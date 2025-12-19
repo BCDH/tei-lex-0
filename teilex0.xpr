@@ -6,6 +6,10 @@
             <serialized xml:space="preserve">
                 <serializableOrderedMap>
                     <entry>
+                        <String>enable.project.master.files.support</String>
+                        <Boolean>true</Boolean>
+                    </entry>
+                    <entry>
                         <String>scenario.associations</String>
                         <scenarioAssociation-array>
                             <scenarioAssociation>
@@ -213,6 +217,9 @@
         </options>
     </meta>
     <projectTree name="teilex0.xpr">
+        <folder masterFiles="true" name="Main Files">
+            <file name="tei/TEILex0.odd"/>
+        </folder>
         <folder path="."/>
     </projectTree>
 </project>

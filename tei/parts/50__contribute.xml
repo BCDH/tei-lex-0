@@ -78,15 +78,15 @@
                 want to include using the <code>xpointer()</code> scheme like this:
                 <egXML xmlns="http://www.tei-c.org/ns/Examples"> 
 &lt;egXML xmlns="http://www.tei-c.org/ns/Examples"&gt; 
-  &lt;xi:include href="../TEILex0.examples/examples.stripped.xml" 
-      corresp="../TEILex0.examples/examples.xml" xpointer="pflaume"/&gt;
+  &lt;xi:include href="../examples/examples.stripped.xml" 
+      corresp="../examples/examples.xml" xpointer="pflaume"/&gt;
 &lt;/egXML&gt; 
                 </egXML>
                 or, using the <code>element()</code> scheme, you can also include segments:
                 <egXML xmlns="http://www.tei-c.org/ns/Examples"> 
 &lt;egXML xmlns="http://www.tei-c.org/ns/Examples"&gt; 
-  &lt;xi:include href="../TEILex0.examples/examples.stripped.xml"
-      corresp="../TEILex0.examples/examples.xml"
+  &lt;xi:include href="../examples/examples.stripped.xml"
+      corresp="../examples/examples.xml"
       xpointer="element(MZ.RGJS.сејче/4/1)"/> 
 &lt;/egXML&gt; </egXML>
             </item>

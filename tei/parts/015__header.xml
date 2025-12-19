@@ -79,8 +79,8 @@
                resource. In other words, a TEI Lex-0 <hi rend="italic">must</hi> include explicit
                information on the conditions under which the given resource can be used. <egXML
                   xmlns="http://www.tei-c.org/ns/Examples" source="#StčS"><xi:include
-                     href="../TEILex0.examples/headers/StčS.stripped.xml"
-                     corresp="../TEILex0.examples/headers/StčS.xml" xpointer="element(/1/1/1/2)"/>
+                     href="../examples/headers/StčS.stripped.xml"
+                     corresp="../examples/headers/StčS.xml" xpointer="element(/1/1/1/2)"/>
                </egXML>
             </item>
             <item>In addition to <gi>publisher</gi> and <gi>distributor</gi>, the
@@ -116,29 +116,29 @@
             vanilla TEI which is more permissive in this respect. <list type="examples">
                <item>
                   <egXML xmlns="http://www.tei-c.org/ns/Examples" source="#VOLP">
-                     <xi:include href="../TEILex0.examples/headers/VOLP.stripped.xml"
-                        corresp="../TEILex0.examples/headers/VOLP.xml" xpointer="element(/1/1/1/3)"
+                     <xi:include href="../examples/headers/VOLP.stripped.xml"
+                        corresp="../examples/headers/VOLP.xml" xpointer="element(/1/1/1/3)"
                      />
                   </egXML>
                </item>
                <item>
                   <egXML xmlns="http://www.tei-c.org/ns/Examples" source="#EtymWB-XML">
-                     <xi:include href="../TEILex0.examples/headers/EtymWB-XML.stripped.xml"
-                        corresp="../TEILex0.examples/headers/EtymWB-XML.stripped.xml"
+                     <xi:include href="../examples/headers/EtymWB-XML.stripped.xml"
+                        corresp="../examples/headers/EtymWB-XML.stripped.xml"
                         xpointer="element(/1/1/1/4)"/>
                   </egXML>
                </item>
                <item>
                   <egXML xmlns="http://www.tei-c.org/ns/Examples" source="#StčS">
-                     <xi:include href="../TEILex0.examples/headers/StčS.stripped.xml"
-                        corresp="../TEILex0.examples/headers/StčS.xml" xpointer="element(/1/1/1/3)"
+                     <xi:include href="../examples/headers/StčS.stripped.xml"
+                        corresp="../examples/headers/StčS.xml" xpointer="element(/1/1/1/3)"
                      />
                   </egXML>
                </item>
                <item>
                   <egXML xmlns="http://www.tei-c.org/ns/Examples" source="#Morais1789">
-                     <xi:include href="../TEILex0.examples/headers/Morais.stripped.xml"
-                        corresp="../TEILex0.examples/headers/Morais.xml"
+                     <xi:include href="../examples/headers/Morais.stripped.xml"
+                        corresp="../examples/headers/Morais.xml"
                         xpointer="element(/1/1/1/4)"/>
                   </egXML>
                </item>

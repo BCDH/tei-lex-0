@@ -19,8 +19,8 @@
             where usage information is provided by labels taken from fixed sets of values for
             stylistic and diatopic properties:</p>
         <egXML xmlns="http://www.tei-c.org/ns/Examples">
-            <xi:include href="../TEILex0.examples/examples.stripped.xml"
-                corresp="../TEILex0.examples/examples.xml" xpointer="pflaume"/>
+            <xi:include href="../examples/examples.stripped.xml"
+                corresp="../examples/examples.xml" xpointer="pflaume"/>
         </egXML>
         <p>In contrast to the example above, the following sample features an occurrence of a more
             verbose usage description that does not rely on a fixed vocabulary. The sample is taken
@@ -28,8 +28,8 @@
             usage hint: “(said by a peasant woman in the field in hot weather)” which provides a
             particular context in which the quote was recorded.</p>
         <egXML xmlns="http://www.tei-c.org/ns/Examples" xml:id="USG.2" source="#Златановић2017">
-            <xi:include href="../TEILex0.examples/examples.stripped.xml"
-                corresp="../TEILex0.examples/examples.xml" xpointer="element(MZ.RGJS.сејче/4/1)"/>
+            <xi:include href="../examples/examples.stripped.xml"
+                corresp="../examples/examples.xml" xpointer="element(MZ.RGJS.сејче/4/1)"/>
         </egXML>
     </div>
     <div>
@@ -263,8 +263,8 @@
                 </egXML>
                 <p>CORRECT</p>
                 <egXML xmlns="http://www.tei-c.org/ns/Examples" xml:id="d1e3815">
-                    <xi:include href="../TEILex0.examples/examples.stripped.xml"
-                        corresp="../TEILex0.examples/examples.xml" xpointer="MZ.RGJS.сајдисльк_2"/>
+                    <xi:include href="../examples/examples.stripped.xml"
+                        corresp="../examples/examples.xml" xpointer="MZ.RGJS.сајдисльк_2"/>
                 </egXML>
             </item>
             <item>Do not use <code>&lt;usg type=&quot;hyper&quot;&gt;&lt;/usg&gt;</code> or
@@ -313,15 +313,15 @@
                 rend="smallcaps">earth science</hi> and <hi rend="smallcaps">sport</hi>, together
             with some of their subdomains:</p>
         <egXML xmlns="http://www.tei-c.org/ns/Examples">
-            <xi:include href="../TEILex0.examples/headers/DLP.stripped.xml"
-                corresp="../TEILex0.examples/headers/DLP.xml" xpointer="element(/1/1/2)"/>
+            <xi:include href="../examples/headers/DLP.stripped.xml"
+                corresp="../examples/headers/DLP.xml" xpointer="element(/1/1/2)"/>
         </egXML>
         <p>To apply a domain label in an entry, use the <gi>usg</gi> element with a
                 <att>valueDatcat</att> attribute pointing to the <code>xml:id</code> of the
             appropriate category in the taxonomy.</p>
         <egXML xmlns="http://www.tei-c.org/ns/Examples">
-            <xi:include href="../TEILex0.examples/headers/DLP.stripped.xml"
-                corresp="../TEILex0.examples/headers/DLP.xml" xpointer="element(/1/2/1/1)"/>
+            <xi:include href="../examples/headers/DLP.stripped.xml"
+                corresp="../examples/headers/DLP.xml" xpointer="element(/1/2/1/1)"/>
         </egXML>
     </div>
 </div>

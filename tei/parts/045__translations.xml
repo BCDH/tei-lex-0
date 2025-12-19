@@ -31,7 +31,7 @@
         </egXML>
         <p>TEI Lex-0:</p>
         <egXML xmlns="http://www.tei-c.org/ns/Examples" valid="true">
-            <xi:include href="../TEILex0.examples/examples.stripped.xml" corresp="../TEILex0.examples/examples.xml" xpointer="horrifier"/>
+            <xi:include href="../examples/examples.stripped.xml" corresp="../examples/examples.xml" xpointer="horrifier"/>
         </egXML>
         
     
@@ -39,8 +39,8 @@
                 <graphic url="https://imgur.com/IVutWGQ.png"/>
             </figure>
             <egXML xmlns="http://www.tei-c.org/ns/Examples">
-            <xi:include href="../TEILex0.examples/examples.stripped.xml"
-                corresp="../TEILex0.examples/examples.xml" xpointer="aid"/>
+            <xi:include href="../examples/examples.stripped.xml"
+                corresp="../examples/examples.xml" xpointer="aid"/>
         </egXML>
         
     </div>

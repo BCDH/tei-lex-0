@@ -123,7 +123,7 @@
                     language </hi> (=one that people still use) [….] </p>
             <p>In TEI Lex-0, this entry would be represented as:</p>
             <egXML xmlns="http://www.tei-c.org/ns/Examples" source="#LDOCE2003">
-               <xi:include href="../TEILex0.examples/examples.stripped.xml" corresp="../TEILex0.examples/examples.xml" xpointer="LDOCE.living"/>
+               <xi:include href="../examples/examples.stripped.xml" corresp="../examples/examples.xml" xpointer="LDOCE.living"/>
            </egXML>
         </div>
     </div>
@@ -138,7 +138,7 @@
             <graphic url="https://i.imgur.com/2UJC9Ae.jpg" rend="padded"/>
         </figure>
         <egXML xmlns="http://www.tei-c.org/ns/Examples" source="#DLPC2014" xml:id="antepassado-gramGrp-in-sense">
-            <xi:include href="../TEILex0.examples/examples.stripped.xml" corresp="../TEILex0.examples/examples.xml" xpointer="DLPC.antepassado_b_2"/>
+            <xi:include href="../examples/examples.stripped.xml" corresp="../examples/examples.xml" xpointer="DLPC.antepassado_b_2"/>
         </egXML>
         <div xml:id="grammatical-glosses">
             <head>Grammatical glosses? </head>
@@ -199,7 +199,7 @@
                     >gash</hi> as an entry consisting of senses, each with a different part of
                 speech, like this:</p>
             <egXML xmlns="http://www.tei-c.org/ns/Examples" xml:id="gash-as-grammatical-homonyms">
-                        <xi:include href="../TEILex0.examples/examples.stripped.xml" corresp="../TEILex0.examples/examples.xml" xpointer="CHDOEL.gash2"/>
+                        <xi:include href="../examples/examples.stripped.xml" corresp="../examples/examples.xml" xpointer="CHDOEL.gash2"/>
                     </egXML>
             <p>This is surely valid TEI Lex-0. There is conceptually nothing wrong with this
                 encoding: it adequately represents the structure implied by the source text.</p>
@@ -236,7 +236,7 @@
             <p>For that reason, our preferred encoding of <hi rend="bold">gash</hi> as a verb and a
                 noun would be:</p>
             <egXML xmlns="http://www.tei-c.org/ns/Examples">
-                    <xi:include href="../TEILex0.examples/examples.stripped.xml" corresp="../TEILex0.examples/examples.xml" xpointer="CH.gash2"/>
+                    <xi:include href="../examples/examples.stripped.xml" corresp="../examples/examples.xml" xpointer="CH.gash2"/>
                 </egXML>
             <p>For an example in which grammatical homonyms have themselves multiple senses, one of
                 which is grammatically constrained, see, for instance: </p>
@@ -244,7 +244,7 @@
                 <graphic url="https://imgur.com/b9dNR9m.png"/>
             </figure>
             <egXML xmlns="http://www.tei-c.org/ns/Examples">
-                    <xi:include href="../TEILex0.examples/examples.stripped.xml" corresp="../TEILex0.examples/examples.xml" xpointer="ED.aid"/>
+                    <xi:include href="../examples/examples.stripped.xml" corresp="../examples/examples.xml" xpointer="ED.aid"/>
                 </egXML>
         </div>
     </div>
