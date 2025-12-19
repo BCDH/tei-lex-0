@@ -109,7 +109,7 @@
             <p>In TEI Lex-0, cross-references are by default encoded as <code>&lt;xr
                     type=&quot;related&quot;&gt;&lt;/xr&gt;</code>.</p>
             <egXML xmlns="http://www.tei-c.org/ns/Examples">
-                            <xi:include href="../TEILex0.examples/examples.stripped.xml" corresp="../TEILex0.examples/examples.xml" xpointer="borcht"/>
+                            <xi:include href="../examples/examples.stripped.xml" corresp="../examples/examples.xml" xpointer="borcht"/>
                     </egXML>
         </div>
         <div>
@@ -130,7 +130,7 @@
                 <graphic url="https://imgur.com/yXte5h1.png"/>
             </figure>
             <egXML xmlns="http://www.tei-c.org/ns/Examples" source="#Duden2007">
-                            <xi:include href="../TEILex0.examples/examples.stripped.xml" corresp="../TEILex0.examples/examples.xml" xpointer="arbeitsunfähig"/>
+                            <xi:include href="../examples/examples.stripped.xml" corresp="../examples/examples.xml" xpointer="arbeitsunfähig"/>
                         </egXML>
         </div>
         <div>
@@ -143,7 +143,7 @@
             <p>In TEI Lex-0, hypernyms are encoded inside <code>&lt;xr
                     type=&quot;hypernymy&quot;&gt;&lt;/xr&gt;</code>.</p>
             <egXML xmlns="http://www.tei-c.org/ns/Examples">
-               <xi:include href="../TEILex0.examples/examples.stripped.xml" corresp="../TEILex0.examples/examples.xml" xpointer="XY.dog"/>
+               <xi:include href="../examples/examples.stripped.xml" corresp="../examples/examples.xml" xpointer="XY.dog"/>
              </egXML>
         </div>
         <div>
@@ -173,7 +173,7 @@
             <p>In TEI Lex-0, antonyms are encoded inside <code>&lt;xr
                     type=&quot;antonymy&quot;&gt;&lt;/xr&gt;</code>.</p>
             <egXML xmlns="http://www.tei-c.org/ns/Examples">
-                <xi:include href="../TEILex0.examples/examples.stripped.xml" corresp="../TEILex0.examples/examples.xml" xpointer="DLPC.antepassado_a_1"/>
+                <xi:include href="../examples/examples.stripped.xml" corresp="../examples/examples.xml" xpointer="DLPC.antepassado_a_1"/>
             </egXML>
 
         </div>
@@ -199,7 +199,7 @@
                             <q>The Royal <oRef type="cap"/> of Arts</q>
                         </egXML>
                 <egXML xmlns="http://www.tei-c.org/ns/Examples">
-                            <xi:include href="../TEILex0.examples/examples.stripped.xml" corresp="../TEILex0.examples/examples.xml" xpointer="academy"/>
+                            <xi:include href="../examples/examples.stripped.xml" corresp="../examples/examples.xml" xpointer="academy"/>
                         </egXML>
             </item>
             <item>
@@ -225,7 +225,7 @@
                         </egXML>
              
                  <egXML xmlns="http://www.tei-c.org/ns/Examples">
-                    <xi:include href="../TEILex0.examples/examples.stripped.xml" corresp="../TEILex0.examples/examples.xml" xpointer="horrifier"/>
+                    <xi:include href="../examples/examples.stripped.xml" corresp="../examples/examples.xml" xpointer="horrifier"/>
                  </egXML>       
             </item>
         </list>
@@ -239,7 +239,7 @@
             <graphic url="https://i.imgur.com/1aM02qR.jpg"></graphic>
         </figure>
         <egXML xmlns="http://www.tei-c.org/ns/Examples">
-            <xi:include href="../TEILex0.examples/examples.stripped.xml" corresp="../TEILex0.examples/examples.xml" xpointer="VSK.SR.грдомајчић"/>
+            <xi:include href="../examples/examples.stripped.xml" corresp="../examples/examples.xml" xpointer="VSK.SR.грдомајчић"/>
         </egXML>
     </div>
 
@@ -248,7 +248,7 @@
         <div>
             <head>More complex example including quotations</head>
             <egXML xmlns="http://www.tei-c.org/ns/Examples">
-                <xi:include href="../TEILex0.examples/examples.stripped.xml" corresp="../TEILex0.examples/examples.xml" xpointer="dog"/>
+                <xi:include href="../examples/examples.stripped.xml" corresp="../examples/examples.xml" xpointer="dog"/>
             </egXML>
         </div>
         <div>
@@ -258,7 +258,7 @@
                 <graphic url="https://imgur.com/Mg7arob.png"/>
             </figure>
             <egXML xmlns="http://www.tei-c.org/ns/Examples">
-            <xi:include href="../TEILex0.examples/examples.stripped.xml" corresp="../TEILex0.examples/examples.xml" xpointer="DLPC.antepassado_a"/>
+            <xi:include href="../examples/examples.stripped.xml" corresp="../examples/examples.xml" xpointer="DLPC.antepassado_a"/>
            
         </egXML>
         </div>

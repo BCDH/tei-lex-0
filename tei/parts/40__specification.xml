@@ -510,8 +510,8 @@
                     the attribute <att>xml:lang</att> should be used on <gi>language</gi></p>
                 <egXML xmlns="http://www.tei-c.org/ns/Examples">
                     <xi:include
-                        href="../TEILex0.examples/headers/LanguageProfileExamples.stripped.xml"
-                        corresp="../TEILex0.examples/headers/LanguageProfileExamples.xml"
+                        href="../examples/headers/LanguageProfileExamples.stripped.xml"
+                        corresp="../examples/headers/LanguageProfileExamples.xml"
                         xpointer="element(/1/1/2/1)"/>
                 </egXML>
             </exemplum>
@@ -537,8 +537,8 @@
                     be encoded using the <gi>ident</gi> element.</p>
                 <egXML xmlns="http://www.tei-c.org/ns/Examples">
                     <xi:include
-                        href="../TEILex0.examples/headers/LanguageProfileExamples.stripped.xml"
-                        corresp="../TEILex0.examples/headers/LanguageProfileExamples.xml"
+                        href="../examples/headers/LanguageProfileExamples.stripped.xml"
+                        corresp="../examples/headers/LanguageProfileExamples.xml"
                         xpointer="element(/1/1/2/2)"/>
                 </egXML>
             </exemplum>
