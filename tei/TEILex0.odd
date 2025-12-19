@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/css" href="css/tei_oxygen.css"?>
+<?xml-stylesheet type="text/css" href="css/tei.lex0.odd.css"?>
+<?xml-model href="http://www.tei-c.org/release/xml/tei/custom/schema/relaxng/tei_all.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
+<!--<?xml-model href="http://www.tei-c.org/release/xml/tei/custom/schema/relaxng/tei_all.rng" type="application/xml"
+	schematypens="http://purl.oclc.org/dsdl/schematron"?>-->
+<TEI xmlns="http://www.tei-c.org/ns/1.0" xmlns:s="http://purl.oclc.org/dsdl/schematron"
+    xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude"
+    xml:lang="en">
+    <teiHeader>
+        <fileDesc>
+            <titleStmt>
+                <title>TEI Lex-0</title>
+                <title type="subordinate">A baseline encoding for lexicographic data</title>
+                <editor>
+                    <persName>
+                        <forename>Toma</forename>
+                        <surname>Tasovac</surname>
+                    </persName>
+                </editor>
+                <editor>
+                    <persName>
+                        <forename>Laurent</forename>
+                        <surname>Romary</surname>
+                    </persName>
+                </editor>
+                <author xml:id="TT" role="main">
+                    <persName>
+                        <forename>Toma</forename>
+                        <surname>Tasovac</surname>
+                    </persName>
+                </author>
+                <author xml:id="LR" role="main">
+                    <persName>
+                        <forename>Laurent</forename>
+                        <surname>Romary</surname>
+                    </persName>
+                </author>
+                <author xml:id="AS" role="contributing">
+                    <persName>
+                        <forename>Ana</forename>
+                        <surname>Salgado</surname>
+                    </persName>
+                </author>
+                <author xml:id="AH" role="contributing">
+                    <persName>
+                        <forename>Axel</forename>
+                        <surname>Herold</surname>
+                    </persName>
+                </author>
+                <author xml:id="JB" role="contributing">
+                    <persName>
+                        <forename>Jack</forename>
+                        <surname>Bowers</surname>
+                    </persName>
+                </author>
+                <author xml:id="AG" role="contributing">
+                    <persName>
+                        <forename>Alexander</forename>
+                        <surname>Geyken</surname>
+                    </persName>
+                </author>
+                <author xml:id="JD" role="contributing">
+                    <persName>
+                        <forename>Jesse</forename>
+                        <surname>de Does</surname>
+                    </persName>
+                </author>
+                <author xml:id="KD" role="contributing">
+                    <persName>
+                        <forename>Katrien</forename>
+                        <surname>Depuydt</surname>
+                    </persName>
+                </author>
+                <author xml:id="MK" role="contributing">
+                    <persName>
+                        <forename>Mohamed</forename>
+                        <surname>Khemakhem</surname>
+                    </persName>
+                </author>
+                <author xml:id="TE" role="contributing">
+                    <persName>
+                        <forename>Tomaž</forename>
+                        <surname>Erjavec</surname>
+                    </persName>
+                </author>
+                <author xml:id="AW" role="contributing">
+                    <persName>
+                        <forename>Andreas</forename>
+                        <surname>Witt</surname>
+                    </persName>
+                </author>
+                <author xml:id="PB" role="contributing">
+                    <persName>
+                        <forename>Piotr</forename>
+                        <surname>Banski</surname>
+                    </persName>
+                </author>
+                <author xml:id="SP" role="contributing">
+                    <persName>
+                        <forename>Snežana</forename>
+                        <surname>Petrović</surname>
+                    </persName>
+                </author>
+                <author xml:id="VH" role="contributing">
+                    <persName>
+                        <forename>Vera</forename>
+                        <surname>Hildenbrandt</surname>
+                    </persName>
+                </author>
+                <author xml:id="BL" role="contributing">
+                    <persName>
+                        <forename>Boris</forename>
+                        <surname>Lehečka</surname>
+                    </persName>
+                </author>
+            </titleStmt>
+            <editionStmt>
+                <!--make sure to remove the dev suffix before publishing a new release-->
+                <edition n="0.9.5-dev"/>
+            </editionStmt>
+            <publicationStmt>
+                <authority>DARIAH Working Group on Lexical Resources</authority>
+                <date when="2018"/>
+                <ptr
+                    target="https://dariah-eric.github.io/lexicalresources/pages/TEILex0/TEILex0.html"
+                />
+            </publicationStmt>
+            <sourceDesc>
+                <p>Born digital</p>
+            </sourceDesc>
+        </fileDesc>
+        <revisionDesc>
+            <listChange>
+                <listChange n="0.9.5">
+                    <change when="2024-11-27" type="docs">Added documentation on encoding condensed forms a là "leleti (sě)".</change>
+                    <change type="spec">Added <ref target="#TEI.model.languageProfile">model.languageProfile</ref> to better structure <gi>language</gi> as per <ref target="https://github.com/DARIAH-ERIC/lexicalresources/issues/245">#245</ref>.</change>
+                    <change type="spec">Added <gi>ruby</gi> annotation support as per <ref target="https://github.com/DARIAH-ERIC/lexicalresources/issues/225">#225</ref></change>
+                    <change type="spec">Added <gi>measure</gi> (to be used, for instance, within <gi>extent</gi> in <gi>fileDesc</gi> as per <ref target="https://github.com/DARIAH-ERIC/lexicalresources/issues/257">#257</ref>.</change>
+                    <change type="xproc">Added a temporary step to fix <att>xml:base</att> and <att>xml:lang</att> issues in xincluded examples as per <ref target="https://github.com/DARIAH-ERIC/lexicalresources/issues/256">#256</ref></change>
+                    <change type="spec">Deprecated <code>gram[@type="government"]</code> in favor of <code>gram[@type="government"]</code> as per <ref target="https://github.com/DARIAH-ERIC/lexicalresources/issues/254">#254</ref></change>
+                    <change type="spec">Refactored model classes to fix XSD UPA violations as per <ref target="https://github.com/DARIAH-ERIC/lexicalresources/issues/223">#223</ref>.</change>
+                    <change type="docs">Minor corrections in the documentation</change>
+                </listChange>
+                <listChange n="0.9.4">
+                    <change when="2024-05-12" type="xproc">fix documentation build on macOS and Windows in oXygen XML Editor</change>
+                    <change type="spec">added <code>degree</code> as <gi>gram</gi> <att>type</att> value</change>
+                    <change type="docs">fixed some typographical errors in the documentation</change>
+                </listChange>
+                <listChange n="0.9.3">
+                    <change when="2024-02-12" type="spec"><gi>catDesc</gi> <hi rend="italic">must</hi> contain a <gi>term</gi></change>
+                    <change type="spec">switch to using the external TEI add-on in oXygen when generating schema and documentation</change>
+                    <change type="spec">fix the mismatch in <gi>usg</gi> types between the specification and documentation (use <code>temporal</code> instead of <code>time</code> </change>
+                    <change type="spec">require <gi>listBibl</gi> in <gi>sourceDesc</gi> with three suggested type values: <code>dictionaries</code>, <code>corpora</code> and <code>literature</code></change>
+                </listChange>
+                <listChange n="0.9.2">
+                    <change when="2023-04-22" type="xproc">switch to using oXygen's TEI framework when generating schema and documentation</change>
+                    <change type="spec">allow <gi>list</gi> and <gi>item</gi> because lists feature prominently in dictionary front matter</change>
+                    <change type="spec">introduce <ref target="#TEI.model.lexicalInter">model.lexicalInter</ref> (based on <ref target="#TEI.model.inter">model.inter</ref>), <ref target="#TEI.model.lexicalPhrase">model.lexicalPhrase</ref> (based on <ref target="#TEI.model.phrase">model.phrase</ref>) and <ref target="#TEI.macro.lexicalParaContent">macro.lexicalParaContent</ref> (based on <ref target="#TEI.macro.paraContent">macro.paraContent</ref>) to make it easier to simplify the content model of various dictionary elements</change>
+                    <change type="spec">remove <ref target="#TEI.model.listLike">model.listLike</ref> from <ref target="#TEI.model.lexicalInter">model.lexicalInter</ref></change>
+                    <change type="html">link version number in the menu to revision history</change>
+                    <change type="spec">allow <gi>abbr</gi> and <gi>expan</gi> so that they can be used in lists of abbreviations in dictionary front matter</change>
+                    <change type="spec">introduced <code>valency</code> as a suggested value in <code>gram[@type="valency"]</code></change>
+                    <change type="spec">introduced <code>gram[@type="government"]</code> and clarified the difference from <code>gram[@type="colloc"]</code>. See sections on <ref target="#typology-of-gram">Typology of <code>gram</code></ref> and <ref target="#collocates">Collocates</ref></change>
+                    <change type="spec">made <code>@type</code> mandatory on <gi>TEI</gi></change>
+                    <change type="spec">add <gi>principal</gi> and <gi>affiliation</gi> for more robust metadata in the <gi>teiHeader</gi></change>
+                </listChange>
+                <listChange n="0.9.1">
+                    <change when="2021-03-24" type="html">fix namespace issues in html output</change>
+                    <change type="docs">add new examples to the <ref target="#header">Header</ref> section</change>
+                    <change type="docs">add section on <ref target="#HierarchicalUsageLabels">hierarchichal usage labels</ref></change>
+                    <change type="spec">allow <gi>taxonomy</gi>, <gi>category</gi> and <gi>catDesc</gi> in <gi>classDecl</gi> </change>
+                    <change type="docs">move the <ref target="#specification">specification</ref> to a different webpage for quicker loading</change>
+                </listChange>
+                <listChange n="0.9.0">
+                    <change when="2021-09-26" type="docs">add section on <ref target="#header">TEI
+                        Header</ref></change>
+                    <change type="docs">correction of various misspellings</change>
+                    <change type="spec">add <gi>monogr</gi> (needed for
+                            <gi>biblStruct</gi>)</change>
+                    <change type="spec">add <gi>forename</gi> and <gi>surname</gi> for more
+                        fine-grained bibliographic information</change>
+                    <change type="spec">add <gi>editorialDecl</gi></change>
+                    <change type="spec">add <gi>email</gi> to make possible contact information in
+                        the header</change>
+                    <change type="spec">require <gi>availability</gi> in <gi>publicationStmt</gi> to
+                        provide <gi>licence</gi></change>
+                    <change type="spec">make <gi>sourceDesc</gi> optional</change>
+                    <change type="spec">allow only <gi>biblStruct</gi> in
+                        <gi>sourceDesc</gi></change>
+                    <change type="spec">make <ref target="#TEI.model.publicationStmtPart.agency"
+                            >model.publicationStmtPart.agency</ref> unbound to allow both
+                            <gi>publisher</gi> and <gi>authority</gi> in
+                        <gi>publicationStmt</gi></change>
+                    <change type="spec">add <att>role</att> to <gi>authority</gi> with suggested
+                        values: <val>funder</val>, <val>sponsor</val>,
+                        <val>rightsHolder</val></change>
+                    <change type="spec">require <gi>language</gi>, <gi>langUsage</gi> and
+                            <gi>profileDesc</gi></change>
+                    <change type="spec">add <att>role</att> to <gi>language</gi> with a closed list
+                        of values: <val>objectLanguage</val>, <val>workingLanguage</val>,
+                            <val>sourceLanguage</val>, <val>targetLanguage</val></change>
+                    
+                </listChange>
+            </listChange>
+        </revisionDesc>
+    </teiHeader>
+    <text>
+        <front>
+            <divGen type="toc"/>
+        </front>
+        <body>
+            <xi:include href="TEILex0.parts/01__introduction.xml" parse="xml"
+                xpointer="introduction"/>
+            <xi:include href="TEILex0.parts/015__header.xml" parse="xml" xpointer="header"/>
+            <xi:include href="TEILex0.parts/02__entries.xml" parse="xml" xpointer="entries"/>
+            <xi:include href="TEILex0.parts/03__forms.xml" parse="xml" xpointer="forms"/>
+            <xi:include href="TEILex0.parts/04__senses.xml" parse="xml" xpointer="senses"/>
+            <xi:include href="TEILex0.parts/045__translations.xml" parse="xml"
+                xpointer="translations"/>
+            <xi:include href="TEILex0.parts/05__cross-references.xml" parse="xml"
+                xpointer="cross-references"/>
+            <xi:include href="TEILex0.parts/06__usage.xml" parse="xml" xpointer="usage"/>
+            <xi:include href="TEILex0.parts/07__etymology.xml" parse="xml" xpointer="etymology"/>
+            <xi:include href="TEILex0.parts/08__patterns.xml" parse="xml" xpointer="patterns"/>
+            <xi:include href="TEILex0.parts/20__bibliography.xml" parse="xml"
+                xpointer="bibliography"/>
+            <!--   <xi:include href="TEILex0.parts/30__annex_A.xml" parse="xml" xpointer="annex_A"/>
+            <xi:include href="TEILex0.parts/31__annex_B.xml" parse="xml" xpointer="annex_B"/>-->
+            <xi:include href="TEILex0.parts/40__specification.xml" parse="xml"
+                xpointer="specification"/>
+            <xi:include href="TEILex0.parts/50__contribute.xml" parse="xml" xpointer="contribute"/>
+        </body>
+    </text>
+</TEI>
