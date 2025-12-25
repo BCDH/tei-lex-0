@@ -210,26 +210,26 @@
             <!--<divGen type="toc"/>-->
         </front>
         <body>
-            <xi:include href="parts/01__introduction.xml" parse="xml"
+            <xi:include href="includes/01__introduction.xml" parse="xml"
                 xpointer="introduction"/>
-            <xi:include href="parts/05__header.xml" parse="xml" xpointer="header"/>
-            <xi:include href="parts/10__entries.xml" parse="xml" xpointer="entries"/>
-            <xi:include href="parts/15__forms.xml" parse="xml" xpointer="forms"/>
-            <xi:include href="parts/20__senses.xml" parse="xml" xpointer="senses"/>
-            <xi:include href="parts/25__translations.xml" parse="xml"
+            <xi:include href="includes/05__header.xml" parse="xml" xpointer="header"/>
+            <xi:include href="includes/10__entries.xml" parse="xml" xpointer="entries"/>
+            <xi:include href="includes/15__forms.xml" parse="xml" xpointer="forms"/>
+            <xi:include href="includes/20__senses.xml" parse="xml" xpointer="senses"/>
+            <xi:include href="includes/25__translations.xml" parse="xml"
                 xpointer="translations"/>
-            <xi:include href="parts/30__cross-references.xml" parse="xml"
+            <xi:include href="includes/30__cross-references.xml" parse="xml"
                 xpointer="cross-references"/>
-            <xi:include href="parts/35__usage.xml" parse="xml" xpointer="usage"/>
-            <xi:include href="parts/40__etymology.xml" parse="xml" xpointer="etymology"/>
-            <xi:include href="parts/45__patterns.xml" parse="xml" xpointer="patterns"/>
-            <xi:include href="parts/50__bibliography.xml" parse="xml"
+            <xi:include href="includes/35__usage.xml" parse="xml" xpointer="usage"/>
+            <xi:include href="includes/40__etymology.xml" parse="xml" xpointer="etymology"/>
+            <xi:include href="includes/45__patterns.xml" parse="xml" xpointer="patterns"/>
+            <xi:include href="includes/50__bibliography.xml" parse="xml"
                 xpointer="bibliography"/>
             <!--   <xi:include href="parts/30__annex_A.xml" parse="xml" xpointer="annex_A"/>
             <xi:include href="parts/31__annex_B.xml" parse="xml" xpointer="annex_B"/>-->
-            <xi:include href="parts/60__specification.xml" parse="xml"
+            <xi:include href="includes/60__specification.xml" parse="xml"
                 xpointer="specification"/>
-            <xi:include href="parts/70__faq.xml" parse="xml" xpointer="faq"/>
+            <xi:include href="includes/70__faq.xml" parse="xml" xpointer="faq"/>
         </body>
     </text>
 </TEI>

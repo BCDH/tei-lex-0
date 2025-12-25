@@ -167,7 +167,7 @@
             <p:identity/>
         </p:otherwise>
     </p:choose>
-    <p:xslt name="fix-ids-in-specs">
+    <p:xslt name="fix-spec">
         <p:with-input port="source">
             <p:pipe step="odd2lite" port="result"/>
         </p:with-input>
@@ -177,7 +177,7 @@
     </p:xslt>
     <p:xslt name="contributors">
         <p:with-input port="source">
-            <p:pipe step="fix-ids-in-specs" port="result"/>
+            <p:pipe step="fix-spec" port="result"/>
         </p:with-input>
         <p:with-input port="stylesheet">
             <p:document href="../stylesheets/contributors.xsl"/>

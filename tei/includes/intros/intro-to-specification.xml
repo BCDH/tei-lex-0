@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="http://www.tei-c.org/release/xml/tei/custom/schema/relaxng/tei_lite.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
+<?xml-model href="http://www.tei-c.org/release/xml/tei/custom/schema/relaxng/tei_lite.rng" type="application/xml"
+	schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0">
+   <teiHeader>
+      <fileDesc>
+         <titleStmt>
+            <title>Title</title>
+         </titleStmt>
+         <publicationStmt>
+            <p>Publication information</p>
+         </publicationStmt>
+         <sourceDesc>
+            <p>Information about the source</p>
+         </sourceDesc>
+      </fileDesc>
+   </teiHeader>
+   <text>
+      <body>
+         <p>The Guidelines you are reading have two complementary “voices”:</p>
+         <list>
+            <item>The narrative parts explain why TEI Lex-0 recommends certain practices, what those
+               practices mean for dictionary work, and how to apply them in real encoding
+               situations. Narrative sections are written for humans: they include rationale,
+               examples, discussion of alternatives, and guidance for consistent practice.</item>
+            <item>The Specification is the reference manual (and, effectively, the “grammar”) of TEI
+               Lex-0. It tells you exactly which TEI constructs are in scope and how they are
+               allowed to combine. When you need to answer questions like “Can this element go
+               here?”, “Which attributes are permitted?”, or “What values are valid?”, the
+               Specification is the place to look.</item>
+         </list>
+         <p>In TEI terms, the Specification is where TEI Lex-0 becomes concrete: it lists the
+            allowed elements, their attributes, and their content models (what may appear inside
+            them), along with the reusable building blocks that make those content models manageable
+            (classes, macros, and data types). </p>
+      </body>
+   </text>
+</TEI>
