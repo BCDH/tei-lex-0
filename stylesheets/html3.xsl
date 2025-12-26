@@ -2,11 +2,22 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:math="http://www.w3.org/2005/xpath-functions/math"
+    xmlns:tei="http://www.tei-c.org/ns/1.0"
+    xpath-default-namespace="http://www.tei-c.org/ns/1.0"
     exclude-result-prefixes="xs math"
     version="3.0">
     
-    <!--<xsl:param name="pageLayout">Complex</xsl:param>
+    <xsl:param name="cssSecondaryFile" select="'css/tei.lex0.web.css'"/>
+    <xsl:param name="cssFile"
+    select="'https://unpkg.com/purecss@2.0.3/build/pure-min.css'"/> 
     <xsl:param name="institution" select="'DARIAH Working Group on Lexical Resources'"/>
+    
+    <xsl:template name="copyrightStatement">This is a copyright statement.</xsl:template>
+    <xsl:template name="stdfooter"/>
+    
+    <!--<xsl:param name="cssFile" select="'https://www.tei-c.org/release/xml/tei/stylesheet/tei.css'"/>-->
+    <!--<xsl:param name="pageLayout">Complex</xsl:param>
+    
     <xsl:param name="headInXref">false</xsl:param>
     <xsl:param name="contentStructure" select="'all'"/>
     <xsl:param name="verbose" select="'true'"/>
@@ -19,6 +30,40 @@
     
     <xsl:import href="https://www.tei-c.org/release/xml/tei/stylesheet/html/html.xsl"/>
     
+    <xsl:variable name="version" select="//tei:fileDesc/tei:editionStmt/tei:edition/@n"/>
     
+    <!--Starting without additional customizations or styling to get a clean look first-->
+    
+    <xsl:import href="includes/layout.xsl"/>
+    <xsl:import href="includes/pageHeader.xsl"/>
+    <xsl:import href="includes/toc.xsl"/>
+    <xsl:import href="includes/examples.xsl"/>
+    <xsl:import href="includes/references.xsl"/>
+    <!--the following include uses data-src, not src for images
+    reenable after including styling-->
+     <xsl:import href="includes/graphic.xsl"/> 
+    
+    <xsl:template name="bodyEndHook">
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.2.1-rc2/lazysizes.min.js" xmlns="http://www.w3.org/1999/xhtml">
+            <xsl:comment>lazysizes</xsl:comment>
+        </script>
+        <script type="text/javascript" src="js/teilex0.js" xmlns="http://www.w3.org/1999/xhtml">
+            <xsl:comment>teilexjs</xsl:comment>
+        </script>
+        <script type="text/javascript" src="js/ui.js" xmlns="http://www.w3.org/1999/xhtml">
+            <xsl:comment>uijs</xsl:comment>
+        </script>
+        <script type="text/javascript" src="js/prism.js" xmlns="http://www.w3.org/1999/xhtml">
+            <xsl:comment>prism</xsl:comment>
+        </script>
+        <script type="text/javascript" src="js/prism-xpath.js" xmlns="http://www.w3.org/1999/xhtml">
+            <xsl:comment>prism-xpath</xsl:comment>
+        </script>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js" xmlns="http://www.w3.org/1999/xhtml">
+            <xsl:comment>doc-search</xsl:comment>
+        </script>
+        <script type="text/javascript" src="js/algo.js" xmlns="http://www.w3.org/1999/xhtml"/>
+                
+    </xsl:template>
    
 </xsl:stylesheet>

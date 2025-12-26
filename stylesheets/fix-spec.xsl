@@ -17,7 +17,7 @@
             <xsl:attribute name="xml:id">specification</xsl:attribute>
             <xsl:element name="head" namespace="http://www.tei-c.org/ns/1.0">Specification</xsl:element>
             <xsl:copy-of
-                select="document('../tei/parts/intros/intro-to-specification.xml')/tei:TEI/tei:text/tei:body/node()"/>
+                select="document('../tei/includes/intros/intro-to-specification.xml')/tei:TEI/tei:text/tei:body/node()"/>
             <xsl:apply-templates/>
         </xsl:element>
         

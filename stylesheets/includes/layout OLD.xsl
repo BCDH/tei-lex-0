@@ -3,7 +3,7 @@
     xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:teix="http://www.tei-c.org/ns/Examples"
     xmlns:html="http://www.w3.org/1999/xhtml" xpath-default-namespace="http://www.tei-c.org/ns/1.0"
     version="2.0" exclude-result-prefixes="tei teix html">
-
+    
     <doc xmlns="http://www.oxygenxml.com/ns/doc/xsl">
         <desc>[html] the main page structure</desc>
     </doc>
@@ -36,7 +36,7 @@
                 <ul class="pure-menu-list" xmlns="http://www.w3.org/1999/xhtml"
                     style="position: fixed; bottom: 0; width: 325px;">
                     
-                   
+                    
                     
                     <li class="dlogo" xmlns="http://www.w3.org/1999/xhtml" style="background: #1a252f">
                         <a href="#" xmlns="http://www.w3.org/1999/xhtml" class="logos">
@@ -44,7 +44,7 @@
                             <img src="images/dariah-lr-blue.png" class="pure-img img"/>
                         </a>
                     </li>
-
+                    
                     <li xmlns="http://www.w3.org/1999/xhtml" style="background: #1a252f">
                         <a href="#" xmlns="http://www.w3.org/1999/xhtml" class="logos">
                             <img src="images/elexis.png" class="pure-img img-hover"/>
@@ -55,7 +55,7 @@
                         <p xmlns="http://www.w3.org/1999/xhtml">Co-funded by the Horizon 2020 innovation and research programme of the European Union under grant no. 731015.</p>
                     </li>
                 </ul>
-
+                
             </div>
             <xsl:choose>
                 <xsl:when test="$contentStructure = 'all' or tei:match(@rend, 'all')">
