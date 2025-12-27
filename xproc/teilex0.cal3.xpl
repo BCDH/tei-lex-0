@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" xmlns:c="http://www.w3.org/ns/xproc-step"
-    version="3.0" name="generateDocumentation">
+    xmlns:lex0="urn:lex0" version="3.0" name="generateDocumentation">
 
     <!-- ================================================================== -->
     <!-- PROLOG: -->
-    <p:option name="debug" select="'true'"/>
+    <p:import href="lib/debug-store.xpl"/>
     <p:option name="odd2oddSource" required="true"/>
     <p:option name="odd2liteSource" required="true"/>
-    <!--<p:output port="result" primary="true">
-        <p:pipe port="result" step="odd2html"/>
-    </p:output>-->
+    <!-- Read debug flag from config/debug.xml (if present); default to false; 
+         ignored by git to avoid CI interference. -->
+    <p:variable name="debug"
+        select="if (doc-available(resolve-uri('config/debug.xml', static-base-uri())))
+                then string(doc(resolve-uri('config/debug.xml', static-base-uri()))/config/@debug)
+                else 'false'"/>
     <p:load name="stylesheet-odd2odd">
         <p:with-option name="href" select="$odd2oddSource"/>
     </p:load>
@@ -54,91 +57,47 @@
             <p:document href="../tei/TEILex0.odd" content-type="application/xml"/>
         </p:with-input>
     </p:xinclude>
-    <p:choose>
+    <lex0:debug-store name="debug-include">
+        <p:with-option name="name" select="'include'"/>
+        <p:with-option name="debug" select="$debug"/>
         <p:with-input>
             <p:pipe step="include" port="result"/>
         </p:with-input>
-        <p:when test="$debug = 'true'">
-            <p:identity name="pass-include"/>
-            <p:store href="stores/included.xml" serialization="map{'method':'xml','indent':false()}">
-                <p:with-input>
-                    <p:pipe step="pass-include" port="result"/>
-                </p:with-input>
-            </p:store>
-            <p:identity>
-                <p:with-input>
-                    <p:pipe step="pass-include" port="result"/>
-                </p:with-input>
-            </p:identity>
-        </p:when>
-        <p:otherwise>
-            <p:identity/>
-        </p:otherwise>
-    </p:choose>
+    </lex0:debug-store>
 
     <p:xslt name="odd2odd">
         <p:with-input port="source">
-            <p:pipe step="include" port="result"/>
+            <p:pipe step="debug-include" port="result"/>
         </p:with-input>
         <p:with-input port="stylesheet">
             <p:pipe step="stylesheet-odd2odd" port="result"/>
         </p:with-input>
     </p:xslt>
-    <p:choose>
+    <lex0:debug-store name="debug-odd2odd">
+        <p:with-option name="name" select="'odd2odd'"/>
+        <p:with-option name="debug" select="$debug"/>
         <p:with-input>
             <p:pipe step="odd2odd" port="result"/>
         </p:with-input>
-        <p:when test="$debug = 'true'">
-            <p:identity name="pass-odd2odd"/>
-            <p:store href="stores/odd2odded.xml"
-                serialization="map{'method':'xml','indent':false()}">
-                <p:with-input>
-                    <p:pipe step="pass-odd2odd" port="result"/>
-                </p:with-input>
-            </p:store>
-            <p:identity>
-                <p:with-input>
-                    <p:pipe step="pass-odd2odd" port="result"/>
-                </p:with-input>
-            </p:identity>
-        </p:when>
-        <p:otherwise>
-            <p:identity/>
-        </p:otherwise>
-    </p:choose>
+    </lex0:debug-store>
     <p:xslt name="xmlbasefix">
         <p:with-input port="source">
-            <p:pipe step="odd2odd" port="result"/>
+            <p:pipe step="debug-odd2odd" port="result"/>
         </p:with-input>
         <p:with-input port="stylesheet">
             <p:document href="../stylesheets/xmlbase-fix.xsl"/>
         </p:with-input>
     </p:xslt>
-    <p:choose>
+    <lex0:debug-store name="debug-xmlbasefix">
+        <p:with-option name="name" select="'xmlbasefix'"/>
+        <p:with-option name="debug" select="$debug"/>
         <p:with-input>
             <p:pipe step="xmlbasefix" port="result"/>
         </p:with-input>
-        <p:when test="$debug = 'true'">
-            <p:identity name="pass-xmlbasefix"/>
-            <p:store href="stores/xmlbase-fixed.xml"
-                serialization="map{'method':'xml','indent':false()}">
-                <p:with-input>
-                    <p:pipe step="pass-xmlbasefix" port="result"/>
-                </p:with-input>
-            </p:store>
-            <p:identity>
-                <p:with-input>
-                    <p:pipe step="pass-xmlbasefix" port="result"/>
-                </p:with-input>
-            </p:identity>
-        </p:when>
-        <p:otherwise>
-            <p:identity/>
-        </p:otherwise>
-    </p:choose>
+    </lex0:debug-store>
     <p:xslt name="odd2lite">
         <p:with-input port="source">
-            <p:pipe step="xmlbasefix" port="result"/>
+            <p:pipe step="debug-xmlbasefix" port="result"/>
         </p:with-input>
         <p:with-input port="stylesheet">
             <p:pipe step="stylesheet-odd2lite" port="result"/>
@@ -152,30 +111,16 @@
             <p:document href="../stylesheets/fix-odd2lite-used-by-classes.xsl"/>
         </p:with-input>
     </p:xslt>
-    <p:choose>
+    <lex0:debug-store name="debug-odd2lite">
+        <p:with-option name="name" select="'odd2lite'"/>
+        <p:with-option name="debug" select="$debug"/>
         <p:with-input>
             <p:pipe step="fix-odd2lite-used-by-classes" port="result"/>
         </p:with-input>
-        <p:when test="$debug = 'true'">
-            <p:identity name="pass-odd2lite"/>
-            <p:store href="stores/odd2lit.xml" serialization="map{'method':'xml','indent':true()}">
-                <p:with-input>
-                    <p:pipe step="pass-odd2lite" port="result"/>
-                </p:with-input>
-            </p:store>
-            <p:identity>
-                <p:with-input>
-                    <p:pipe step="pass-odd2lite" port="result"/>
-                </p:with-input>
-            </p:identity>
-        </p:when>
-        <p:otherwise>
-            <p:identity/>
-        </p:otherwise>
-    </p:choose>
+    </lex0:debug-store>
     <p:xslt name="fix-spec">
         <p:with-input port="source">
-            <p:pipe step="fix-odd2lite-used-by-classes" port="result"/>
+            <p:pipe step="debug-odd2lite" port="result"/>
         </p:with-input>
         <p:with-input port="stylesheet">
             <p:document href="../stylesheets/fix-spec.xsl"/>
@@ -189,28 +134,13 @@
             <p:document href="../stylesheets/expand-intro.xsl"/>
         </p:with-input>
     </p:xslt>
-    <p:choose>
+    <lex0:debug-store name="debug-expand-intro">
+        <p:with-option name="name" select="'expand-intro'"/>
+        <p:with-option name="debug" select="$debug"/>
         <p:with-input>
             <p:pipe step="expand-intro" port="result"/>
         </p:with-input>
-        <p:when test="$debug = 'true'">
-            <p:identity name="pass-expand-intro"/>
-            <p:store href="stores/intro-expanded.xml"
-                serialization="map{'method':'xml','indent':true()}">
-                <p:with-input>
-                    <p:pipe step="pass-expand-intro" port="result"/>
-                </p:with-input>
-            </p:store>
-            <p:identity>
-                <p:with-input>
-                    <p:pipe step="pass-expand-intro" port="result"/>
-                </p:with-input>
-            </p:identity>
-        </p:when>
-        <p:otherwise>
-            <p:identity/>
-        </p:otherwise>
-    </p:choose>
+    </lex0:debug-store>
     <p:xslt name="odd2html" version="3.0">
         <p:with-option name="output-base-uri"
             select="resolve-uri('../build/html/', static-base-uri())"/>
@@ -226,7 +156,7 @@
            
             }"/>
         <p:with-input port="source">
-            <p:pipe step="expand-intro" port="result"/>
+            <p:pipe step="debug-expand-intro" port="result"/>
         </p:with-input>
         <p:with-input port="stylesheet">
             <p:document href="../stylesheets/html3.xsl"/>
