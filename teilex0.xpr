@@ -10,6 +10,18 @@
                         <Boolean>true</Boolean>
                     </entry>
                     <entry>
+                        <String>key.outline.option.pane</String>
+                        <Boolean>true</Boolean>
+                    </entry>
+                    <entry>
+                        <String>outliner.preferred.attributes.list</String>
+                        <String-array>
+                            <String>name</String>
+                            <String>id</String>
+                            <String>ident</String>
+                        </String-array>
+                    </entry>
+                    <entry>
                         <String>scenario.associations</String>
                         <scenarioAssociation-array>
                             <scenarioAssociation>
@@ -19,6 +31,26 @@
                                 <field name="scenarioIds">
                                     <list>
                                         <String>Generate documentation (3.0)</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XPROC</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioStorageLocations">
+                                    <list>
+                                        <Byte>2</Byte>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="url">
+                                    <String>xproc/teilex0.xpl</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>Generate documentation (1.0)</String>
                                     </list>
                                 </field>
                                 <field name="scenarioTypes">
@@ -44,26 +76,6 @@
                                 <field name="scenarioTypes">
                                     <list>
                                         <String>ANT</String>
-                                    </list>
-                                </field>
-                                <field name="scenarioStorageLocations">
-                                    <list>
-                                        <Byte>2</Byte>
-                                    </list>
-                                </field>
-                            </scenarioAssociation>
-                            <scenarioAssociation>
-                                <field name="url">
-                                    <String>xproc/teilex0.xpl</String>
-                                </field>
-                                <field name="scenarioIds">
-                                    <list>
-                                        <String>Generate documentation (1.0)</String>
-                                    </list>
-                                </field>
-                                <field name="scenarioTypes">
-                                    <list>
-                                        <String>XPROC</String>
                                     </list>
                                 </field>
                                 <field name="scenarioStorageLocations">
@@ -587,41 +599,7 @@
                                     </xprocOutputPort-array>
                                 </field>
                                 <field name="xprocOptions">
-                                    <xprocOption-array>
-                                        <xprocOption>
-                                            <field name="namespaceURI">
-                                                <String></String>
-                                            </field>
-                                            <field name="localName">
-                                                <String>debug</String>
-                                            </field>
-                                            <field name="value">
-                                                <null/>
-                                            </field>
-                                        </xprocOption>
-                                        <xprocOption>
-                                            <field name="namespaceURI">
-                                                <String></String>
-                                            </field>
-                                            <field name="localName">
-                                                <String>odd2oddSource</String>
-                                            </field>
-                                            <field name="value">
-                                                <String>${framework(TEI P5)}/xml/tei/stylesheet/odds/odd2odd.xsl</String>
-                                            </field>
-                                        </xprocOption>
-                                        <xprocOption>
-                                            <field name="namespaceURI">
-                                                <String></String>
-                                            </field>
-                                            <field name="localName">
-                                                <String>odd2liteSource</String>
-                                            </field>
-                                            <field name="value">
-                                                <String>${framework(TEI P5)}/xml/tei/stylesheet/odds/odd2lite.xsl</String>
-                                            </field>
-                                        </xprocOption>
-                                    </xprocOption-array>
+                                    <xprocOption-array/>
                                 </field>
                                 <field name="xprocParameters">
                                     <xprocParameterPort-array>

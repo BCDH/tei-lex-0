@@ -1,78 +1,66 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <p:declare-step xmlns:p="http://www.w3.org/ns/xproc" xmlns:c="http://www.w3.org/ns/xproc-step"
-    xmlns:lex0="urn:lex0" version="3.0" name="generateDocumentation">
+    xmlns:lex0="urn:lex0" version="3.0"
+    name="generateDocumentation">
 
     <!-- ================================================================== -->
     <!-- PROLOG: -->
     <p:import href="lib/debug-store.xpl"/>
-    <p:option name="odd2oddSource" required="true"/>
-    <p:option name="odd2liteSource" required="true"/>
     <!-- Read debug flag from config/debug.xml (if present); default to false; 
          ignored by git to avoid CI interference. -->
     <p:variable name="debug"
         select="if (doc-available(resolve-uri('config/debug.xml', static-base-uri())))
                 then string(doc(resolve-uri('config/debug.xml', static-base-uri()))/config/@debug)
                 else 'false'"/>
-    <p:load name="stylesheet-odd2odd">
-        <p:with-option name="href" select="$odd2oddSource"/>
-    </p:load>
-    <p:load name="stylesheet-odd2lite">
-        <p:with-option name="href" select="$odd2liteSource"/>
-    </p:load>
     <!-- ================================================================== -->
     <!-- BODY: -->
-    <p:xslt name="stripper">
-        <p:with-input port="source">
-            <p:document href="../tei/examples/examples.xml"/>
-        </p:with-input>
-        <p:with-input port="stylesheet">
-            <p:document href="../stylesheets/tei-stripper.xsl"/>
-        </p:with-input>
-
-    </p:xslt>
-    <p:store href="../tei/examples/examples.stripped.xml"
-        serialization="map{'method':'xml','indent':true()}"/>
-    <p:directory-list exclude-filter=".+stripped\.xml$" path="../tei/examples/headers"/>
-    <p:for-each>
+  
+    <p:directory-list name="dl" path="../tei/examples" include-filter=".+\.xml$"
+        exclude-filter=".+stripped\.xml$" max-depth="unbounded"/>
+    <p:make-absolute-uris name="abs" match="@name"/>
+    <p:variable name="input-file-count" select="count(//c:file)"/>
+    <p:for-each name="tei-stripper">  
+        <!-- Explicitly feed ONE listing document into the for-each -->
         <p:with-input select="//c:file"/>
-        <p:variable name="filename" select="substring-before(/c:file/@name, '.xml')"/>
-        <p:load>
-            <p:with-option name="href"
-                select="concat('../tei/examples/headers/', $filename, '.xml')"/>
-        </p:load>
+        <!-- in this iteration, the document is a single c:file -->
+        <p:variable name="in" select="string(/*/@name)"/>
+        <!-- replace trailing .xml with .stripped.xml -->
+        <p:variable name="out" select="replace($in, '\.xml$', '.stripped.xml', 'i')"/>
+        <p:load href="{$in}" content-type="application/xml"/>
         <p:xslt>
-            <p:with-input port="source"/>
-            <p:with-input port="stylesheet">
-                <p:document href="../stylesheets/tei-stripper.xsl"/>
-            </p:with-input>
-
+            <p:with-input port="stylesheet" href="../stylesheets/tei-stripper.xsl"/>
         </p:xslt>
-        <p:store>
-            <p:with-option name="href"
-                select="concat('../tei/examples/headers/', $filename, '.stripped.xml')"/>
-        </p:store>
+        <p:store name="store-it" href="{$out}"/> 
     </p:for-each>
-    <p:xinclude name="include" fixup-xml-base="false" fixup-xml-lang="false">
-        <p:with-input port="source">
-            <p:document href="../tei/TEILex0.odd" content-type="application/xml"/>
-        </p:with-input>
-    </p:xinclude>
+    <p:count name="n-stored"/>
+    <p:group name="do-include">
+        <p:output port="result"/>
+            <p:if test=". = $input-file-count">
+                <p:xinclude name="include" fixup-xml-base="false" fixup-xml-lang="false">
+                    <p:with-input port="source">
+                        <p:document href="../tei/TEILex0.odd" content-type="application/xml"/>
+                    </p:with-input>
+                </p:xinclude>     
+            </p:if>
+    </p:group>
+    
     <lex0:debug-store name="debug-include">
         <p:with-option name="name" select="'include'"/>
         <p:with-option name="debug" select="$debug"/>
         <p:with-input>
-            <p:pipe step="include" port="result"/>
+            <p:pipe step="do-include" port="result"/>
         </p:with-input>
     </lex0:debug-store>
-
+    
     <p:xslt name="odd2odd">
         <p:with-input port="source">
             <p:pipe step="debug-include" port="result"/>
         </p:with-input>
         <p:with-input port="stylesheet">
-            <p:pipe step="stylesheet-odd2odd" port="result"/>
+            <p:document href="../stylesheets/odd2odd.xsl" content-type="application/xml"/>
         </p:with-input>
     </p:xslt>
+     
     <lex0:debug-store name="debug-odd2odd">
         <p:with-option name="name" select="'odd2odd'"/>
         <p:with-option name="debug" select="$debug"/>
@@ -100,7 +88,7 @@
             <p:pipe step="debug-xmlbasefix" port="result"/>
         </p:with-input>
         <p:with-input port="stylesheet">
-            <p:pipe step="stylesheet-odd2lite" port="result"/>
+            <p:document href="../stylesheets/odd2lite.xsl"/>
         </p:with-input>
     </p:xslt>
     <p:xslt name="fix-odd2lite-used-by-classes">
@@ -162,12 +150,6 @@
             <p:document href="../stylesheets/html3.xsl"/>
         </p:with-input>
     </p:xslt>
-    <!-- Clean output directory before writing fresh HTML -->
-    <!--This is mainly for local development to avoid having
-    stale files when I'm working on the new structure-->
-    <p:file-delete href="{resolve-uri('../build/html/', static-base-uri())}" recursive="true"/>
-    <p:file-mkdir href="{resolve-uri('../build/html/', static-base-uri())}"/>
-    <!-- Store primary result when only a single HTML file is produced -->
     <p:store href="{resolve-uri('../build/html/index.html', static-base-uri())}"
         serialization="map{'method':'xhtml','indent':false()}">
         <p:with-input>
@@ -183,8 +165,9 @@
             <p:with-option name="href" select="base-uri(/*)"/>
         </p:store>
     </p:for-each>
+    
     <!-- Copy CSS/JS assets into build/html -->
-    <p:file-mkdir href="{resolve-uri('../build/html/css/', static-base-uri())}"/>
+    <!--<p:file-mkdir href="{resolve-uri('../build/html/css/', static-base-uri())}"/>
     <p:file-copy>
         <p:with-option name="href"
             select="resolve-uri('../assets/css/tei-print.css', static-base-uri())"/>
@@ -204,14 +187,12 @@
             select="resolve-uri('../build/html/css/prism.css', static-base-uri())"/>
     </p:file-copy>
     <p:file-copy>
-        <p:with-option name="href"
-            select="resolve-uri('../assets/css/odd.css', static-base-uri())"/>
+        <p:with-option name="href" select="resolve-uri('../assets/css/odd.css', static-base-uri())"/>
         <p:with-option name="target"
             select="resolve-uri('../build/html/css/odd.css', static-base-uri())"/>
     </p:file-copy>
     <p:file-copy>
-        <p:with-option name="href"
-            select="resolve-uri('../assets/css/pure.css', static-base-uri())"/>
+        <p:with-option name="href" select="resolve-uri('../assets/css/pure.css', static-base-uri())"/>
         <p:with-option name="target"
             select="resolve-uri('../build/html/css/pure.css', static-base-uri())"/>
     </p:file-copy>
@@ -226,7 +207,7 @@
             <p:with-option name="target"
                 select="resolve-uri(concat('../build/html/js/', $asset), static-base-uri())"/>
         </p:file-copy>
-    </p:for-each>
+    </p:for-each>-->
     <!-- Copy image assets into build/html/images -->
     <p:file-mkdir href="{resolve-uri('../build/html/images/', static-base-uri())}"/>
     <p:directory-list path="../assets/images"/>
@@ -240,6 +221,8 @@
                 select="resolve-uri(concat('../build/html/images/', $asset), static-base-uri())"/>
         </p:file-copy>
     </p:for-each>
+
+   
 
     <!--<p:xslt name="post-process" version="2.0">
         <p:with-input port="source">
