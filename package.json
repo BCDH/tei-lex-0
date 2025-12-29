@@ -1,0 +1,27 @@
+{
+  "name": "tei-lex-0",
+  "version": "1.0.0",
+  "description": "Repository for the TEI Lex-0 Schema and Guidelines (test version).",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "assets:minify": "node scripts/minify-assets.mjs",
+    "build": "npm run assets:minify"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/daliboris/tei-lex-0.git"
+  },
+  "keywords": [],
+  "author": "Toma Tasovac",
+  "license": "BSD-3-Clause",
+  "bugs": {
+    "url": "https://github.com/daliboris/tei-lex-0/issues"
+  },
+  "homepage": "https://github.com/daliboris/tei-lex-0#readme",
+  "devDependencies": {
+    "esbuild": "^0.27.2"
+  }
+}
