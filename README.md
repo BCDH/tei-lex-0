@@ -11,21 +11,33 @@ git clone https://github.com/daliboris/tei-lex-0.git
 cd tei-lex-0
 ```
 
-## Using in oXygen
+## Source files
 
-Open `lex-0.xpr` as the project. The main ODD is `tei/lex-0.odd`, with supporting includes and examples in the same folder. 
+- Master ODD lives at `tei/lex-0.odd`, with supporting includes and examples under `tei/includes` and `tei/examples`.
+- The XProc script is in `xproc/lex-0.xpl`.
+- The stylesheets under `stylesheets/` are used to generate derived schema and documentation.
 
-Use our project-specific oXygen transformation scenarios:
+## Outputs
 
-- `Lex-0: Generate Relax NG Schema`
-- `Lex-0: Generate guidelines`
+All generated artifacts land in `build/` (.gitignored by choice):
 
-to produce schema and documentation outputs as needed. You can run these transformations regardless of where you are in the project or what your currently open file is. (If you want to create toolbar buttons for an even easier access to your transformations, check out the [OxyRuns](https://github.com/BCDH/oxyruns) plugin.)
+- Schemas: `build/rng/` and `build/xsd/`
+- HTML docs: `build/html`
+- Expanded ODD and intermediates: `build/odd/`
 
-**Note:** The assets build step (copying minified CSS/JS files to `/build`) is handled via `npm`. From the root of this repo, do:
+TODO: Add a XSD transformation + compiled ODD from lex-0.xpl.
 
-```sh
-npm install
-npm run build
-```
+The HTML documentation expects minified CSS/JS from `assets/`, produced by the npm build step (see below).
 
+## Build in oXygen
+
+1. Open `lex-0.xpr` as the project.
+2. Run the transformation scenarios:
+   - `Lex-0: Generate Relax NG Schema`
+   - `Lex-0: Generate guidelines`
+3. Install Node dependencies after cloning the repo for the first time with `npm install` in the root folder.
+4. Build assets so HTML output has its CSS/JS by running `npm run build` in the cloned repo root folder.
+
+![](.github/images/transformation-scenarios.png)
+
+You can run these transformations regardless of your currently open file. If you want toolbar buttons for even faster access, see the [OxyRuns](https://github.com/BCDH/oxyruns) plugin.

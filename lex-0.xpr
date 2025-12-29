@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project>
     <meta>
-        <filters directoryPatterns="" filePatterns="\Qteilex0.xpr\E" positiveFilePatterns="" showHiddenFiles="false"/>
+        <filters directoryPatterns=".git" filePatterns="\Qteilex0.xpr\E,.DS_Store,package.json,package-lock.json,.gitignore,.editorconfig" positiveFilePatterns="" showHiddenFiles="true"/>
         <options>
             <serialized xml:space="preserve">
                 <serializableOrderedMap>
@@ -24,6 +24,29 @@
                     <entry>
                         <String>scenario.associations</String>
                         <scenarioAssociation-array>
+                            <scenarioAssociation>
+                                <field name="url">
+                                    <String>xproc/lex-0.xpl</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>Lex-0: Generate RelaxNG schema</String>
+                                        <String>Lex-0: Generate guidelines</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>ANT</String>
+                                        <String>XPROC</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioStorageLocations">
+                                    <list>
+                                        <Byte>2</Byte>
+                                        <Byte>2</Byte>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
                             <scenarioAssociation>
                                 <field name="url">
                                     <String>stylesheets/html.xsl</String>
