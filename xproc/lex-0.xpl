@@ -38,7 +38,7 @@
             <p:if test=". = $input-file-count">
                 <p:xinclude name="include" fixup-xml-base="false" fixup-xml-lang="false">
                     <p:with-input port="source">
-                        <p:document href="../tei/TEILex0.odd" content-type="application/xml"/>
+                        <p:document href="../tei/lex-0.odd" content-type="application/xml"/>
                     </p:with-input>
                 </p:xinclude>     
             </p:if>
@@ -147,7 +147,7 @@
             <p:pipe step="debug-expand-intro" port="result"/>
         </p:with-input>
         <p:with-input port="stylesheet">
-            <p:document href="../stylesheets/html3.xsl"/>
+            <p:document href="../stylesheets/html.xsl"/>
         </p:with-input>
     </p:xslt>
     <p:store href="{resolve-uri('../build/html/index.html', static-base-uri())}"

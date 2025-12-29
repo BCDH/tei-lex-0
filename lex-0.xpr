@@ -26,80 +26,23 @@
                         <scenarioAssociation-array>
                             <scenarioAssociation>
                                 <field name="url">
-                                    <String>xproc/teilex0.cal3.xpl</String>
+                                    <String>stylesheets/html.xsl</String>
                                 </field>
                                 <field name="scenarioIds">
                                     <list>
-                                        <String>Generate documentation (3.0)</String>
-                                    </list>
-                                </field>
-                                <field name="scenarioTypes">
-                                    <list>
-                                        <String>XPROC</String>
-                                    </list>
-                                </field>
-                                <field name="scenarioStorageLocations">
-                                    <list>
-                                        <Byte>2</Byte>
-                                    </list>
-                                </field>
-                            </scenarioAssociation>
-                            <scenarioAssociation>
-                                <field name="url">
-                                    <String>xproc/teilex0.xpl</String>
-                                </field>
-                                <field name="scenarioIds">
-                                    <list>
-                                        <String>Generate documentation (1.0)</String>
-                                    </list>
-                                </field>
-                                <field name="scenarioTypes">
-                                    <list>
-                                        <String>XPROC</String>
-                                    </list>
-                                </field>
-                                <field name="scenarioStorageLocations">
-                                    <list>
-                                        <Byte>2</Byte>
-                                    </list>
-                                </field>
-                            </scenarioAssociation>
-                            <scenarioAssociation>
-                                <field name="url">
-                                    <String>tei/TEILex0.odd</String>
-                                </field>
-                                <field name="scenarioIds">
-                                    <list>
-                                        <String>Generate RelaxNG schema (new)</String>
+                                        <String>Lex-0: Generate RelaxNG schema</String>
+                                        <String>Lex-0: Generate guidelines</String>
                                     </list>
                                 </field>
                                 <field name="scenarioTypes">
                                     <list>
                                         <String>ANT</String>
-                                    </list>
-                                </field>
-                                <field name="scenarioStorageLocations">
-                                    <list>
-                                        <Byte>2</Byte>
-                                    </list>
-                                </field>
-                            </scenarioAssociation>
-                            <scenarioAssociation>
-                                <field name="url">
-                                    <String>../../../Downloads/teilex0.xpl%20for%20calabash3%20doesn%27t%20work</String>
-                                </field>
-                                <field name="scenarioIds">
-                                    <list>
-                                        <String>Generate documentation (3.0)</String>
-                                    </list>
-                                </field>
-                                <field name="scenarioTypes">
-                                    <list>
                                         <String>XPROC</String>
                                     </list>
                                 </field>
                                 <field name="scenarioStorageLocations">
                                     <list>
+                                        <Byte>2</Byte>
                                         <Byte>2</Byte>
                                     </list>
                                 </field>
@@ -152,7 +95,7 @@
                                                 <String>Path to the TEI XML file.</String>
                                             </field>
                                             <field name="value">
-                                                <String>${pd}/tei/TEILex0.odd</String>
+                                                <String>${pd}/tei/lex-0.odd</String>
                                             </field>
                                             <field name="defaultValue">
                                                 <null/>
@@ -286,7 +229,7 @@
                                     <null/>
                                 </field>
                                 <field name="name">
-                                    <String>Generate RelaxNG schema (new)</String>
+                                    <String>Lex-0: Generate RelaxNG schema</String>
                                 </field>
                                 <field name="baseURL">
                                     <null/>
@@ -331,7 +274,7 @@
                                     <Boolean>true</Boolean>
                                 </field>
                                 <field name="locationToOpenInBrowserURL">
-                                    <String>${cfd}/out/${cfn}.rng</String>
+                                    <String></String>
                                 </field>
                                 <field name="openInEditor">
                                     <Boolean>false</Boolean>
@@ -366,199 +309,6 @@
                                     </String-array>
                                 </field>
                             </antScenario>
-                            <xprocScenario>
-                                <field name="inputPorts">
-                                    <xprocInputPort-array>
-                                        <xprocInputPort>
-                                            <field name="urls">
-                                                <String-array/>
-                                            </field>
-                                            <field name="portName">
-                                                <String>stylesheetParameters</String>
-                                            </field>
-                                        </xprocInputPort>
-                                    </xprocInputPort-array>
-                                </field>
-                                <field name="outputPorts">
-                                    <xprocOutputPort-array>
-                                        <xprocOutputPort>
-                                            <field name="url">
-                                                <null/>
-                                            </field>
-                                            <field name="showInSequenceView">
-                                                <Boolean>true</Boolean>
-                                            </field>
-                                            <field name="portName">
-                                                <String>exsout</String>
-                                            </field>
-                                        </xprocOutputPort>
-                                        <xprocOutputPort>
-                                            <field name="url">
-                                                <null/>
-                                            </field>
-                                            <field name="showInSequenceView">
-                                                <Boolean>true</Boolean>
-                                            </field>
-                                            <field name="portName">
-                                                <String>result</String>
-                                            </field>
-                                        </xprocOutputPort>
-                                    </xprocOutputPort-array>
-                                </field>
-                                <field name="xprocOptions">
-                                    <xprocOption-array>
-                                        <xprocOption>
-                                            <field name="namespaceURI">
-                                                <String></String>
-                                            </field>
-                                            <field name="localName">
-                                                <String>debug</String>
-                                            </field>
-                                            <field name="value">
-                                                <null/>
-                                            </field>
-                                        </xprocOption>
-                                        <xprocOption>
-                                            <field name="namespaceURI">
-                                                <String></String>
-                                            </field>
-                                            <field name="localName">
-                                                <String>odd2oddSource</String>
-                                            </field>
-                                            <field name="value">
-                                                <String>${framework(TEI P5)}/xml/tei/stylesheet/odds/odd2odd.xsl</String>
-                                            </field>
-                                        </xprocOption>
-                                        <xprocOption>
-                                            <field name="namespaceURI">
-                                                <String></String>
-                                            </field>
-                                            <field name="localName">
-                                                <String>odd2liteSource</String>
-                                            </field>
-                                            <field name="value">
-                                                <String>${framework(TEI P5)}/xml/tei/stylesheet/odds/odd2lite.xsl</String>
-                                            </field>
-                                        </xprocOption>
-                                    </xprocOption-array>
-                                </field>
-                                <field name="xprocParameters">
-                                    <xprocParameterPort-array>
-                                        <xprocParameterPort>
-                                            <field name="portName">
-                                                <String>stylesheetParameters</String>
-                                            </field>
-                                            <field name="parameters">
-                                                <xprocParameter-array>
-                                                    <xprocParameter>
-                                                        <field name="namespaceURI">
-                                                            <String></String>
-                                                        </field>
-                                                        <field name="localName">
-                                                            <String>paramName1</String>
-                                                        </field>
-                                                        <field name="value">
-                                                            <String></String>
-                                                        </field>
-                                                    </xprocParameter>
-                                                </xprocParameter-array>
-                                            </field>
-                                        </xprocParameterPort>
-                                        <xprocParameterPort>
-                                            <field name="portName">
-                                                <String>*</String>
-                                            </field>
-                                            <field name="parameters">
-                                                <xprocParameter-array/>
-                                            </field>
-                                        </xprocParameterPort>
-                                    </xprocParameterPort-array>
-                                </field>
-                                <field name="configFile">
-                                    <String></String>
-                                </field>
-                                <field name="advancedOptionsMap">
-                                    <null/>
-                                </field>
-                                <field name="name">
-                                    <String>Generate documentation (1.0)</String>
-                                </field>
-                                <field name="baseURL">
-                                    <null/>
-                                </field>
-                                <field name="footerURL">
-                                    <null/>
-                                </field>
-                                <field name="fOPMethod">
-                                    <null/>
-                                </field>
-                                <field name="fOProcessorName">
-                                    <null/>
-                                </field>
-                                <field name="headerURL">
-                                    <null/>
-                                </field>
-                                <field name="inputXSLURL">
-                                    <String>${currentFileURL}</String>
-                                </field>
-                                <field name="inputXMLURL">
-                                    <String></String>
-                                </field>
-                                <field name="defaultScenario">
-                                    <Boolean>false</Boolean>
-                                </field>
-                                <field name="isFOPPerforming">
-                                    <Boolean>false</Boolean>
-                                </field>
-                                <field name="type">
-                                    <String>XPROC</String>
-                                </field>
-                                <field name="saveAs">
-                                    <Boolean>false</Boolean>
-                                </field>
-                                <field name="openInBrowser">
-                                    <Boolean>false</Boolean>
-                                </field>
-                                <field name="outputResource">
-                                    <null/>
-                                </field>
-                                <field name="openOtherLocationInBrowser">
-                                    <Boolean>false</Boolean>
-                                </field>
-                                <field name="locationToOpenInBrowserURL">
-                                    <null/>
-                                </field>
-                                <field name="openInEditor">
-                                    <Boolean>false</Boolean>
-                                </field>
-                                <field name="showInHTMLPane">
-                                    <Boolean>false</Boolean>
-                                </field>
-                                <field name="showInXMLPane">
-                                    <Boolean>true</Boolean>
-                                </field>
-                                <field name="showInSVGPane">
-                                    <Boolean>false</Boolean>
-                                </field>
-                                <field name="showInResultSetPane">
-                                    <Boolean>false</Boolean>
-                                </field>
-                                <field name="useXSLTInput">
-                                    <Boolean>false</Boolean>
-                                </field>
-                                <field name="xsltParams">
-                                    <list/>
-                                </field>
-                                <field name="cascadingStylesheets">
-                                    <String-array/>
-                                </field>
-                                <field name="xslTransformer">
-                                    <String>XML Calabash 1.X</String>
-                                </field>
-                                <field name="extensionURLs">
-                                    <String-array/>
-                                </field>
-                            </xprocScenario>
                             <xprocScenario>
                                 <field name="inputPorts">
                                     <xprocInputPort-array>
@@ -640,7 +390,7 @@
                                     <null/>
                                 </field>
                                 <field name="name">
-                                    <String>Generate documentation (3.0)</String>
+                                    <String>Lex-0: Generate guidelines</String>
                                 </field>
                                 <field name="baseURL">
                                     <null/>
@@ -658,7 +408,7 @@
                                     <null/>
                                 </field>
                                 <field name="inputXSLURL">
-                                    <String>${pdu}/xproc/teilex0.cal3.xpl</String>
+                                    <String>${pdu}/xproc/lex-0.xpl</String>
                                 </field>
                                 <field name="inputXMLURL">
                                     <String></String>
@@ -726,11 +476,10 @@
             </serialized>
         </options>
     </meta>
-    <projectTree name="teilex0.xpr">
+    <projectTree name="lex-0.xpr">
         <folder masterFiles="true" name="Main Files">
             <file name="stylesheets/html.xsl"/>
-            <file name="stylesheets/html3.xsl"/>
-            <file name="tei/TEILex0.odd"/>
+            <file name="tei/lex-0.odd"/>
         </folder>
         <folder path="."/>
     </projectTree>

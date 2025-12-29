@@ -1,0 +1,35 @@
+cff-version: 1.2.0
+message: "If you use TEI Lex-0 in your research, software, or data production,
+  please cite it using the information below."
+title: "TEI Lex-0"
+type: software
+authors:
+  - family-names: "Tasovac"
+    given-names: "Toma"
+    orcid: "https://orcid.org/0000-0002-3919-993X"
+    # remember to ask everybody to give us their orcids
+  # Add other authors
+version: 0.9.5
+date-released: "XXXX-XX-XX"
+repository-code: "https://github.com/daliboris/tei-lex-0"
+url: "https://github.com/daliboris/tei-lex-0"
+license: "BSD-3-Clause"
+abstract:
+  "TEI Lex-0 is a community-driven subset of the Text Encoding Initiative (TEI)
+  Guidelines that defines a constrained, interoperable model for encoding
+  dictionaries and lexical resources. It combines human-readable guidelines
+  with machine-actionable RELAX NG schemas to support consistent data creation,
+  validation, and reuse in digital lexicography and the digital humanities."
+keywords:
+  - TEI
+  - lexicography
+  - dictionaries
+  - XML
+  - schemas
+  - digital humanities
+  - standards
+# This is a manually created CITATION.cff file for the TEI Lex-0 project. The
+# goal is to generate it automatically from ODD, include all the authors etc.
+
+# More things to figure out later: how to handle versions, date-released, etc.
+# Put keywords in the ODD as well.
