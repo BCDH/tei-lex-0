@@ -98,7 +98,7 @@
                         <a
                             style="float:right; text-transform:capitalize; margin-right: 0.75em; line-height:30px; vertical-align:middle; font-size:85%; padding: 0"
                             href="#revisionHistory">Version <xsl:value-of select="$version"/></a>
-                        <a style="line-height:30px; vertical-align:middle" href="#">TEI Lex-0</a>
+                        <a style="line-height:30px; vertical-align:middle" href="index.html">TEI Lex-0</a>
 
                     </div>
 
@@ -144,6 +144,7 @@
                    
                 </div>
                 <div class="footer">
+                    This is where the footer goes.
                     <xsl:call-template name="copyrightStatement"></xsl:call-template>
                 </div>
             </div>
