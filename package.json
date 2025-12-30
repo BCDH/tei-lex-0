@@ -8,7 +8,8 @@
   },
   "scripts": {
     "assets:minify": "node scripts/minify-assets.mjs",
-    "build": "npm run assets:minify"
+    "build": "npm run assets:minify",
+    "assets:watch": "node scripts/watch-assets.mjs"
   },
   "repository": {
     "type": "git",
