@@ -207,7 +207,8 @@
     </teiHeader>
     <text>
         <front>
-            <!--<divGen type="toc"/>-->
+            <xi:include href="includes/00__index.xml" parse="xml"
+                xpointer="home"/>
         </front>
         <body>
             <xi:include href="includes/01__introduction.xml" parse="xml"

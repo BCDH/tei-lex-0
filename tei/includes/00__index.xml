@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/css" href="../css/tei_oxygen.css"?>
+<?xml-stylesheet type="text/css" href="../css/tei.lex0.odd.css"?>
+<div xmlns="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude"
+    xml:id="home">
+    <div xml:id="home-test">
+        <p>Intro text for the index page… Now that we have an index page and separate chapter pages, I need to rethink the introduction and what goes where.</p>
+    </div>
+    
+   
+      
+       
+</div>
