@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    xmlns="http://www.w3.org/1999/xhtml"
     xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:teix="http://www.tei-c.org/ns/Examples"
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
     xpath-default-namespace="http://www.tei-c.org/ns/1.0"
@@ -13,7 +14,7 @@
     <xsl:template name="processExample">
         <xsl:param name="simple"/>
         <xsl:param name="highlight"/>
-        <pre xmlns="http://www.w3.org/1999/xhtml">
+        <pre>
             <code>
             <xsl:attribute name="id">
                 <xsl:apply-templates mode="ident" select="."/>
@@ -102,7 +103,7 @@
     <xsl:template name="egXMLEndHook">
         <xsl:choose>
             <xsl:when test="@corresp and id(substring(@corresp, 2))">
-                <span class="eg_biblStruct" xmlns="http://www.w3.org/1999/xhtml">
+                <span class="eg_biblStruct">
                     <xsl:call-template name="makeInternalLink">
                         <xsl:with-param name="target" select="id(substring(@corresp, 2))"/>
                         <xsl:with-param name="ptr" select="true()"/>
@@ -127,7 +128,7 @@
                 </span>
             </xsl:when>
             <xsl:when test="@source and id(substring(@source, 2))">
-                <span class="eg_biblStruct" xmlns="http://www.w3.org/1999/xhtml">
+                <span class="eg_biblStruct">
                     <xsl:call-template name="makeInternalLink">
                         <xsl:with-param name="target" select="id(substring(@source, 2))"/>
                         <xsl:with-param name="ptr" select="true()"/>
@@ -158,7 +159,7 @@
             </xsl:when>
         </xsl:choose>
         <xsl:for-each select="ancestor::tei:elementSpec">
-            <div style="float: right;" xmlns="http://www.w3.org/1999/xhtml">
+            <div style="float: right;">
                 <a href="examples-{@ident}.html">
                     <xsl:sequence select="tei:i18n('Show all')"/>
                 </a>
@@ -179,13 +180,13 @@
         <xsl:param name="egImg"/>
         <xsl:element name="div" namespace="http://www.w3.org/1999/xhtml">
             <xsl:attribute name="class">tab</xsl:attribute>
-            <input type="checkbox" xmlns="http://www.w3.org/1999/xhtml">
+            <input type="checkbox">
                 <!--will need another unique str. for id-->
                 <xsl:attribute name="id">
                     <xsl:value-of select="concat('chck', generate-id())"/>
                 </xsl:attribute>
             </input>
-            <label class="tab-label" xmlns="http://www.w3.org/1999/xhtml">
+            <label class="tab-label">
                 <xsl:attribute name="for">
                     <xsl:value-of select="concat('chck', generate-id())"/>
                 </xsl:attribute>
@@ -193,7 +194,7 @@
                 <span style="display:inline-block"
                     ><!--<xsl:value-of select="concat('Example ', $position)"/>--></span>
             </label>
-            <div class="tab-content" xmlns="http://www.w3.org/1999/xhtml">
+            <div class="tab-content">
                 <xsl:apply-templates select="$egImg"></xsl:apply-templates>
                 <!--<xsl:apply-templates></xsl:apply-templates>-->
                 <xsl:call-template name="processExample">
@@ -208,13 +209,13 @@
         <!--<xsl:param name="position"></xsl:param> -->
         <xsl:element name="div" namespace="http://www.w3.org/1999/xhtml">
             <xsl:attribute name="class">tab</xsl:attribute>
-            <input type="checkbox" xmlns="http://www.w3.org/1999/xhtml">
+            <input type="checkbox" >
                 <!--will need another unique str. for id-->
                 <xsl:attribute name="id">
                     <xsl:value-of select="concat('chck', generate-id())"/>
                 </xsl:attribute>
             </input>
-            <label class="tab-label" xmlns="http://www.w3.org/1999/xhtml">
+            <label class="tab-label">
                 <xsl:attribute name="for">
                     <xsl:value-of select="concat('chck', generate-id())"/>
                 </xsl:attribute>
@@ -223,7 +224,7 @@
                 <xsl:text>In focus: </xsl:text>
                 <xsl:value-of select="tei:body/tei:head"/>
             </label>
-            <div class="tab-content" xmlns="http://www.w3.org/1999/xhtml">
+            <div class="tab-content">
                 <xsl:apply-templates/>
                 <!--<xsl:call-template name="processExample">
                     <xsl:with-param name="simple"></xsl:with-param>
@@ -246,7 +247,7 @@
     </xsl:template>
     <xsl:template match="tei:floatingText[@type = 'inFocusPanel']/tei:body/tei:head"> </xsl:template>
     <xsl:template match="tei:floatingText[@type = 'inFocusPanel']/tei:body">
-        <div class="panelContent" xmlns="http://www.w3.org/1999/xhtml">
+        <div class="panelContent">
             <xsl:apply-templates/>
         </div>
     </xsl:template>

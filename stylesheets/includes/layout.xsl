@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    xmlns="http://www.w3.org/1999/xhtml"
     xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:teix="http://www.tei-c.org/ns/Examples"
-    xmlns:html="http://www.w3.org/1999/xhtml" xpath-default-namespace="http://www.tei-c.org/ns/1.0"
-    version="3.0" exclude-result-prefixes="tei teix html">
+    xpath-default-namespace="http://www.tei-c.org/ns/1.0"
+    version="3.0" exclude-result-prefixes="tei teix">
 
     <doc xmlns="http://www.oxygenxml.com/ns/doc/xsl">
         <desc>[html] Make a new page using multicolumn layout <param name="currentID">current
@@ -78,10 +79,10 @@
             `xproc/teilex0.cal3.xpl`. If you change $pageLayout there (or in
             html3.xsl), a different page layout template will be chosen.
         -->
-        <div id="layout" class="custom-layout language-xml" xmlns="http://www.w3.org/1999/xhtml">
+        <div id="layout" class="custom-layout language-xml">
 
             <!-- Menu toggle: CSS controls left/overlay behavior for #menu/#menuLink. -->
-            <a href="#menu" id="menuLink" class="menu-link" xmlns="http://www.w3.org/1999/xhtml">
+            <a href="#menu" id="menuLink" class="menu-link">
                 <!-- Hamburger icon; needed to retrieve the menu on small screens -->
                 <span/>
             </a>
@@ -92,7 +93,7 @@
                 - The menu content is built from tei:text/tei:front below.
                 - Add menu-specific classes here (class="custom-menu ...") for styling hooks.
             -->
-            <div id="menu" class="custom-menu" xmlns="http://www.w3.org/1999/xhtml">
+            <div id="menu" class="custom-menu">
                 <div class="pure-menu">
                     <div class="pure-menu-heading">
                         <a
@@ -104,7 +105,7 @@
 
                     <div class="tei_toc_search">
                         <div class="input-group">
-                            <input type="search" placeholder="Search..."
+                            <input type="search" name="search" placeholder="Search..."
                                 onfocus="this.placeholder=''" onblur="this.placeholder='Search...'"
                                 class="algo rounded"/>
                         </div>
@@ -112,22 +113,21 @@
                     <xsl:call-template name="mainTOC"/>
                 </div>
 
-                <ul class="pure-menu-list" xmlns="http://www.w3.org/1999/xhtml"
-                    style="position: fixed; bottom: 0; width: 325px;">
-                    <li class="dlogo" xmlns="http://www.w3.org/1999/xhtml" style="background: #1a252f">
-                        <a href="#" xmlns="http://www.w3.org/1999/xhtml" class="logos">
+                <ul class="pure-menu-list" style="position: fixed; bottom: 0; width: 325px;">
+                    <li class="dlogo" style="background: #1a252f">
+                        <a href="#" class="logos">
                             <img src="images/dariah-lr.png" class="pure-img img-hover"/>
                             <img src="images/dariah-lr-blue.png" class="pure-img img"/>
                         </a>
                     </li>
-                    <li xmlns="http://www.w3.org/1999/xhtml" style="background: #1a252f">
-                        <a href="#" xmlns="http://www.w3.org/1999/xhtml" class="logos">
+                    <li style="background: #1a252f">
+                        <a href="#" class="logos">
                             <img src="images/elexis.png" class="pure-img img-hover"/>
                             <img src="images/elexis-blue.png" class="pure-img img"/>
                         </a>
                     </li>
-                    <li class="pure-menu-item h2020" xmlns="http://www.w3.org/1999/xhtml" style="background: #1a252f">
-                        <p xmlns="http://www.w3.org/1999/xhtml">Co-funded by the Horizon 2020 innovation and research programme of the European Union under grant no. 731015.</p>
+                    <li class="pure-menu-item h2020" style="background: #1a252f">
+                        <p>Co-funded by the Horizon 2020 innovation and research programme of the European Union under grant no. 731015.</p>
                     </li>
                 </ul>
             </div>

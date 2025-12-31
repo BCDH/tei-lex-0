@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    xmlns="http://www.w3.org/1999/xhtml"
     xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:teix="http://www.tei-c.org/ns/Examples" xmlns:xs="http://www.w3.org/2001/XMLSchema"
-    xmlns:xhtml="http://www.w3.org/1999/xhtml"
     xpath-default-namespace="http://www.tei-c.org/ns/1.0" version="2.0"
-    exclude-result-prefixes="tei teix xhtml xs">
+    exclude-result-prefixes="tei teix xs">
     
     <xsl:function name="tei:tocRevealClass">
         <xsl:param name="tocLevel" as="xs:integer"></xsl:param>
@@ -84,7 +84,7 @@
         <xsl:param name="part"/>
         <xsl:param name="force"/>
         <xsl:if test="tei:div | tei:div1 | tei:div2 | tei:div3 | tei:div4 | tei:div5 | tei:div6">
-            <div class="toc{$force} toc_{$part}" xmlns="http://www.w3.org/1999/xhtml">
+            <div class="toc{$force} toc_{$part}">
                 <xsl:apply-templates mode="maketoc"
                     select="tei:div | tei:div1 | tei:div2 | tei:div3 | tei:div4 | tei:div5 | tei:div6">
                     <xsl:with-param name="forcedepth" select="$force"/>
@@ -96,7 +96,7 @@
     <xsl:template name="continuedToc">
         <xsl:if test="div">
             <!--pure-u-24-24-->
-            <div class="continuedtoc" xmlns="http://www.w3.org/1999/xhtml">
+            <div class="continuedtoc">
                 <xsl:apply-templates mode="maketoc" select="div"/>
             </div>
         </xsl:if>
@@ -119,7 +119,7 @@
                 </xsl:otherwise>
             </xsl:choose>
         </xsl:variable>
-        <div class="oddTocEntry" xmlns="http://www.w3.org/1999/xhtml">
+        <div class="oddTocEntry">
             <a href="{$loc}" class="pure-menu-link">
                 <xsl:value-of select="$linkname"/>
             </a>
@@ -151,7 +151,7 @@
                 <xsl:apply-templates mode="generateLink" select="."/>
             </xsl:variable>
           
-            <div xmlns="http://www.w3.org/1999/xhtml">
+            <div>
                 <xsl:choose>
                     <xsl:when test="not(ancestor::div) and child::div">
                         <xsl:attribute name="class">
@@ -161,7 +161,7 @@
                         <xsl:variable name="tocLevel">
                             <xsl:value-of select="number(count(ancestor::tei:div))"/>
                         </xsl:variable>
-                        <div class="{tei:calcTocIndentClass($tocLevel)}" xmlns="http://www.w3.org/1999/xhtml"></div>
+                        <div class="{tei:calcTocIndentClass($tocLevel)}"></div>
                        <!-- <div class="{$tocRevealClass} toc-showhide">
                            <div class="plusminus"></div>   
                         </div>-->
@@ -175,7 +175,7 @@
                         <xsl:variable name="tocLevel">
                             <xsl:value-of select="number(count(ancestor::tei:div))"/>
                         </xsl:variable>
-                        <div class="{tei:calcTocIndentClass($tocLevel)}" xmlns="http://www.w3.org/1999/xhtml"></div>
+                        <div class="{tei:calcTocIndentClass($tocLevel)}"></div>
                       
                     </xsl:when>
                     <xsl:otherwise>
@@ -186,7 +186,7 @@
                         <xsl:variable name="tocLevel">
                             <xsl:value-of select="number(count(ancestor::tei:div))"/>
                         </xsl:variable>
-                        <div class="{tei:calcTocIndentClass($tocLevel)}" xmlns="http://www.w3.org/1999/xhtml"></div>
+                        <div class="{tei:calcTocIndentClass($tocLevel)}"></div>
                        <!-- <div class="{$tocRevealClass} toc-showhide">
                             <xsl:text>&#160;&#160;</xsl:text>
                         </div>-->
@@ -280,7 +280,7 @@
             <xsl:value-of select="count(ancestor::tei:div)"/>
         </xsl:variable>
         <xsl:if test="$toc">
-            <div class="{tei:calcHeadingNumberClass($tocLevel)} toc-heading-number" xmlns="http://www.w3.org/1999/xhtml">
+            <div class="{tei:calcHeadingNumberClass($tocLevel)} toc-heading-number">
                 <xsl:copy-of select="$headingNumber"/>
             </div>
         </xsl:if>
@@ -290,7 +290,7 @@
         </xsl:if>
      
         <xsl:if test="$minimal = 'false' and $toc">
-            <div class="{tei:calcHeadingClass($tocLevel)} toc-heading" xmlns="http://www.w3.org/1999/xhtml">
+            <div class="{tei:calcHeadingClass($tocLevel)} toc-heading">
                 <xsl:choose>
                     <xsl:when test="local-name(.) = 'TEI'">
                         <xsl:apply-templates
@@ -389,7 +389,7 @@
             </div>
             
             <xsl:if test="$toc">
-                <div class="{tei:tocRevealClass($tocLevel)} toc-showhide" xmlns="http://www.w3.org/1999/xhtml">
+                <div class="{tei:tocRevealClass($tocLevel)} toc-showhide">
                     <xsl:choose>
                         <xsl:when test="child::div and $toc">
                             <div id="menu-{translate(tei:head, ' ', '')}" class="plusminus"></div>
