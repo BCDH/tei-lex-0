@@ -166,12 +166,11 @@ div.toc_body div.toc > div:first-child {
 
 /* Controls for first-level TOC entries */
 
-/* ignore first empty div
-TODO: remove in XSL */
-#menu .toc_body > .tocTree > div:first-child, 
+/* ignore first empty div */
+/* #menu .toc_body > .tocTree > div:first-child, 
 #menu .toc_body > .toc > div:first-child {
   flex-basis: 0;
-}
+} */
 
 #menu .toc_body > .tocTree > .toc-heading-number,
 #menu .toc_body > .toc > .toc-heading-number  {
@@ -184,10 +183,10 @@ TODO: remove in XSL */
 }
 
 /* Controls for second-level TOC entries */
-#menu .toc_body > .tocTree > .continuedtoc > .tocTree >  div:first-child, 
+/* #menu .toc_body > .tocTree > .continuedtoc > .tocTree >  div:first-child, 
 #menu .toc_body > .tocTree > .continuedtoc > .toc >  div:first-child  {
   flex-basis: 0em;
-}
+} */
 
 #menu .toc_body > .tocTree > .continuedtoc > .tocTree > .toc-heading-number,
 #menu .toc_body > .tocTree > .continuedtoc > .toc > .toc-heading-number  {
@@ -205,9 +204,9 @@ TODO: remove in XSL */
 
 /* Controls for third-level TOC entries */
 
-#menu .toc_body > .tocTree > .continuedtoc > .tocTree > .continuedtoc > .toc > div:first-child {
+/* #menu .toc_body > .tocTree > .continuedtoc > .tocTree > .continuedtoc > .toc > div:first-child {
   flex-basis: 0;
-}
+} */
 
 #menu .toc_body > .tocTree > .continuedtoc > .tocTree > .continuedtoc > .toc > .toc-heading-number {
   flex-basis: 7.9em;

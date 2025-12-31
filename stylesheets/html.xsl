@@ -35,6 +35,7 @@
     <xsl:param name="splitOnlyID" select="'specification'"/>
     <xsl:param name="splitLevelNonSpec" select="'0'"/>
     <xsl:param name="outputMethod" select="'html'"/>
+    <xsl:param name="tocFront" select="'false'"/>
     
     <xsl:import href="https://www.tei-c.org/release/xml/tei/stylesheet/html/html.xsl"/>
     

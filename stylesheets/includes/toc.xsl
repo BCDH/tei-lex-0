@@ -1,85 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:teix="http://www.tei-c.org/ns/Examples" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns="http://www.w3.org/1999/xhtml" xmlns:tei="http://www.tei-c.org/ns/1.0"
+    xmlns:teix="http://www.tei-c.org/ns/Examples" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:xd="http://www.oxygenxml.com/ns/doc/xsl"
     xpath-default-namespace="http://www.tei-c.org/ns/1.0" version="2.0"
-    exclude-result-prefixes="tei teix xs">
-    
-    <xsl:function name="tei:tocRevealClass">
-        <xsl:param name="tocLevel" as="xs:integer"></xsl:param>
-        <xsl:choose>
-            <xsl:when test="$tocLevel eq 0 ">
-                <!--<xsl:value-of select="'pure-u-2-24'"/>-->
-            </xsl:when>
-            <xsl:when test="$tocLevel eq 1 ">
-              <!--  <xsl:value-of select="'pure-u-2-24'"/>-->
-            </xsl:when>
-            <xsl:when test="$tocLevel eq 2 ">
-              <!--  <xsl:value-of select="''"/>-->
-            </xsl:when>
-        </xsl:choose>
-    </xsl:function>
-    
-    <xsl:function name="tei:calcTocIndentClass">
-        <xsl:param name="tocLevel" as="xs:integer"></xsl:param>
-        <xsl:choose>
-            <xsl:when test="$tocLevel eq 0 ">
-                <!--<xsl:value-of select="'pure-u-1-24'"/>-->
-            </xsl:when>
-            <xsl:when test="$tocLevel eq 1 ">
-                <!--<xsl:value-of select="'pure-u-3-24'"/>-->
-            </xsl:when>
-            <xsl:when test="$tocLevel eq 2 ">
-               <!-- <xsl:value-of select="'pure-u-6-24'"/>-->
-            </xsl:when>
-        </xsl:choose>
-    </xsl:function>
+    exclude-result-prefixes="tei teix xs xd">
 
-    
-    <xsl:function name="tei:calcHeadingNumberClass">
-        <xsl:param name="tocLevel" as="xs:integer"></xsl:param>
-        <xsl:choose>
-            <xsl:when test="$tocLevel eq 0 ">
-                <!--<xsl:value-of select="'pure-u-3-24'"/>-->
-            </xsl:when>
-            <xsl:when test="$tocLevel eq 1 ">
-                <!--<xsl:value-of select="'pure-u-4-24'"/>-->
-            </xsl:when>
-            <xsl:when test="$tocLevel eq 2 ">
-                <!--<xsl:value-of select="'pure-u-5-24'"/>-->
-            </xsl:when>
-        </xsl:choose>
-    </xsl:function>
-    
-    <xsl:function name="tei:calcHeadingClass">
-        <xsl:param name="tocLevel" as="xs:integer"></xsl:param>
-        <xsl:choose>
-            <xsl:when test="$tocLevel eq 0 ">
-                <!--<xsl:value-of select="'pure-u-18-24'"/>-->
-            </xsl:when>
-            <xsl:when test="$tocLevel eq 1 ">
-              <!--  <xsl:value-of select="'pure-u-15-24'"/>-->
-            </xsl:when>
-            <xsl:when test="$tocLevel eq 2 ">
-            <!--    <xsl:value-of select="'pure-u-13-24'"/>-->
-            </xsl:when>
-        </xsl:choose>
-    </xsl:function>
+    <xd:doc>
+        <xd:author>Toma Tasovac</xd:author>
+        <xd:desc>Adjust TOC templates for the TEI Lex-0 website</xd:desc>
+    </xd:doc>
 
-   <!--this removes the front matter from toc -\- i can remove this later
-   if we decide to give a heading to the home pages stuff. but at the moment
-   it doesn't make sense to me to have a heading in the toc called Home or Index
-   since the TEI Lex-0 in the upper left corner has that function already.-->
-    <xsl:template name="mainTOC">
-        <xsl:variable name="root" select="ancestor-or-self::tei:TEI[1]"/>
-        <xsl:for-each select="$root/tei:text/tei:body | $root/tei:text/tei:back">
-            <xsl:call-template name="partTOC">
-                <xsl:with-param name="part" select="local-name()"/>
-                <xsl:with-param name="force"/>
-            </xsl:call-template>
-        </xsl:for-each>
-    </xsl:template>
-    
+    <xd:doc>
+        <xd:desc>Override upstream partTOC: use div-based containers instead of ul/li lists to fit
+            the sidebar menu layout.</xd:desc>
+        <xd:param name="part"/>
+        <xd:param name="force"/>
+    </xd:doc>
     <xsl:template name="partTOC">
         <xsl:param name="part"/>
         <xsl:param name="force"/>
@@ -92,47 +29,25 @@
             </div>
         </xsl:if>
     </xsl:template>
-    
+
+    <xd:doc>
+        <xd:desc>Override upstream continuedToc: emit a div wrapper for nested TOC entries instead
+            of a ul list.</xd:desc>
+    </xd:doc>
     <xsl:template name="continuedToc">
         <xsl:if test="div">
-            <!--pure-u-24-24-->
             <div class="continuedtoc">
                 <xsl:apply-templates mode="maketoc" select="div"/>
             </div>
         </xsl:if>
     </xsl:template>
-    
-    <xsl:template name="oddTocEntry">
-        <xsl:variable name="linkname"
-            select="concat(tei:createSpecPrefix(.), tei:createSpecName(.))"/>
-        
-        <xsl:variable name="loc">
-            <xsl:choose>
-                <xsl:when test="number($splitLevel) = -1 or $STDOUT = 'true'">
-                    <xsl:text>#</xsl:text>
-                    <xsl:value-of select="@ident"/>
-                </xsl:when>
-                <xsl:otherwise>
-                    <xsl:text>ref-</xsl:text>
-                    <xsl:value-of select="$linkname"/>
-                    <xsl:value-of select="$outputSuffix"/>
-                </xsl:otherwise>
-            </xsl:choose>
-        </xsl:variable>
-        <div class="oddTocEntry">
-            <a href="{$loc}" class="pure-menu-link">
-                <xsl:value-of select="$linkname"/>
-            </a>
-        </div>
-    </xsl:template>
-    
-    
-    
+
+    <xd:doc>
+        <xd:desc>Override upstream maketoc: generate div-based rows (toc/tocTree) for flex layout.</xd:desc>
+        <xd:param name="forcedepth"/>
+    </xd:doc>
     <xsl:template match="div" mode="maketoc">
         <xsl:param name="forcedepth"/>
-        <xsl:variable name="myName">
-            <xsl:value-of select="local-name(.)"/>
-        </xsl:variable>
         <xsl:if test="head or $autoHead = 'true'">
             <xsl:variable name="Depth">
                 <xsl:choose>
@@ -150,72 +65,46 @@
             <xsl:variable name="pointer">
                 <xsl:apply-templates mode="generateLink" select="."/>
             </xsl:variable>
-          
+
             <div>
                 <xsl:choose>
                     <xsl:when test="not(ancestor::div) and child::div">
                         <xsl:attribute name="class">
-                            <!--pure-g-->
                             <xsl:text>tocTree</xsl:text>
                         </xsl:attribute>
-                        <xsl:variable name="tocLevel">
-                            <xsl:value-of select="number(count(ancestor::tei:div))"/>
-                        </xsl:variable>
-                        <div class="{tei:calcTocIndentClass($tocLevel)}"></div>
-                       <!-- <div class="{$tocRevealClass} toc-showhide">
-                           <div class="plusminus"></div>   
-                        </div>-->
-                        
                     </xsl:when>
                     <xsl:when test="child::div">
                         <xsl:attribute name="class">
-                            <!--pure-g-->
                             <xsl:text>tocTree</xsl:text>
                         </xsl:attribute>
-                        <xsl:variable name="tocLevel">
-                            <xsl:value-of select="number(count(ancestor::tei:div))"/>
-                        </xsl:variable>
-                        <div class="{tei:calcTocIndentClass($tocLevel)}"></div>
-                      
                     </xsl:when>
                     <xsl:otherwise>
                         <xsl:attribute name="class">
-                            <!--pure-g-->
                             <xsl:text>toc</xsl:text>
                         </xsl:attribute>
-                        <xsl:variable name="tocLevel">
-                            <xsl:value-of select="number(count(ancestor::tei:div))"/>
-                        </xsl:variable>
-                        <div class="{tei:calcTocIndentClass($tocLevel)}"></div>
-                       <!-- <div class="{$tocRevealClass} toc-showhide">
-                            <xsl:text>&#160;&#160;</xsl:text>
-                        </div>-->
                     </xsl:otherwise>
                 </xsl:choose>
-                
                 <xsl:call-template name="header">
                     <xsl:with-param name="toc" select="$pointer"/>
                     <xsl:with-param name="minimal">false</xsl:with-param>
                     <xsl:with-param name="display">plain</xsl:with-param>
                 </xsl:call-template>
-         
-                
+
                 <xsl:if test="$thislevel &lt; $Depth">
                     <xsl:call-template name="continuedToc"/>
                 </xsl:if>
             </div>
         </xsl:if>
     </xsl:template>
-    
-    
-    <doc xmlns="http://www.oxygenxml.com/ns/doc/xsl">
-        <desc>[common] Making a heading for something <param name="minimal">whether to display
-            headings</param>
-            <param name="toc">whether this is making a TOC entry</param>
-            <param name="display">detail of display (full, simple, plain), ie whether markup is
-                followed</param>
-        </desc>
-    </doc>
+
+
+    <xd:doc>
+        <xd:desc>Override upstream header: wrap number/heading in toc-specific divs and append a
+            JS toggle control.</xd:desc>
+        <xd:param name="minimal"/>
+        <xd:param name="toc"/>
+        <xd:param name="display"/>
+    </xd:doc>
     <xsl:template name="header">
         <xsl:param name="minimal">false</xsl:param>
         <xsl:param name="toc"/>
@@ -276,11 +165,8 @@
                 </xsl:with-param>
             </xsl:call-template>
         </xsl:variable>
-        <xsl:variable name="tocLevel">
-            <xsl:value-of select="count(ancestor::tei:div)"/>
-        </xsl:variable>
         <xsl:if test="$toc">
-            <div class="{tei:calcHeadingNumberClass($tocLevel)} toc-heading-number">
+            <div class="toc-heading-number">
                 <xsl:copy-of select="$headingNumber"/>
             </div>
         </xsl:if>
@@ -288,9 +174,9 @@
             <xsl:copy-of select="$headingNumber"/>
             <xsl:apply-templates mode="plain" select="tei:head"/>
         </xsl:if>
-     
+
         <xsl:if test="$minimal = 'false' and $toc">
-            <div class="{tei:calcHeadingClass($tocLevel)} toc-heading">
+            <div class="toc-heading">
                 <xsl:choose>
                     <xsl:when test="local-name(.) = 'TEI'">
                         <xsl:apply-templates
@@ -309,19 +195,20 @@
                             <xsl:with-param name="body">
                                 <xsl:choose>
                                     <xsl:when test="self::tei:text">
-                                        <xsl:value-of
-                                            select="
-                                            if (@n) then
-                                            @n
-                                            else
-                                            concat('[', position(), ']')"
+                                        <xsl:value-of select="
+                                                if (@n) then
+                                                    @n
+                                                else
+                                                    concat('[', position(), ']')"
                                         />
                                     </xsl:when>
                                     <xsl:when test="not(tei:head) and tei:front/tei:head">
-                                        <xsl:apply-templates mode="plain" select="tei:front/tei:head"/>
+                                        <xsl:apply-templates mode="plain"
+                                            select="tei:front/tei:head"/>
                                     </xsl:when>
                                     <xsl:when test="not(tei:head) and tei:body/tei:head">
-                                        <xsl:apply-templates mode="plain" select="tei:body/tei:head"/>
+                                        <xsl:apply-templates mode="plain" select="tei:body/tei:head"
+                                        />
                                     </xsl:when>
                                     <xsl:when
                                         test="not(tei:head) and tei:front//tei:titlePart/tei:title">
@@ -334,11 +221,10 @@
                                         <xsl:sequence select="tei:i18n('figureWord')"/>
                                         <xsl:text>]</xsl:text>
                                     </xsl:when>
-                                    <xsl:when
-                                        test="
-                                        tei:head[not(. = '')] and
-                                        not(tei:head[count(*) = 1 and
-                                        tei:figure])">
+                                    <xsl:when test="
+                                            tei:head[not(. = '')] and
+                                            not(tei:head[count(*) = 1 and
+                                            tei:figure])">
                                         <xsl:apply-templates mode="plain" select="tei:head"/>
                                     </xsl:when>
                                     <xsl:when test="@type = 'title_page'">Title page</xsl:when>
@@ -363,12 +249,12 @@
                     </xsl:when>
                     <xsl:when test="tei:head">
                         <xsl:apply-templates mode="makeheading" select="tei:head"/>
-                    </xsl:when>          
+                    </xsl:when>
                     <xsl:when test="tei:front/tei:head">
-                        
+
                         <xsl:apply-templates mode="plain" select="tei:front/tei:head"/>
-                        
-                    </xsl:when>               
+
+                    </xsl:when>
                     <xsl:when test="tei:body/tei:head">
                         <xsl:apply-templates mode="plain" select="tei:body/tei:head"/>
                     </xsl:when>
@@ -385,31 +271,22 @@
                         <xsl:value-of select="(normalize-space(substring(., 1, 20)), '…')"/>
                     </xsl:when>
                 </xsl:choose>
-            
             </div>
-            
+
             <xsl:if test="$toc">
-                <div class="{tei:tocRevealClass($tocLevel)} toc-showhide">
+                <div class="toc-showhide">
                     <xsl:choose>
                         <xsl:when test="child::div and $toc">
-                            <div id="menu-{translate(tei:head, ' ', '')}" class="plusminus"></div>
+                            <div id="menu-{translate(tei:head, ' ', '')}" class="plusminus"/>
                         </xsl:when>
-                        <xsl:otherwise>
-                            
-                        </xsl:otherwise>
+                        <xsl:otherwise> </xsl:otherwise>
                     </xsl:choose>
                 </div>
             </xsl:if>
-            
-            
-            
-            
-           
-            
         </xsl:if>
-        
+
     </xsl:template>
-    
-    
-    
+
+
+
 </xsl:stylesheet>
