@@ -139,7 +139,8 @@
                 'pageLayout': 'Complex',
                 'verbose' : 'yes',
                 'headInXref': 'false',
-                'bottomNavigationPanel' :'false',
+                'outputMethod': 'xhtml',
+                'bottomNavigationPanel' :'true',
                 'topNavigationPanel' :'false'
            
             }"/>

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    xmlns="http://www.w3.org/1999/xhtml"
     xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:teix="http://www.tei-c.org/ns/Examples"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
-    xmlns:xhtml="http://www.w3.org/1999/xhtml"
     xpath-default-namespace="http://www.tei-c.org/ns/1.0" version="2.0"
-    exclude-result-prefixes="tei teix xhtml xs">
+    exclude-result-prefixes="tei teix xs">
 
 
 
@@ -88,7 +88,7 @@
     </xsl:template>
 
     <xsl:template match="tei:monogr" mode="teilex0-journal">
-        <i xmlns="http://www.w3.org/1999/xhtml">
+        <i>
             <xsl:value-of select="tei:title"/>
         </i>
 
@@ -132,7 +132,7 @@
         <xsl:text>. </xsl:text>
         <xsl:value-of select="tei:imprint/tei:date"/>
         <xsl:text>. </xsl:text>
-        <i xmlns="http://www.w3.org/1999/xhtml">
+        <i>
             <xsl:choose>
                 <xsl:when test="tei:title[@ref]">
                     <xsl:element name="a" namespace="http://www.w3.org/1999/xhtml">
@@ -191,7 +191,7 @@
             <xsl:when test="tei:biblStruct and $biblioStyle = 'mla'">
                 <div type="listBibl">
                     <xsl:for-each select="tei:biblStruct">
-                        <p class="hang" xmlns="http://www.w3.org/1999/xhtml">
+                        <p class="hang">
                             <xsl:call-template name="makeAnchor"/>
                             <xsl:apply-templates select="tei:analytic" mode="mla"/>
                             <xsl:apply-templates select="tei:monogr" mode="mla"/>
@@ -224,7 +224,7 @@
                 </div>
             </xsl:when>
             <xsl:when test="tei:biblStruct and not(tei:bibl)">
-                <ol class="listBibl {$biblioStyle}" xmlns="http://www.w3.org/1999/xhtml">
+                <ol class="listBibl {$biblioStyle}">
                     <xsl:for-each select="tei:biblStruct">
                         <xsl:sort
                             select="
@@ -255,7 +255,7 @@
                 </ol>
             </xsl:when>
             <xsl:otherwise>
-                <ol class="listBibl" xmlns="http://www.w3.org/1999/xhtml">
+                <ol class="listBibl">
                     <xsl:for-each select="*[not(self::tei:head)]">
                         <li>
                             <xsl:call-template name="makeAnchor">

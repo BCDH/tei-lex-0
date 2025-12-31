@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    xmlns="http://www.w3.org/1999/xhtml"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:math="http://www.w3.org/2005/xpath-functions/math"
     xmlns:tei="http://www.tei-c.org/ns/1.0"
     xmlns:lex0="urn:tei-lex0"
     xpath-default-namespace="http://www.tei-c.org/ns/1.0"
-    exclude-result-prefixes="xs math lex0"
+    exclude-result-prefixes="tei xs math lex0"
     version="3.0">
     
     <xsl:param name="cssSecondaryFile" select="'css/tei.lex0.web.css'"/>
@@ -33,7 +34,7 @@
     <!-- Only apply splitLevel inside this div; other divs use splitLevelNonSpec. -->
     <xsl:param name="splitOnlyID" select="'specification'"/>
     <xsl:param name="splitLevelNonSpec" select="'0'"/>
-    <!--<xsl:param name="outputDir" select="'../build/html'"></xsl:param>-->
+    <xsl:param name="outputMethod" select="'html'"/>
     
     <xsl:import href="https://www.tei-c.org/release/xml/tei/stylesheet/html/html.xsl"/>
     
@@ -50,26 +51,13 @@
     <xsl:import href="includes/graphic.xsl"/> 
     
     <xsl:template name="bodyEndHook">
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.2.1-rc2/lazysizes.min.js" xmlns="http://www.w3.org/1999/xhtml">
-            <xsl:comment>lazysizes</xsl:comment>
-        </script>
-        <script type="text/javascript" src="js/teilex0.js" xmlns="http://www.w3.org/1999/xhtml">
-            <xsl:comment>teilexjs</xsl:comment>
-        </script>
-        <script type="text/javascript" src="js/ui.js" xmlns="http://www.w3.org/1999/xhtml">
-            <xsl:comment>uijs</xsl:comment>
-        </script>
-        <script type="text/javascript" src="js/prism.js" xmlns="http://www.w3.org/1999/xhtml">
-            <xsl:comment>prism</xsl:comment>
-        </script>
-        <script type="text/javascript" src="js/prism-xpath.js" xmlns="http://www.w3.org/1999/xhtml">
-            <xsl:comment>prism-xpath</xsl:comment>
-        </script>
-        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js" xmlns="http://www.w3.org/1999/xhtml">
-            <xsl:comment>doc-search</xsl:comment>
-        </script>
-        <script type="text/javascript" src="js/algo.js" xmlns="http://www.w3.org/1999/xhtml"/>
-                
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.2.1-rc2/lazysizes.min.js"/>
+        <script type="text/javascript" src="js/teilex0.js"/>
+        <script type="text/javascript" src="js/ui.js"/>     
+        <script type="text/javascript" src="js/prism.js"/>
+        <script type="text/javascript" src="js/prism-xpath.js"/>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"/>
+        <script type="text/javascript" src="js/algo.js"/>             
     </xsl:template>
 
    
