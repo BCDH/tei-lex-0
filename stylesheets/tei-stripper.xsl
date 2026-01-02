@@ -35,7 +35,9 @@ then transform using tei-stripper.xsl</xsl:comment>
     
     
     <!-- template to copy the rest of the nodes -->
-    <xsl:template match="comment()  | processing-instruction() | text()">
+     <!-- removed processing instructions because stripped file
+     shouldn't be validated against RelaxNG -->
+    <xsl:template match="comment() | text()">
         <xsl:copy></xsl:copy>
     </xsl:template>
     
