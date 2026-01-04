@@ -7,8 +7,9 @@
     "doc": "docs"
   },
   "scripts": {
+    "assets:images": "node scripts/copy-images.mjs",
     "assets:minify": "node scripts/minify-assets.mjs",
-    "build": "npm run assets:minify",
+    "build": "npm run assets:minify && npm run assets:images",
     "assets:watch": "node scripts/watch-assets.mjs"
   },
   "repository": {

@@ -29,6 +29,8 @@ TODO: Add a XSD transformation + compiled ODD from lex-0.xpl.
 
 The HTML documentation expects minified CSS/JS from `assets/`, produced by the npm build step (see below).
 
+Image assets live under `assets/images/` and are copied to `build/html/images/` during `npm run build`. References in `lex-0.odd` and example files use the runtime path `images/...`.
+
 ## Build in oXygen
 
 1. Open `lex-0.xpr` as the project.

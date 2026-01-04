@@ -73,7 +73,7 @@
                <quote>The Royal <ref type="oRef" target="#academy.lemma">A~</ref> of Arts</quote>
             </cit>
          </entry>
-         <!--https://imgur.com/b9dNR9m.png-->
+         <!--images/imgur/b9dNR9m.png-->
          <entry xml:id="ED.aid" xml:lang="en">
             <form type="lemma">
                <orth>aid</orth>
@@ -140,7 +140,7 @@
                </sense>
             </entry>
          </entry>
-         <!--https://imgur.com/IVutWGQ.png-->
+         <!--images/imgur/IVutWGQ.png-->
          <entry type="mainEntry" xml:lang="en" xml:id="aid">
             <form type="lemma">
                <orth>Aid</orth>

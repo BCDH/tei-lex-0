@@ -19,7 +19,7 @@
                 icon in the oXygen menu bar. Both of these methods will display the Associate Schema
                 dialog box: <figure xml:id="oxy-assoc-schema">
                     <head>Associating schema in oXygen XML Editor</head>
-                    <graphic url="https://imgur.com/Z11TTWf.png"/>
+                    <graphic url="images/imgur/Z11TTWf.png"/>
 
                 </figure>
             </item>
@@ -93,7 +93,7 @@
             <item>If you are using oXygen XML, clicking on the link in Author Mode will take you
                 directly to the element or fragment in the <code>examples.xml</code> for editing
                 XML. <figure>
-                    <graphic url="https://i.imgur.com/BLvHW45.png"/>
+                    <graphic url="images/imgur/BLvHW45.png"/>
                     <head>testing captions</head>
                 </figure>
             </item>
