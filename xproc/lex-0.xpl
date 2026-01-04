@@ -28,7 +28,7 @@
         <p:variable name="out" select="replace($in, '\.xml$', '.stripped.xml', 'i')"/>
         <p:load href="{$in}" content-type="application/xml"/>
         <p:xslt>
-            <p:with-input port="stylesheet" href="../stylesheets/tei-stripper.xsl"/>
+            <p:with-input port="stylesheet" href="../xslt/tei-stripper.xsl"/>
         </p:xslt>
         <p:store name="store-it" href="{$out}"/> 
     </p:for-each>
@@ -57,7 +57,7 @@
             <p:pipe step="debug-include" port="result"/>
         </p:with-input>
         <p:with-input port="stylesheet">
-            <p:document href="../stylesheets/odd2odd.xsl" content-type="application/xml"/>
+            <p:document href="../xslt/odd2odd.xsl" content-type="application/xml"/>
         </p:with-input>
     </p:xslt>
      
@@ -73,7 +73,7 @@
             <p:pipe step="debug-odd2odd" port="result"/>
         </p:with-input>
         <p:with-input port="stylesheet">
-            <p:document href="../stylesheets/xmlbase-fix.xsl"/>
+            <p:document href="../xslt/xmlbase-fix.xsl"/>
         </p:with-input>
     </p:xslt>
     <lex0:debug-store name="debug-xmlbasefix">
@@ -88,7 +88,7 @@
             <p:pipe step="debug-xmlbasefix" port="result"/>
         </p:with-input>
         <p:with-input port="stylesheet">
-            <p:document href="../stylesheets/odd2lite.xsl"/>
+            <p:document href="../xslt/odd2lite.xsl"/>
         </p:with-input>
     </p:xslt>
     <p:xslt name="fix-odd2lite-used-by-classes">
@@ -96,7 +96,7 @@
             <p:pipe step="odd2lite" port="result"/>
         </p:with-input>
         <p:with-input port="stylesheet">
-            <p:document href="../stylesheets/fix-odd2lite-used-by-classes.xsl"/>
+            <p:document href="../xslt/fix-odd2lite-used-by-classes.xsl"/>
         </p:with-input>
     </p:xslt>
     <lex0:debug-store name="debug-odd2lite">
@@ -111,7 +111,7 @@
             <p:pipe step="debug-odd2lite" port="result"/>
         </p:with-input>
         <p:with-input port="stylesheet">
-            <p:document href="../stylesheets/fix-spec.xsl"/>
+            <p:document href="../xslt/fix-spec.xsl"/>
         </p:with-input>
     </p:xslt>
     <p:xslt name="expand-intro">
@@ -119,7 +119,7 @@
             <p:pipe step="fix-spec" port="result"/>
         </p:with-input>
         <p:with-input port="stylesheet">
-            <p:document href="../stylesheets/expand-intro.xsl"/>
+            <p:document href="../xslt/expand-intro.xsl"/>
         </p:with-input>
     </p:xslt>
     <lex0:debug-store name="debug-expand-intro">
@@ -149,7 +149,7 @@
             <p:pipe step="debug-expand-intro" port="result"/>
         </p:with-input>
         <p:with-input port="stylesheet">
-            <p:document href="../stylesheets/html.xsl"/>
+            <p:document href="../xslt/html.xsl"/>
         </p:with-input>
     </p:xslt>
     <p:store href="{resolve-uri('../build/html/index.html', static-base-uri())}"
@@ -231,7 +231,7 @@
             <p:pipe step="odd2html" port="result"/>
         </p:with-input>
         <p:with-input port="stylesheet">
-            <p:document href="../stylesheets/html-post-process.xsl"/>
+            <p:document href="../xslt/html-post-process.xsl"/>
         </p:with-input>
     </p:xslt>
     <p:store href="../../../docs/pages/TEILex0/TEILex0.html"

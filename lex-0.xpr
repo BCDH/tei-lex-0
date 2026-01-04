@@ -501,7 +501,7 @@
     </meta>
     <projectTree name="lex-0.xpr">
         <folder masterFiles="true" name="Main Files">
-            <file name="stylesheets/html.xsl"/>
+            <file name="xslt/html.xsl"/>
             <file name="odd/lex-0.odd"/>
         </folder>
         <folder path="."/>
