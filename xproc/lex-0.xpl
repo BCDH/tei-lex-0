@@ -15,7 +15,7 @@
     <!-- ================================================================== -->
     <!-- BODY: -->
   
-    <p:directory-list name="dl" path="../tei/examples" include-filter=".+\.xml$"
+    <p:directory-list name="dl" path="../odd/examples" include-filter=".+\.xml$"
         exclude-filter=".+stripped\.xml$" max-depth="unbounded"/>
     <p:make-absolute-uris name="abs" match="@name"/>
     <p:variable name="input-file-count" select="count(//c:file)"/>
@@ -38,7 +38,7 @@
             <p:if test=". = $input-file-count">
                 <p:xinclude name="include" fixup-xml-base="false" fixup-xml-lang="false">
                     <p:with-input port="source">
-                        <p:document href="../tei/lex-0.odd" content-type="application/xml"/>
+                        <p:document href="../odd/lex-0.odd" content-type="application/xml"/>
                     </p:with-input>
                 </p:xinclude>     
             </p:if>

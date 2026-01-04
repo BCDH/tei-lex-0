@@ -30,14 +30,14 @@
                                 </field>
                                 <field name="scenarioIds">
                                     <list>
-                                        <String>Lex-0: Generate RelaxNG schema</String>
                                         <String>Lex-0: Generate guidelines</String>
+                                        <String>Lex-0: Generate RelaxNG schema</String>
                                     </list>
                                 </field>
                                 <field name="scenarioTypes">
                                     <list>
-                                        <String>ANT</String>
                                         <String>XPROC</String>
+                                        <String>ANT</String>
                                     </list>
                                 </field>
                                 <field name="scenarioStorageLocations">
@@ -53,14 +53,14 @@
                                 </field>
                                 <field name="scenarioIds">
                                     <list>
-                                        <String>Lex-0: Generate RelaxNG schema</String>
                                         <String>Lex-0: Generate guidelines</String>
+                                        <String>Lex-0: Generate RelaxNG schema</String>
                                     </list>
                                 </field>
                                 <field name="scenarioTypes">
                                     <list>
-                                        <String>ANT</String>
                                         <String>XPROC</String>
+                                        <String>ANT</String>
                                     </list>
                                 </field>
                                 <field name="scenarioStorageLocations">
@@ -118,7 +118,7 @@
                                                 <String>Path to the TEI XML file.</String>
                                             </field>
                                             <field name="value">
-                                                <String>${pd}/tei/lex-0.odd</String>
+                                                <String>${pd}/odd/lex-0.odd</String>
                                             </field>
                                             <field name="defaultValue">
                                                 <null/>
@@ -502,7 +502,7 @@
     <projectTree name="lex-0.xpr">
         <folder masterFiles="true" name="Main Files">
             <file name="stylesheets/html.xsl"/>
-            <file name="tei/lex-0.odd"/>
+            <file name="odd/lex-0.odd"/>
         </folder>
         <folder path="."/>
     </projectTree>

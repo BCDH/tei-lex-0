@@ -7,13 +7,13 @@ Repository for the new TEI Lex-0 Schema and Guidelines (test version).
 Clone the repository and enter the working directory:
 
 ```sh
-git clone https://github.com/daliboris/tei-lex-0.git
+git clone https://github.com/ttasovac/tei-lex-0.git
 cd tei-lex-0
 ```
 
 ## Source files
 
-- Master ODD lives at `tei/lex-0.odd`, with supporting includes and examples under `tei/includes` and `tei/examples`.
+- Master ODD lives at `odd/lex-0.odd`, with supporting includes and examples under `odd/includes` and `odd/examples`.
 - The XProc script is in `xproc/lex-0.xpl`.
 - The stylesheets under `stylesheets/` are used to generate derived schema and documentation.
 
