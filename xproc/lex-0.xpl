@@ -57,7 +57,7 @@
             <p:pipe step="debug-include" port="result"/>
         </p:with-input>
         <p:with-input port="stylesheet">
-            <p:document href="../xslt/odd2odd.xsl" content-type="application/xml"/>
+            <p:document href="../xslt/odd2odd.xsl"/>
         </p:with-input>
     </p:xslt>
      
