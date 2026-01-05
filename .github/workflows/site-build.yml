@@ -60,10 +60,15 @@ jobs:
             </dependencies>
           </project>
           EOF
-          mvn -q -f .cache/tools/pom.xml -DincludeScope=runtime -Dmdep.outputFile=.cache/tools/classpath.txt \
-            org.apache.maven.plugins:maven-dependency-plugin:3.6.1:build-classpath
+          mvn -B -f .cache/tools/pom.xml -DincludeScope=runtime -Dmdep.outputFile=.cache/tools/classpath.txt \
+            org.apache.maven.plugins:maven-dependency-plugin:3.6.1:build-classpath 2>&1 | tee .cache/tools/maven.log
+          if [ "${PIPESTATUS[0]}" -ne 0 ]; then
+            echo "Maven failed while building Calabash classpath."
+            exit 1
+          fi
           if [ ! -s .cache/tools/classpath.txt ]; then
             echo "Calabash classpath not generated."
+            tail -n 200 .cache/tools/maven.log || true
             exit 1
           fi
           if [ ! -f "$SAXON_JAR" ]; then
@@ -136,10 +141,15 @@ jobs:
             </dependencies>
           </project>
           EOF
-          mvn -q -f .cache/tools/pom.xml -DincludeScope=runtime -Dmdep.outputFile=.cache/tools/classpath.txt \
-            org.apache.maven.plugins:maven-dependency-plugin:3.6.1:build-classpath
+          mvn -B -f .cache/tools/pom.xml -DincludeScope=runtime -Dmdep.outputFile=.cache/tools/classpath.txt \
+            org.apache.maven.plugins:maven-dependency-plugin:3.6.1:build-classpath 2>&1 | tee .cache/tools/maven.log
+          if [ "${PIPESTATUS[0]}" -ne 0 ]; then
+            echo "Maven failed while building Calabash classpath."
+            exit 1
+          fi
           if [ ! -s .cache/tools/classpath.txt ]; then
             echo "Calabash classpath not generated."
+            tail -n 200 .cache/tools/maven.log || true
             exit 1
           fi
           if [ ! -f "$SAXON_JAR" ]; then
@@ -240,10 +250,15 @@ jobs:
             </dependencies>
           </project>
           EOF
-          mvn -q -f .cache/tools/pom.xml -DincludeScope=runtime -Dmdep.outputFile=.cache/tools/classpath.txt \
-            org.apache.maven.plugins:maven-dependency-plugin:3.6.1:build-classpath
+          mvn -B -f .cache/tools/pom.xml -DincludeScope=runtime -Dmdep.outputFile=.cache/tools/classpath.txt \
+            org.apache.maven.plugins:maven-dependency-plugin:3.6.1:build-classpath 2>&1 | tee .cache/tools/maven.log
+          if [ "${PIPESTATUS[0]}" -ne 0 ]; then
+            echo "Maven failed while building Calabash classpath."
+            exit 1
+          fi
           if [ ! -s .cache/tools/classpath.txt ]; then
             echo "Calabash classpath not generated."
+            tail -n 200 .cache/tools/maven.log || true
             exit 1
           fi
           if [ ! -f "$SAXON_JAR" ]; then
@@ -356,10 +371,15 @@ jobs:
             </dependencies>
           </project>
           EOF
-          mvn -q -f .cache/tools/pom.xml -DincludeScope=runtime -Dmdep.outputFile=.cache/tools/classpath.txt \
-            org.apache.maven.plugins:maven-dependency-plugin:3.6.1:build-classpath
+          mvn -B -f .cache/tools/pom.xml -DincludeScope=runtime -Dmdep.outputFile=.cache/tools/classpath.txt \
+            org.apache.maven.plugins:maven-dependency-plugin:3.6.1:build-classpath 2>&1 | tee .cache/tools/maven.log
+          if [ "${PIPESTATUS[0]}" -ne 0 ]; then
+            echo "Maven failed while building Calabash classpath."
+            exit 1
+          fi
           if [ ! -s .cache/tools/classpath.txt ]; then
             echo "Calabash classpath not generated."
+            tail -n 200 .cache/tools/maven.log || true
             exit 1
           fi
           if [ ! -f "$SAXON_JAR" ]; then
