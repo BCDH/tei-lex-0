@@ -183,6 +183,7 @@ jobs:
         run: node scripts/postprocess-html.mjs --mode=main
       - name: Publish to vercel-main
         env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           TARGET_BRANCH: vercel-main
         run: |
           set -euo pipefail
@@ -295,6 +296,7 @@ jobs:
         run: node scripts/postprocess-html.mjs --mode=dev
       - name: Publish to vercel-dev
         env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           TARGET_BRANCH: vercel-dev
         run: |
           set -euo pipefail
@@ -426,6 +428,8 @@ jobs:
         run: |
           node scripts/postprocess-html.mjs --mode=release --tag="${GITHUB_REF_NAME}" --release-status="${RELEASE_STATUS}"
       - name: Publish release to gh-pages
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           set -euo pipefail
           RELEASE_TAG="${GITHUB_REF_NAME}"
@@ -456,6 +460,8 @@ jobs:
           git commit -m "Publish ${RELEASE_TAG}"
           git push origin gh-pages
       - name: Update RELEASES.md on main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           set -euo pipefail
           RELEASE_TAG="${GITHUB_REF_NAME}"
