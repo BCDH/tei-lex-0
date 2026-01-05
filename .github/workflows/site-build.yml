@@ -1,0 +1,478 @@
+name: build-site
+
+on:
+  pull_request:
+    branches: [dev]
+  push:
+    branches: [main, dev]
+    tags: ["v*"]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  pr:
+    if: ${{ github.event_name == 'pull_request' }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - name: Cache Calabash, Saxon, and Maven
+        uses: actions/cache@v4
+        with:
+          path: |
+            .cache/tools
+            ~/.m2/repository
+          key: calabash-3.0.35-saxon-12.4-maven
+      - name: Prepare Calabash and Saxon
+        run: |
+          set -euo pipefail
+          mkdir -p .cache/tools
+          CALABASH_VERSION=3.0.35
+          SAXON_VERSION=12.4
+          SAXON_JAR=".cache/tools/saxon-he-${SAXON_VERSION}.jar"
+          cat > .cache/tools/pom.xml <<'EOF'
+          <project xmlns="http://maven.apache.org/POM/4.0.0"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+            <modelVersion>4.0.0</modelVersion>
+            <groupId>local</groupId>
+            <artifactId>calabash-runner</artifactId>
+            <version>1.0.0</version>
+            <dependencies>
+              <dependency>
+                <groupId>com.xmlcalabash</groupId>
+                <artifactId>app</artifactId>
+                <version>3.0.35</version>
+              </dependency>
+            </dependencies>
+          </project>
+          EOF
+          OUTPUT_FILE="$(pwd)/.cache/tools/classpath.txt"
+          if ! mvn -q -B -f .cache/tools/pom.xml -DincludeScope=runtime -Dmdep.outputFile="$OUTPUT_FILE" \
+            org.apache.maven.plugins:maven-dependency-plugin:3.6.1:build-classpath > .cache/tools/maven.log 2>&1; then
+            echo "Maven failed while building Calabash classpath."
+            tail -n 200 .cache/tools/maven.log || true
+            exit 1
+          fi
+          if [ ! -s "$OUTPUT_FILE" ]; then
+            echo "Calabash classpath not generated."
+            tail -n 200 .cache/tools/maven.log || true
+            exit 1
+          fi
+          echo "Calabash classpath ready."
+          if [ ! -f "$SAXON_JAR" ]; then
+            curl -fL -o "$SAXON_JAR" "https://repo.maven.apache.org/maven2/net/sf/saxon/Saxon-HE/${SAXON_VERSION}/Saxon-HE-${SAXON_VERSION}.jar"
+            curl -fL -o "$SAXON_JAR.sha256" "https://repo.maven.apache.org/maven2/net/sf/saxon/Saxon-HE/${SAXON_VERSION}/Saxon-HE-${SAXON_VERSION}.jar.sha256"
+            EXPECTED="$(tr -d ' \n' < "$SAXON_JAR.sha256")"
+            if ! echo "$EXPECTED" | grep -Eq '^[0-9a-fA-F]{64}$'; then
+              echo "Invalid Saxon checksum: $EXPECTED"
+              exit 1
+            fi
+            echo "$EXPECTED  $SAXON_JAR" | sha256sum -c -
+          fi
+          echo "Saxon jar ready."
+          CALABASH_CP="$(cat "$OUTPUT_FILE")"
+          echo "XMLCALABASH_CMD=java -cp \"$CALABASH_CP\" com.xmlcalabash.app.Main {PIPELINE}" >> "$GITHUB_ENV"
+          echo "SAXON_JAR=$SAXON_JAR" >> "$GITHUB_ENV"
+      - run: npm ci
+      - run: npm run build
+      - name: Verify build output
+        run: |
+          test -d build/html
+          test -n "$(ls -A build/html)"
+      - name: Link hygiene
+        run: node scripts/check-links.mjs
+
+  push_main:
+    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - name: Cache Calabash, Saxon, and Maven
+        uses: actions/cache@v4
+        with:
+          path: |
+            .cache/tools
+            ~/.m2/repository
+          key: calabash-3.0.35-saxon-12.4-maven
+      - name: Prepare Calabash and Saxon
+        run: |
+          set -euo pipefail
+          mkdir -p .cache/tools
+          CALABASH_VERSION=3.0.35
+          SAXON_VERSION=12.4
+          SAXON_JAR=".cache/tools/saxon-he-${SAXON_VERSION}.jar"
+          cat > .cache/tools/pom.xml <<'EOF'
+          <project xmlns="http://maven.apache.org/POM/4.0.0"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+            <modelVersion>4.0.0</modelVersion>
+            <groupId>local</groupId>
+            <artifactId>calabash-runner</artifactId>
+            <version>1.0.0</version>
+            <dependencies>
+              <dependency>
+                <groupId>com.xmlcalabash</groupId>
+                <artifactId>app</artifactId>
+                <version>3.0.35</version>
+              </dependency>
+            </dependencies>
+          </project>
+          EOF
+          OUTPUT_FILE="$(pwd)/.cache/tools/classpath.txt"
+          if ! mvn -q -B -f .cache/tools/pom.xml -DincludeScope=runtime -Dmdep.outputFile="$OUTPUT_FILE" \
+            org.apache.maven.plugins:maven-dependency-plugin:3.6.1:build-classpath > .cache/tools/maven.log 2>&1; then
+            echo "Maven failed while building Calabash classpath."
+            tail -n 200 .cache/tools/maven.log || true
+            exit 1
+          fi
+          if [ ! -s "$OUTPUT_FILE" ]; then
+            echo "Calabash classpath not generated."
+            tail -n 200 .cache/tools/maven.log || true
+            exit 1
+          fi
+          echo "Calabash classpath ready."
+          if [ ! -f "$SAXON_JAR" ]; then
+            curl -fL -o "$SAXON_JAR" "https://repo.maven.apache.org/maven2/net/sf/saxon/Saxon-HE/${SAXON_VERSION}/Saxon-HE-${SAXON_VERSION}.jar"
+            curl -fL -o "$SAXON_JAR.sha256" "https://repo.maven.apache.org/maven2/net/sf/saxon/Saxon-HE/${SAXON_VERSION}/Saxon-HE-${SAXON_VERSION}.jar.sha256"
+            EXPECTED="$(tr -d ' \n' < "$SAXON_JAR.sha256")"
+            if ! echo "$EXPECTED" | grep -Eq '^[0-9a-fA-F]{64}$'; then
+              echo "Invalid Saxon checksum: $EXPECTED"
+              exit 1
+            fi
+            echo "$EXPECTED  $SAXON_JAR" | sha256sum -c -
+          fi
+          echo "Saxon jar ready."
+          CALABASH_CP="$(cat "$OUTPUT_FILE")"
+          echo "XMLCALABASH_CMD=java -cp \"$CALABASH_CP\" com.xmlcalabash.app.Main {PIPELINE}" >> "$GITHUB_ENV"
+          echo "SAXON_JAR=$SAXON_JAR" >> "$GITHUB_ENV"
+      - run: npm ci
+      - run: npm run build
+      - name: Verify build output
+        run: |
+          test -d build/html
+          test -n "$(ls -A build/html)"
+      - name: Link hygiene
+        run: node scripts/check-links.mjs
+      - name: Post-process HTML
+        run: node scripts/postprocess-html.mjs --mode=main
+      - name: Publish to vercel-main
+        env:
+          TARGET_BRANCH: vercel-main
+        run: |
+          set -euo pipefail
+          mkdir -p .deploy
+          cd .deploy
+          git init
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git remote add origin "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+          if git fetch origin "$TARGET_BRANCH"; then
+            git checkout -B "$TARGET_BRANCH" FETCH_HEAD
+            git rm -r . || true
+            find . -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf {} +
+          else
+            git checkout -B "$TARGET_BRANCH"
+          fi
+          cp -R ../build/html/. .
+          git add .
+          if git diff --cached --quiet; then
+            echo "No changes to publish."
+            exit 0
+          fi
+          git commit -m "Deploy ${GITHUB_SHA}"
+          git push origin "$TARGET_BRANCH"
+
+  push_dev:
+    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/dev' }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - name: Cache Calabash, Saxon, and Maven
+        uses: actions/cache@v4
+        with:
+          path: |
+            .cache/tools
+            ~/.m2/repository
+          key: calabash-3.0.35-saxon-12.4-maven
+      - name: Prepare Calabash and Saxon
+        run: |
+          set -euo pipefail
+          mkdir -p .cache/tools
+          CALABASH_VERSION=3.0.35
+          SAXON_VERSION=12.4
+          SAXON_JAR=".cache/tools/saxon-he-${SAXON_VERSION}.jar"
+          cat > .cache/tools/pom.xml <<'EOF'
+          <project xmlns="http://maven.apache.org/POM/4.0.0"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+            <modelVersion>4.0.0</modelVersion>
+            <groupId>local</groupId>
+            <artifactId>calabash-runner</artifactId>
+            <version>1.0.0</version>
+            <dependencies>
+              <dependency>
+                <groupId>com.xmlcalabash</groupId>
+                <artifactId>app</artifactId>
+                <version>3.0.35</version>
+              </dependency>
+            </dependencies>
+          </project>
+          EOF
+          OUTPUT_FILE="$(pwd)/.cache/tools/classpath.txt"
+          if ! mvn -q -B -f .cache/tools/pom.xml -DincludeScope=runtime -Dmdep.outputFile="$OUTPUT_FILE" \
+            org.apache.maven.plugins:maven-dependency-plugin:3.6.1:build-classpath > .cache/tools/maven.log 2>&1; then
+            echo "Maven failed while building Calabash classpath."
+            tail -n 200 .cache/tools/maven.log || true
+            exit 1
+          fi
+          if [ ! -s "$OUTPUT_FILE" ]; then
+            echo "Calabash classpath not generated."
+            tail -n 200 .cache/tools/maven.log || true
+            exit 1
+          fi
+          echo "Calabash classpath ready."
+          if [ ! -f "$SAXON_JAR" ]; then
+            curl -fL -o "$SAXON_JAR" "https://repo.maven.apache.org/maven2/net/sf/saxon/Saxon-HE/${SAXON_VERSION}/Saxon-HE-${SAXON_VERSION}.jar"
+            curl -fL -o "$SAXON_JAR.sha256" "https://repo.maven.apache.org/maven2/net/sf/saxon/Saxon-HE/${SAXON_VERSION}/Saxon-HE-${SAXON_VERSION}.jar.sha256"
+            EXPECTED="$(tr -d ' \n' < "$SAXON_JAR.sha256")"
+            if ! echo "$EXPECTED" | grep -Eq '^[0-9a-fA-F]{64}$'; then
+              echo "Invalid Saxon checksum: $EXPECTED"
+              exit 1
+            fi
+            echo "$EXPECTED  $SAXON_JAR" | sha256sum -c -
+          fi
+          echo "Saxon jar ready."
+          CALABASH_CP="$(cat "$OUTPUT_FILE")"
+          echo "XMLCALABASH_CMD=java -cp \"$CALABASH_CP\" com.xmlcalabash.app.Main {PIPELINE}" >> "$GITHUB_ENV"
+          echo "SAXON_JAR=$SAXON_JAR" >> "$GITHUB_ENV"
+      - run: npm ci
+      - run: npm run build
+      - name: Verify build output
+        run: |
+          test -d build/html
+          test -n "$(ls -A build/html)"
+      - name: Link hygiene
+        run: node scripts/check-links.mjs
+      - name: Post-process HTML
+        run: node scripts/postprocess-html.mjs --mode=dev
+      - name: Publish to vercel-dev
+        env:
+          TARGET_BRANCH: vercel-dev
+        run: |
+          set -euo pipefail
+          mkdir -p .deploy
+          cd .deploy
+          git init
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git remote add origin "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+          if git fetch origin "$TARGET_BRANCH"; then
+            git checkout -B "$TARGET_BRANCH" FETCH_HEAD
+            git rm -r . || true
+            find . -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf {} +
+          else
+            git checkout -B "$TARGET_BRANCH"
+          fi
+          cp -R ../build/html/. .
+          git add .
+          if git diff --cached --quiet; then
+            echo "No changes to publish."
+            exit 0
+          fi
+          git commit -m "Deploy ${GITHUB_SHA}"
+          git push origin "$TARGET_BRANCH"
+
+  tag_release:
+    if: ${{ github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v') }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - name: Validate annotated tag on main
+        run: |
+          set -euo pipefail
+          git fetch origin main
+          if [ "$(git cat-file -t "${GITHUB_REF_NAME}")" != "tag" ]; then
+            echo "Tag ${GITHUB_REF_NAME} is not annotated."
+            exit 1
+          fi
+          if ! git merge-base --is-ancestor "${GITHUB_SHA}" "origin/main"; then
+            echo "Tag ${GITHUB_REF_NAME} is not on main."
+            exit 1
+          fi
+      - name: Cache Calabash, Saxon, and Maven
+        uses: actions/cache@v4
+        with:
+          path: |
+            .cache/tools
+            ~/.m2/repository
+          key: calabash-3.0.35-saxon-12.4-maven
+      - name: Prepare Calabash and Saxon
+        run: |
+          set -euo pipefail
+          mkdir -p .cache/tools
+          CALABASH_VERSION=3.0.35
+          SAXON_VERSION=12.4
+          SAXON_JAR=".cache/tools/saxon-he-${SAXON_VERSION}.jar"
+          cat > .cache/tools/pom.xml <<'EOF'
+          <project xmlns="http://maven.apache.org/POM/4.0.0"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+            <modelVersion>4.0.0</modelVersion>
+            <groupId>local</groupId>
+            <artifactId>calabash-runner</artifactId>
+            <version>1.0.0</version>
+            <dependencies>
+              <dependency>
+                <groupId>com.xmlcalabash</groupId>
+                <artifactId>app</artifactId>
+                <version>3.0.35</version>
+              </dependency>
+            </dependencies>
+          </project>
+          EOF
+          OUTPUT_FILE="$(pwd)/.cache/tools/classpath.txt"
+          if ! mvn -q -B -f .cache/tools/pom.xml -DincludeScope=runtime -Dmdep.outputFile="$OUTPUT_FILE" \
+            org.apache.maven.plugins:maven-dependency-plugin:3.6.1:build-classpath > .cache/tools/maven.log 2>&1; then
+            echo "Maven failed while building Calabash classpath."
+            tail -n 200 .cache/tools/maven.log || true
+            exit 1
+          fi
+          if [ ! -s "$OUTPUT_FILE" ]; then
+            echo "Calabash classpath not generated."
+            tail -n 200 .cache/tools/maven.log || true
+            exit 1
+          fi
+          echo "Calabash classpath ready."
+          if [ ! -f "$SAXON_JAR" ]; then
+            curl -fL -o "$SAXON_JAR" "https://repo.maven.apache.org/maven2/net/sf/saxon/Saxon-HE/${SAXON_VERSION}/Saxon-HE-${SAXON_VERSION}.jar"
+            curl -fL -o "$SAXON_JAR.sha256" "https://repo.maven.apache.org/maven2/net/sf/saxon/Saxon-HE/${SAXON_VERSION}/Saxon-HE-${SAXON_VERSION}.jar.sha256"
+            EXPECTED="$(tr -d ' \n' < "$SAXON_JAR.sha256")"
+            if ! echo "$EXPECTED" | grep -Eq '^[0-9a-fA-F]{64}$'; then
+              echo "Invalid Saxon checksum: $EXPECTED"
+              exit 1
+            fi
+            echo "$EXPECTED  $SAXON_JAR" | sha256sum -c -
+          fi
+          echo "Saxon jar ready."
+          CALABASH_CP="$(cat "$OUTPUT_FILE")"
+          echo "XMLCALABASH_CMD=java -cp \"$CALABASH_CP\" com.xmlcalabash.app.Main {PIPELINE}" >> "$GITHUB_ENV"
+          echo "SAXON_JAR=$SAXON_JAR" >> "$GITHUB_ENV"
+      - run: npm ci
+      - run: npm run build
+      - name: Verify build output
+        run: |
+          test -d build/html
+          test -n "$(ls -A build/html)"
+      - name: Determine release status
+        run: |
+          set -euo pipefail
+          LATEST_TAG="$(git tag --sort=-version:refname | head -n 1)"
+          if [ "$LATEST_TAG" = "${GITHUB_REF_NAME}" ]; then
+            echo "RELEASE_STATUS=current" >> "$GITHUB_ENV"
+          else
+            echo "RELEASE_STATUS=historical" >> "$GITHUB_ENV"
+          fi
+      - name: Post-process HTML
+        run: |
+          node scripts/postprocess-html.mjs --mode=release --tag="${GITHUB_REF_NAME}" --release-status="${RELEASE_STATUS}"
+      - name: Publish release to gh-pages
+        run: |
+          set -euo pipefail
+          RELEASE_TAG="${GITHUB_REF_NAME}"
+          mkdir -p .deploy-pages
+          cd .deploy-pages
+          git init
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git remote add origin "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+          git fetch origin gh-pages || true
+          if git show-ref --verify --quiet refs/remotes/origin/gh-pages; then
+            git checkout -B gh-pages origin/gh-pages
+          else
+            git checkout -B gh-pages
+          fi
+          mkdir -p releases
+          if [ -d "releases/${RELEASE_TAG}" ]; then
+            echo "Release folder already exists: releases/${RELEASE_TAG}"
+            exit 1
+          fi
+          cp -R ../build/html "releases/${RELEASE_TAG}"
+          node ../scripts/generate-release-index.cjs
+          git add releases
+          if git diff --cached --quiet; then
+            echo "No changes to publish."
+            exit 0
+          fi
+          git commit -m "Publish ${RELEASE_TAG}"
+          git push origin gh-pages
+      - name: Update RELEASES.md on main
+        run: |
+          set -euo pipefail
+          RELEASE_TAG="${GITHUB_REF_NAME}"
+          TMPDIR="$(mktemp -d)"
+          git clone --branch main "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" "$TMPDIR"
+          cd "$TMPDIR"
+          RELEASES_FILE="RELEASES.md"
+          URL="https://lex0.org/releases/${RELEASE_TAG}/"
+          if [ ! -f "$RELEASES_FILE" ]; then
+            echo "# Releases" > "$RELEASES_FILE"
+            echo "" >> "$RELEASES_FILE"
+          fi
+          if grep -q "$URL" "$RELEASES_FILE"; then
+            echo "Release already listed."
+            exit 0
+          fi
+          echo "- ${RELEASE_TAG}: ${URL}" >> "$RELEASES_FILE"
+          git add "$RELEASES_FILE"
+          git commit -m "Add ${RELEASE_TAG} release URL"
+          git push origin main
