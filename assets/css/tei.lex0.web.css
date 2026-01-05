@@ -921,3 +921,8 @@ div.parent ul {
 .grid-nav .nextLink + a.navigation {
   grid-column: 4;
 }
+
+.teidiv1[id],
+.teidiv2[id] {
+  scroll-margin-top: 15px;
+}
