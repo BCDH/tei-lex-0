@@ -1,0 +1,2 @@
+(()=>{docsearch({apiKey:"81fe7e18f931f5024ff56f875ed7e8fb",appId:"TFWYQALT5Y",indexName:"tei_lex",inputSelector:".algo",debug:!1,handleSelected:function(l,r,e,d,a){if(a.selectionMethod==="click"){if(l.setVal(""),window.location.protocol=="file:"){var f=window.location.href.substring(0,window.location.href.lastIndexOf("/")),o=e.url.substring(0,e.url.lastIndexOf("/"));e.url=e.url.replace(o,f)}window.open(e.url,"_self")}}});})();
+//# sourceMappingURL=algo.js.map
