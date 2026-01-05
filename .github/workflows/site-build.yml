@@ -29,33 +29,41 @@ jobs:
         with:
           node-version: "22"
           cache: npm
-      - name: Cache Calabash and Saxon
+      - name: Cache Calabash, Saxon, and Maven
         uses: actions/cache@v4
         with:
-          path: .cache/tools
-          key: calabash-3.0.35-saxon-12.4
-      - name: Download Calabash and Saxon
+          path: |
+            .cache/tools
+            ~/.m2/repository
+          key: calabash-3.0.35-saxon-12.4-maven
+      - name: Prepare Calabash and Saxon
         run: |
           set -euo pipefail
           mkdir -p .cache/tools
-          BASE_URL="https://repo.maven.apache.org/maven2"
           CALABASH_VERSION=3.0.35
           SAXON_VERSION=12.4
-          CALABASH_JAR=".cache/tools/app-${CALABASH_VERSION}.jar"
           SAXON_JAR=".cache/tools/saxon-he-${SAXON_VERSION}.jar"
-          if [ ! -f "$CALABASH_JAR" ]; then
-            curl -fL -o "$CALABASH_JAR" "$BASE_URL/com/xmlcalabash/app/${CALABASH_VERSION}/app-${CALABASH_VERSION}.jar"
-            curl -fL -o "$CALABASH_JAR.sha256" "$BASE_URL/com/xmlcalabash/app/${CALABASH_VERSION}/app-${CALABASH_VERSION}.jar.sha256"
-            EXPECTED="$(tr -d ' \n' < "$CALABASH_JAR.sha256")"
-            if ! echo "$EXPECTED" | grep -Eq '^[0-9a-fA-F]{64}$'; then
-              echo "Invalid Calabash checksum: $EXPECTED"
-              exit 1
-            fi
-            echo "$EXPECTED  $CALABASH_JAR" | sha256sum -c -
-          fi
+          cat > .cache/tools/pom.xml <<'EOF'
+          <project xmlns="http://maven.apache.org/POM/4.0.0"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+            <modelVersion>4.0.0</modelVersion>
+            <groupId>local</groupId>
+            <artifactId>calabash-runner</artifactId>
+            <version>1.0.0</version>
+            <dependencies>
+              <dependency>
+                <groupId>com.xmlcalabash</groupId>
+                <artifactId>app</artifactId>
+                <version>3.0.35</version>
+              </dependency>
+            </dependencies>
+          </project>
+EOF
+          mvn -q -f .cache/tools/pom.xml -DincludeScope=runtime dependency:build-classpath -Dmdep.outputFile=.cache/tools/classpath.txt
           if [ ! -f "$SAXON_JAR" ]; then
-            curl -fL -o "$SAXON_JAR" "$BASE_URL/net/sf/saxon/Saxon-HE/${SAXON_VERSION}/Saxon-HE-${SAXON_VERSION}.jar"
-            curl -fL -o "$SAXON_JAR.sha256" "$BASE_URL/net/sf/saxon/Saxon-HE/${SAXON_VERSION}/Saxon-HE-${SAXON_VERSION}.jar.sha256"
+            curl -fL -o "$SAXON_JAR" "https://repo.maven.apache.org/maven2/net/sf/saxon/Saxon-HE/${SAXON_VERSION}/Saxon-HE-${SAXON_VERSION}.jar"
+            curl -fL -o "$SAXON_JAR.sha256" "https://repo.maven.apache.org/maven2/net/sf/saxon/Saxon-HE/${SAXON_VERSION}/Saxon-HE-${SAXON_VERSION}.jar.sha256"
             EXPECTED="$(tr -d ' \n' < "$SAXON_JAR.sha256")"
             if ! echo "$EXPECTED" | grep -Eq '^[0-9a-fA-F]{64}$'; then
               echo "Invalid Saxon checksum: $EXPECTED"
@@ -63,7 +71,8 @@ jobs:
             fi
             echo "$EXPECTED  $SAXON_JAR" | sha256sum -c -
           fi
-          echo "XMLCALABASH_CMD=java -jar $CALABASH_JAR {PIPELINE}" >> "$GITHUB_ENV"
+          CALABASH_CP="$(cat .cache/tools/classpath.txt)"
+          echo "XMLCALABASH_CMD=java -cp \"$CALABASH_CP\" com.xmlcalabash.app.Main {PIPELINE}" >> "$GITHUB_ENV"
           echo "SAXON_JAR=$SAXON_JAR" >> "$GITHUB_ENV"
       - run: npm ci
       - run: npm run build
@@ -91,33 +100,41 @@ jobs:
         with:
           node-version: "22"
           cache: npm
-      - name: Cache Calabash and Saxon
+      - name: Cache Calabash, Saxon, and Maven
         uses: actions/cache@v4
         with:
-          path: .cache/tools
-          key: calabash-3.0.35-saxon-12.4
-      - name: Download Calabash and Saxon
+          path: |
+            .cache/tools
+            ~/.m2/repository
+          key: calabash-3.0.35-saxon-12.4-maven
+      - name: Prepare Calabash and Saxon
         run: |
           set -euo pipefail
           mkdir -p .cache/tools
-          BASE_URL="https://repo.maven.apache.org/maven2"
           CALABASH_VERSION=3.0.35
           SAXON_VERSION=12.4
-          CALABASH_JAR=".cache/tools/app-${CALABASH_VERSION}.jar"
           SAXON_JAR=".cache/tools/saxon-he-${SAXON_VERSION}.jar"
-          if [ ! -f "$CALABASH_JAR" ]; then
-            curl -fL -o "$CALABASH_JAR" "$BASE_URL/com/xmlcalabash/app/${CALABASH_VERSION}/app-${CALABASH_VERSION}.jar"
-            curl -fL -o "$CALABASH_JAR.sha256" "$BASE_URL/com/xmlcalabash/app/${CALABASH_VERSION}/app-${CALABASH_VERSION}.jar.sha256"
-            EXPECTED="$(tr -d ' \n' < "$CALABASH_JAR.sha256")"
-            if ! echo "$EXPECTED" | grep -Eq '^[0-9a-fA-F]{64}$'; then
-              echo "Invalid Calabash checksum: $EXPECTED"
-              exit 1
-            fi
-            echo "$EXPECTED  $CALABASH_JAR" | sha256sum -c -
-          fi
+          cat > .cache/tools/pom.xml <<'EOF'
+          <project xmlns="http://maven.apache.org/POM/4.0.0"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+            <modelVersion>4.0.0</modelVersion>
+            <groupId>local</groupId>
+            <artifactId>calabash-runner</artifactId>
+            <version>1.0.0</version>
+            <dependencies>
+              <dependency>
+                <groupId>com.xmlcalabash</groupId>
+                <artifactId>app</artifactId>
+                <version>3.0.35</version>
+              </dependency>
+            </dependencies>
+          </project>
+EOF
+          mvn -q -f .cache/tools/pom.xml -DincludeScope=runtime dependency:build-classpath -Dmdep.outputFile=.cache/tools/classpath.txt
           if [ ! -f "$SAXON_JAR" ]; then
-            curl -fL -o "$SAXON_JAR" "$BASE_URL/net/sf/saxon/Saxon-HE/${SAXON_VERSION}/Saxon-HE-${SAXON_VERSION}.jar"
-            curl -fL -o "$SAXON_JAR.sha256" "$BASE_URL/net/sf/saxon/Saxon-HE/${SAXON_VERSION}/Saxon-HE-${SAXON_VERSION}.jar.sha256"
+            curl -fL -o "$SAXON_JAR" "https://repo.maven.apache.org/maven2/net/sf/saxon/Saxon-HE/${SAXON_VERSION}/Saxon-HE-${SAXON_VERSION}.jar"
+            curl -fL -o "$SAXON_JAR.sha256" "https://repo.maven.apache.org/maven2/net/sf/saxon/Saxon-HE/${SAXON_VERSION}/Saxon-HE-${SAXON_VERSION}.jar.sha256"
             EXPECTED="$(tr -d ' \n' < "$SAXON_JAR.sha256")"
             if ! echo "$EXPECTED" | grep -Eq '^[0-9a-fA-F]{64}$'; then
               echo "Invalid Saxon checksum: $EXPECTED"
@@ -125,7 +142,8 @@ jobs:
             fi
             echo "$EXPECTED  $SAXON_JAR" | sha256sum -c -
           fi
-          echo "XMLCALABASH_CMD=java -jar $CALABASH_JAR {PIPELINE}" >> "$GITHUB_ENV"
+          CALABASH_CP="$(cat .cache/tools/classpath.txt)"
+          echo "XMLCALABASH_CMD=java -cp \"$CALABASH_CP\" com.xmlcalabash.app.Main {PIPELINE}" >> "$GITHUB_ENV"
           echo "SAXON_JAR=$SAXON_JAR" >> "$GITHUB_ENV"
       - run: npm ci
       - run: npm run build
@@ -181,33 +199,41 @@ jobs:
         with:
           node-version: "22"
           cache: npm
-      - name: Cache Calabash and Saxon
+      - name: Cache Calabash, Saxon, and Maven
         uses: actions/cache@v4
         with:
-          path: .cache/tools
-          key: calabash-3.0.35-saxon-12.4
-      - name: Download Calabash and Saxon
+          path: |
+            .cache/tools
+            ~/.m2/repository
+          key: calabash-3.0.35-saxon-12.4-maven
+      - name: Prepare Calabash and Saxon
         run: |
           set -euo pipefail
           mkdir -p .cache/tools
-          BASE_URL="https://repo.maven.apache.org/maven2"
           CALABASH_VERSION=3.0.35
           SAXON_VERSION=12.4
-          CALABASH_JAR=".cache/tools/app-${CALABASH_VERSION}.jar"
           SAXON_JAR=".cache/tools/saxon-he-${SAXON_VERSION}.jar"
-          if [ ! -f "$CALABASH_JAR" ]; then
-            curl -fL -o "$CALABASH_JAR" "$BASE_URL/com/xmlcalabash/app/${CALABASH_VERSION}/app-${CALABASH_VERSION}.jar"
-            curl -fL -o "$CALABASH_JAR.sha256" "$BASE_URL/com/xmlcalabash/app/${CALABASH_VERSION}/app-${CALABASH_VERSION}.jar.sha256"
-            EXPECTED="$(tr -d ' \n' < "$CALABASH_JAR.sha256")"
-            if ! echo "$EXPECTED" | grep -Eq '^[0-9a-fA-F]{64}$'; then
-              echo "Invalid Calabash checksum: $EXPECTED"
-              exit 1
-            fi
-            echo "$EXPECTED  $CALABASH_JAR" | sha256sum -c -
-          fi
+          cat > .cache/tools/pom.xml <<'EOF'
+          <project xmlns="http://maven.apache.org/POM/4.0.0"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+            <modelVersion>4.0.0</modelVersion>
+            <groupId>local</groupId>
+            <artifactId>calabash-runner</artifactId>
+            <version>1.0.0</version>
+            <dependencies>
+              <dependency>
+                <groupId>com.xmlcalabash</groupId>
+                <artifactId>app</artifactId>
+                <version>3.0.35</version>
+              </dependency>
+            </dependencies>
+          </project>
+EOF
+          mvn -q -f .cache/tools/pom.xml -DincludeScope=runtime dependency:build-classpath -Dmdep.outputFile=.cache/tools/classpath.txt
           if [ ! -f "$SAXON_JAR" ]; then
-            curl -fL -o "$SAXON_JAR" "$BASE_URL/net/sf/saxon/Saxon-HE/${SAXON_VERSION}/Saxon-HE-${SAXON_VERSION}.jar"
-            curl -fL -o "$SAXON_JAR.sha256" "$BASE_URL/net/sf/saxon/Saxon-HE/${SAXON_VERSION}/Saxon-HE-${SAXON_VERSION}.jar.sha256"
+            curl -fL -o "$SAXON_JAR" "https://repo.maven.apache.org/maven2/net/sf/saxon/Saxon-HE/${SAXON_VERSION}/Saxon-HE-${SAXON_VERSION}.jar"
+            curl -fL -o "$SAXON_JAR.sha256" "https://repo.maven.apache.org/maven2/net/sf/saxon/Saxon-HE/${SAXON_VERSION}/Saxon-HE-${SAXON_VERSION}.jar.sha256"
             EXPECTED="$(tr -d ' \n' < "$SAXON_JAR.sha256")"
             if ! echo "$EXPECTED" | grep -Eq '^[0-9a-fA-F]{64}$'; then
               echo "Invalid Saxon checksum: $EXPECTED"
@@ -215,7 +241,8 @@ jobs:
             fi
             echo "$EXPECTED  $SAXON_JAR" | sha256sum -c -
           fi
-          echo "XMLCALABASH_CMD=java -jar $CALABASH_JAR {PIPELINE}" >> "$GITHUB_ENV"
+          CALABASH_CP="$(cat .cache/tools/classpath.txt)"
+          echo "XMLCALABASH_CMD=java -cp \"$CALABASH_CP\" com.xmlcalabash.app.Main {PIPELINE}" >> "$GITHUB_ENV"
           echo "SAXON_JAR=$SAXON_JAR" >> "$GITHUB_ENV"
       - run: npm ci
       - run: npm run build
@@ -283,33 +310,41 @@ jobs:
             echo "Tag ${GITHUB_REF_NAME} is not on main."
             exit 1
           fi
-      - name: Cache Calabash and Saxon
+      - name: Cache Calabash, Saxon, and Maven
         uses: actions/cache@v4
         with:
-          path: .cache/tools
-          key: calabash-3.0.35-saxon-12.4
-      - name: Download Calabash and Saxon
+          path: |
+            .cache/tools
+            ~/.m2/repository
+          key: calabash-3.0.35-saxon-12.4-maven
+      - name: Prepare Calabash and Saxon
         run: |
           set -euo pipefail
           mkdir -p .cache/tools
-          BASE_URL="https://repo.maven.apache.org/maven2"
           CALABASH_VERSION=3.0.35
           SAXON_VERSION=12.4
-          CALABASH_JAR=".cache/tools/app-${CALABASH_VERSION}.jar"
           SAXON_JAR=".cache/tools/saxon-he-${SAXON_VERSION}.jar"
-          if [ ! -f "$CALABASH_JAR" ]; then
-            curl -fL -o "$CALABASH_JAR" "$BASE_URL/com/xmlcalabash/app/${CALABASH_VERSION}/app-${CALABASH_VERSION}.jar"
-            curl -fL -o "$CALABASH_JAR.sha256" "$BASE_URL/com/xmlcalabash/app/${CALABASH_VERSION}/app-${CALABASH_VERSION}.jar.sha256"
-            EXPECTED="$(tr -d ' \n' < "$CALABASH_JAR.sha256")"
-            if ! echo "$EXPECTED" | grep -Eq '^[0-9a-fA-F]{64}$'; then
-              echo "Invalid Calabash checksum: $EXPECTED"
-              exit 1
-            fi
-            echo "$EXPECTED  $CALABASH_JAR" | sha256sum -c -
-          fi
+          cat > .cache/tools/pom.xml <<'EOF'
+          <project xmlns="http://maven.apache.org/POM/4.0.0"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+            <modelVersion>4.0.0</modelVersion>
+            <groupId>local</groupId>
+            <artifactId>calabash-runner</artifactId>
+            <version>1.0.0</version>
+            <dependencies>
+              <dependency>
+                <groupId>com.xmlcalabash</groupId>
+                <artifactId>app</artifactId>
+                <version>3.0.35</version>
+              </dependency>
+            </dependencies>
+          </project>
+EOF
+          mvn -q -f .cache/tools/pom.xml -DincludeScope=runtime dependency:build-classpath -Dmdep.outputFile=.cache/tools/classpath.txt
           if [ ! -f "$SAXON_JAR" ]; then
-            curl -fL -o "$SAXON_JAR" "$BASE_URL/net/sf/saxon/Saxon-HE/${SAXON_VERSION}/Saxon-HE-${SAXON_VERSION}.jar"
-            curl -fL -o "$SAXON_JAR.sha256" "$BASE_URL/net/sf/saxon/Saxon-HE/${SAXON_VERSION}/Saxon-HE-${SAXON_VERSION}.jar.sha256"
+            curl -fL -o "$SAXON_JAR" "https://repo.maven.apache.org/maven2/net/sf/saxon/Saxon-HE/${SAXON_VERSION}/Saxon-HE-${SAXON_VERSION}.jar"
+            curl -fL -o "$SAXON_JAR.sha256" "https://repo.maven.apache.org/maven2/net/sf/saxon/Saxon-HE/${SAXON_VERSION}/Saxon-HE-${SAXON_VERSION}.jar.sha256"
             EXPECTED="$(tr -d ' \n' < "$SAXON_JAR.sha256")"
             if ! echo "$EXPECTED" | grep -Eq '^[0-9a-fA-F]{64}$'; then
               echo "Invalid Saxon checksum: $EXPECTED"
@@ -317,7 +352,8 @@ jobs:
             fi
             echo "$EXPECTED  $SAXON_JAR" | sha256sum -c -
           fi
-          echo "XMLCALABASH_CMD=java -jar $CALABASH_JAR {PIPELINE}" >> "$GITHUB_ENV"
+          CALABASH_CP="$(cat .cache/tools/classpath.txt)"
+          echo "XMLCALABASH_CMD=java -cp \"$CALABASH_CP\" com.xmlcalabash.app.Main {PIPELINE}" >> "$GITHUB_ENV"
           echo "SAXON_JAR=$SAXON_JAR" >> "$GITHUB_ENV"
       - run: npm ci
       - run: npm run build
