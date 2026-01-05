@@ -60,7 +60,12 @@ jobs:
             </dependencies>
           </project>
           EOF
-          mvn -q -f .cache/tools/pom.xml -DincludeScope=runtime dependency:build-classpath -Dmdep.outputFile=.cache/tools/classpath.txt
+          mvn -q -f .cache/tools/pom.xml -DincludeScope=runtime -Dmdep.outputFile=.cache/tools/classpath.txt \
+            org.apache.maven.plugins:maven-dependency-plugin:3.6.1:build-classpath
+          if [ ! -s .cache/tools/classpath.txt ]; then
+            echo "Calabash classpath not generated."
+            exit 1
+          fi
           if [ ! -f "$SAXON_JAR" ]; then
             curl -fL -o "$SAXON_JAR" "https://repo.maven.apache.org/maven2/net/sf/saxon/Saxon-HE/${SAXON_VERSION}/Saxon-HE-${SAXON_VERSION}.jar"
             curl -fL -o "$SAXON_JAR.sha256" "https://repo.maven.apache.org/maven2/net/sf/saxon/Saxon-HE/${SAXON_VERSION}/Saxon-HE-${SAXON_VERSION}.jar.sha256"
@@ -131,7 +136,12 @@ jobs:
             </dependencies>
           </project>
           EOF
-          mvn -q -f .cache/tools/pom.xml -DincludeScope=runtime dependency:build-classpath -Dmdep.outputFile=.cache/tools/classpath.txt
+          mvn -q -f .cache/tools/pom.xml -DincludeScope=runtime -Dmdep.outputFile=.cache/tools/classpath.txt \
+            org.apache.maven.plugins:maven-dependency-plugin:3.6.1:build-classpath
+          if [ ! -s .cache/tools/classpath.txt ]; then
+            echo "Calabash classpath not generated."
+            exit 1
+          fi
           if [ ! -f "$SAXON_JAR" ]; then
             curl -fL -o "$SAXON_JAR" "https://repo.maven.apache.org/maven2/net/sf/saxon/Saxon-HE/${SAXON_VERSION}/Saxon-HE-${SAXON_VERSION}.jar"
             curl -fL -o "$SAXON_JAR.sha256" "https://repo.maven.apache.org/maven2/net/sf/saxon/Saxon-HE/${SAXON_VERSION}/Saxon-HE-${SAXON_VERSION}.jar.sha256"
@@ -230,7 +240,12 @@ jobs:
             </dependencies>
           </project>
           EOF
-          mvn -q -f .cache/tools/pom.xml -DincludeScope=runtime dependency:build-classpath -Dmdep.outputFile=.cache/tools/classpath.txt
+          mvn -q -f .cache/tools/pom.xml -DincludeScope=runtime -Dmdep.outputFile=.cache/tools/classpath.txt \
+            org.apache.maven.plugins:maven-dependency-plugin:3.6.1:build-classpath
+          if [ ! -s .cache/tools/classpath.txt ]; then
+            echo "Calabash classpath not generated."
+            exit 1
+          fi
           if [ ! -f "$SAXON_JAR" ]; then
             curl -fL -o "$SAXON_JAR" "https://repo.maven.apache.org/maven2/net/sf/saxon/Saxon-HE/${SAXON_VERSION}/Saxon-HE-${SAXON_VERSION}.jar"
             curl -fL -o "$SAXON_JAR.sha256" "https://repo.maven.apache.org/maven2/net/sf/saxon/Saxon-HE/${SAXON_VERSION}/Saxon-HE-${SAXON_VERSION}.jar.sha256"
@@ -341,7 +356,12 @@ jobs:
             </dependencies>
           </project>
           EOF
-          mvn -q -f .cache/tools/pom.xml -DincludeScope=runtime dependency:build-classpath -Dmdep.outputFile=.cache/tools/classpath.txt
+          mvn -q -f .cache/tools/pom.xml -DincludeScope=runtime -Dmdep.outputFile=.cache/tools/classpath.txt \
+            org.apache.maven.plugins:maven-dependency-plugin:3.6.1:build-classpath
+          if [ ! -s .cache/tools/classpath.txt ]; then
+            echo "Calabash classpath not generated."
+            exit 1
+          fi
           if [ ! -f "$SAXON_JAR" ]; then
             curl -fL -o "$SAXON_JAR" "https://repo.maven.apache.org/maven2/net/sf/saxon/Saxon-HE/${SAXON_VERSION}/Saxon-HE-${SAXON_VERSION}.jar"
             curl -fL -o "$SAXON_JAR.sha256" "https://repo.maven.apache.org/maven2/net/sf/saxon/Saxon-HE/${SAXON_VERSION}/Saxon-HE-${SAXON_VERSION}.jar.sha256"
