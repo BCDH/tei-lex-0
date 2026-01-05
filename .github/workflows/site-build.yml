@@ -61,10 +61,10 @@ jobs:
           </project>
           EOF
           OUTPUT_FILE="$(pwd)/.cache/tools/classpath.txt"
-          mvn -B -f .cache/tools/pom.xml -DincludeScope=runtime -Dmdep.outputFile="$OUTPUT_FILE" \
-            org.apache.maven.plugins:maven-dependency-plugin:3.6.1:build-classpath 2>&1 | tee .cache/tools/maven.log
-          if [ "${PIPESTATUS[0]}" -ne 0 ]; then
+          if ! mvn -q -B -f .cache/tools/pom.xml -DincludeScope=runtime -Dmdep.outputFile="$OUTPUT_FILE" \
+            org.apache.maven.plugins:maven-dependency-plugin:3.6.1:build-classpath > .cache/tools/maven.log 2>&1; then
             echo "Maven failed while building Calabash classpath."
+            tail -n 200 .cache/tools/maven.log || true
             exit 1
           fi
           if [ ! -s "$OUTPUT_FILE" ]; then
@@ -72,6 +72,7 @@ jobs:
             tail -n 200 .cache/tools/maven.log || true
             exit 1
           fi
+          echo "Calabash classpath ready."
           if [ ! -f "$SAXON_JAR" ]; then
             curl -fL -o "$SAXON_JAR" "https://repo.maven.apache.org/maven2/net/sf/saxon/Saxon-HE/${SAXON_VERSION}/Saxon-HE-${SAXON_VERSION}.jar"
             curl -fL -o "$SAXON_JAR.sha256" "https://repo.maven.apache.org/maven2/net/sf/saxon/Saxon-HE/${SAXON_VERSION}/Saxon-HE-${SAXON_VERSION}.jar.sha256"
@@ -82,6 +83,7 @@ jobs:
             fi
             echo "$EXPECTED  $SAXON_JAR" | sha256sum -c -
           fi
+          echo "Saxon jar ready."
           CALABASH_CP="$(cat "$OUTPUT_FILE")"
           echo "XMLCALABASH_CMD=java -cp \"$CALABASH_CP\" com.xmlcalabash.app.Main {PIPELINE}" >> "$GITHUB_ENV"
           echo "SAXON_JAR=$SAXON_JAR" >> "$GITHUB_ENV"
@@ -143,10 +145,10 @@ jobs:
           </project>
           EOF
           OUTPUT_FILE="$(pwd)/.cache/tools/classpath.txt"
-          mvn -B -f .cache/tools/pom.xml -DincludeScope=runtime -Dmdep.outputFile="$OUTPUT_FILE" \
-            org.apache.maven.plugins:maven-dependency-plugin:3.6.1:build-classpath 2>&1 | tee .cache/tools/maven.log
-          if [ "${PIPESTATUS[0]}" -ne 0 ]; then
+          if ! mvn -q -B -f .cache/tools/pom.xml -DincludeScope=runtime -Dmdep.outputFile="$OUTPUT_FILE" \
+            org.apache.maven.plugins:maven-dependency-plugin:3.6.1:build-classpath > .cache/tools/maven.log 2>&1; then
             echo "Maven failed while building Calabash classpath."
+            tail -n 200 .cache/tools/maven.log || true
             exit 1
           fi
           if [ ! -s "$OUTPUT_FILE" ]; then
@@ -154,6 +156,7 @@ jobs:
             tail -n 200 .cache/tools/maven.log || true
             exit 1
           fi
+          echo "Calabash classpath ready."
           if [ ! -f "$SAXON_JAR" ]; then
             curl -fL -o "$SAXON_JAR" "https://repo.maven.apache.org/maven2/net/sf/saxon/Saxon-HE/${SAXON_VERSION}/Saxon-HE-${SAXON_VERSION}.jar"
             curl -fL -o "$SAXON_JAR.sha256" "https://repo.maven.apache.org/maven2/net/sf/saxon/Saxon-HE/${SAXON_VERSION}/Saxon-HE-${SAXON_VERSION}.jar.sha256"
@@ -164,6 +167,7 @@ jobs:
             fi
             echo "$EXPECTED  $SAXON_JAR" | sha256sum -c -
           fi
+          echo "Saxon jar ready."
           CALABASH_CP="$(cat "$OUTPUT_FILE")"
           echo "XMLCALABASH_CMD=java -cp \"$CALABASH_CP\" com.xmlcalabash.app.Main {PIPELINE}" >> "$GITHUB_ENV"
           echo "SAXON_JAR=$SAXON_JAR" >> "$GITHUB_ENV"
@@ -253,10 +257,10 @@ jobs:
           </project>
           EOF
           OUTPUT_FILE="$(pwd)/.cache/tools/classpath.txt"
-          mvn -B -f .cache/tools/pom.xml -DincludeScope=runtime -Dmdep.outputFile="$OUTPUT_FILE" \
-            org.apache.maven.plugins:maven-dependency-plugin:3.6.1:build-classpath 2>&1 | tee .cache/tools/maven.log
-          if [ "${PIPESTATUS[0]}" -ne 0 ]; then
+          if ! mvn -q -B -f .cache/tools/pom.xml -DincludeScope=runtime -Dmdep.outputFile="$OUTPUT_FILE" \
+            org.apache.maven.plugins:maven-dependency-plugin:3.6.1:build-classpath > .cache/tools/maven.log 2>&1; then
             echo "Maven failed while building Calabash classpath."
+            tail -n 200 .cache/tools/maven.log || true
             exit 1
           fi
           if [ ! -s "$OUTPUT_FILE" ]; then
@@ -264,6 +268,7 @@ jobs:
             tail -n 200 .cache/tools/maven.log || true
             exit 1
           fi
+          echo "Calabash classpath ready."
           if [ ! -f "$SAXON_JAR" ]; then
             curl -fL -o "$SAXON_JAR" "https://repo.maven.apache.org/maven2/net/sf/saxon/Saxon-HE/${SAXON_VERSION}/Saxon-HE-${SAXON_VERSION}.jar"
             curl -fL -o "$SAXON_JAR.sha256" "https://repo.maven.apache.org/maven2/net/sf/saxon/Saxon-HE/${SAXON_VERSION}/Saxon-HE-${SAXON_VERSION}.jar.sha256"
@@ -274,6 +279,7 @@ jobs:
             fi
             echo "$EXPECTED  $SAXON_JAR" | sha256sum -c -
           fi
+          echo "Saxon jar ready."
           CALABASH_CP="$(cat "$OUTPUT_FILE")"
           echo "XMLCALABASH_CMD=java -cp \"$CALABASH_CP\" com.xmlcalabash.app.Main {PIPELINE}" >> "$GITHUB_ENV"
           echo "SAXON_JAR=$SAXON_JAR" >> "$GITHUB_ENV"
@@ -375,10 +381,10 @@ jobs:
           </project>
           EOF
           OUTPUT_FILE="$(pwd)/.cache/tools/classpath.txt"
-          mvn -B -f .cache/tools/pom.xml -DincludeScope=runtime -Dmdep.outputFile="$OUTPUT_FILE" \
-            org.apache.maven.plugins:maven-dependency-plugin:3.6.1:build-classpath 2>&1 | tee .cache/tools/maven.log
-          if [ "${PIPESTATUS[0]}" -ne 0 ]; then
+          if ! mvn -q -B -f .cache/tools/pom.xml -DincludeScope=runtime -Dmdep.outputFile="$OUTPUT_FILE" \
+            org.apache.maven.plugins:maven-dependency-plugin:3.6.1:build-classpath > .cache/tools/maven.log 2>&1; then
             echo "Maven failed while building Calabash classpath."
+            tail -n 200 .cache/tools/maven.log || true
             exit 1
           fi
           if [ ! -s "$OUTPUT_FILE" ]; then
@@ -386,6 +392,7 @@ jobs:
             tail -n 200 .cache/tools/maven.log || true
             exit 1
           fi
+          echo "Calabash classpath ready."
           if [ ! -f "$SAXON_JAR" ]; then
             curl -fL -o "$SAXON_JAR" "https://repo.maven.apache.org/maven2/net/sf/saxon/Saxon-HE/${SAXON_VERSION}/Saxon-HE-${SAXON_VERSION}.jar"
             curl -fL -o "$SAXON_JAR.sha256" "https://repo.maven.apache.org/maven2/net/sf/saxon/Saxon-HE/${SAXON_VERSION}/Saxon-HE-${SAXON_VERSION}.jar.sha256"
@@ -396,6 +403,7 @@ jobs:
             fi
             echo "$EXPECTED  $SAXON_JAR" | sha256sum -c -
           fi
+          echo "Saxon jar ready."
           CALABASH_CP="$(cat "$OUTPUT_FILE")"
           echo "XMLCALABASH_CMD=java -cp \"$CALABASH_CP\" com.xmlcalabash.app.Main {PIPELINE}" >> "$GITHUB_ENV"
           echo "SAXON_JAR=$SAXON_JAR" >> "$GITHUB_ENV"
