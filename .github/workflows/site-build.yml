@@ -59,7 +59,7 @@ jobs:
               </dependency>
             </dependencies>
           </project>
-EOF
+          EOF
           mvn -q -f .cache/tools/pom.xml -DincludeScope=runtime dependency:build-classpath -Dmdep.outputFile=.cache/tools/classpath.txt
           if [ ! -f "$SAXON_JAR" ]; then
             curl -fL -o "$SAXON_JAR" "https://repo.maven.apache.org/maven2/net/sf/saxon/Saxon-HE/${SAXON_VERSION}/Saxon-HE-${SAXON_VERSION}.jar"
@@ -130,7 +130,7 @@ EOF
               </dependency>
             </dependencies>
           </project>
-EOF
+          EOF
           mvn -q -f .cache/tools/pom.xml -DincludeScope=runtime dependency:build-classpath -Dmdep.outputFile=.cache/tools/classpath.txt
           if [ ! -f "$SAXON_JAR" ]; then
             curl -fL -o "$SAXON_JAR" "https://repo.maven.apache.org/maven2/net/sf/saxon/Saxon-HE/${SAXON_VERSION}/Saxon-HE-${SAXON_VERSION}.jar"
@@ -229,7 +229,7 @@ EOF
               </dependency>
             </dependencies>
           </project>
-EOF
+          EOF
           mvn -q -f .cache/tools/pom.xml -DincludeScope=runtime dependency:build-classpath -Dmdep.outputFile=.cache/tools/classpath.txt
           if [ ! -f "$SAXON_JAR" ]; then
             curl -fL -o "$SAXON_JAR" "https://repo.maven.apache.org/maven2/net/sf/saxon/Saxon-HE/${SAXON_VERSION}/Saxon-HE-${SAXON_VERSION}.jar"
@@ -340,7 +340,7 @@ EOF
               </dependency>
             </dependencies>
           </project>
-EOF
+          EOF
           mvn -q -f .cache/tools/pom.xml -DincludeScope=runtime dependency:build-classpath -Dmdep.outputFile=.cache/tools/classpath.txt
           if [ ! -f "$SAXON_JAR" ]; then
             curl -fL -o "$SAXON_JAR" "https://repo.maven.apache.org/maven2/net/sf/saxon/Saxon-HE/${SAXON_VERSION}/Saxon-HE-${SAXON_VERSION}.jar"
