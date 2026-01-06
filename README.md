@@ -25,7 +25,7 @@ All generated artifacts land in `build/` (.gitignored by choice):
 - HTML docs: `build/html`
 - Expanded ODD and intermediates: `build/odd/`
 
-TODO: Add a XSD transformation + compiled ODD from lex-0.xpl.
+TODO: Add RNG → XSD and RNG → RNC with Trang + maybe compiled ODD from lex-0.xpl.
 
 The HTML documentation expects minified CSS/JS from `assets/`, produced by the npm build step (see below).
 
@@ -68,8 +68,8 @@ XMLCALABASH_JAR=/path/to/xmlcalabash-app-3.0.35.jar npm run assets:odd
 
 ### Build steps
 
-- `npm run assets:odd` generates the HTML guidelines into `build/html`.
-- `npm run build` runs the full pipeline: HTML guidelines (`assets:odd`) + minified CSS/JS (`assets:minify`) + images (`assets:images`).
+- `npm run assets:odd` runs the XProc pipeline to generate the HTML guidelines under `build/html` and the Relax NG schema under `build/html/rng/lex0.rng`.
+- `npm run build` runs the full pipeline: HTML guidelines + Relax NG schema (`assets:odd`) + minified CSS/JS (`assets:minify`) + images (`assets:images`).
 
 ## Build in oXygen
 
@@ -78,7 +78,7 @@ XMLCALABASH_JAR=/path/to/xmlcalabash-app-3.0.35.jar npm run assets:odd
    - `Lex-0: Generate Relax NG Schema`
    - `Lex-0: Generate guidelines`
 3. Install Node dependencies after cloning the repo for the first time with `npm install` in the root folder.
-4. Build assets so HTML output has its CSS/JS by running `npm run build` in the cloned repo root folder.
+4. Build assets so HTML output has its CSS/JS by running `npm run assets:minify` in the cloned repo root folder.
 
 ![](.github/images/transformation-scenarios.png)
 

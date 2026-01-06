@@ -6,10 +6,6 @@
             <serialized xml:space="preserve">
                 <serializableOrderedMap>
                     <entry>
-                        <String>catalog.verbose.level</String>
-                        <Integer>1</Integer>
-                    </entry>
-                    <entry>
                         <String>catalogs.v5</String>
                         <String-array>
                             <String>${pdu}/catalog.xml</String>
@@ -40,7 +36,7 @@
                         <scenarioAssociation-array>
                             <scenarioAssociation>
                                 <field name="url">
-                                    <String>xproc/lex-0.xpl</String>
+                                    <String>xproc/lex-0.test.xpl</String>
                                 </field>
                                 <field name="scenarioIds">
                                     <list>
@@ -65,6 +61,26 @@
                                 <field name="scenarioIds">
                                     <list>
                                         <String>Fetch remote TEI resources</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>XPROC</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioStorageLocations">
+                                    <list>
+                                        <Byte>2</Byte>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="url">
+                                    <String>xproc/lex-0.xpl</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>Lex-0: Generate guidelines</String>
                                     </list>
                                 </field>
                                 <field name="scenarioTypes">

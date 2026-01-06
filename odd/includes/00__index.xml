@@ -6,7 +6,8 @@
      xml:id="home">
     <div xml:id="home-test">
         <p>We are rebuilding TEI Lex-0 from the ground up to deliver a clearer, more stable reference that is easier to use and maintain.</p>
-        <p>In parallel, we are setting up a robust deployment pipeline so releases are reproducible, versioned, and long-lived. See the deployment documentation at <ref target="https://github.com/ttasovac/tei-lex-0/blob/main/DEPLOYMENT.md"> https://github.com/ttasovac/tei-lex-0/blob/main/DEPLOYMENT.md</ref>. </p>
-        <p>This site is not yet ready for production use and some features may not work. For the time being, please stick with that clunky, old <ref target="https://dariah-eric.github.io/lexicalresources/pages/TEILex0/TEILex0.html">behemoth of a site</ref> while we complete the transition.</p>
+        <p>In parallel, we are setting up a robust deployment pipeline so releases are reproducible, versioned, and long-lived. See the deployment <ref target="https://github.com/ttasovac/tei-lex-0/blob/main/DEPLOYMENT.md">documentation</ref>. </p>
+        <p>This site is not yet ready for production use and some features may not work. For the time being, please stick with that clunky, old <ref target="https://dariah-eric.github.io/lexicalresources/pages/TEILex0/TEILex0.html">behemoth</ref> of a site while we complete the transition.</p>
+        <p>Testing the generated <ref target="rng/lex0.rng">RelaxNG schema</ref>.</p>
     </div>
 </div>

@@ -13,8 +13,8 @@
     "build": "npm run assets:odd && npm run assets:minify && npm run assets:images",
     "assets:watch": "node scripts/watch-assets.mjs",
     "postprocess:html": "node scripts/postprocess-html.mjs",
-    "links:check": "node scripts/check-links.mjs",
-    "postprocess:watch": "node scripts/watch-postprocess.mjs",
+    "links:check": "node scripts/check-internal-links.mjs",
+    "postprocess:watch": "node scripts/watch-postprocess-script.mjs",
     "releases:index": "node scripts/generate-release-index.cjs"
   },
   "repository": {
