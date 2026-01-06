@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?xml-stylesheet type="text/css" href="../css/tei_oxygen.css"?>
 <?xml-stylesheet type="text/css" href="../css/tei.lex0.odd.css"?>
-<div xmlns="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude"
-    xml:id="home">
+<div xmlns="http://www.tei-c.org/ns/1.0"
+     xmlns:xi="http://www.w3.org/2001/XInclude"
+     xml:id="home">
     <div xml:id="home-test">
-        <p>Intro text for the index page… Now that we have an index page and separate chapter pages, I need to rethink the introduction and what goes where.</p>
+        <p>We are rebuilding TEI Lex-0 from the ground up to deliver a clearer, more stable reference that is easier to use and maintain.</p>
+        <p>In parallel, we are setting up a robust deployment pipeline so releases are reproducible, versioned, and long-lived. See the deployment documentation at <ref target="https://github.com/ttasovac/tei-lex-0/blob/main/DEPLOYMENT.md"> https://github.com/ttasovac/tei-lex-0/blob/main/DEPLOYMENT.md</ref>. </p>
+        <p>This site is not yet ready for production use and some features may not work. For the time being, please stick with that clunky, old <ref target="https://dariah-eric.github.io/lexicalresources/pages/TEILex0/TEILex0.html">behemoth of a site</ref> while we complete the transition.</p>
     </div>
-    
-   
-      
-       
 </div>
