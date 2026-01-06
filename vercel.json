@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/releases/:path*",
+      "destination": "https://ttasovac.github.io/tei-lex-0/releases/:path*"
+    }
+  ]
+}
