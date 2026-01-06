@@ -94,7 +94,7 @@ jobs:
           test -d build/html
           test -n "$(ls -A build/html)"
       - name: Link hygiene
-        run: node scripts/check-links.mjs
+        run: node scripts/check-internal-links.mjs
 
   push_main:
     if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
@@ -178,7 +178,7 @@ jobs:
           test -d build/html
           test -n "$(ls -A build/html)"
       - name: Link hygiene
-        run: node scripts/check-links.mjs
+        run: node scripts/check-internal-links.mjs
       - name: Post-process HTML
         run: node scripts/postprocess-html.mjs --mode=main
       - name: Publish to vercel-main
@@ -291,7 +291,7 @@ jobs:
           test -d build/html
           test -n "$(ls -A build/html)"
       - name: Link hygiene
-        run: node scripts/check-links.mjs
+        run: node scripts/check-internal-links.mjs
       - name: Post-process HTML
         run: node scripts/postprocess-html.mjs --mode=dev
       - name: Publish to vercel-dev

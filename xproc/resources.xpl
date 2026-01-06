@@ -39,9 +39,13 @@
 	<p:option name="debug-path" as="xs:string?" select="()" />
 	<p:option name="base-uri" as="xs:anyURI" select="static-base-uri()" />
 	<p:option name="main-xslt-url" as="xs:anyURI" select="'https://www.tei-c.org/release/xml/tei/stylesheet/html/html.xsl'"/>
+	<p:option name="main-odd2relax-url" as="xs:anyURI" select="'https://www.tei-c.org/release/xml/tei/stylesheet/odds/odd2relax.xsl'"/>
 	<p:option name="target-directory" as="xs:anyURI"  select="'../tei/stylesheet/html'"/>
 	<p:option name="target-odds-directory" as="xs:anyURI"  select="'../tei/stylesheet/odds'"/>
 	<p:option name="force-download" as="xs:boolean" select="false()" />
+	
+	
+	
 	
 	<!--
    ÷÷÷÷÷÷÷÷÷÷÷÷÷÷÷
@@ -84,6 +88,13 @@
 	/>
 	
 	<xrm:download-stylesheets main-xslt-url="https://www.tei-c.org/release/xml/tei/stylesheet/odds/odd2lite.xsl"
+		target-directory="{$target-odds-directory}"
+		force-download="{$force-download}"
+		debug-path="{$debug-path}"
+		base-uri="{$base-uri}"
+	/>
+	
+	<xrm:download-stylesheets main-xslt-url="{$main-odd2relax-url}"
 		target-directory="{$target-odds-directory}"
 		force-download="{$force-download}"
 		debug-path="{$debug-path}"
