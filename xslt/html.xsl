@@ -14,7 +14,7 @@
     select="'https://unpkg.com/purecss@2.0.3/build/pure-min.css'"/> 
     <xsl:param name="institution" select="'DARIAH Working Group on Lexical Resources'"/>
     
-    <xsl:template name="copyrightStatement">This is a copyright statement.</xsl:template>
+    
     <xsl:template name="stdfooter"/>
     
     <!--TODO: I've moved some params to xproc, some are here, I will
@@ -47,6 +47,7 @@
     <xsl:import href="includes/pageHeader.xsl"/>
     <xsl:import href="includes/toc.xsl"/>
     <xsl:import href="includes/examples.xsl"/>
+    <xsl:import href="includes/eg.xsl"/>
     <xsl:import href="includes/references.xsl"/>
     <xsl:import href="includes/lex0-split.xsl"/>
     <xsl:import href="includes/graphic.xsl"/> 
@@ -57,6 +58,7 @@
         <script type="text/javascript" src="js/ui.js"/>     
         <script type="text/javascript" src="js/prism.js"/>
         <script type="text/javascript" src="js/prism-xpath.js"/>
+        <script type="text/javascript" src="js/prism-rnc.js"/>
         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"/>
         <script type="text/javascript" src="js/algo.js"/>             
     </xsl:template>

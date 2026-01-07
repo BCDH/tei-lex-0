@@ -113,28 +113,21 @@
                     <xsl:call-template name="mainTOC"/>
                 </div>
 
-                <ul class="pure-menu-list" style="position: fixed; bottom: 0; width: 325px;">
+                <!--<ul class="pure-menu-list" style="position: fixed; bottom: 0; width: 325px;">
                     <li class="dlogo" style="background: #1a252f">
                         <a href="#" class="logos">
-                            <img src="images/dariah-lr.png" class="pure-img img-hover"/>
                             <img src="images/dariah-lr-blue.png" class="pure-img img"/>
                         </a>
                     </li>
-                    <li style="background: #1a252f">
-                        <a href="#" class="logos">
-                            <img src="images/elexis.png" class="pure-img img-hover"/>
-                            <img src="images/elexis-blue.png" class="pure-img img"/>
-                        </a>
-                    </li>
-                    <li class="pure-menu-item h2020" style="background: #1a252f">
-                        <p>Co-funded by the Horizon 2020 innovation and research programme of the European Union under grant no. 731015.</p>
-                    </li>
-                </ul>
+                    
+                </ul>-->
             </div>
             
             <div id="main">
                 <div class="header">
-                    <xsl:call-template name="pageHeader"/>
+                    <div class="header-inner">
+                        <xsl:call-template name="pageHeader"/>
+                    </div>
                 </div>
                 
                 <div class="content">
@@ -143,21 +136,39 @@
                     </xsl:call-template>
                    
                 </div>
+               
                 <div class="footer">
-                    This is where the footer goes.
-                    <xsl:call-template name="copyrightStatement"></xsl:call-template>
+                    <div class="footer-inner">
+                        <div class="footer-labels">
+                            <div class="footer-label">maintained by</div>
+                            <div class="footer-label">licensed under</div>
+                            <div class="footer-label">hosted by</div>
+                        </div>
+
+                        <div class="footer-logos">
+                            <div class="footer-left">
+                                <a href="#" class="footer-logo footer-logo-dariah" aria-label="On behalf of DARIAH Lexical Resources">
+                                    <img src="images/dariah-lr-blue.png" alt="DARIAH Lexical Resources"/>
+                                </a>
+                            </div>
+
+                            <div class="footer-center">
+                                <a href="https://creativecommons.org/licenses/by/4.0/" class="footer-logo footer-logo-cc-by"
+                                aria-label="Licensed under CC-BY">
+                                    <img src="images/CC-BY-SA_icon_yellow.svg" alt="CC-BY"/>
+                                </a>
+                            </div>
+
+                            <div class="footer-right">
+                                <a href="https://humanistika.org" class="footer-logo footer-logo-bcdh" aria-label="Hosted by BCDH">
+                                    <img src="images/BCDH-logo_schmal.png" alt="Belgrade Center for Digital Humanities"/>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-                
-          
-            
-           
-                    <!-- Single-column body layout. -->
-           <!-- at the moment this outputs the toc as well need to figure out how to display only main content-->
-                    <!--<xsl:call-template name="bodyLayout">
-                        <xsl:with-param name="currentID" select="$currentID"/>
-                    </xsl:call-template>-->
-         
+               
         </div>
     </xsl:template>
 
