@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../assets/js/prism-rnc.js"],
+  "sourcesContent": ["!function(e){e.languages.rnc={comment:{pattern:/#.*$/m,greedy:!0},string:[{pattern:/\"(?:\\\\.|[^\"\\\\])*\"/,greedy:!0,alias:\"attr-value\"},{pattern:/'(?:\\\\.|[^'\\\\])*'/,greedy:!0,alias:\"attr-value\"}],keyword:/\\b(?:grammar|start)\\b/,type:/\\b(?:text|empty|xsd:(?:int|integer|double|date(?:Time)?|time|string|decimal))\\b/,\n\"class-name\":[{pattern:/\\b(attribute)\\s+([a-zA-Z][-a-zA-Z_0-9]*)(?=\\s*\\{)/,inside:{keyword:/\\battribute\\b/,string:/[a-zA-Z][-a-zA-Z_0-9]*/}},{pattern:/\\b(element)\\s+([a-zA-Z][-a-zA-Z_0-9]*)(?=\\s*\\{)/,inside:{keyword:/\\belement\\b/,\"class-name\":/[a-zA-Z][-a-zA-Z_0-9]*/}}],\"function\":/\\b[a-zA-Z][a-zA-Z_0-9]*(?=\\s*=)/,operator:/[=|&?*+~]/,punctuation:/[{}()\\[\\],;:]/},e.languages[\"language-rnc\"]=e.languages.rnc}(Prism);\n"],
+  "mappings": "OAAC,SAASA,EAAE,CAACA,EAAE,UAAU,IAAI,CAAC,QAAQ,CAAC,QAAQ,QAAQ,OAAO,EAAE,EAAE,OAAO,CAAC,CAAC,QAAQ,oBAAoB,OAAO,GAAG,MAAM,YAAY,EAAE,CAAC,QAAQ,oBAAoB,OAAO,GAAG,MAAM,YAAY,CAAC,EAAE,QAAQ,wBAAwB,KAAK,kFACtO,aAAa,CAAC,CAAC,QAAQ,oDAAoD,OAAO,CAAC,QAAQ,gBAAgB,OAAO,wBAAwB,CAAC,EAAE,CAAC,QAAQ,kDAAkD,OAAO,CAAC,QAAQ,cAAc,aAAa,wBAAwB,CAAC,CAAC,EAAE,SAAW,kCAAkC,SAAS,YAAY,YAAY,eAAe,EAAEA,EAAE,UAAU,cAAc,EAAEA,EAAE,UAAU,GAAG,GAAE,KAAK",
+  "names": ["e"]
+}
