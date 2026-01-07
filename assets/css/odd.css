@@ -32,415 +32,557 @@ theory of liability, whether in contract, strict liability, or tort
 of this software, even if advised of the possibility of such damage.
 */
 table.wovenodd {
-    width: 100%;
-    clear: both;
+  width: 100% !important;
+  max-width: 100% !important;
+  clear: both;
+  /* padding: 0 0.5em; */
+  box-sizing: border-box;
+  table-layout: auto;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid #555;
+  border-collapse: separate;
+  border-spacing: 0;
 }
+
+/* @media (max-width: 48em) {
+  table.wovenodd {
+    padding: 0 2em;
+  }
+} */
 td.wovenodd-col1 {
-    width:15%;
-    vertical-align: top;
+  width: 118px;
+  min-width: 118px;
+  max-width: 118px;
+  vertical-align: top;
+  box-sizing: border-box;
 }
 td.wovenodd-col2 {
-    width:85%;
+  width: auto;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  box-sizing: border-box;
 }
 table.wovenodd tr td {
-    border: 1px solid #555;
-    padding:1%;
+  border: 0;
+  border-top: 1px solid #555;
+  border-left: 1px solid #555;
+  padding: 9px;
+}
+
+table.wovenodd tr:first-child td {
+  border-top: 0;
+}
+
+table.wovenodd td:first-child {
+  border-left: 0;
+}
+
+table.wovenodd pre.pre_eg {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
 }
 table.wovenodd {
-    border-spacing:0px;
-    border-collapse:collapse;
+  border-spacing: 0px;
+  border-collapse: separate;
 }
 table.wovenodd tr td {
-    border-spacing:0px;
+  border-spacing: 0px;
 }
 table.wovenodd tr {
-    border-spacing:0px;
-    border-collapse:collapse;
+  border-spacing: 0px;
+  border-collapse: collapse;
 }
 table.wovenodd tr td table.elementList {
-    border-spacing:0px;
-    border:none;
+  border-spacing: 0px;
+  border: none;
 }
 table.wovenodd tr td table.elementList tr {
-    border-spacing:0px;
-    border:none;
+  border-spacing: 0px;
+  border: none;
 }
 table.wovenodd tr td table.elementList tr td {
-    border-spacing:0px;
-    border:none;
+  border-spacing: 0px;
+  border: none;
 }
 table.classList {
-    table-layout: fixed;
-    width: 95%;
-    margin: 0pt;
-    margin-left: 1em;
-    padding: 0pt;
+  table-layout: fixed;
+  width: 95%;
+  margin: 0pt;
+  margin-left: 1em;
+  padding: 0pt;
 }
 table.classList td.odd_label {
-    width: 20%;
-    vertical-align: top;
-    font-weight: normal;
+  width: 20%;
+  vertical-align: top;
+  font-weight: normal;
 }
 table.elementList {
-    table-layout: fixed;
-    width: 95%;
-    margin: 0pt;
-    margin-left: 1em;
-    padding: 0pt;
+  table-layout: fixed;
+  width: 95%;
+  margin: 0pt;
+  margin-left: 1em;
+  padding: 0pt;
 }
 table.elementList td.odd_label {
-    width: 15%;
-    vertical-align: top;
-    font-weight: normal;
+  width: 15%;
+  vertical-align: top;
+  font-weight: normal;
 }
-table.elementList  td.odd_label:before {
-    content: "<";
+table.elementList td.odd_label:before {
+  content: "<";
 }
-table.elementList  td.odd_label:after {
-    content: ">";
+table.elementList td.odd_label:after {
+  content: ">";
 }
 table.wovenodd tr td table.attList {
-    border-spacing:0px;
-    border:none;
+  border-spacing: 0px;
+  border: none;
 }
 table.wovenodd tr td table.attList tr {
-    border-spacing:0px;
-    border:none;
+  border-spacing: 0px;
+  border: none;
 }
 table.wovenodd tr td table.attList tr td {
-    border-spacing:0px;
-    border:none;
+  border-spacing: 0px;
+  border: none;
 }
 table.attList {
-    table-layout: fixed;
-    width: 100%;
-    margin: 0pt;
-    padding: 0pt;
+  table-layout: fixed;
+  width: 100%;
+  margin: 0pt;
+  padding: 0pt;
+}
+
+td.wovenodd-col2 > p,
+td.wovenodd-col2 > ul,
+td.wovenodd-col2 > ol,
+td.wovenodd-col2 > dl,
+td.wovenodd-col2 > div,
+td.wovenodd-col2 > table {
+  margin-top: 0;
+}
+
+td.wovenodd-col2 > ul,
+td.wovenodd-col2 > ol {
+  margin-bottom: 0.75em;
+  padding-left: 1em;
+}
+
+td.wovenodd-col2:has(.code-toolbar) {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+table.attDef td.wovenodd-col1 {
+  padding-bottom: 0;
+}
+
+table.attDef td.wovenodd-col2,
+table.attDef td.wovenodd-col2 p {
+  padding-left: 0;
+  padding-top: 0;
+}
+
+td.wovenodd-col2 div.specChildren {
+  margin-left: 0;
+  padding-left: 0;
+}
+
+td.wovenodd-col2 div.specChild {
+  margin-left: 0;
+  text-indent: 0;
 }
 td.odd_label {
-    vertical-align: top;
-    width: 15em;
-    font-weight: bold;
+  vertical-align: top;
+  width: 15em;
+  font-weight: bold;
+  padding-left: 0 !important;
 }
+
+td.wovenodd-col2 table.attDef td.odd_label,
+td.wovenodd-col2 table.attDef td.odd_value {
+  /* padding: 0; */
+}
+
+table.attList > tbody > tr:first-child td.odd_label,
+table.attList > tbody > tr:first-child td.odd_value {
+  padding-top: 0;
+}
+
+td.wovenodd-col2 td.odd_value td.odd_value {
+  /* padding: 8px; */
+}
+
+td.wovenodd-col2 td.odd_value td.odd_label,
+td.wovenodd-col2 td.odd_value td.wovenodd-col1 {
+  padding-left: 0;
+}
+
 td.odd_value {
-    vertical-align: top;
-    width: 90%;
+  vertical-align: top;
+  width: 90%;
+}
+
+td.odd_value > div.table {
+  padding-top: 8px;
 }
 table.attDef {
-    table-layout: fixed;
-    width: 100%;
+  table-layout: fixed;
+  width: 100%;
 }
 table.attDef td.odd_label {
-    min-width: 10%;
-    vertical-align: top;
-    font-weight: normal;
+  min-width: 10%;
+  vertical-align: top;
+  font-weight: normal;
 }
 table.attDef td.odd_value {
-    vertical-align: top;
-    max-width: 90%;
+  vertical-align: top;
+  max-width: 90%;
 }
-table.attList  td.odd_label:before {
-    content: "@";
+
+table.attDef:has(td.wovenodd-col1) {
+  display: block;
+  width: 100%;
 }
-table.attDef  td.odd_label:before {
-    content: "";
+
+table.attDef:has(td.wovenodd-col1) > tbody {
+  display: block;
+  width: 100%;
 }
-table.valList  td.odd_label:before {
-    content: "";
+
+table.attDef:has(td.wovenodd-col1) > tbody > tr {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+}
+
+table.attDef:has(td.wovenodd-col1) > tbody > tr > td {
+  display: table-cell;
+}
+
+table.attDef:has(td.wovenodd-col1) > tbody > tr:has(> td.wovenodd-col1) {
+  display: block;
+  width: 100%;
+}
+
+table.attDef:has(td.wovenodd-col1) > tbody > tr:has(> td.wovenodd-col1) > td.wovenodd-col1,
+table.attDef:has(td.wovenodd-col1) > tbody > tr:has(> td.wovenodd-col1) > td.wovenodd-col2 {
+  display: block;
+  width: 100%;
+  max-width: none;
+  min-width: 0;
+}
+table.attList td.odd_label:before {
+  content: "@";
+}
+table.attDef td.odd_label:before {
+  content: "";
+}
+table.valList td.odd_label:before {
+  content: "";
 }
 table.valList {
-    table-layout: fixed;
-    width: 100%;
+  table-layout: fixed;
+  width: 100%;
 }
 table.valList td.odd_label {
-    width: 10%;
-    vertical-align: top;
-    font-style: normal;
-    font-weight: normal;
+  width: 10%;
+  vertical-align: top;
+  font-style: normal;
+  font-weight: normal;
 }
 table.valList td.odd_value {
-    vertical-align: top;
-    width: 90%;
+  vertical-align: top;
+  width: 90%;
 }
 table.specDesc td.Attribute {
-    font-weight: bold;
-    vertical-align: top;
+  font-weight: bold;
+  vertical-align: top;
 }
 table.specDesc {
-    margin-left: 1em;
+  margin-left: 1em;
 }
 td p {
-    margin-top: 0pt;
-    margin-bottom: 2pt;
+  margin-top: 0pt;
+  margin-bottom: 2pt;
 }
 
 div.cdata {
-    white-space: pre;
-    clear:both;
+  white-space: pre;
+  clear: both;
 }
 
 span.tag:before {
-     
 }
 span.tag:after {
-     
 }
-span.gi,span.tag {
+span.gi,
+span.tag {
 }
 span.att {
-     
 }
 span.att:before {
-    content: "@";
+  content: "@";
 }
-span.ident, 
-span.ident-class, span.ident-datatype, span.ident-frag,
-span.ident-ge,    span.ident-macro,    span.ident-module,
-span.ident-pe,    span.ident-rng,      span.ident-schema  {
-    font-weight: bold;
+span.ident,
+span.ident-class,
+span.ident-datatype,
+span.ident-frag,
+span.ident-ge,
+span.ident-macro,
+span.ident-module,
+span.ident-pe,
+span.ident-rng,
+span.ident-schema {
+  font-weight: bold;
 }
 
-span.ident-file, span.ident-ns {
-    font-style: italic;
+span.ident-file,
+span.ident-ns {
+  font-style: italic;
 }
 
 button.displayRelaxButton {
-    margin-right: 2px;
-    margin-top: 2px;
-    font-size: 70%;
-    float: right;
-    cursor: pointer;
+  margin-right: 2px;
+  margin-top: 2px;
+  font-size: 70%;
+  float: right;
+  cursor: pointer;
 }
 pre.RNG_XML {
-	    display: none;
-	    }
+  display: none;
+}
 
 span.RNG_XML {
-	    display: none;
-	    }
+  display: none;
+}
 
 /* pretty printing of XML */
-td.classSpec, td.macroSpec {
-    font-weight: bold;
+td.classSpec,
+td.macroSpec {
+  font-weight: bold;
 }
-a.link_odd_element:link,a.link_odd_element:visited {		   
-    /*     color: #006400; */
+a.link_odd_element:link,
+a.link_odd_element:visited {
+  /*     color: #006400; */
 }
-a.link_odd_macro:link,a.link_odd_macro:visited {
-
+a.link_odd_macro:link,
+a.link_odd_macro:visited {
 }
-a.link_odd_class:link,a.link_odd_class:visited {
-
+a.link_odd_class:link,
+a.link_odd_class:visited {
 }
 span.element {
-    font-weight: bold;
-    color: black;
+  font-weight: bold;
+  color: black;
 }
-td.elementSpec,span.elementname {
-    font-weight: bold;
-    color: #222288;
+td.elementSpec,
+span.elementname {
+  font-weight: bold;
+  color: #222288;
 }
 span.highlightelementname {
-    color: red;
+  color: red;
 }
 
 span.attribute {
-    color: #222288;
+  color: #222288;
 }
 span.attributevalue {
-    color: black;
+  color: black;
 }
 span.comment {
-    color: black;
-    font-style:italic;
+  color: black;
+  font-style: italic;
 }
 span.namespace {
-    color: #222288;
+  color: #222288;
 }
 /* pretty print rnc */
 span.rnc_nc {
-    color: #006400;
+  color: #006400;
 }
 span.rnc_decl {
-    color: green;
+  color: green;
 }
 span.rnc_prefix {
-    color: blue;
+  color: blue;
 }
 span.rnc_param {
-    color: gray;
+  color: gray;
 }
 span.rnc_atom {
-    color: yellow;
+  color: yellow;
 }
 span.rnc_annot {
-    color: #FF8040;
+  color: #ff8040;
 }
 span.rnc_comment {
-    color: #FF00FF;
+  color: #ff00ff;
 }
 span.rnc_annot {
-    color: #00FFFF;
+  color: #00ffff;
 }
 span.rnc_type {
-    color: purple;
+  color: purple;
 }
 span.rnc_keyword {
-    color: teal;
+  color: teal;
 }
 span.defaultVal {
-    font-weight: bold;
+  font-weight: bold;
 }
 span.required {
-    font-weight: bold;
+  font-weight: bold;
 }
 div.moduleSpec {
-    padding: 1px;
-    margin: 1px;
-    background-color: #C0C0C0;
-    color:inherit;
-    clear:right;
+  padding: 1px;
+  margin: 1px;
+  background-color: #c0c0c0;
+  color: inherit;
+  clear: right;
 }
 span.moduleSpecHead {
-    font-style: italic;
+  font-style: italic;
 }
 ul.specList li {
-    list-style: none;
+  list-style: none;
 }
 span.specList-macroSpec {
-    font-weight: bold;
+  font-weight: bold;
 }
 span.specList-elementSpec {
-    font-weight: bold;
+  font-weight: bold;
 }
 span.specList-elementSpec:before {
-    content: "<";
-     
+  content: "<";
 }
 span.specList-elementSpec:after {
-    content: ">";
-     
+  content: ">";
 }
 span.specList-classSpec {
-    font-weight: bold;
+  font-weight: bold;
 }
 span.specName {
-    color: #223377;
-    font-weight: bold;
+  color: #223377;
+  font-weight: bold;
 }
 /* A -Z Styles From http://www.smileycat.com/miaow/archives/000211.php -styling the a to z */
 #azindex {
-    background-color: #ddd;
-    color:inherit;
-    display: block;
-    margin: 0px;
-    float: left;
-    padding: 5px;
-    width: 75%;
-    border: 1px solid #999;
+  background-color: #ddd;
+  color: inherit;
+  display: block;
+  margin: 0px;
+  float: left;
+  padding: 5px;
+  width: 75%;
+  border: 1px solid #999;
 }
 #azindex p {
-    color: #fff;
-    background-color: #000060;
-    padding: 4px;
-    display: block;
-    margin: 0;
-    border-bottom: 1px solid #333;
-    font-size: 0.95em;
+  color: #fff;
+  background-color: #000060;
+  padding: 4px;
+  display: block;
+  margin: 0;
+  border-bottom: 1px solid #333;
+  font-size: 0.95em;
 }
 .index {
-    font: bold 100% Verdana, Helvetica, sans-serif;
-    margin: 0;
-    padding: 0;
+  font: bold 100% Verdana, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
 }
 .index li {
-    float: left;
-    height: 1.5em;
-    list-style-type: none;
-    margin: 0.35em 0.15em;
-    padding: 0;
-    width: 1.5em;
+  float: left;
+  height: 1.5em;
+  list-style-type: none;
+  margin: 0.35em 0.15em;
+  padding: 0;
+  width: 1.5em;
 }
-.index a:link, .index a:visited {
-    background: #fff;
-    color: navy;
-    display: block;
-    height: 1.5em;
-    padding: 0.37em 0 0 0;
-    text-align: center;
-    text-decoration: none;
-    width: 1.5em;
-    border: 1px solid #999;
+.index a:link,
+.index a:visited {
+  background: #fff;
+  color: navy;
+  display: block;
+  height: 1.5em;
+  padding: 0.37em 0 0 0;
+  text-align: center;
+  text-decoration: none;
+  width: 1.5em;
+  border: 1px solid #999;
 }
-li.showall, li.showall a:visited,li.showall a:link {
-    width: 10em;
+li.showall,
+li.showall a:visited,
+li.showall a:link {
+  width: 10em;
 }
 * html .index li {
-    margin: 0.2em 0.2em;
+  margin: 0.2em 0.2em;
 }
 ul.index li a:hover {
-    background-color: #93D1E4;
-    color: #fff;
-    text-decoration: underline;
+  background-color: #93d1e4;
+  color: #fff;
+  text-decoration: underline;
 }
 div.atozwrapper {
-   float: left;
-   width: 70%;
+  float: left;
+  width: 70%;
 }
-div.atoz {    
-   clear: left;
-   float: left;
-}    
+div.atoz {
+  clear: left;
+  float: left;
+}
 #byMod {
-   margin-top: 12px;
-   clear: left;
+  margin-top: 12px;
+  clear: left;
 }
 ul.atoz {
-    list-style: none;
-    text-align:left;
-    margin: 2px;
-    padding: 2px;
-    background-color: #eef;
-    color:inherit;
+  list-style: none;
+  text-align: left;
+  margin: 2px;
+  padding: 2px;
+  background-color: #eef;
+  color: inherit;
 }
 .atoz li {
-    padding: 0px;
-    display: inline;
+  padding: 0px;
+  display: inline;
 }
 span.listhead {
-    margin-top: 0em;
-    margin-right: 1em;
-    padding-left: 3px;
-    padding-right: 3px;
-    color: #000066;
-    font-weight: bold;
-    font-size: large;
+  margin-top: 0em;
+  margin-right: 1em;
+  padding-left: 3px;
+  padding-right: 3px;
+  color: #000066;
+  font-weight: bold;
+  font-size: large;
 }
 /* End of A - Z styles */
 div.specChildren {
-    margin: 0em;
-    padding: 0em;
+  margin: 0em;
+  padding: 0em;
 }
 span.specChildModule {
-    font-weight: bold;
+  font-weight: bold;
 }
 div.specChild {
-    margin-bottom: 4pt;
-    margin-left: 25px;
-    text-indent: -30px;
+  margin-bottom: 4pt;
+  margin-left: 25px;
+  text-indent: -30px;
 }
 span.emptySlash:after {
-    content: "/";
+  content: "/";
 }
 .deprecated {
-    border: solid red 2pt;
-    font-weight: bold;
+  border: solid red 2pt;
+  font-weight: bold;
 }
 .unusedattribute {
-    text-decoration: line-through;
-    color: gray;
+  text-decoration: line-through;
+  color: gray;
 }
-.unusedattribute:before{
-    content: "@";
+.unusedattribute:before {
+  content: "@";
 }
-

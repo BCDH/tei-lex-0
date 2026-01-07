@@ -98,7 +98,7 @@ span.att {
 
 /* Scroll the TOC itself so the menu can stay overflow-visible for dropdowns. */
 #menu .toc {
-  max-height: calc(100vh - 200px);
+  max-height: 100vh;
   overflow-y: auto;
   overflow-x: hidden;
 }
@@ -328,10 +328,6 @@ div.toc_body div.toc > .continuedtoc {
   width: 0;
 }
 
-td.wovenodd-col1 {
-  min-height: 1px;
-}
-
 /* Handling of example XML code embedded in pages. */
 pre.teiCode,
 code[class*="language-"],
@@ -479,10 +475,10 @@ td.odd_label {
   margin-right: auto;
 }
 
-.logos .img-hover,
+/* .logos .img-hover,
 .logos:hover .img {
   display: none;
-}
+} */
 
 .logos:hover .img-hover {
   display: block;
@@ -828,11 +824,202 @@ div.parent ul {
 .content {
   display: flex;
   flex-direction: column;
-  padding-top: 2em;
+  padding: 2em 1.5em;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  box-sizing: border-box;
+  overflow-wrap: anywhere;
 }
 
 .content > * {
   order: 3;
+}
+
+/* Keep footer at or below viewport bottom on short pages. */
+#main {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+#main .header {
+  border-bottom: 0;
+  padding: 0;
+}
+
+#main .header-inner {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2.5em 2em 0;
+  box-sizing: border-box;
+  border-bottom: 1px solid #e6eaee;
+}
+
+#main .content {
+  flex: 1 0 auto;
+}
+
+/* Footer: logos left/right, license centered. */
+#main .footer {
+  margin-top: auto;
+  padding: 0;
+}
+
+#main .footer-inner {
+  display: grid;
+  grid-template-columns: max-content 1fr max-content;
+  row-gap: 0em;
+  column-gap: 2em;
+  align-items: center;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 1.5em 0em 1.25em;
+  border-top: 1px solid #e6eaee;
+}
+
+#main .footer-labels,
+#main .footer-logos {
+  display: contents;
+}
+
+#main .footer-label {
+  font-size: 0.75em;
+  color: #6b7280;
+  letter-spacing: 0.04em;
+  text-align: center;
+  flex: 1 1 0;
+  font-variant: small-caps;
+  text-transform: none;
+}
+
+#main .footer-labels .footer-label:nth-child(1) {
+  grid-column: 1;
+  grid-row: 1;
+  justify-self: center;
+}
+
+#main .footer-labels .footer-label:nth-child(2) {
+  grid-column: 2;
+  grid-row: 1;
+  justify-self: center;
+}
+
+#main .footer-labels .footer-label:nth-child(3) {
+  grid-column: 3;
+  grid-row: 1;
+  justify-self: center;
+}
+
+#main .footer-logos .footer-left {
+  grid-column: 1;
+  grid-row: 2;
+  justify-self: center;
+}
+
+#main .footer-logos .footer-center {
+  grid-column: 2;
+  grid-row: 2;
+  justify-self: center;
+}
+
+#main .footer-logos .footer-right {
+  grid-column: 3;
+  grid-row: 2;
+  justify-self: center;
+}
+
+#main .footer-center {
+  flex: 0 0 auto;
+  text-align: center;
+  font-size: 0.85em;
+  color: #6b7280;
+  letter-spacing: 0.02em;
+}
+
+#main .footer-center .ccby {
+  font-weight: 600;
+  color: #334155;
+}
+
+#main .footer-center .meta-sep {
+  margin: 0 0.5em;
+}
+
+#main .footer-logo img {
+  height: 28px;
+  width: auto;
+  display: block;
+}
+
+#main .footer-logo {
+  display: flex;
+  align-items: center;
+}
+
+/* Tune logo heights independently while keeping vertical alignment. */
+#main .footer-logo-dariah img {
+  height: 38px;
+}
+
+#main .footer-logo-bcdh img {
+  height: 24px;
+}
+
+/* Per-logo vertical nudges for optical alignment. */
+#main .footer-logo-dariah {
+  transform: translateY(0px);
+}
+
+#main .footer-logo-bcdh {
+  transform: translateY(3px);
+}
+
+#main .footer-logo-cc-by {
+  transform: translateY(5px);
+}
+
+@media (max-width: 48em) {
+  #main .footer-inner {
+    grid-template-columns: 1fr 1fr;
+    row-gap: 0em;
+  }
+
+  #main .footer-labels .footer-label:nth-child(1),
+  #main .footer-logos .footer-left,
+  #main .footer-labels .footer-label:nth-child(3),
+  #main .footer-logos .footer-right,
+  #main .footer-labels .footer-label:nth-child(2),
+  #main .footer-logos .footer-center {
+    justify-self: center;
+  }
+
+  #main .footer-labels .footer-label:nth-child(1) {
+    grid-column: 1;
+    grid-row: 1;
+  }
+  #main .footer-labels .footer-label:nth-child(3) {
+    grid-column: 2;
+    grid-row: 1;
+  }
+  #main .footer-logos .footer-left {
+    grid-column: 1;
+    grid-row: 2;
+    margin-bottom: 1em;
+  }
+  #main .footer-logos .footer-right {
+    grid-column: 2;
+    grid-row: 2;
+    margin-bottom: 1em;
+  }
+  #main .footer-labels .footer-label:nth-child(2) {
+    grid-column: 1 / span 2;
+    grid-row: 3;
+  }
+  #main .footer-logos .footer-center {
+    grid-column: 1 / span 2;
+    grid-row: 4;
+  }
 }
 
 .content > .grid-nav:first-of-type {
@@ -925,4 +1112,10 @@ div.parent ul {
 .teidiv1[id],
 .teidiv2[id] {
   scroll-margin-top: 15px;
+}
+
+.pre_eg {
+  background: #f2faff;
+  font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, Courier, monospace;
+  font-size: 0.95em;
 }
