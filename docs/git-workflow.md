@@ -1,4 +1,4 @@
-# Git Workflow
+# Git Workflow (Linear History)
 
 Goal: keep `dev` and `main` strictly linear; only feature branches get rebased/force-pushed.
 
@@ -28,7 +28,7 @@ Goal: keep `dev` and `main` strictly linear; only feature branches get rebased/f
 ## Release dev to main (fast-forward only)
 
 - **CLI (preferred):** `git checkout main && git fetch && git merge --ff-only origin/dev && git push` (advances `main` to `dev` with no merge commit).
-- **GitHub UI/Desktop:** GitHub PRs don’t offer a true fast-forward merge; “rebase”/“squash” create new commits. If you want `main` to exactly match `dev` with no new commits, use the CLI fast-forward above.
+- **GitHub UI/Desktop:** if the UI can’t guarantee a fast-forward, do the CLI step above. Otherwise, use a PR and a merge mode that produces a fast-forward (no merge commit).
 
 ## Protections and rules
 
