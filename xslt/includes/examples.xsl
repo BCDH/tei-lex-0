@@ -174,64 +174,59 @@
         </xsl:element>
     </xsl:template>
    
-    <!-- TODO: when i have more time, merge wrapExample and wrapInFocusPanel
-    accounting for the differences between them-->
-    <xsl:template name="wrapExample">
-        <xsl:param name="egImg"/>
-        <xsl:element name="div" namespace="http://www.w3.org/1999/xhtml">
-            <xsl:attribute name="class">tab</xsl:attribute>
+    <!-- Generic tab wrapper used by both code examples and in-focus panels. -->
+    <xsl:template name="wrapTab">
+        <xsl:param name="iconSrc"/>
+        <xsl:param name="labelContent" as="node()*"/>
+        <xsl:param name="bodyContent" as="node()*"/>
+        <xsl:variable name="id" select="concat('checkbox', generate-id())"/>
+        <div class="tab">
             <input type="checkbox">
-                <!--will need another unique str. for id-->
                 <xsl:attribute name="id">
-                    <xsl:value-of select="concat('chck', generate-id())"/>
+                    <xsl:value-of select="$id"/>
                 </xsl:attribute>
             </input>
             <label class="tab-label">
                 <xsl:attribute name="for">
-                    <xsl:value-of select="concat('chck', generate-id())"/>
+                    <xsl:value-of select="$id"/>
                 </xsl:attribute>
-                <img class="pure-img" src="images/code.png"/>
-                <span style="display:inline-block"
-                    ><!--<xsl:value-of select="concat('Example ', $position)"/>--></span>
+                <img class="pure-img" src="{$iconSrc}"/>
+                <xsl:sequence select="$labelContent"/>
             </label>
             <div class="tab-content">
-                <xsl:apply-templates select="$egImg"></xsl:apply-templates>
-                <!--<xsl:apply-templates></xsl:apply-templates>-->
+                <xsl:sequence select="$bodyContent"/>
+            </div>
+        </div>
+    </xsl:template>
+
+    <xsl:template name="wrapExample">
+        <xsl:param name="egImg"/>
+        <xsl:call-template name="wrapTab">
+            <xsl:with-param name="iconSrc" select="'images/code.png'"/>
+            <xsl:with-param name="labelContent">
+                <span style="display:inline-block"></span>
+            </xsl:with-param>
+            <xsl:with-param name="bodyContent">
+                <xsl:apply-templates select="$egImg"/>
                 <xsl:call-template name="processExample">
                     <xsl:with-param name="simple"/>
                     <xsl:with-param name="highlight"/>
                 </xsl:call-template>
-            </div>
-        </xsl:element>
+            </xsl:with-param>
+        </xsl:call-template>
     </xsl:template>
-    <!--first separate, then merge -->
+
     <xsl:template name="wrapInFocusPanel">
-        <!--<xsl:param name="position"></xsl:param> -->
-        <xsl:element name="div" namespace="http://www.w3.org/1999/xhtml">
-            <xsl:attribute name="class">tab</xsl:attribute>
-            <input type="checkbox" >
-                <!--will need another unique str. for id-->
-                <xsl:attribute name="id">
-                    <xsl:value-of select="concat('chck', generate-id())"/>
-                </xsl:attribute>
-            </input>
-            <label class="tab-label">
-                <xsl:attribute name="for">
-                    <xsl:value-of select="concat('chck', generate-id())"/>
-                </xsl:attribute>
-                <img class="pure-img"
-                    src="images/focus.png"/>
+        <xsl:call-template name="wrapTab">
+            <xsl:with-param name="iconSrc" select="'images/focus.png'"/>
+            <xsl:with-param name="labelContent">
                 <xsl:text>In focus: </xsl:text>
                 <xsl:value-of select="tei:body/tei:head"/>
-            </label>
-            <div class="tab-content">
+            </xsl:with-param>
+            <xsl:with-param name="bodyContent">
                 <xsl:apply-templates/>
-                <!--<xsl:call-template name="processExample">
-                    <xsl:with-param name="simple"></xsl:with-param>
-                    <xsl:with-param name="highlight"></xsl:with-param>
-                </xsl:call-template>-->
-            </div>
-        </xsl:element>
+            </xsl:with-param>
+        </xsl:call-template>
     </xsl:template>
     <!--for the time being it's single -\- consider lists as well-->
     <xsl:template match="tei:floatingText[@type = 'inFocusPanel']">
@@ -241,7 +236,7 @@
                     <xsl:value-of select="@xml:id"/>
                 </xsl:attribute>
             </xsl:if>
-            <xsl:attribute name="class">infopanels tabs</xsl:attribute>
+            <xsl:attribute name="class">infoPanels tabs</xsl:attribute>
             <xsl:call-template name="wrapInFocusPanel"/>
         </xsl:element>
     </xsl:template>

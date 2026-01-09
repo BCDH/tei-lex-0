@@ -191,6 +191,9 @@
         </xsl:choose>
     </xsl:template>
 
+    <!-- Suppress floatingText/@type='inFocusPanel' heads: the label is already shown in the tab header. See examples.xsl -->
+    <xsl:template match="tei:floatingText[@type = 'inFocusPanel']/tei:body/tei:head"/>
+
     <xsl:template match="tei:head">
         <xsl:variable name="parentName" select="local-name(..)"/>
         <xsl:variable name="depth">

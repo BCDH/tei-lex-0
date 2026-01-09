@@ -599,11 +599,11 @@ span.label img {
   overflow: hidden;
 }
 
-.infopanels .tab-content {
+.infoPanels .tab-content {
   background: bisque;
 }
 
-.infopanels .tab-content div.panelContent {
+.infoPanels .tab-content div.panelContent {
   padding: 0 1em;
 }
 

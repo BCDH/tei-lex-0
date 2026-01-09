@@ -4,13 +4,9 @@
     xpath-default-namespace="http://www.tei-c.org/ns/1.0"
     version="3.0" exclude-result-prefixes="tei teix">
 
-    <!--This is a bit of a hack to force the creation of xml:ids for each of the main sections
-    in the specs. I need those because otherwise a complex layout with splitLevel set to 2 or 3
-    will not be able to process individual elements etc.-->
+    <!--This is a bit of a hack to force the creation of xml:ids for each of the main sections in the specs. I need those because otherwise a complex layout with splitLevel set to 2 or 3 will not be able to process individual elements etc.-->
     
-    <!--In addition, this stylesheet imports introductions to the main sections in the specs.
-    Because of the way odd is built, we can inject these only after the full odd has been
-    compiled in the odd2lite step in our XProc pipeline.-->
+    <!--In addition, this stylesheet imports introductions to the main sections in the specs. Because of the way odd is built, we can inject these only after the full odd has been compiled in the odd2lite step in our XProc pipeline.-->
 
     <xsl:template match="div[@xml:id = 'specification']">
         <xsl:element name="div" namespace="http://www.tei-c.org/ns/1.0">
