@@ -35,6 +35,7 @@
     <xsl:param name="splitLevelNonSpec" select="'0'"/>
     <xsl:param name="outputMethod" select="'html'"/>
     <xsl:param name="tocFront" select="'false'"/>
+    <xsl:param name="divOffset" select="2"></xsl:param>
     
     <xsl:variable name="version" select="//tei:fileDesc/tei:editionStmt/tei:edition/@n"/>
     <xsl:import href="https://www.tei-c.org/release/xml/tei/stylesheet/html/html.xsl"/>

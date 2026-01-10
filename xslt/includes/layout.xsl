@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:teix="http://www.tei-c.org/ns/Examples"
-    xpath-default-namespace="http://www.tei-c.org/ns/1.0"
-    version="3.0" exclude-result-prefixes="tei teix">
+    xmlns="http://www.w3.org/1999/xhtml" xmlns:tei="http://www.tei-c.org/ns/1.0"
+    xmlns:teix="http://www.tei-c.org/ns/Examples"
+    xpath-default-namespace="http://www.tei-c.org/ns/1.0" version="3.0"
+    exclude-result-prefixes="tei teix">
 
     <doc xmlns="http://www.oxygenxml.com/ns/doc/xsl">
         <desc>[html] Make a new page using multicolumn layout <param name="currentID">current
@@ -43,7 +43,7 @@
             </xsl:variable>
             <!--
                 Head markup (title + CSS links) is built by tei:htmlHead().
-                The CSS URLs come from params set in `stylesheets/html3.xsl`:
+                The CSS URLs come from params set in `stylesheets/html.xsl`:
                   - $cssFile (primary CSS, currently PureCSS CDN)
                   - $cssSecondaryFile (project CSS, currently css/tei.lex0.web.css)
                 If you want additional <link> or <script> in <head>, override
@@ -98,8 +98,10 @@
                     <div class="pure-menu-heading">
                         <a
                             style="float:right; text-transform:capitalize; line-height:30px; vertical-align:middle; font-size:85%; padding: 0"
-                            href="#revisionHistory">Version <xsl:value-of select="$version"/></a>
-                        <a style="line-height:30px; vertical-align:middle" href="index.html">TEI Lex-0</a>
+                            href="index.html#home.revision-history">Version <xsl:value-of
+                                select="$version"/></a>
+                        <a style="line-height:30px; vertical-align:middle" href="index.html">TEI
+                            Lex-0</a>
 
                     </div>
 
@@ -122,21 +124,33 @@
                     
                 </ul>-->
             </div>
-            
+
             <div id="main">
                 <div class="header">
                     <div class="header-inner">
-                        <xsl:call-template name="pageHeader"/>
+                        <xsl:call-template name="makeHTMLHeading">
+                            <xsl:with-param name="class">title</xsl:with-param>
+                            <xsl:with-param name="text">
+                                <xsl:sequence select="tei:generateSimpleTitle(.)"/>
+                            </xsl:with-param>
+                            <xsl:with-param name="level">1</xsl:with-param>
+                        </xsl:call-template>
+
+                        <span class="content-subhead">
+                            <xsl:value-of
+                                select="(ancestor-or-self::tei:TEI[1]/tei:teiHeader//tei:titleStmt/tei:title[@type = 'tagline'])[1]"
+                            />
+                        </span>
                     </div>
                 </div>
-                
+
                 <div class="content">
                     <xsl:call-template name="mainFrame">
                         <xsl:with-param name="currentID" select="$currentID"/>
                     </xsl:call-template>
-                   
+
                 </div>
-               
+
                 <div class="footer">
                     <div class="footer-inner">
                         <div class="footer-labels">
@@ -147,29 +161,33 @@
 
                         <div class="footer-logos">
                             <div class="footer-left">
-                                <a href="#" class="footer-logo footer-logo-dariah" aria-label="On behalf of DARIAH Lexical Resources">
-                                    <img src="images/dariah-lr-blue.png" alt="DARIAH Lexical Resources"/>
+                                <a href="#" class="footer-logo footer-logo-dariah"
+                                    aria-label="On behalf of DARIAH Lexical Resources">
+                                    <img src="images/dariah-lr-blue.png"
+                                        alt="DARIAH Lexical Resources"/>
                                 </a>
                             </div>
 
                             <div class="footer-center">
-                                <a href="https://creativecommons.org/licenses/by/4.0/" class="footer-logo footer-logo-cc-by"
-                                aria-label="Licensed under CC-BY">
-                                    <img src="images/by.png"
-                                    alt="CC-BY"/>
+                                <a href="https://creativecommons.org/licenses/by/4.0/"
+                                    class="footer-logo footer-logo-cc-by"
+                                    aria-label="Licensed under CC-BY">
+                                    <img src="images/by.png" alt="CC-BY"/>
                                 </a>
                             </div>
 
                             <div class="footer-right">
-                                <a href="https://humanistika.org" class="footer-logo footer-logo-bcdh" aria-label="Hosted by BCDH">
-                                    <img src="images/BCDH-logo_schmal.png" alt="Belgrade Center for Digital Humanities"/>
+                                <a href="https://humanistika.org"
+                                    class="footer-logo footer-logo-bcdh" aria-label="Hosted by BCDH">
+                                    <img src="images/BCDH-logo_schmal.png"
+                                        alt="Belgrade Center for Digital Humanities"/>
                                 </a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-               
+
         </div>
     </xsl:template>
 

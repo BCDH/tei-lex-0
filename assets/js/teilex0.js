@@ -1,58 +1,58 @@
 document.addEventListener("DOMContentLoaded", function (event) {
     
-    // was menu open?
-    var existing = localStorage.getItem('menu-selections');
-    if (existing) {
-        existing = existing.split(',');
-        existing.forEach(item => {
-            //console.log(document.getElementById(item));
-            document.getElementById(item).classList.add('clicked');
-            document.getElementById(item).closest('div.toc-showhide').nextElementSibling.style.display = 'block';
-        })
-    }
+    const getMenuSelections = () => {
+        const existing = localStorage.getItem('menu-selections');
+        return existing ? existing.split(',').filter(Boolean) : [];
+    };
     
-    document.querySelectorAll('.tocTree .toc-showhide').forEach(item => {
-        item.addEventListener('click', event => {
-            var element = item.parentElement.querySelector("div.continuedtoc");
-            if (window.getComputedStyle(element).display === 'block') {
-                element.style.display = 'none';
-            } else {
-                element.style.display = 'block';
+    const setMenuSelections = (ids) => {
+        localStorage.setItem('menu-selections', ids.filter(Boolean).toString());
+    };
+    
+    const setMenuOpen = (showhide, open) => {
+        if (!showhide) return;
+        const plusminus = showhide.querySelector('.plusminus');
+        const continued = showhide.nextElementSibling && showhide.nextElementSibling.classList.contains('continuedtoc')
+            ? showhide.nextElementSibling
+            : showhide.parentElement && showhide.parentElement.querySelector("div.continuedtoc");
+        
+        if (continued && continued.style) {
+            continued.style.display = open ? 'block' : 'none';
+        }
+        
+        if (plusminus && plusminus.classList) {
+            plusminus.classList.toggle('clicked', open);
+            if (plusminus.id) {
+                const selections = getMenuSelections();
+                const next = open
+                    ? Array.from(new Set([...selections, plusminus.id]))
+                    : selections.filter((id) => id !== plusminus.id);
+                setMenuSelections(next);
             }
-        })
-    })
+        }
+    };
+    
+    // was menu open?
+    getMenuSelections().forEach(id => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        const showhide = el.closest('div.toc-showhide');
+        setMenuOpen(showhide, true);
+    });
+    
+    // Only the +/- control should toggle submenus (toc-showhide itself is not clickable).
     
     document.querySelectorAll('.plusminus').forEach(item => {
         item.addEventListener('click', event => {
-            if (item.classList.contains('clicked')) {
-                item.classList.remove('clicked')
-                 // Get the existing data
-                var existing = localStorage.getItem('menu-selections');
-                
-                // If no existing data, create an array
-                // Otherwise, convert the localStorage string to an array
-                existing = existing ? existing.split(','):[];
-                
-                // Add new data to localStorage Array
-                existing.splice(existing.indexOf(item.id));
-                
-                // Save back to localStorage
-                localStorage.setItem('menu-selections', existing.toString());
-            } else {
-                item.classList.add('clicked')
-                // Get the existing data
-                var existing = localStorage.getItem('menu-selections');
-                
-                // If no existing data, create an array
-                // Otherwise, convert the localStorage string to an array
-                existing = existing ? existing.split(','):[];
-                
-                // Add new data to localStorage Array
-                existing.push(item.id);
-                
-                // Save back to localStorage
-                localStorage.setItem('menu-selections', existing.toString());
-            }
+            event.stopPropagation();
+            const showhide = item.closest('div.toc-showhide');
+            if (!showhide) return;
+            const continued = showhide.nextElementSibling && showhide.nextElementSibling.classList.contains('continuedtoc')
+                ? showhide.nextElementSibling
+                : showhide.parentElement && showhide.parentElement.querySelector("div.continuedtoc");
+            if (!continued) return;
+            const open = window.getComputedStyle(continued).display !== 'block';
+            setMenuOpen(showhide, open);
         })
     })
     
@@ -108,7 +108,11 @@ document.addEventListener("DOMContentLoaded", function (event) {
 });
 
 document.querySelectorAll('.tabs').forEach(set => {
-    set.querySelector('.tab').querySelector('input').checked = true;  
+    const tab = set.querySelector('.tab');
+    const input = tab ? tab.querySelector('input') : null;
+    if (input) {
+        input.checked = true;
+    }
 });
 
 

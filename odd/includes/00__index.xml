@@ -1,16 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?xml-stylesheet type="text/css" href="../css/tei_oxygen.css"?>
-<?xml-stylesheet type="text/css" href="../css/tei.lex0.odd.css"?>
 <div xmlns="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:id="home">
-    <p>We are rebuilding TEI Lex-0 from the ground up to deliver a clearer, more stable reference
-        that is easier to use and maintain.</p>
-    <p>In parallel, we are setting up a robust deployment pipeline so releases are reproducible,
-        versioned, and long-lived. See the deployment <ref
-            target="https://github.com/ttasovac/tei-lex-0/blob/main/DEPLOYMENT.md"
-            >documentation</ref>. </p>
-    <p>This site is not yet ready for production use and some features may not work. For the time
-        being, please stick with that clunky, old <ref
-            target="https://dariah-eric.github.io/lexicalresources/pages/TEILex0/TEILex0.html"
-            >behemoth</ref> of a site while we complete the transition.</p>
-    <p>Testing the generated <ref target="rng/lex0.rng">RelaxNG schema</ref>.</p>
+    <p>TEI Lex-0 is both a technical specification and a set of community-based recommendations for
+        encoding machine-readable dictionaries. It helps you create, analyze, and share lexical
+        resources that are interoperable, sustainable, and fit for purpose.</p>
+    <egXML xmlns="http://www.tei-c.org/ns/Examples" source="#Johnson1775"
+        rend="unwrapped tb-floated tb-smaller">
+        <xi:include href="../examples/examples.stripped.xml" corresp="../examples/examples.xml"
+            xpointer="SJ.DEL"/>
+    </egXML>
+    <div xml:id="home.quickstart">
+        <head>Quickstart</head>
+        <p>To start using Lex-0 in your projects, you'll need a schema-aware XML editor and one of
+            our schemas: <list>
+                <item>
+                    <ref target="schema/lex0.rng">Relax NG (RNG)</ref>
+                </item>
+                <item>
+                    <ref target="#">RELAX NG Compact (coming soon)</ref>
+                </item>
+                <item>
+                    <ref target="#">XML Schema (XSD) (coming soon)</ref>
+                </item>
+            </list></p>
+        <p>If you are new to the world of TEI and XML, in general, or need a refresher on how to
+            validate TEI files, see <ref target="#faq.get-started">FAQ → Getting Started</ref></p>
+    </div>
+    <div xml:id="home.howTo">
+        <head>How to use the <hi rend="italic">Guidelines</hi></head>
+        <p>The <hi rend="bold">narrative</hi> chapters of these <hi rend="italic">Guidelines</hi>
+            explain <hi rend="italic">why</hi> TEI Lex-0 recommends certain practices, <hi
+                rend="italic">what</hi> those practices mean for lexicographic work, and <hi
+                rend="italic">how</hi> to apply them in real encoding situations. Each chapter
+            focuses on a specific type of lexicographic content, covering rationale, examples and
+            guidance for the consistent encoding of <ref target="#entries">entries</ref>, <ref
+                target="#forms">forms</ref>, <ref target="#senses">senses</ref>, <ref
+                target="#translations">translations</ref>, <ref target="#cross-references"
+                >cross-references</ref> and <ref target="#usage">usage labels</ref>.</p>
+        <p>The <hi rend="bold">technical</hi>
+            <ref target="#specification">Specification</ref> is the <hi rend="italic">reference
+                manual</hi> (and, effectively, the “grammar”) of Lex-0. When you need to answer
+            concrete questions like “What elements are allowed within <gi>sense</gi>?”, “Which
+            attributes are permitted on <gi>form</gi>?”, or “What types of values are valid in
+                <att>target</att>?”, the <hi rend="italic">Specification</hi> is the first place to
+            look. </p>
+        <p>The chapter on the <ref target="#community">Community</ref> explains how TEI Lex-0
+            evolved and the people behind it, while <ref target="#faq">FAQs</ref> provide quick
+            answers on <ref target="#faq.whyLex-0">why</ref> Lex-0 exists, <ref
+                target="#faq.lex-0-vs-TEI">how</ref> it relates to TEI P5, and how to <ref
+                target="#faq.get-started">get started</ref> with validation and tooling. They also
+            cover issues such as where to <ref target="#faq.who-to-ask">ask questions</ref>, how to
+                <ref target="#faq.how-to-contribute">get involved</ref> with the development, how
+                <ref target="#faq.how-to-cite">to cite</ref> the <hi rend="italic">Guidelines</hi>
+            etc.</p>
+    </div>
+    <divGen type="revision-history"/>
 </div>

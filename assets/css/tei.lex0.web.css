@@ -65,7 +65,7 @@ span.att {
 
 .tei_toc_search {
   padding-top: 20px;
-  padding-bottom: 20px;
+  padding-bottom: 10px;
 }
 
 /* Keep search visible just below the heading while the menu scrolls. */
@@ -1129,4 +1129,15 @@ div.parent ul {
 
 .refdoc {
   margin-bottom: 1em;
+  margin-top: 1.5em;
+}
+
+h2,
+h3,
+h4 {
+  margin-bottom: 0;
+}
+
+#home.teidiv2 p:first-child {
+  margin-top: 0;
 }

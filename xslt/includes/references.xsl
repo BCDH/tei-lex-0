@@ -83,7 +83,6 @@
                 <xsl:text>: </xsl:text>
             </xsl:if>
             <xsl:apply-templates select="tei:idno"/>
-            <xsl:text>.</xsl:text>
         </xsl:if>
     </xsl:template>
 

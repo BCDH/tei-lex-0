@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div xmlns="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude"
+    xmlns:teix="http://www.tei-c.org/ns/Examples" xml:id="faq">
+    <head>FAQs</head>
+    <div xml:id="faq.get-started">
+        <head>How to get started?</head>
+        <p>To start using TEI Lex-0, you need an XML-aware text edtior and the Lex-0 schema. The
+            most commonly used schema is RelaxNG, and the most popular XML editor for working with
+            TEI files is <ref target="https://www.oxygenxml.com/xml_editor.html">oXygen</ref>. The
+            following instructions assume you have installed oXygen on your system:</p>
+        <list>
+            <item>
+                <hi rend="italic">In oXygen XML Editor</hi>: associate your TEI document with the
+                current Relax NG schema <code>https://lex0.org/schema/lex0.rng</code> using the
+                Schema Association dialog (Document &gt; Schema &gt; Associate Schema, or the
+                red-pin icon). <figure xml:id="oxy-assoc-schema">
+                    <head>Associating schema in oXygen XML Editor</head>
+                    <graphic url="images/associate-schema.png"/>
+                </figure>
+            </item>
+            <item>
+                <hi rend="italic">Manually</hi>: include processing instructions at the top of your
+                TEI file: <xi:include parse="xml" href="fragments/processing-instructions.xml"
+                /></item>
+        </list>
+        <p>Once you associate the schema, you'll be able to validate your TEI Lex-0 files from
+            inside your editor.</p>
+    </div>
+    <div xml:id="faq.whyLex-0">
+        <head>Why TEI Lex-0?</head>
+        <p>In the digital age, lexicographers increasingly rely on structured, machine-readable
+            formats to create, analyze, and publish dictionaries (<ref target="#Fellbaum2014"
+                >Fellbaum 2014</ref>). This shift in lexicographic practice requires not only access
+            to digital content, but a method for representing the internal structure of dictionary
+            entries in a way that computers can process. This is important because computers, unlike
+            humans, cannot intuitively “see” the difference between, say, a word form and its
+            grammatical label: without additional markup, a dictionary entry is just a block of
+            undifferentiated text strings. With consistent markup (<ref target="#Lemnitzer2013"
+                >Lemnitzer et al. 2013</ref>), however, each component of a dictionary entry — such
+            as headwords, pronunciations, parts of speech, definitions, usage notes, and examples —
+            can be explicitly identified and semantically distinguished. This enables a wide range
+            of computational processes, from advanced search and filtering to automated analysis,
+            visualization, and integration with other linguistic resources.</p>
+        <p>TEI Lex-0 addresses the need for structured lexical data by providing a technical
+            specification and a set of community-recommended guidelines for encoding, i.e. marking
+            up, machine-readable dictionaries. In essence, it is a strict customization of the
+            Guidelines of the Text Encoding Initiative (TEI Consortium 2025), delivered as a
+            constrained TEI schema that prioritizes uniformity and simplicity. It consists of a
+            vocabulary (i.e. a set of XML elements and attributes) that can be used to markup parts
+            of the dictionary (<gi>entry</gi>, <gi>form</gi>, <gi>sense</gi>, <gi>def</gi> etc.) and
+            a grammar, i.e. a set of rules on how to combine individual elements into valid
+            dictionary entries. Using an XML text editor that supports validation mechanisms, a user
+            can ensure that their dictionary conforms to the TEI Lex-0 specification, catching
+            errors or inconsistencies during the encoding process. This validation step helps
+            maintain structural integrity and semantic clarity across entries.</p>
+    </div>
+    <div xml:id="faq.lex-0-vs-TEI">
+        <head>Lex-0 vs. TEI P5?</head>
+        <p>TEI Lex-0 is not a separate markup language from TEI. It is a <hi rend="bold">profile /
+                customization of TEI P5</hi> (the broader TEI Guidelines). TEI P5 provides a very
+            large vocabulary designed to cover many text types (manuscripts, drama, correspondence,
+            dictionaries, and more). Lex-0 builds on that foundation by:</p>
+        <list type="simple">
+            <item>selecting a <hi rend="bold">dictionary-focused subset</hi> of TEI P5, </item>
+            <item>clarifying <hi rend="italic">preferred</hi> and <hi rend="italic">discouraged</hi>
+                patterns where TEI P5 offers multiple possibilities, and </item>
+            <item>(where possible) <hi rend="bold">constraining</hi> choices to improve <hi
+                    rend="bold">interoperability</hi> between dictionary projects. </item>
+        </list>
+        <p>A practical consequence is that an element can exist in TEI P5 (such as <ref
+                target="https://tei-c.org/release/doc/tei-p5-doc/en/html/ref-superEntry.html"
+                >&lt;superEntry&gt;</ref> or <ref
+                target="https://tei-c.org/release/doc/tei-p5-doc/en/html/ref-pos.html"
+                >&lt;pos&gt;</ref>, for instance) but be out of scope or constrained differently in
+            TEI Lex-0. If you already know TEI P5, you can simply treat the Lex-0 <hi rend="italic"
+                >Specification</hi> as the authoritative reference for what is “allowed and
+            expected” when you want Lex-0–conformant dictionary data.</p>
+        <p>Lex-0 should not be thought of as a replacement of the <ref
+                target="https://tei-c.org/release/doc/tei-p5-doc/en/html/DI.html">Dictionaries
+                Chapter</ref> in the <hi rend="italic">TEI Guidelines</hi> or as the format that
+            must be necessarily used for editing or managing individual resources, especially in
+            those projects and/or institutions that already have established workflows based on
+            their own flavors of TEI. Lex-0 should be primarily seen as a format that existing TEI
+            dictionaries can be unequivocally transformed to in order to be queried, visualised, or
+            mined in a uniform way.</p>
+        <p>At the same time, however, Lex-0 can be used both as a <hi rend="italic"
+                >best-practice</hi> example in educational settings and as a foundation for <hi
+                rend="italic">new</hi> TEI-based projects. This is especially true considering the
+            fact that Lex-0 aims to to stay as aligned as possible with the TEI subset developed in
+            conjunction with the revision of the ISO LMF (Lexical Markup Framework) standard (cf.
+                <ref target="#Romary2015">Romary 2015</ref>)</p>
+    </div>
+    <div xml:id="faq.who-to-ask">
+        <head>Have a question?</head>
+        <p>TEI Lex-0 is a community-based project. If you have a question or need help encoding
+            lexicographic data using TEI Lex-0, get in touch using our <ref
+                target="https://github.com/DARIAH-ERIC/lexicalresources/issues">issue tracker</ref>
+            here on GitHub.</p>
+    </div>
+    <div xml:id="faq.how-to-contribute">
+        <head>How to contribute?</head>
+        <p>More advanced users can propose solutions by submitting pull requests. Make sure you
+            understand the internal <ref target="#faq.contribute.nitty-gritty">nitty-gritty</ref> as
+            well as our GitHub <ref target="#faq.contribute.github-workflow">workflow</ref>.</p>
+        <div xml:id="faq.contribute.nitty-gritty">
+            <head>The internal nitty-gritty</head>
+            <list>
+                <item><code>lex-0.odd</code> is the master ODD file. It uses
+                        <code>&lt;xi:include&gt;</code> to pull chapter fragments from
+                        <code>odd/includes/</code>.</item>
+                <item>Examples of TEI Lex-0 live in <code>odd/examples/examples.xml</code>; the
+                    stripped counterpart is <code>odd/examples/examples.stripped.xml</code>.</item>
+                <item>The Relax NG schema generated from the ODD is written to
+                        <code>build/html/schema/lex0.rng</code>.</item>
+                <item><code>xslt/tei-stripper.xsl</code> strips TEI examples into the
+                        <code>http://www.tei-c.org/ns/Examples</code> namespace so they can be
+                    included inside <gi>egXML</gi>. The stripping is run by the XProc pipeline in
+                        <code>xproc/lex-0.xpl</code> (invoked by <code>npm run assets:odd</code>
+                    from the repository root).</item>
+                <item>To include validated examples, reference ids from the stripped file, for
+                    example: <xi:include parse="xml" href="fragments/referencing-stripped-ids.xml"/>
+                    You can also include segments using the <code>element()</code> scheme, e.g.
+                        <xi:include parse="xml" href="fragments/xinclude-element-scheme.xml"/>
+                </item>
+                <item>If you are using oXygen XML, clicking on the link in Author Mode will take you
+                    directly to the element or fragment in <code>odd/examples/examples.xml</code>
+                    for editing.</item>
+                <item>After changing <code>odd/examples/examples.xml</code>, run <code>npm run
+                        assets:odd</code> to regenerate the stripped examples and the HTML
+                    output.</item>
+            </list>
+        </div>
+        <div xml:id="faq.contribute.github-workflow">
+            <head>GitHub Workflow</head>
+            <p>Before proposing changes to the TEI Lex-0 specification or narrative guidelines, make
+                sure: <list>
+                    <item>you have gathered feedback or confirmed the need for the change using our
+                        GitHub <ref target="https://github.com/DARIAH-ERIC/lexicalresources/issues"
+                            >issues</ref></item>
+                    <item>you understand how the source files are organized and how the guidelines
+                        and RNG schema are generated from the ODD</item>
+                </list>
+            </p>
+            <p>Workflow overview (using forks): <list>
+                    <item>fork the Lex-0 repository on GitHub and clone your fork locally; your fork
+                        is the <hi rend="italic">origin</hi>, the main repository is <hi
+                            rend="italic">upstream</hi></item>
+                    <item>keep your local <code>dev</code> up to date by fetching from upstream and
+                        fast-forwarding your local branch before starting new work</item>
+                    <item>create a feature branch from <code>dev</code> and name it appropriately
+                        for the given task (e.g. <code>fix-attr-values-on-sense</code>)</item>
+                    <item>make your changes in that branch (specification, examples, or narrative
+                        text), then commit and push to your fork</item>
+                    <item>once you are satisfied with the changes you made, open a pull request from
+                        your feature branch into upstream <code>dev</code>, summarizing the change
+                        and linking to the relevant issue</item>
+                    <item>if editors request adjustments, keep working in the same branch and push
+                        new commits; the PR will update automatically</item>
+                    <item>after the PR is merged, delete the feature branch and sync your fork’s
+                            <code>dev</code> with upstream again</item>
+                </list>
+            </p>
+        </div>
+    </div>
+    <div xml:id="faq.convert-to-ontolex-lemon">
+        <head>Convert from Lex-0 to Ontolex-Lemon?</head>
+        <p>Funny you should ask, because we have exactly what you're looking for. Check out the <ref
+                target="https://github.com/elexis-eu/tei2ontolex">tei2ontolex</ref> stylesheet. </p>
+    </div>
+    <divGen type="how-to-cite"/>
+</div>
