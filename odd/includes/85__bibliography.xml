@@ -136,7 +136,7 @@
                 </imprint>
             </monogr>
         </biblStruct>
-        
+
         <biblStruct type="journalArticle" xml:id="Erjavec2000">
             <analytic>
                 <author><persName><surname>Erjavec</surname>
@@ -194,6 +194,26 @@
                 </imprint>
             </monogr>
         </biblStruct>
+        <biblStruct type="journalArticle" xml:id="Fellbaum2014">
+            <analytic>
+                <author>
+                    <persName>
+                        <forename>Christiane</forename>
+                        <surname>Fellbaum</surname>
+                    </persName>
+                </author>
+                <title level="a">Large-Scale Lexicography in the Digital Age</title>
+                <idno type="DOI">10.1093/ijl/ecu018</idno>
+            </analytic>
+            <monogr>
+                <title level="j">International Journal of Lexicography</title>
+                <imprint>
+                    <biblScope unit="volume">27(4)</biblScope>
+                    <biblScope unit="page">378–395</biblScope>
+                    <date>2014</date>
+                </imprint>
+            </monogr>
+        </biblStruct>
         <biblStruct type="conferencePaper" xml:id="Ide2000">
             <analytic>
                 <author role="aut">
@@ -226,6 +246,57 @@
                 </imprint>
             </monogr>
         </biblStruct>
+        <biblStruct type="dictionary" xml:id="Johnson1775">
+            <monogr>
+                <author>
+                    <persName>
+                        <forename>Samuel</forename>
+                        <surname>Johnson</surname>
+                    </persName>
+                </author>
+                <title>A Dictionary of the English Language in which the words are deduced from
+                    their originals, and illustrated in their different significations by examples
+                    from the best writers</title>
+                <imprint>
+                    <pubPlace>London</pubPlace>
+                    <publisher>W. Strahan for J. and P. Knapton; T. and T. Longman; C. Hitch and L.
+                        Hawes; A. Millar; and R. and J. Dodsley</publisher>
+                    <date>1755</date>
+                </imprint>
+            </monogr>
+        </biblStruct>
+        <biblStruct xml:id="Lemnitzer2013">
+            <analytic>
+                <author>
+                    <persName>
+                        <forename>Lothar</forename>
+                        <surname>Lemnitzer</surname>
+                    </persName>
+                </author>
+                <author>
+                    <persName>
+                        <forename>Laurent</forename>
+                        <surname>Romary</surname>
+                    </persName>
+                </author>
+                <author>
+                    <persName>
+                        <forename>Andreas</forename>
+                        <surname>Witt</surname>
+                    </persName>
+                </author>
+                <title level="a">Representing Human and
+                    Machine Dictionaries in Markup Languages</title>
+                <idno type="HAL">inria-00441215</idno>
+            </analytic>
+            <monogr>
+                <title level="m">HSK - Dictionaries. An International Encyclopedia of Lexicography</title>
+                <imprint>
+                    <date>2013</date>
+                    <publisher>Mouton de Gruyter</publisher>
+                </imprint>
+            </monogr>
+        </biblStruct>
         <biblStruct type="book" xml:id="LDOCE2003"
             corresp="http://zotero.org/users/306701/items/66WSN5U8">
             <monogr>
@@ -244,7 +315,7 @@
         <biblStruct xml:id="Morais1789" type="dictionary">
             <monogr>
                 <author><persName><forename>Antônio de Morais</forename>
-                    <surname>Silva</surname></persName></author>
+                        <surname>Silva</surname></persName></author>
                 <title level="m">Diccionario da lingua portugueza </title>
                 <imprint>
                     <date>1789</date>
@@ -255,7 +326,7 @@
         </biblStruct>
         <biblStruct xml:id="Московљевић1990" type="dictionary">
             <monogr>
-                <author><persName><forename>Милош С.</forename>
+                <author><persName><forename>Милош С</forename>
                         <surname>Московљевић</surname></persName></author>
                 <title level="m">Речник савременог српскохрватског књижевног језика с књижевним
                     саветником</title>
@@ -414,7 +485,8 @@
                 </author>
                 <title>Vocabulário Ortográfico da Língua Portuguesa [em linha]</title>
                 <imprint>
-                    <publisher>Academia das Ciências de Lisboa/Imprensa Nacional de Lisboa</publisher>
+                    <publisher>Academia das Ciências de Lisboa/Imprensa Nacional de
+                        Lisboa</publisher>
                     <pubPlace>Lisboa</pubPlace>
                     <date>1940</date>
                 </imprint>
@@ -493,12 +565,14 @@
         <biblStruct xml:id="MSS" type="dictionary" xml:lang="cs">
             <monogr>
                 <author><persName><surname>Bělič</surname><forename>Jaromír</forename>
-                        </persName></author>
+                    </persName></author>
                 <author><persName><surname>Kamiš</surname><forename>Adolf</forename>
-                        </persName></author>
+                    </persName></author>
                 <author><persName><surname>Kučera</surname><forename>Karel</forename>
-                        </persName></author>
-                <title level="m" ref="https://vokabular.ujc.cas.cz/informace.aspx?t=MSS&amp;o=slovniky">Malý staročeský slovník</title>
+                    </persName></author>
+                <title level="m"
+                    ref="https://vokabular.ujc.cas.cz/informace.aspx?t=MSS&amp;o=slovniky">Malý
+                    staročeský slovník</title>
                 <imprint>
                     <date>1979</date>
                     <pubPlace>Praha</pubPlace>

@@ -75,7 +75,7 @@
     <!--generate how to cite guidelines -->
     <xsl:template match="tei:divGen[@type = 'how-to-cite']">
         <xsl:element name="div" namespace="http://www.tei-c.org/ns/1.0">
-            <xsl:attribute name="xml:id">introduction.guidelines.how-to-cite</xsl:attribute>
+            <xsl:attribute name="xml:id">faq.how-to-cite</xsl:attribute>
             <head xmlns="http://www.tei-c.org/ns/1.0">How to cite these guidelines</head>
             <hi xmlns="http://www.tei-c.org/ns/1.0" rend="underline">Full citation</hi>
             <xsl:element name="p" xmlns="http://www.tei-c.org/ns/1.0">
@@ -116,7 +116,7 @@
     <!--generate revision history -->
     <xsl:template match="tei:divGen[@type = 'revision-history']">
         <xsl:element name="div" namespace="http://www.tei-c.org/ns/1.0">
-            <xsl:attribute name="xml:id">introduction.guidelines.revision-history</xsl:attribute>
+            <xsl:attribute name="xml:id">home.revision-history</xsl:attribute>
             <head xmlns="http://www.tei-c.org/ns/1.0">Revision history</head>
             <xsl:element name="p" namespace="http://www.tei-c.org/ns/1.0"> Changes to the TEI Lex-0
                 specification up to version 0.8.6 were included in comments inside the ODD file

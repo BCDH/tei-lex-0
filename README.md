@@ -68,7 +68,7 @@ XMLCALABASH_JAR=/path/to/xmlcalabash-app-3.0.35.jar npm run assets:odd
 
 ### Build steps
 
-- `npm run assets:odd` runs the XProc pipeline to generate the HTML guidelines under `build/html` and the Relax NG schema under `build/html/rng/lex0.rng`.
+- `npm run assets:odd` runs the XProc pipeline to generate the HTML guidelines under `build/html` and the Relax NG schema under `build/html/schema/lex0.rng`.
 - `npm run build` runs the full pipeline: HTML guidelines + Relax NG schema (`assets:odd`) + minified CSS/JS (`assets:minify`) + images (`assets:images`).
 
 ## Build in oXygen

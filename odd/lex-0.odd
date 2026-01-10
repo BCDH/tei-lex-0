@@ -11,7 +11,8 @@
         <fileDesc>
             <titleStmt>
                 <title>TEI Lex-0</title>
-                <title type="subordinate">A baseline encoding for lexicographic data</title>
+                <title type="subordinate">A baseline encoding for lexicograpic data</title>
+                <title type="tagline">Clarity for lexicographers. Stability for data. Compatibility for the future.</title>
                 <editor>
                     <persName>
                         <forename>Toma</forename>
@@ -211,8 +212,6 @@
                 xpointer="home"/>
         </front>
         <body>
-            <xi:include href="includes/01__introduction.xml" parse="xml"
-                xpointer="introduction"/>
             <xi:include href="includes/05__header.xml" parse="xml" xpointer="header"/>
             <xi:include href="includes/10__entries.xml" parse="xml" xpointer="entries"/>
             <xi:include href="includes/15__forms.xml" parse="xml" xpointer="forms"/>
@@ -224,13 +223,15 @@
             <xi:include href="includes/35__usage.xml" parse="xml" xpointer="usage"/>
             <xi:include href="includes/40__etymology.xml" parse="xml" xpointer="etymology"/>
             <xi:include href="includes/45__patterns.xml" parse="xml" xpointer="patterns"/>
-            <xi:include href="includes/50__bibliography.xml" parse="xml"
-                xpointer="bibliography"/>
-            <!--   <xi:include href="parts/30__annex_A.xml" parse="xml" xpointer="annex_A"/>
-            <xi:include href="parts/31__annex_B.xml" parse="xml" xpointer="annex_B"/>-->
             <xi:include href="includes/60__specification.xml" parse="xml"
                 xpointer="specification"/>
-            <xi:include href="includes/70__faq.xml" parse="xml" xpointer="faq"/>
+            <xi:include href="includes/70__community.xml" parse="xml"
+                xpointer="community"/>
+            <xi:include href="includes/85__bibliography.xml" parse="xml"
+                xpointer="bibliography"/>
+            <xi:include href="includes/80__faq.xml" parse="xml" xpointer="faq"/>
+            <!--   <xi:include href="parts/90__annex_A.xml" parse="xml" xpointer="annex_A"/>
+            <xi:include href="parts/90__annex_B.xml" parse="xml" xpointer="annex_B"/>-->
         </body>
     </text>
 </TEI>

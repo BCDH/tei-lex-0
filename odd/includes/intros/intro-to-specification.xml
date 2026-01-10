@@ -18,7 +18,7 @@
    </teiHeader>
    <text>
       <body>
-                  <p>The <hi rend="italic">Specification</hi> is the reference manual (and, effectively, the “grammar”) of TEI Lex-0. It tells you exactly which TEI constructs are in scope and how they are allowed to combine. When you need to answer questions like “Can this element go here?”, “Which attributes are permitted?”, or “What values are valid?”, the <hi rend="italic">Specification</hi> is the first place to look.</p>
+         <p>The <hi rend="italic">Specification</hi> is the reference manual (and, effectively, the “grammar”) of TEI Lex-0. It tells you exactly which TEI constructs are in scope and how they are allowed to combine. When you need to answer questions like “Can this element go here?”, “Which attributes are permitted?”, or “What values are valid?”, the <hi rend="italic">Specification</hi> is the first place to look.</p>
          <p>The <hi rend="italic">Specification</hi> is based on the TEI Lex-0 <hi rend="italic">schema</hi>: it lists the allowed <ref target="TEI.elements.html">elements</ref>, their attributes, and their content models (what may appear inside them), along with the reusable building blocks that make those content models manageable (<ref target="TEI.model-classes.html">model classes</ref>, <ref target="TEI.attribute-classes.html">attribute classes</ref>, <ref target="TEI.macros.html">macros</ref>, and <ref target="TEI.datatypes.html">data types</ref>). </p>
          <p>You do not need to read the <hi rend="italic">Specification</hi> front-to-back. Most encoders will use it as an aid: <list>
                <item><hi rend="bold">when choosing a tag</hi>: look up the element and read its definition and typical usage.</item>
@@ -31,7 +31,7 @@
                <item><hi rend="bold">when collaborating across projects</hi>: it helps you confirm that you are using the same constructs in the same way.</item>
             </list></p>
          <p>The <hi rend="italic">Specification</hi> is also the basis for the TEI Lex-0 <hi
-               rend="italic">schema</hi> (<ref target="rng/lex0.rng">RNG</ref>, RNC, and XSD). These
+               rend="italic">schema</hi> (<ref target="schema/lex0.rng">RNG</ref>, RNC, and XSD). These
             schemas are meant to be processed by computers and can be used to <hi rend="italic"
                >validate</hi> TEI Lex-0 documents for structural and attribute correctness. Do not
             try to read the schema, unless you suffer from insomnia.</p>

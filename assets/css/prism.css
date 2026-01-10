@@ -294,3 +294,16 @@ div.code-toolbar > .toolbar span:focus {
   text-decoration: none;
   background: #ed6f59;
 }
+
+/* my additions */
+/* this is currently set up only for unwrapped examples? */
+div.code-toolbar.tb-floated {
+  float: right;
+  width: 50%;
+  margin-left: 1em;
+  margin-bottom: 1em;
+}
+
+div.code-toolbar.tb-smaller {
+  font-size: 80%;
+}

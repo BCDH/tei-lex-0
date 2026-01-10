@@ -6,14 +6,13 @@
     xpath-default-namespace="http://www.tei-c.org/ns/1.0"
     version="2.0" exclude-result-prefixes="tei teix xhtml">
     
-    
-    
     <doc xmlns="http://www.oxygenxml.com/ns/doc/xsl">
         <desc>Process elements teix:egXML</desc>
     </doc>
     <xsl:template name="processExample">
         <xsl:param name="simple"/>
         <xsl:param name="highlight"/>
+        <xsl:param name="contentClass"/>
         <pre>
             <code>
             <xsl:attribute name="id">
@@ -23,6 +22,10 @@
                 <xsl:text>pre</xsl:text>
                 <xsl:if test="not(*)">
                     <xsl:text> cdata</xsl:text>
+                </xsl:if>
+                <xsl:if test="@rend">
+                    <xsl:text> </xsl:text>
+                    <xsl:value-of select="@rend"/>
                 </xsl:if>
                 <xsl:choose>
                     <xsl:when test="@valid = 'feasible'">
@@ -57,24 +60,35 @@
         </code>
         </pre>
     </xsl:template>
+    <!-- style examples but don't wrap them in the tab UI -->
     <xsl:template
-        match="teix:egXML[ancestor::tei:div[@xml:id = 'specification'] or ancestor::tei:floatingText or @rend='unwrapped']">
+        match="teix:egXML[ancestor::tei:div[@xml:id = 'specification'] or ancestor::tei:floatingText or contains(@rend,'unwrapped')]">
         <xsl:param name="simple">false</xsl:param>
         <xsl:param name="highlight"/>
         <xsl:call-template name="processExample">
             <xsl:with-param name="simple"/>
             <xsl:with-param name="highlight"/>
+            <xsl:with-param name="contentClass"
+                select="string-join(tokenize(normalize-space(@rend), '\s+')[starts-with(., 'tb-')], ' ')"/>
         </xsl:call-template>
     </xsl:template>
+    <!-- wrap examples in tab UI -->
     <xsl:template
         match="
             teix:egXML
             [not(ancestor::tei:list[@type = 'examples'])]
             [not(ancestor::tei:div[@xml:id = 'specification'])]
             [not(ancestor::tei:floatingText)]
-            [not(@rend='unwrapped')]">
+            [not(contains(@rend, 'unwrapped'))]">
         <xsl:element name="ul" namespace="http://www.w3.org/1999/xhtml">
-            <xsl:attribute name="class">examples tabs</xsl:attribute>
+            <xsl:attribute name="class">
+                <xsl:text>examples tabs</xsl:text>
+                <xsl:if test="@rend">
+                    <xsl:text> </xsl:text>
+                    <xsl:value-of
+                    select="string-join(tokenize(normalize-space(@rend),'\s+'), ' ')"/>
+                </xsl:if> 
+            </xsl:attribute>
             <xsl:call-template name="wrapExample">
                 <!--<xsl:with-param name="position" select="''"/>-->
             </xsl:call-template>
@@ -90,7 +104,7 @@
             [ancestor::tei:list[@type = 'examples']]
             [not(ancestor::tei:div[@xml:id = 'specification'])]
             [not(ancestor::tei:floatingText)]
-            [not(@rend='unwrapped')]">
+            [not(contains(@rend,'unwrapped'))]">
         <xsl:param name="simple">false</xsl:param>
         <xsl:param name="highlight"/>
       <!--  <xsl:variable name="pos-in-list" select="count(../preceding-sibling::tei:item) + 1"/>-->
