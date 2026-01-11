@@ -2,7 +2,7 @@
 @import url("https://unpkg.com/purecss@2.0.3/build/grids-responsive-min.css");
 @import "odd.css";
 @import "prism.css";
-@import url("https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css");
+@import url("https://cdn.jsdelivr.net/npm/@docsearch/css@3.9.0/dist/style.css");
 
 /*customizing pure*/
 
@@ -541,7 +541,7 @@ tr.label {
   margin: 0;
 }
 
-input {
+.tabs input {
   position: absolute;
   opacity: 0;
   z-index: -1;
@@ -631,15 +631,15 @@ span.label img {
   border-bottom: 1px solid white;
 }
 
-input:checked + .tab-label {
+.tabs input:checked + .tab-label {
   background: #1f8dd6;
 }
 
-input:checked + .tab-label::after {
+.tabs input:checked + .tab-label::after {
   transform: rotate(90deg);
 }
 
-input:checked ~ .tab-content {
+.tabs input:checked ~ .tab-content {
   max-height: 1000vh;
   /*padding: 0 0.5em 0 0;*/
 }
@@ -665,105 +665,43 @@ span.label {
 }
 
 /* search input width here */
-.algo {
-  opacity: 1;
-  margin-left: 1em;
-  z-index: 9999;
+:root {
+  --docsearch-primary-color: #1f8dd6;
+  --docsearch-container-background: rgba(26, 37, 47, 0.85);
+}
+
+/* Keep the DocSearch modal above sticky headers/banners. */
+.DocSearch-Container {
+  z-index: 10000;
+}
+
+/* Sidebar button styling (replaces the old inline input). */
+#docsearch .DocSearch-Button {
   width: 16em;
-}
-
-/* Main dropdown wrapper */
-.algolia-autocomplete .ds-dropdown-menu {
-  width: 500px;
-  position: absolute;
-  left: 0;
-  z-index: 5002;
-}
-
-.algolia-autocomplete {
-  position: relative;
-  z-index: 5001;
-}
-
-/* Main category (eg. Getting Started) */
-.algolia-autocomplete .algolia-docsearch-suggestion--category-header {
-  /* hack until i figure out lvls and categories acting weird*/
-  font-size: 0;
-}
-
-.algolia-autocomplete .algolia-docsearch-suggestion--category-header .algolia-docsearch-suggestion--highlight {
-  color: darkgray;
-  border-bottom: 1px solid gainsboro;
-  /*text-decoration: none;*/
-}
-
-.algolia-autocomplete .algolia-docsearch-suggestion--category-header:hover {
-  color: #1f8dd6;
-}
-
-.algolia-autocomplete .algolia-docsearch-suggestion {
-  text-decoration: none;
-}
-
-/*dark mode
-
-.algolia-autocomplete .algolia-docsearch-suggestion,
-.algolia-autocomplete .ds-dropdown-menu [class^="ds-dataset-"] {
-   background: #1a252f;
-}*/
-
-/* Category (eg. Downloads) */
-.algolia-autocomplete .algolia-docsearch-suggestion--subcategory-column {
-  color: gray;
-}
-
-.algolia-autocomplete .algolia-docsearch-suggestion--subcategory-column::before {
-  background: gainsboro;
-}
-
-.algolia-autocomplete .algolia-docsearch-suggestion--content::before {
-  background: none;
-}
-
-.algolia-autocomplete .ds-dropdown-menu .ds-suggestion.ds-cursor .algolia-docsearch-suggestion.suggestion-layout-simple,
-.algolia-autocomplete
-  .ds-dropdown-menu
-  .ds-suggestion.ds-cursor
-  .algolia-docsearch-suggestion:not(.suggestion-layout-simple)
-  .algolia-docsearch-suggestion--content {
-  background-color: #f2faff;
-}
-
-/* Title (eg. Bootstrap CDN) */
-.algolia-autocomplete .algolia-docsearch-suggestion--title {
-  font-weight: bold;
-  /*color: white; darkmode*/
-}
-
-.algolia-autocomplete .algolia-docsearch-suggestion--title:hover {
-  color: black;
-  /*darkmode*/
-}
-
-/* Description description (eg. Bootstrap currently works...) */
-.algolia-autocomplete .algolia-docsearch-suggestion--text {
-  font-size: 0.8rem;
-  color: gray;
-}
-
-/* Highlighted text */
-.algolia-autocomplete .algolia-docsearch-suggestion--highlight {
-  color: #1f8dd6;
-}
-
-input.rounded {
-  border: none;
-  -moz-border-radius: 14px;
-  -webkit-border-radius: 14px;
+  margin: 0 0 0 1em;
   border-radius: 14px;
-  padding: 4px 7px 4px 14px;
-  outline: 0;
-  -webkit-appearance: none;
+  height: 34px;
+  background: #fff;
+  color: #1c1e21;
+}
+
+#docsearch .DocSearch-Button:hover,
+#docsearch .DocSearch-Button:focus,
+#docsearch .DocSearch-Button:active {
+  background: #fff;
+  box-shadow: none;
+  color: #1c1e21;
+}
+
+/* Tweak keycap alignment inside the sidebar button. */
+#docsearch .DocSearch-Button-Keys {
+  align-items: center;
+}
+
+#docsearch .DocSearch-Button-Key {
+  top: 0;
+  padding-bottom: 0;
+  line-height: 18px;
 }
 
 /*labels in revision history*/

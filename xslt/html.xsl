@@ -36,7 +36,6 @@
     <xsl:param name="outputMethod" select="'html'"/>
     <xsl:param name="tocFront" select="'false'"/>
     <xsl:param name="divOffset" select="2"></xsl:param>
-    
     <xsl:variable name="version" select="//tei:fileDesc/tei:editionStmt/tei:edition/@n"/>
     <xsl:import href="https://www.tei-c.org/release/xml/tei/stylesheet/html/html.xsl"/>
     <xsl:import href="includes/layout.xsl"/>
@@ -55,7 +54,7 @@
         <script type="text/javascript" src="js/prism.js"/>
         <script type="text/javascript" src="js/prism-xpath.js"/>
         <script type="text/javascript" src="js/prism-rnc.js"/>
-        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"/>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@docsearch/js@3.9.0/dist/umd/index.js"/>
         <script type="text/javascript" src="js/algo.js"/>             
     </xsl:template>
     

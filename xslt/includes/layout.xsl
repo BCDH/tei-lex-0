@@ -107,9 +107,7 @@
 
                     <div class="tei_toc_search">
                         <div class="input-group">
-                            <input type="search" name="search" placeholder="Search..."
-                                onfocus="this.placeholder=''" onblur="this.placeholder='Search...'"
-                                class="algo rounded"/>
+                            <div id="docsearch"/>
                         </div>
                     </div>
                     <xsl:call-template name="mainTOC"/>
