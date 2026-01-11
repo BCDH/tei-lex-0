@@ -683,6 +683,7 @@ span.label {
   height: 34px;
   background: #fff;
   color: #1c1e21;
+  font-weight: 400;
 }
 
 #docsearch .DocSearch-Button:hover,
@@ -702,10 +703,19 @@ span.label {
   top: 0;
   padding-bottom: 0;
   line-height: 18px;
+  color: #9ca3af;
 }
 
 #docsearch .DocSearch-Button-Key:last-child {
   font-size: 0.75em;
+}
+
+#docsearch .DocSearch-Button .DocSearch-Search-Icon {
+  color: #9ca3af;
+}
+
+#docsearch .DocSearch-Button-Placeholder {
+  color: #9ca3af;
 }
 
 /*labels in revision history*/
