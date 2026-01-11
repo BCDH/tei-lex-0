@@ -1,1 +1,3 @@
-User-agent: *\nAllow: /\nSitemap: https://lex0.org/sitemap.xml\n
+User-agent: *
+Allow: /
+Sitemap: https://lex0.org/sitemap.xml
