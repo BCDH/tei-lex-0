@@ -214,9 +214,16 @@
             <p:pipe step="odd2html"
                     port="secondary" />
         </p:with-input>
-        <p:store serialization="map{'method':'xhtml','indent':false()}">
-            <p:with-option name="href"
-                           select="base-uri(/*)" />
-        </p:store>
+        <p:choose>
+            <p:when test="ends-with(string(base-uri(/*)), '/home.html')">
+                <p:identity />
+            </p:when>
+            <p:otherwise>
+                <p:store serialization="map{'method':'xhtml','indent':false()}">
+                    <p:with-option name="href"
+                                   select="base-uri(/*)" />
+                </p:store>
+            </p:otherwise>
+        </p:choose>
     </p:for-each>
 </p:declare-step>
