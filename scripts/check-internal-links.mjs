@@ -24,6 +24,12 @@ const stripAllowedMeta = (html) => {
   return out;
 };
 
+const stripCodeBlocks = (html) => {
+  // Ignore code examples; they may intentionally contain absolute URLs (e.g. schema references)
+  // or strings that look like HTML attributes (href/src) but are just example text.
+  return html.replace(/<pre\b[^>]*>[\s\S]*?<\/pre>/gi, "");
+};
+
 const findViolations = (html) => {
   const matches = [];
   const regex =
@@ -49,7 +55,7 @@ const main = async () => {
   for (const file of files) {
     const raw = await fs.readFile(file, "utf-8");
     const cleaned = stripAllowedMeta(raw);
-    const matches = findViolations(cleaned);
+    const matches = findViolations(stripCodeBlocks(cleaned));
     if (matches.length) {
       violations.push({ file, matches });
     }
