@@ -712,10 +712,13 @@ span.label {
 
 #docsearch .DocSearch-Button .DocSearch-Search-Icon {
   color: #9ca3af;
+  width: 16px;
+  height: 16px;
 }
 
 #docsearch .DocSearch-Button-Placeholder {
   color: #9ca3af;
+  font-size: 17px;
 }
 
 /*labels in revision history*/
