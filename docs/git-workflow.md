@@ -79,28 +79,34 @@ Note: GitHub Desktop is fine for day-to-day work, but the release tag must be an
 
 ## Required GitHub settings
 
-These settings prevent accidental non-linear history.
+These settings enforce a rebase-only workflow on `dev`, while still allowing admin to fast-forward `main` to `dev` from the CLI.
 
 **Repo settings → Pull Requests**
 
 - Enable: “Allow rebase merging”
 - Disable: “Allow merge commits”
 - Disable: “Allow squash merging” (rebase-only)
-- Set “Always suggest updating pull request branches” to **Never** (the “Update branch” flow is not compatible with rebase-only workflows)
+- Do _not_ set “Always suggest updating pull request branches” (the “Update branch” flow is not compatible with rebase-only workflows)
 
 **Repo settings → Rules → Rulesets**
 
-Create (or edit) a ruleset that targets both protected branches:
+Use two rulesets, because `dev` and `main` have different constraints.
 
-- Target branches (fnmatch patterns): add two include patterns: `main` and `dev`
-- Enable: “Require a pull request before merging”
-- Enable: “Require linear history”
-- Enable: “Block force pushes” and “Block deletions”
-- TODO: think about requiring approvals and required status checks. For now, it sounds like an overkill.
+- **Ruleset for `dev` (PR-only):**
+  - Target branches (fnmatch pattern): `dev`
+  - Enable: “Require a pull request before merging”
+  - Enable: “Require linear history”
+  - Enable: “Block force pushes” and “Block deletions”
+- **Ruleset for `main` (FF-only by admin):**
+  - Target branches (fnmatch pattern): `main`
+  - Enable: “Require a pull request before merging” (it blocks the `git merge --ff-only origin/dev && git push origin main` release step)
+  - Enable: “Require linear history”
+  - Enable: “Block force pushes” and “Block deletions”
 
 **Bypass list**
 
-- Keep the bypass list **empty**. If you can bypass the rules, you can still merge with disallowed strategies.
+- Keep the bypass list empty for the `dev` ruleset.
+- For `main`, prefer “restrict who can push” over bypass. If you can’t restrict pushes, add only yourself to the bypass list and keep “Block force pushes” enabled.
 
 In a nutshell: never rebase `dev` or `main`. Only rebase your own feature branches, then force-push them with `--force-with-lease` after rebasing.
 
