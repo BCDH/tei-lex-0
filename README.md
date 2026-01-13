@@ -21,9 +21,8 @@ cd tei-lex-0
 
 All generated artifacts land in `build/` (.gitignored by choice):
 
-- Schemas: `build/rng/` and `build/xsd/`
+- Schemas: `build/html/schema/`
 - HTML docs: `build/html`
-- Expanded ODD and intermediates: `build/odd/`
 
 TODO: Add RNG → XSD and RNG → RNC with Trang + maybe compiled ODD from lex-0.xpl.
 
