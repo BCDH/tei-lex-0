@@ -37,7 +37,7 @@ These branches are artifact-only deployments that contain only the built site.
 - GitHub Pages is served from `gh-pages`.
 - Releases are published into `gh-pages/releases/vX.Y.Z/`.
 - The release archive must be immutable. If a tag already exists, the publish should fail.
-- **NOTE**: not tested yet
+- A release is produced only from an **annotated tag** on `main` named `vX.Y.Z`.
 
 ## Build output requirements
 
@@ -51,7 +51,7 @@ All deployments are handled in GitHub Actions. High-level triggers:
 
 - Pull requests targeting `dev`: build only; no post-processing; no publish.
 - Pushes to `main` and `dev`: build + post-process, then publish to Vercel artifact branches.
-- Annotated tags on `main` (e.g., `vX.Y.Z`): build + post-process, then publish to GitHub Pages.
+- **Annotated tags** on `main` (e.g., `vX.Y.Z`): build + post-process, then publish to GitHub Pages.
 
 Common job steps:
 
@@ -130,3 +130,5 @@ Use this to validate a deployment:
 - Release content not updating: verify tag workflow ran and `gh-pages` publish succeeded.
 - `dev.lex0.org` indexed: confirm `robots.txt` and `<meta name="robots">` in dev output.
 - Release pages redirect to `github.io`: check Vercel rewrite and ensure relative links.
+
+For practical, step-by-step instructions on publishing dev/prod and release builds, see [`git-workflow.md`](git-workflow.md).
