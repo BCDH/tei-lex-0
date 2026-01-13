@@ -5,6 +5,40 @@
     return;
   }
 
+  // DocSearch can sometimes leave the "kbd pressed" visual state stuck
+  // (e.g. ⌘ / Ctrl keycap shows as pressed) if the corresponding keyup event
+  // is missed due to focus changes. We defensively clear it on common lifecycle
+  // events (keyup, window blur, tab hidden, modal open).
+  const clearPressedKeycaps = () => {
+    document
+      .querySelectorAll(".DocSearch-Button-Key--pressed")
+      .forEach((el) => el.classList.remove("DocSearch-Button-Key--pressed"));
+  };
+
+  window.addEventListener("blur", clearPressedKeycaps, { passive: true });
+  document.addEventListener(
+    "visibilitychange",
+    () => {
+      if (document.hidden) clearPressedKeycaps();
+    },
+    { passive: true }
+  );
+  document.addEventListener(
+    "keyup",
+    (e) => {
+      // Only needed for modifier keys, but clearing is cheap and avoids edge cases.
+      if (
+        e.key === "Meta" ||
+        e.key === "Control" ||
+        e.key === "Alt" ||
+        e.key === "Shift"
+      ) {
+        clearPressedKeycaps();
+      }
+    },
+    { passive: true }
+  );
+
   const rewriteToLocalIfFileProtocol = (itemUrl) => {
     if (window.location.protocol !== "file:" || typeof itemUrl !== "string") {
       return itemUrl;
@@ -53,6 +87,7 @@
   if (body) {
     const observer = new MutationObserver(() => {
       if (body.classList.contains("DocSearch--active")) {
+        clearPressedKeycaps();
         setTimeout(focusDocSearchInput, 0);
         setTimeout(focusDocSearchInput, 50);
       }
