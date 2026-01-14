@@ -7,7 +7,7 @@ Repository for the new TEI Lex-0 Schema and Guidelines (test version).
 Clone the repository and enter the working directory:
 
 ```sh
-git clone https://github.com/ttasovac/tei-lex-0.git
+git clone https://github.com/BCDH/tei-lex-0.git
 cd tei-lex-0
 ```
 
