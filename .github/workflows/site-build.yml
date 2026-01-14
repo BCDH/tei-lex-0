@@ -190,8 +190,8 @@ jobs:
           mkdir -p .deploy
           cd .deploy
           git init
-          git config user.name "github-actions"
-          git config user.email "github-actions@github.com"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git remote add origin "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
           if git fetch origin "$TARGET_BRANCH"; then
             git checkout -B "$TARGET_BRANCH" FETCH_HEAD
@@ -303,8 +303,8 @@ jobs:
           mkdir -p .deploy
           cd .deploy
           git init
-          git config user.name "github-actions"
-          git config user.email "github-actions@github.com"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git remote add origin "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
           if git fetch origin "$TARGET_BRANCH"; then
             git checkout -B "$TARGET_BRANCH" FETCH_HEAD
@@ -436,8 +436,8 @@ jobs:
           mkdir -p .deploy-pages
           cd .deploy-pages
           git init
-          git config user.name "github-actions"
-          git config user.email "github-actions@github.com"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git remote add origin "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
           git fetch origin gh-pages || true
           if git show-ref --verify --quiet refs/remotes/origin/gh-pages; then
@@ -468,6 +468,8 @@ jobs:
           TMPDIR="$(mktemp -d)"
           git clone --branch main "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" "$TMPDIR"
           cd "$TMPDIR"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           RELEASES_FILE="RELEASES.md"
           URL="https://lex0.org/releases/${RELEASE_TAG}/"
           if [ ! -f "$RELEASES_FILE" ]; then
