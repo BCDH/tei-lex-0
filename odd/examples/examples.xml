@@ -22,13 +22,8 @@
       </fileDesc>
       <profileDesc>
          <langUsage>
-            <language ident="mix" role="objectLanguage">
-               <name>Mixtepec Mixtec</name>
-            </language>
-            <language ident="mix-x-YCNY" role="objectLanguage">
-               <name>Yucanany
-                  Mixtec</name>
-            </language>
+            <language ident="mix" role="objectLanguage">Mixtepec Mixtec</language>
+            <language ident="mix-x-YCNY" role="objectLanguage">Yucanany Mixtec</language>
          </langUsage>
       </profileDesc>
    </teiHeader>
