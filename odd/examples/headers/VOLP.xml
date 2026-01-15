@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?xml-model href="../../../build/html/schema/lex0.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
-<?xml-model href="../../../build/html/schema/lex0.rng" type="application/xml" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<?xml-model href="../../../build/rng/TEILex0.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
+<?xml-model href="../../../build/rng/TEILex0.rng" type="application/xml" schematypens="http://purl.oclc.org/dsdl/schematron"?>
 <TEI xmlns="http://www.tei-c.org/ns/1.0" type="lex-0">
    <teiHeader>
       <fileDesc>
@@ -43,7 +43,10 @@
                         <publisher>Imprensa Nacional de Lisboa</publisher>
                         <date>1940</date>
                      </imprint>
-                     <extent>1 volume, 821 pp.</extent>
+                     <extent>
+                        <measure unit="volumes" quantity="1">1 volume</measure>
+                        <measure unit="pages" quantity="821">821 pp.</measure>
+                     </extent>
                   </monogr>
                </biblStruct>
             </listBibl>
@@ -51,8 +54,12 @@
       </fileDesc>
       <profileDesc>
          <langUsage>
-            <language role="objectLanguage" ident="pt">Portuguese</language>
-            <language role="workingLanguage" ident="pt">Portuguese</language>
+            <language role="objectLanguage" ident="pt">
+               <name>Portuguese</name>
+            </language>
+            <language role="workingLanguage" ident="pt">
+               <name>Portuguese</name>
+            </language>
          </langUsage>
       </profileDesc>
    </teiHeader>
