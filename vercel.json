@@ -1,5 +1,20 @@
 {
+  "redirects": [
+    {
+      "source": "/releases",
+      "destination": "/releases/",
+      "permanent": true
+    }
+  ],
   "rewrites": [
+    {
+      "source": "/releases/",
+      "destination": "https://bcdh.github.io/tei-lex-0/releases/"
+    },
+    {
+      "source": "/releases/:path*/",
+      "destination": "https://bcdh.github.io/tei-lex-0/releases/:path*/"
+    },
     {
       "source": "/releases/:path*",
       "destination": "https://bcdh.github.io/tei-lex-0/releases/:path*"
