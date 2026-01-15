@@ -3,7 +3,6 @@
   <url><loc>https://lex0.org/TEI.TEI.html</loc></url>
   <url><loc>https://lex0.org/TEI.abbr.html</loc></url>
   <url><loc>https://lex0.org/TEI.affiliation.html</loc></url>
-  <url><loc>https://lex0.org/TEI.age.html</loc></url>
   <url><loc>https://lex0.org/TEI.analytic.html</loc></url>
   <url><loc>https://lex0.org/TEI.appInfo.html</loc></url>
   <url><loc>https://lex0.org/TEI.att.anchoring.html</loc></url>
@@ -36,7 +35,6 @@
   <url><loc>https://lex0.org/TEI.att.lexicographic.html</loc></url>
   <url><loc>https://lex0.org/TEI.att.lexicographic.normalized.html</loc></url>
   <url><loc>https://lex0.org/TEI.att.linguistic.html</loc></url>
-  <url><loc>https://lex0.org/TEI.att.measurement.html</loc></url>
   <url><loc>https://lex0.org/TEI.att.media.html</loc></url>
   <url><loc>https://lex0.org/TEI.att.naming.html</loc></url>
   <url><loc>https://lex0.org/TEI.att.notated.html</loc></url>
@@ -46,13 +44,12 @@
   <url><loc>https://lex0.org/TEI.att.pointing.html</loc></url>
   <url><loc>https://lex0.org/TEI.att.ranging.html</loc></url>
   <url><loc>https://lex0.org/TEI.att.resourced.html</loc></url>
+  <url><loc>https://lex0.org/TEI.att.scope.html</loc></url>
   <url><loc>https://lex0.org/TEI.att.scoped.html</loc></url>
   <url><loc>https://lex0.org/TEI.att.segLike.html</loc></url>
   <url><loc>https://lex0.org/TEI.att.sortable.html</loc></url>
   <url><loc>https://lex0.org/TEI.att.spanning.html</loc></url>
   <url><loc>https://lex0.org/TEI.att.styleDef.html</loc></url>
-  <url><loc>https://lex0.org/TEI.att.transcriptional.html</loc></url>
-  <url><loc>https://lex0.org/TEI.att.translatable.html</loc></url>
   <url><loc>https://lex0.org/TEI.att.typed.html</loc></url>
   <url><loc>https://lex0.org/TEI.att.written.html</loc></url>
   <url><loc>https://lex0.org/TEI.attribute-classes.html</loc></url>
@@ -68,7 +65,6 @@
   <url><loc>https://lex0.org/TEI.catDesc.html</loc></url>
   <url><loc>https://lex0.org/TEI.category.html</loc></url>
   <url><loc>https://lex0.org/TEI.change.html</loc></url>
-  <url><loc>https://lex0.org/TEI.channel.html</loc></url>
   <url><loc>https://lex0.org/TEI.char.html</loc></url>
   <url><loc>https://lex0.org/TEI.charDecl.html</loc></url>
   <url><loc>https://lex0.org/TEI.cit.html</loc></url>
@@ -77,15 +73,13 @@
   <url><loc>https://lex0.org/TEI.datatypes.html</loc></url>
   <url><loc>https://lex0.org/TEI.date.html</loc></url>
   <url><loc>https://lex0.org/TEI.def.html</loc></url>
-  <url><loc>https://lex0.org/TEI.desc.html</loc></url>
   <url><loc>https://lex0.org/TEI.dictScrap.html</loc></url>
+  <url><loc>https://lex0.org/TEI.distributor.html</loc></url>
   <url><loc>https://lex0.org/TEI.div.html</loc></url>
-  <url><loc>https://lex0.org/TEI.domain.html</loc></url>
   <url><loc>https://lex0.org/TEI.edition.html</loc></url>
   <url><loc>https://lex0.org/TEI.editionStmt.html</loc></url>
   <url><loc>https://lex0.org/TEI.editor.html</loc></url>
   <url><loc>https://lex0.org/TEI.editorialDecl.html</loc></url>
-  <url><loc>https://lex0.org/TEI.education.html</loc></url>
   <url><loc>https://lex0.org/TEI.elements.html</loc></url>
   <url><loc>https://lex0.org/TEI.email.html</loc></url>
   <url><loc>https://lex0.org/TEI.encodingDesc.html</loc></url>
@@ -93,16 +87,13 @@
   <url><loc>https://lex0.org/TEI.etym.html</loc></url>
   <url><loc>https://lex0.org/TEI.expan.html</loc></url>
   <url><loc>https://lex0.org/TEI.extent.html</loc></url>
-  <url><loc>https://lex0.org/TEI.faith.html</loc></url>
   <url><loc>https://lex0.org/TEI.figDesc.html</loc></url>
   <url><loc>https://lex0.org/TEI.figure.html</loc></url>
   <url><loc>https://lex0.org/TEI.fileDesc.html</loc></url>
-  <url><loc>https://lex0.org/TEI.floruit.html</loc></url>
   <url><loc>https://lex0.org/TEI.forename.html</loc></url>
   <url><loc>https://lex0.org/TEI.form.html</loc></url>
   <url><loc>https://lex0.org/TEI.front.html</loc></url>
   <url><loc>https://lex0.org/TEI.g.html</loc></url>
-  <url><loc>https://lex0.org/TEI.gender.html</loc></url>
   <url><loc>https://lex0.org/TEI.gloss.html</loc></url>
   <url><loc>https://lex0.org/TEI.glyph.html</loc></url>
   <url><loc>https://lex0.org/TEI.gram.html</loc></url>
@@ -111,14 +102,10 @@
   <url><loc>https://lex0.org/TEI.head.html</loc></url>
   <url><loc>https://lex0.org/TEI.hi.html</loc></url>
   <url><loc>https://lex0.org/TEI.hyph.html</loc></url>
-  <url><loc>https://lex0.org/TEI.ident.html</loc></url>
   <url><loc>https://lex0.org/TEI.idno.html</loc></url>
   <url><loc>https://lex0.org/TEI.imprint.html</loc></url>
-  <url><loc>https://lex0.org/TEI.interaction.html</loc></url>
   <url><loc>https://lex0.org/TEI.item.html</loc></url>
   <url><loc>https://lex0.org/TEI.lang.html</loc></url>
-  <url><loc>https://lex0.org/TEI.langKnowledge.html</loc></url>
-  <url><loc>https://lex0.org/TEI.langKnown.html</loc></url>
   <url><loc>https://lex0.org/TEI.langUsage.html</loc></url>
   <url><loc>https://lex0.org/TEI.language.html</loc></url>
   <url><loc>https://lex0.org/TEI.lbl.html</loc></url>
@@ -126,8 +113,7 @@
   <url><loc>https://lex0.org/TEI.list.html</loc></url>
   <url><loc>https://lex0.org/TEI.listBibl.html</loc></url>
   <url><loc>https://lex0.org/TEI.localProp.html</loc></url>
-  <url><loc>https://lex0.org/TEI.macro.lexParaContent.html</loc></url>
-  <url><loc>https://lex0.org/TEI.macro.lexSpecialPara.html</loc></url>
+  <url><loc>https://lex0.org/TEI.macro.lexicalParaContent.html</loc></url>
   <url><loc>https://lex0.org/TEI.macro.limitedContent.html</loc></url>
   <url><loc>https://lex0.org/TEI.macro.paraContent.html</loc></url>
   <url><loc>https://lex0.org/TEI.macro.phraseSeq.html</loc></url>
@@ -136,7 +122,6 @@
   <url><loc>https://lex0.org/TEI.macro.xtext.html</loc></url>
   <url><loc>https://lex0.org/TEI.macros.html</loc></url>
   <url><loc>https://lex0.org/TEI.mapping.html</loc></url>
-  <url><loc>https://lex0.org/TEI.measure.html</loc></url>
   <url><loc>https://lex0.org/TEI.metamark.html</loc></url>
   <url><loc>https://lex0.org/TEI.model-classes.html</loc></url>
   <url><loc>https://lex0.org/TEI.model.addressLike.html</loc></url>
@@ -146,7 +131,6 @@
   <url><loc>https://lex0.org/TEI.model.biblPart.html</loc></url>
   <url><loc>https://lex0.org/TEI.model.common.html</loc></url>
   <url><loc>https://lex0.org/TEI.model.dateLike.html</loc></url>
-  <url><loc>https://lex0.org/TEI.model.descLike.html</loc></url>
   <url><loc>https://lex0.org/TEI.model.divBottom.html</loc></url>
   <url><loc>https://lex0.org/TEI.model.divLike.html</loc></url>
   <url><loc>https://lex0.org/TEI.model.divPart.html</loc></url>
@@ -157,21 +141,19 @@
   <url><loc>https://lex0.org/TEI.model.entryLike.html</loc></url>
   <url><loc>https://lex0.org/TEI.model.entryPart.html</loc></url>
   <url><loc>https://lex0.org/TEI.model.entryPart.top.html</loc></url>
+  <url><loc>https://lex0.org/TEI.model.formPart.html</loc></url>
   <url><loc>https://lex0.org/TEI.model.frontPart.html</loc></url>
   <url><loc>https://lex0.org/TEI.model.gLike.html</loc></url>
   <url><loc>https://lex0.org/TEI.model.global.html</loc></url>
+  <url><loc>https://lex0.org/TEI.model.gramPart.html</loc></url>
   <url><loc>https://lex0.org/TEI.model.graphicLike.html</loc></url>
   <url><loc>https://lex0.org/TEI.model.headLike.html</loc></url>
   <url><loc>https://lex0.org/TEI.model.hiLike.html</loc></url>
   <url><loc>https://lex0.org/TEI.model.highlighted.html</loc></url>
   <url><loc>https://lex0.org/TEI.model.imprintPart.html</loc></url>
   <url><loc>https://lex0.org/TEI.model.inter.html</loc></url>
-  <url><loc>https://lex0.org/TEI.model.labelLike.html</loc></url>
-  <url><loc>https://lex0.org/TEI.model.languageProfile.html</loc></url>
-  <url><loc>https://lex0.org/TEI.model.lexEmphLike.html</loc></url>
-  <url><loc>https://lex0.org/TEI.model.lexFormPart.html</loc></url>
-  <url><loc>https://lex0.org/TEI.model.lexInter.html</loc></url>
-  <url><loc>https://lex0.org/TEI.model.lexPhrase.html</loc></url>
+  <url><loc>https://lex0.org/TEI.model.lexicalInter.html</loc></url>
+  <url><loc>https://lex0.org/TEI.model.lexicalPhrase.html</loc></url>
   <url><loc>https://lex0.org/TEI.model.lexicalRefinement.html</loc></url>
   <url><loc>https://lex0.org/TEI.model.limitedPhrase.html</loc></url>
   <url><loc>https://lex0.org/TEI.model.listLike.html</loc></url>
@@ -186,15 +168,13 @@
   <url><loc>https://lex0.org/TEI.model.pPart.editorial.html</loc></url>
   <url><loc>https://lex0.org/TEI.model.paraPart.html</loc></url>
   <url><loc>https://lex0.org/TEI.model.persNamePart.html</loc></url>
-  <url><loc>https://lex0.org/TEI.model.persStateLike.html</loc></url>
-  <url><loc>https://lex0.org/TEI.model.personPart.html</loc></url>
   <url><loc>https://lex0.org/TEI.model.phrase.html</loc></url>
-  <url><loc>https://lex0.org/TEI.model.placeLike.html</loc></url>
   <url><loc>https://lex0.org/TEI.model.placeNamePart.html</loc></url>
   <url><loc>https://lex0.org/TEI.model.placeStateLike.html</loc></url>
   <url><loc>https://lex0.org/TEI.model.profileDescPart.html</loc></url>
   <url><loc>https://lex0.org/TEI.model.ptrLike.html</loc></url>
   <url><loc>https://lex0.org/TEI.model.publicationStmtPart.agency.html</loc></url>
+  <url><loc>https://lex0.org/TEI.model.publicationStmtPart.detail.html</loc></url>
   <url><loc>https://lex0.org/TEI.model.quoteLike.html</loc></url>
   <url><loc>https://lex0.org/TEI.model.resource.html</loc></url>
   <url><loc>https://lex0.org/TEI.model.respLike.html</loc></url>
@@ -203,21 +183,14 @@
   <url><loc>https://lex0.org/TEI.monogr.html</loc></url>
   <url><loc>https://lex0.org/TEI.name.html</loc></url>
   <url><loc>https://lex0.org/TEI.namespace.html</loc></url>
-  <url><loc>https://lex0.org/TEI.nationality.html</loc></url>
   <url><loc>https://lex0.org/TEI.note.html</loc></url>
   <url><loc>https://lex0.org/TEI.notesStmt.html</loc></url>
   <url><loc>https://lex0.org/TEI.num.html</loc></url>
-  <url><loc>https://lex0.org/TEI.occupation.html</loc></url>
   <url><loc>https://lex0.org/TEI.orgName.html</loc></url>
   <url><loc>https://lex0.org/TEI.orth.html</loc></url>
   <url><loc>https://lex0.org/TEI.p.html</loc></url>
   <url><loc>https://lex0.org/TEI.pc.html</loc></url>
   <url><loc>https://lex0.org/TEI.persName.html</loc></url>
-  <url><loc>https://lex0.org/TEI.persPronouns.html</loc></url>
-  <url><loc>https://lex0.org/TEI.person.html</loc></url>
-  <url><loc>https://lex0.org/TEI.personGrp.html</loc></url>
-  <url><loc>https://lex0.org/TEI.persona.html</loc></url>
-  <url><loc>https://lex0.org/TEI.place.html</loc></url>
   <url><loc>https://lex0.org/TEI.placeName.html</loc></url>
   <url><loc>https://lex0.org/TEI.principal.html</loc></url>
   <url><loc>https://lex0.org/TEI.profileDesc.html</loc></url>
@@ -226,25 +199,16 @@
   <url><loc>https://lex0.org/TEI.pubPlace.html</loc></url>
   <url><loc>https://lex0.org/TEI.publicationStmt.html</loc></url>
   <url><loc>https://lex0.org/TEI.publisher.html</loc></url>
-  <url><loc>https://lex0.org/TEI.purpose.html</loc></url>
   <url><loc>https://lex0.org/TEI.quote.html</loc></url>
-  <url><loc>https://lex0.org/TEI.rb.html</loc></url>
   <url><loc>https://lex0.org/TEI.ref.html</loc></url>
   <url><loc>https://lex0.org/TEI.rendition.html</loc></url>
-  <url><loc>https://lex0.org/TEI.residence.html</loc></url>
   <url><loc>https://lex0.org/TEI.resp.html</loc></url>
   <url><loc>https://lex0.org/TEI.respStmt.html</loc></url>
   <url><loc>https://lex0.org/TEI.revisionDesc.html</loc></url>
-  <url><loc>https://lex0.org/TEI.rt.html</loc></url>
-  <url><loc>https://lex0.org/TEI.ruby.html</loc></url>
   <url><loc>https://lex0.org/TEI.seg.html</loc></url>
   <url><loc>https://lex0.org/TEI.sense.html</loc></url>
   <url><loc>https://lex0.org/TEI.seriesStmt.html</loc></url>
-  <url><loc>https://lex0.org/TEI.settingDesc.html</loc></url>
-  <url><loc>https://lex0.org/TEI.sex.html</loc></url>
-  <url><loc>https://lex0.org/TEI.socecStatus.html</loc></url>
   <url><loc>https://lex0.org/TEI.sourceDesc.html</loc></url>
-  <url><loc>https://lex0.org/TEI.state.html</loc></url>
   <url><loc>https://lex0.org/TEI.stress.html</loc></url>
   <url><loc>https://lex0.org/TEI.surname.html</loc></url>
   <url><loc>https://lex0.org/TEI.syll.html</loc></url>
@@ -257,7 +221,6 @@
   <url><loc>https://lex0.org/TEI.teidata.duration.iso.html</loc></url>
   <url><loc>https://lex0.org/TEI.teidata.duration.w3c.html</loc></url>
   <url><loc>https://lex0.org/TEI.teidata.enumerated.html</loc></url>
-  <url><loc>https://lex0.org/TEI.teidata.gender.html</loc></url>
   <url><loc>https://lex0.org/TEI.teidata.language.html</loc></url>
   <url><loc>https://lex0.org/TEI.teidata.name.html</loc></url>
   <url><loc>https://lex0.org/TEI.teidata.namespace.html</loc></url>
@@ -269,13 +232,10 @@
   <url><loc>https://lex0.org/TEI.teidata.probCert.html</loc></url>
   <url><loc>https://lex0.org/TEI.teidata.probability.html</loc></url>
   <url><loc>https://lex0.org/TEI.teidata.replacement.html</loc></url>
-  <url><loc>https://lex0.org/TEI.teidata.sex.html</loc></url>
   <url><loc>https://lex0.org/TEI.teidata.temporal.iso.html</loc></url>
   <url><loc>https://lex0.org/TEI.teidata.temporal.w3c.html</loc></url>
-  <url><loc>https://lex0.org/TEI.teidata.temporal.working.html</loc></url>
   <url><loc>https://lex0.org/TEI.teidata.text.html</loc></url>
   <url><loc>https://lex0.org/TEI.teidata.truthValue.html</loc></url>
-  <url><loc>https://lex0.org/TEI.teidata.unboundedCount.html</loc></url>
   <url><loc>https://lex0.org/TEI.teidata.version.html</loc></url>
   <url><loc>https://lex0.org/TEI.teidata.versionNumber.html</loc></url>
   <url><loc>https://lex0.org/TEI.teidata.word.html</loc></url>
@@ -286,7 +246,6 @@
   <url><loc>https://lex0.org/TEI.text.html</loc></url>
   <url><loc>https://lex0.org/TEI.title.html</loc></url>
   <url><loc>https://lex0.org/TEI.titleStmt.html</loc></url>
-  <url><loc>https://lex0.org/TEI.trait.html</loc></url>
   <url><loc>https://lex0.org/TEI.unicodeProp.html</loc></url>
   <url><loc>https://lex0.org/TEI.unihanProp.html</loc></url>
   <url><loc>https://lex0.org/TEI.usg.html</loc></url>
