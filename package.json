@@ -10,6 +10,7 @@
     "assets:images": "node scripts/copy-images.mjs",
     "assets:minify": "node scripts/minify-assets.mjs",
     "assets:odd": "node scripts/run-xproc.mjs",
+    "assets:unused": "node scripts/find-unused-media.mjs",
     "build": "npm run assets:odd && npm run assets:minify && npm run assets:images",
     "assets:watch": "node scripts/watch-assets.mjs",
     "postprocess:html": "node scripts/postprocess-html.mjs",
