@@ -39,23 +39,39 @@
     { passive: true }
   );
 
-  const rewriteToLocalIfFileProtocol = (itemUrl) => {
-    if (window.location.protocol !== "file:" || typeof itemUrl !== "string") {
+  const rewriteToLocalBase = (itemUrl) => {
+    if (typeof itemUrl !== "string") return itemUrl;
+
+    const isLex0Host = (hostname) =>
+      hostname === "lex0.org" || hostname.endsWith(".lex0.org");
+
+    let parsed;
+    try {
+      parsed = new URL(itemUrl, window.location.href);
+    } catch {
       return itemUrl;
     }
 
-    const localBase = window.location.href
-      .split("#")[0]
-      .split("?")[0]
-      .replace(/\/[^/]*$/, "");
+    // Only rewrite:
+    // - file:// browsing (local build), where Algolia returns https://lex0.org/...
+    // - lex0.org / dev.lex0.org URLs, so we don't accidentally rewrite external links.
+    if (window.location.protocol !== "file:" && !isLex0Host(parsed.hostname)) {
+      return itemUrl;
+    }
 
-    const remoteBase = itemUrl
-      .split("#")[0]
-      .split("?")[0]
-      .replace(/\/[^/]*$/, "");
+    const baseDir = (href) =>
+      href.split("#")[0].split("?")[0].replace(/\/[^/]*$/, "");
 
+    const localBase = baseDir(window.location.href);
+    const remoteBase = baseDir(parsed.href);
     if (!localBase || !remoteBase) return itemUrl;
-    return itemUrl.replace(remoteBase, localBase);
+
+    // Rewrite "remote base dir" to the current page's base dir.
+    // This keeps users inside:
+    // - local file:// builds
+    // - /releases/vX.Y.Z/ snapshots
+    // - dev deployments using a prod index (until indices are split)
+    return parsed.href.replace(remoteBase, localBase);
   };
 
   docsearchFn({
@@ -64,15 +80,14 @@
     indexName: "lex0-crawler",
     container: "#docsearch",
     transformItems(items) {
-      if (items && items.length) console.log(items[0]);
       return (items || []).map((item) => {
         if (!item || typeof item.url !== "string") return item;
-        return { ...item, url: rewriteToLocalIfFileProtocol(item.url) };
+        return { ...item, url: rewriteToLocalBase(item.url) };
       });
     },
     navigator: {
       navigate({ itemUrl }) {
-        window.location.assign(rewriteToLocalIfFileProtocol(itemUrl));
+        window.location.assign(rewriteToLocalBase(itemUrl));
       },
     },
   });
