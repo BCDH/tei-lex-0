@@ -82,9 +82,9 @@ const bannerMarkup = () => {
   if (mode === "dev") {
     return (
       `<div id="env-banner" data-env-banner="dev" style="position:fixed;top:0;left:0;right:0;` +
-      `z-index:9999;background:#b45309;color:#fff;padding:8px 12px;font:600 13px/1.4 system-ui;` +
+      `z-index:9999;background:#ed6f59;color:#fff;padding:8px 1.75em;font:600 13px/1.4 system-ui;` +
       `letter-spacing:.5px;text-transform:uppercase;">` +
-      `DEV SITE - NOT FOR INDEXING</div>`
+      `DEV SITE</div>`
     );
   }
   if (mode === "release") {
@@ -94,7 +94,7 @@ const bannerMarkup = () => {
     const tagLabel = tag ? ` ${tag}` : "";
     return (
       `<div id="env-banner" data-env-banner="release" style="position:fixed;top:0;left:0;right:0;` +
-      `z-index:9999;background:${bg};color:#fff;padding:8px 12px;font:600 13px/1.4 system-ui;` +
+      `z-index:9999;background:${bg};color:#fff;padding:8px 1.75em;font:600 13px/1.4 system-ui;` +
       `letter-spacing:.3px;">` +
       `${label}${tagLabel}. Latest at <a href="${BASE_URL}" style="color:#fff;text-decoration:underline;">` +
       `lex0.org</a>.</div>`
@@ -130,6 +130,37 @@ const insertBanner = (html, banner) => {
 
 const addBuildInfo = (html) =>
   insertBefore(html, /<\/head>/i, `${buildInfoComment()}\n`);
+
+const stripDocSearch = (html) => {
+  let out = html;
+  const message =
+    '<div class="docsearch-disabled" role="note" style="' +
+    "color:#e2e8f0;font:500 13px/1.4 system-ui;padding:6px 8px;" +
+    "margin: 0 2em 0.5em 2em;" +
+    "background:rgba(255,255,255,.06);border:1px solid rgba(226,232,240,.18);" +
+    'border-radius:6px;">Search is disabled on historical releases.</div>';
+
+  // Remove DocSearch UMD loader.
+  out = out.replace(
+    /<script\b[^>]*\bsrc=["'][^"']*\/@docsearch\/js@[^"']*\/dist\/umd\/index\.js["'][^>]*>(?:\s*<\/script>)?/gi,
+    ""
+  );
+
+  // Remove local DocSearch bootstrap.
+  out = out.replace(
+    /<script\b[^>]*\bsrc=["'][^"']*js\/algo\.js["'][^>]*>(?:\s*<\/script>)?/gi,
+    ""
+  );
+
+  // Replace the DocSearch mount point with a static message.
+  out = out.replace(/<div\b[^>]*\bid=["']docsearch["'][^>]*\s*\/>/gi, message);
+  out = out.replace(
+    /<div\b[^>]*\bid=["']docsearch["'][^>]*>[\s\S]*?<\/div>/gi,
+    message
+  );
+
+  return out;
+};
 
 const stripEnvArtifacts = (html) => {
   let out = html;
@@ -203,6 +234,10 @@ const main = async () => {
       html = addCanonicalLink(html, canonicalUrl);
       html = injectBannerStyle(html);
       html = insertBanner(html, bannerMarkup());
+    }
+
+    if (mode === "release" && releaseStatus === "historical") {
+      html = stripDocSearch(html);
     }
 
     html = addBuildInfo(html);
