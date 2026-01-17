@@ -89,13 +89,6 @@ jobs:
           echo "SAXON_JAR=$SAXON_JAR" >> "$GITHUB_ENV"
       - run: npm ci
       - run: npm run build
-      - name: Install Trang
-        run: |
-          set -euo pipefail
-          sudo apt-get update
-          sudo apt-get install -y trang
-      - name: Convert RNG to RNC/XSD
-        run: npm run assets:trang
       - name: Verify build output
         run: |
           test -d build/html
@@ -187,6 +180,11 @@ jobs:
           sudo apt-get install -y trang
       - name: Convert RNG to RNC/XSD
         run: npm run assets:trang
+      - name: Verify schema conversions
+        run: |
+          test -d build/html/schema
+          test -f build/html/schema/lex0.rnc
+          test -f build/html/schema/lex0.xsd
       - name: Verify build output
         run: |
           test -d build/html
@@ -301,6 +299,18 @@ jobs:
           echo "SAXON_JAR=$SAXON_JAR" >> "$GITHUB_ENV"
       - run: npm ci
       - run: npm run build
+      - name: Install Trang
+        run: |
+          set -euo pipefail
+          sudo apt-get update
+          sudo apt-get install -y trang
+      - name: Convert RNG to RNC/XSD
+        run: npm run assets:trang
+      - name: Verify schema conversions
+        run: |
+          test -d build/html/schema
+          test -f build/html/schema/lex0.rnc
+          test -f build/html/schema/lex0.xsd
       - name: Verify build output
         run: |
           test -d build/html
@@ -428,6 +438,18 @@ jobs:
           echo "SAXON_JAR=$SAXON_JAR" >> "$GITHUB_ENV"
       - run: npm ci
       - run: npm run build
+      - name: Install Trang
+        run: |
+          set -euo pipefail
+          sudo apt-get update
+          sudo apt-get install -y trang
+      - name: Convert RNG to RNC/XSD
+        run: npm run assets:trang
+      - name: Verify schema conversions
+        run: |
+          test -d build/html/schema
+          test -f build/html/schema/lex0.rnc
+          test -f build/html/schema/lex0.xsd
       - name: Verify build output
         run: |
           test -d build/html
