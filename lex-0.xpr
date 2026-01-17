@@ -36,16 +36,39 @@
                         <scenarioAssociation-array>
                             <scenarioAssociation>
                                 <field name="url">
-                                    <String>xproc/lex-0.test.xpl</String>
+                                    <String>xproc/lex-0.xpl</String>
                                 </field>
                                 <field name="scenarioIds">
                                     <list>
                                         <String>Lex-0: Generate guidelines</String>
+                                        <String>Lex-0: Generate RelaxNG schema</String>
                                     </list>
                                 </field>
                                 <field name="scenarioTypes">
                                     <list>
                                         <String>XPROC</String>
+                                        <String>ANT</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioStorageLocations">
+                                    <list>
+                                        <Byte>2</Byte>
+                                        <Byte>2</Byte>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
+                            <scenarioAssociation>
+                                <field name="url">
+                                    <String>odd/lex-0.odd</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>Lex-0: Generate RelaxNG schema</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>ANT</String>
                                     </list>
                                 </field>
                                 <field name="scenarioStorageLocations">
@@ -76,7 +99,7 @@
                             </scenarioAssociation>
                             <scenarioAssociation>
                                 <field name="url">
-                                    <String>xproc/lex-0.xpl</String>
+                                    <String>xproc/lex-0.test.xpl</String>
                                 </field>
                                 <field name="scenarioIds">
                                     <list>
