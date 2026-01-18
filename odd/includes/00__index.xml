@@ -16,10 +16,10 @@
                     <ref target="schema/lex0.rng">Relax NG (RNG)</ref>
                 </item>
                 <item>
-                    <ref target="#">RELAX NG Compact (coming soon)</ref>
+                    <ref target="schema/lex0.rnc">Relax NG Compact (RNC)</ref>
                 </item>
                 <item>
-                    <ref target="#">XML Schema (XSD) (coming soon)</ref>
+                    <ref target="schema/lex0.xsd">XML Schema (XSD)</ref>
                 </item>
             </list></p>
         <p>If you are new to the world of TEI and XML, in general, or need a refresher on how to
