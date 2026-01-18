@@ -191,7 +191,7 @@
                                 </a>
                                 <a href="https://github.com/bcdh/tei-lex-0" class="footer-logo footer-logo-github"
                                     aria-label="Source code on GitHub">
-                                    <img src="images/github.png" alt="GitHub"/>
+                                    <img src="images/github48x48.png" alt="GitHub"/>
                                 </a>
                             </div>
 
@@ -218,7 +218,7 @@
                                     <div class="footer-builtwith-tei">
                                         <a href="https://tei-c.org/" class="footer-logo footer-logo-tei"
                                             aria-label="Built with TEI">
-                                            <img src="images/TEI_logo.png" alt="TEI"/>
+                                            <img src="images/TEI_logo108x60.png" alt="TEI"/>
                                         </a>
                                     </div>
 
@@ -226,7 +226,7 @@
                                         <a href="https://github.com/bcdh/tei-lex-0"
                                             class="footer-logo footer-logo-github"
                                             aria-label="Source code on GitHub">
-                                            <img src="images/github.png" alt="GitHub"/>
+                                            <img src="images/github48x48.png" alt="GitHub"/>
                                         </a>
                                     </div>
                                 </div>
@@ -286,7 +286,7 @@
                                 <div class="footer-desktop-logo footer-desktop-logo-tei">
                                     <a href="https://tei-c.org/" class="footer-logo footer-logo-tei"
                                         aria-label="Built with TEI">
-                                        <img src="images/TEI_logo.png" alt="TEI"/>
+                                        <img src="images/TEI_logo108x60.png" alt="TEI"/>
                                     </a>
                                 </div>
 
@@ -302,7 +302,7 @@
                                     <a href="https://github.com/bcdh/tei-lex-0"
                                         class="footer-logo footer-logo-github"
                                         aria-label="Source code on GitHub">
-                                        <img src="images/github.png" alt="GitHub"/>
+                                        <img src="images/github48x48.png" alt="GitHub"/>
                                     </a>
                                 </div>
 
