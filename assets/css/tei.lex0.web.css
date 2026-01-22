@@ -13,8 +13,9 @@ select,
 textarea,
 .pure-g [class*="pure-u"] {
   /* Set your content font stack here: */
-  font-family: -apple-system, ".SFNSText-Regular", "San Francisco", "Roboto", "Segoe UI", "Helvetica Neue",
-    "Lucida Grande", sans-serif;
+  font-family:
+    -apple-system, ".SFNSText-Regular", "San Francisco", "Roboto", "Segoe UI", "Helvetica Neue", "Lucida Grande",
+    sans-serif;
   font-size: 18px;
 }
 
@@ -82,8 +83,9 @@ span.att {
 
 .maintitle,
 .footer-odd-subtitle {
-  font-family: -apple-system, ".SFNSText-Regular", "San Francisco", Roboto, "Segoe UI", "Helvetica Neue",
-    "Lucida Grande", sans-serif;
+  font-family:
+    -apple-system, ".SFNSText-Regular", "San Francisco", Roboto, "Segoe UI", "Helvetica Neue", "Lucida Grande",
+    sans-serif;
 }
 
 .custom-menu {
@@ -774,6 +776,10 @@ div.parent a.link_odd_dataSpec {
   display: block;
 }
 
+a.link_odd_elementSpec + a.link_odd_elementSpec {
+  margin-left: 0.1em;
+}
+
 div.parent ul {
   margin-block-start: 0em;
 }
@@ -1292,7 +1298,13 @@ div.parent ul {
 
 .pre_eg {
   background: #f2faff;
-  font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, Courier, monospace;
+  font-family:
+    SFMono-Regular,
+    Consolas,
+    Liberation Mono,
+    Menlo,
+    Courier,
+    monospace;
   font-size: 0.95em;
 }
 
