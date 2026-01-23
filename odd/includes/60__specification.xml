@@ -56,7 +56,7 @@
         <!-- 2021-09-19 (TT): added forename, surname; need for detailed biblStruct/author/persName-->
         <!-- 2021-11-27 (TT): added a bunch of elements from model.persStateLike for language profiles-->
         <moduleRef key="namesdates"
-            include="affiliation age education faith floruit forename gender langKnowledge langKnown
+            include="affiliation age education faith floruit forename gender langKnowledge langKnown listPlace
             nationality occupation orgName person personGrp persona persName persPronouns place
             placeName residence sex socecStatus state surname trait"/>
         <!-- 2020-11-27 (TT): added ident, needed for language profiles -->
