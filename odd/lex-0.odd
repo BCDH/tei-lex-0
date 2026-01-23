@@ -143,6 +143,7 @@
                     <change type="spec">Refactored model classes to fix XSD UPA violations as per <ref target="https://github.com/DARIAH-ERIC/lexicalresources/issues/223">#223</ref>.</change>
                     <change type="docs">Minor corrections in the documentation</change>
                     <change type="docs">Introduced the tagging of P5 and Lex-0 examples in the specification to avoid confusion</change>
+                    <change type="spec">Include <gi>listPlace</gi> to be used in <gi>settingDesc</gi> as part of <ref target="#TEI.model.languageProfile">model.languageProfile</ref></change>
                 </listChange>
                 <listChange n="0.9.4">
                     <change when="2024-05-12" type="xproc">fix documentation build on macOS and Windows in oXygen XML Editor</change>
