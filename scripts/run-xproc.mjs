@@ -8,6 +8,8 @@ const repoRoot = path.resolve(scriptDir, "..");
 const pipeline = path.join(repoRoot, "xproc", "lex-0.xpl");
 const extraArgs = process.argv.slice(2);
 const successMessage = "Generated HTML guidelines from TEI ODD";
+const buildHtmlDir = path.join(repoRoot, "build", "html");
+const schemaDir = path.join(buildHtmlDir, "schema");
 
 const runCommand = (command, args, options = {}) => {
   const result = spawnSync(command, args, { stdio: "inherit", ...options });
@@ -34,6 +36,12 @@ const exitWithStatus = (status) => {
   }
   process.exit(status ?? 1);
 };
+
+const ensureOutputDirs = () => {
+  fs.mkdirSync(schemaDir, { recursive: true });
+};
+
+ensureOutputDirs();
 
 const envCmd = process.env.XMLCALABASH_CMD;
 if (envCmd) {
