@@ -31,7 +31,7 @@
                <item><hi rend="bold">when collaborating across projects</hi>: it helps you confirm that you are using the same constructs in the same way.</item>
             </list></p>
          <p>The <hi rend="italic">Specification</hi> is also the basis for the TEI Lex-0 <hi
-               rend="italic">schema</hi> (<ref target="schema/lex0.rng">RNG</ref>, RNC, and XSD). These
+               rend="italic">schema</hi> (<ref target="schema/lex-0.rng">RNG</ref>, RNC, and XSD). These
             schemas are meant to be processed by computers and can be used to <hi rend="italic"
                >validate</hi> TEI Lex-0 documents for structural and attribute correctness. Do not
             try to read the schema, unless you suffer from insomnia.</p>

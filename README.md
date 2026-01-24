@@ -1,6 +1,6 @@
 # TEI Lex-0
 
-Official repository for [TEI Lex-0](https://lex0.org). It contains the Lex-0 ODD and build pipeline used to generate the schema and guidelines.
+Official repository for [TEI Lex-0](https://lex-0.org). It contains the Lex-0 ODD and build pipeline used to generate the schema and guidelines.
 
 ## Development
 
@@ -23,9 +23,9 @@ Open `build/html/index.html` to view the generated documentation.
 - Generated outputs: `build/` (gitignored).
   - HTML docs: `build/html/` (entry point: `build/html/index.html`)
   - Schemas: `build/html/schema/`
-    - `lex0.rng`
-    - `lex0.rnc` (coming soon)
-    - `lex0.xsd` (coming soon)
+    - `lex-0.rng`
+    - `lex-0.rnc`
+    - `lex-0.xsd`
 
 ### Build
 

@@ -11,7 +11,7 @@
         <list>
             <item>
                 <hi rend="italic">In oXygen XML Editor</hi>: associate your TEI document with the
-                current Relax NG schema <code>https://lex0.org/schema/lex0.rng</code> using the
+                current Relax NG schema <code>https://lex-0.org/schema/lex-0.rng</code> using the
                 Schema Association dialog (Document &gt; Schema &gt; Associate Schema, or the
                 red-pin icon). <figure xml:id="oxy-assoc-schema">
                     <head>Associating schema in oXygen XML Editor</head>
@@ -111,7 +111,7 @@
                 <item>Examples of TEI Lex-0 live in <code>odd/examples/examples.xml</code>; the
                     stripped counterpart is <code>odd/examples/examples.stripped.xml</code>.</item>
                 <item>The Relax NG schema generated from the ODD is written to
-                        <code>build/html/schema/lex0.rng</code>.</item>
+                        <code>build/html/schema/lex-0.rng</code>.</item>
                 <item><code>xslt/tei-stripper.xsl</code> strips TEI examples into the
                         <code>http://www.tei-c.org/ns/Examples</code> namespace so they can be
                     included inside <gi>egXML</gi>. The stripping is run by the XProc pipeline in

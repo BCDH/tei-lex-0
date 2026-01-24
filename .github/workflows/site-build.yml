@@ -183,8 +183,8 @@ jobs:
       - name: Verify schema conversions
         run: |
           test -d build/html/schema
-          test -f build/html/schema/lex0.rnc
-          test -f build/html/schema/lex0.xsd
+          test -f build/html/schema/lex-0.rnc
+          test -f build/html/schema/lex-0.xsd
       - name: Verify build output
         run: |
           test -d build/html
@@ -309,8 +309,8 @@ jobs:
       - name: Verify schema conversions
         run: |
           test -d build/html/schema
-          test -f build/html/schema/lex0.rnc
-          test -f build/html/schema/lex0.xsd
+          test -f build/html/schema/lex-0.rnc
+          test -f build/html/schema/lex-0.xsd
       - name: Verify build output
         run: |
           test -d build/html
@@ -448,8 +448,8 @@ jobs:
       - name: Verify schema conversions
         run: |
           test -d build/html/schema
-          test -f build/html/schema/lex0.rnc
-          test -f build/html/schema/lex0.xsd
+          test -f build/html/schema/lex-0.rnc
+          test -f build/html/schema/lex-0.xsd
       - name: Verify build output
         run: |
           test -d build/html

@@ -43,7 +43,7 @@
     if (typeof itemUrl !== "string") return itemUrl;
 
     const isLex0Host = (hostname) =>
-      hostname === "lex0.org" || hostname.endsWith(".lex0.org");
+      hostname === "lex-0.org" || hostname.endsWith(".lex-0.org");
 
     let parsed;
     try {
@@ -53,8 +53,8 @@
     }
 
     // Only rewrite:
-    // - file:// browsing (local build), where Algolia returns https://lex0.org/...
-    // - lex0.org / dev.lex0.org URLs, so we don't accidentally rewrite external links.
+    // - file:// browsing (local build), where Algolia returns https://lex-0.org/...
+    // - lex-0.org / dev.lex-0.org URLs, so we don't accidentally rewrite external links.
     if (window.location.protocol !== "file:" && !isLex0Host(parsed.hostname)) {
       return itemUrl;
     }

@@ -59,8 +59,8 @@ Run in separate terminals when iterating:
 
 ## Deployment overview
 
-- `lex0.org` serves `main` (Vercel project on `vercel-main`).
-- `dev.lex0.org` serves `dev` (Vercel project on `vercel-dev`).
-- `lex0.org/releases/vX.Y.Z/` serves GitHub Pages releases via Vercel rewrite.
+- `lex-0.org` serves `main` (Vercel project on `vercel-main`).
+- `dev.lex-0.org` serves `dev` (Vercel project on `vercel-dev`).
+- `lex-0.org/releases/vX.Y.Z/` serves GitHub Pages releases via Vercel rewrite.
 - Release builds are immutable and require annotated tags; if a tag exists, publish fails.
 - HTML output must use relative links (no absolute `/` or `github.io`) or releases will break.

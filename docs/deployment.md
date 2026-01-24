@@ -4,16 +4,16 @@ This document describes how TEI Lex-0 is deployed across Vercel and GitHub Pages
 
 ## Architecture overview
 
-- `lex0.org` serves the current release from Vercel (main line).
-- `dev.lex0.org` serves the dev line from Vercel.
-- `lex0.org/releases/vX.Y.Z/` serves archived releases from GitHub Pages via a Vercel rewrite.
+- `lex-0.org` serves the current release from Vercel (main line).
+- `dev.lex-0.org` serves the dev line from Vercel.
+- `lex-0.org/releases/vX.Y.Z/` serves archived releases from GitHub Pages via a Vercel rewrite.
 - Release content is immutable and produced only from annotated tags on `main`.
 
 ## Domains and routing
 
-- Production domain: `lex0.org` -> Vercel project for `main`.
-- Dev domain: `dev.lex0.org` -> Vercel project for `dev`.
-- Release archive: `lex0.org/releases/:path*` -> GitHub Pages via Vercel rewrite.
+- Production domain: `lex-0.org` -> Vercel project for `main`.
+- Dev domain: `dev.lex-0.org` -> Vercel project for `dev`.
+- Release archive: `lex-0.org/releases/:path*` -> GitHub Pages via Vercel rewrite.
 
 Vercel rewrite (main project):
 
@@ -21,14 +21,14 @@ Vercel rewrite (main project):
 /releases/:path* -> https://<user>.github.io/<repo>/releases/:path*
 ```
 
-Note: keep this as a rewrite, not a redirect, so the URL remains `lex0.org/releases/...`.
+Note: keep this as a rewrite, not a redirect, so the URL remains `lex-0.org/releases/...`.
 
 ## Vercel projects
 
 Two Vercel projects are expected:
 
-- Main project: production branch `vercel-main` -> `lex0.org`.
-- Dev project: production branch `vercel-dev` -> `dev.lex0.org`.
+- Main project: production branch `vercel-main` -> `lex-0.org`.
+- Dev project: production branch `vercel-dev` -> `dev.lex-0.org`.
 
 These branches are artifact-only deployments that contain only the built site.
 
@@ -71,9 +71,9 @@ Post-processing is CI-only and operates on `build/html` via `scripts/postprocess
 - Minify HTML.
 - Inject a build info comment (commit/tag) for debugging.
 - Generate `robots.txt` (mode-dependent).
-- Generate `sitemap.xml` for main only from `build/html` file list with `https://lex0.org/` as the base.
+- Generate `sitemap.xml` for main only from `build/html` file list with `https://lex-0.org/` as the base.
 - Reference the sitemap in main `robots.txt`.
-- Add canonical URLs for dev/release builds if missing; keep the page path and point to `https://lex0.org/...`.
+- Add canonical URLs for dev/release builds if missing; keep the page path and point to `https://lex-0.org/...`.
 
 Modes:
 
@@ -98,8 +98,8 @@ Publishing rules:
 
 Release builds display a top-of-page banner on every HTML page:
 
-- Latest release: "Current release vX.Y.Z" with link to `lex0.org`.
-- Older releases: "Historical release" with link to `lex0.org`.
+- Latest release: "Current release vX.Y.Z" with link to `lex-0.org`.
+- Older releases: "Historical release" with link to `lex-0.org`.
 - Style is neutral for latest, warning-tinted for older releases.
 
 All release builds are noindexed via `<meta name="robots">` and `robots.txt`.
@@ -108,7 +108,7 @@ All release builds are noindexed via `<meta name="robots">` and `robots.txt`.
 
 The CI check enforces that internal links are relative. The check should fail on:
 
-- Absolute internal links like `https://lex0.org/...` in normal page content.
+- Absolute internal links like `https://lex-0.org/...` in normal page content.
 - Absolute internal links like `/css/...` or `/images/...`.
 
 The check should allow external domains and metadata/canonical URLs.
@@ -117,17 +117,17 @@ The check should allow external domains and metadata/canonical URLs.
 
 Use this to validate a deployment:
 
-- `lex0.org` serves latest `main` build via Vercel.
-- `dev.lex0.org` serves latest `dev` build via Vercel.
-- `lex0.org/releases/vX.Y.Z/` loads via Vercel rewrite with no redirect.
-- Assets for releases resolve correctly and stay on `lex0.org`.
+- `lex-0.org` serves latest `main` build via Vercel.
+- `dev.lex-0.org` serves latest `dev` build via Vercel.
+- `lex-0.org/releases/vX.Y.Z/` loads via Vercel rewrite with no redirect.
+- Assets for releases resolve correctly and stay on `lex-0.org`.
 - Dev and release builds are noindexed.
 
 ## Troubleshooting
 
 - Missing assets in releases: check for absolute paths in `build/html`.
 - Release content not updating: verify tag workflow ran and `gh-pages` publish succeeded.
-- `dev.lex0.org` indexed: confirm `robots.txt` and `<meta name="robots">` in dev output.
+- `dev.lex-0.org` indexed: confirm `robots.txt` and `<meta name="robots">` in dev output.
 - Release pages redirect to `github.io`: check Vercel rewrite and ensure relative links.
 
 For practical, step-by-step instructions on publishing dev/prod and release builds, see [`git-workflow.md`](git-workflow.md).
