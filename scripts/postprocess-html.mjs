@@ -2,7 +2,7 @@ import fs from "node:fs/promises";
 import path from "node:path";
 
 const ROOT_DIR = path.resolve("build", "html");
-const BASE_URL = "https://lex0.org";
+const BASE_URL = "https://lex-0.org";
 const VALID_MODES = new Set(["main", "dev", "release"]);
 
 const args = process.argv.slice(2);
@@ -97,7 +97,7 @@ const bannerMarkup = () => {
       `z-index:9999;background:${bg};color:#fff;padding:8px 1.75em;font:600 13px/1.4 system-ui;` +
       `letter-spacing:.3px;">` +
       `${label}${tagLabel}. Latest at <a href="${BASE_URL}" style="color:#fff;text-decoration:underline;">` +
-      `lex0.org</a>.</div>`
+      `lex-0.org</a>.</div>`
     );
   }
   return "";

@@ -13,13 +13,13 @@
         <p>To start using Lex-0 in your projects, you'll need a schema-aware XML editor and one of
             our schemas: <list>
                 <item>
-                    <ref target="schema/lex0.rng">Relax NG (RNG)</ref>
+                    <ref target="schema/lex-0.rng">Relax NG (RNG)</ref>
                 </item>
                 <item>
-                    <ref target="schema/lex0.rnc">Relax NG Compact (RNC)</ref>
+                    <ref target="schema/lex-0.rnc">Relax NG Compact (RNC)</ref>
                 </item>
                 <item>
-                    <ref target="schema/lex0.xsd">XML Schema (XSD)</ref>
+                    <ref target="schema/lex-0.xsd">XML Schema (XSD)</ref>
                 </item>
             </list></p>
         <p>If you are new to the world of TEI and XML, in general, or need a refresher on how to

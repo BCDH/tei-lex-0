@@ -4,12 +4,12 @@
 
 Today DocSearch is effectively tied to the production index. This causes two issues:
 
-1. `dev.lex0.org` searches the production index and search results send users back to `lex0.org`.
-2. Historical releases under `lex0.org/releases/vX.Y.Z/` are immutable snapshots, but search results will drift over time and point to the wrong version or rather back to `lex0.org`.
+1. `dev.lex-0.org` searches the production index and search results send users back to `lex-0.org`.
+2. Historical releases under `lex-0.org/releases/vX.Y.Z/` are immutable snapshots, but search results will drift over time and point to the wrong version or rather back to `lex-0.org`.
 
 ## Goals
 
-- Use separate Algolia indices for `lex0.org` and `dev.lex0.org`.
+- Use separate Algolia indices for `lex-0.org` and `dev.lex-0.org`.
 - Make index selection deterministic for:
   - Vercel deployments (main/dev)
   - local builds
@@ -18,9 +18,9 @@ Today DocSearch is effectively tied to the production index. This causes two iss
 
 ## Policy
 
-- `lex0.org` (main): search enabled
-- `dev.lex0.org` (dev): search enabled (dev index)
-- Releases (`lex0.org/releases/vX.Y.Z/`):
+- `lex-0.org` (main): search enabled
+- `dev.lex-0.org` (dev): search enabled (dev index)
+- Releases (`lex-0.org/releases/vX.Y.Z/`):
   - Current release: optional (either enabled using prod index, or disabled)
   - Historical releases: **disabled**
 
@@ -28,8 +28,8 @@ Rationale: releases are for stable references (RNG/schema links), not for dynami
 
 ## Index mapping
 
-- Vercel project `lex0.org` → Algolia index `lex0-crawler`
-- Vercel project `dev.lex0.org` → Algolia index `lex0-dev-crawler`
+- Vercel project `lex-0.org` → Algolia index `lex0-crawler`
+- Vercel project `dev.lex-0.org` → Algolia index `lex0-dev-crawler`
 
 This mapping is project-based (both are “Production” in Vercel terms).
 
@@ -64,9 +64,9 @@ This ensures historical releases never make Algolia requests and don’t show a 
 
 Set per project:
 
-- `lex0.org`:
+- `lex-0.org`:
   - `ALGOLIA_INDEX_NAME=lex0-crawler`
-- `dev.lex0.org`:
+- `dev.lex-0.org`:
   - `ALGOLIA_INDEX_NAME=lex0-dev-crawler`
 
 Shared values (same on both projects):
@@ -77,11 +77,11 @@ Shared values (same on both projects):
 ### 4. Guardrails
 
 - Restrict the search API key to the expected indices.
-- Optionally restrict by allowed domains/referrers for `lex0.org` and `dev.lex0.org`.
+- Optionally restrict by allowed domains/referrers for `lex-0.org` and `dev.lex-0.org`.
 
 ## Verification checklist
 
-- `lex0.org`: queries `lex0-crawler`
-- `dev.lex0.org`: queries `lex0-dev-crawler`
+- `lex-0.org`: queries `lex0-crawler`
+- `dev.lex-0.org`: queries `lex0-dev-crawler`
 - Current release (if enabled): queries `lex0-crawler`
 - Historical releases: no DocSearch UI and no Algolia requests

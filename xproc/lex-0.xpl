@@ -113,7 +113,7 @@
             <p:document href="../xslt/odd2relax.xsl" />
         </p:with-input>
     </p:xslt>
-    <p:store href="{resolve-uri('../build/html/schema/lex0.rng', static-base-uri())}">
+    <p:store href="{resolve-uri('../build/html/schema/lex-0.rng', static-base-uri())}">
         <p:with-input>
             <p:pipe step="odd2relax"
                     port="result" />

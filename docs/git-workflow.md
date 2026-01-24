@@ -5,8 +5,8 @@ Goal: keep `dev` and `main` strictly linear with rebase-only PR merges, publish 
 ## Overview
 
 - Set up [required settings](#required-github-settings) on GitHub
-- **Publish to dev site:** merge PRs into `dev` (rebase-only) → pushing to `dev` triggers deployment to `dev.lex0.org`.
-- **Publish to production site:** fast-forward `main` to `dev` → pushing to `main` triggers deployment to `lex0.org`.
+- **Publish to dev site:** merge PRs into `dev` (rebase-only) → pushing to `dev` triggers deployment to `dev.lex-0.org`.
+- **Publish to production site:** fast-forward `main` to `dev` → pushing to `main` triggers deployment to `lex-0.org`.
 - **Publish an immutable release:** create an **annotated** tag `vX.Y.Z` on `main` and push the tag → GitHub Actions publishes to `gh-pages/releases/vX.Y.Z/` and updates the releases index on `gh-pages`.
 
 ## Feature branch creation
@@ -40,7 +40,7 @@ Work on your feature and commit freely; when you’re ready to open a PR, rebase
 
 ## Publish a release
 
-Releases are immutable snapshots published under `lex0.org/releases/vX.Y.Z/` (GitHub Pages, behind a Vercel rewrite). The release workflow is tag-driven and requires an **annotated** tag on `main`.
+Releases are immutable snapshots published under `lex-0.org/releases/vX.Y.Z/` (GitHub Pages, behind a Vercel rewrite). The release workflow is tag-driven and requires an **annotated** tag on `main`.
 
 ### Preconditions (once per repo)
 
@@ -51,7 +51,7 @@ Releases are immutable snapshots published under `lex0.org/releases/vX.Y.Z/` (Gi
 ### Release process
 
 1. Fast-forward `main` to `dev` (see [above](#release-dev-to-main-ff-only).)
-2. Wait for GitHub Actions → `build-site` on `main` to finish successfully (this deploys `lex0.org`).
+2. Wait for GitHub Actions → `build-site` on `main` to finish successfully (this deploys `lex-0.org`).
 3. Create an **annotated** tag on `main` and push it:
 
    - `git checkout main`
@@ -66,7 +66,7 @@ Releases are immutable snapshots published under `lex0.org/releases/vX.Y.Z/` (Gi
 
 5. Verify:
 
-   - `https://lex0.org/releases/vX.Y.Z/` loads
+   - `https://lex-0.org/releases/vX.Y.Z/` loads
    - Assets resolve (no `github.io` URLs)
 
 Notes:

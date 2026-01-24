@@ -33,7 +33,7 @@ const stripCodeBlocks = (html) => {
 const findViolations = (html) => {
   const matches = [];
   const regex =
-    /(href|src)=["'](https?:\/\/lex0\.org\/[^"']*|\/[^"']*)["']/gi;
+    /(href|src)=["'](https?:\/\/lex-0\.org\/[^"']*|\/[^"']*)["']/gi;
   let match;
   while ((match = regex.exec(html)) !== null) {
     matches.push(match[0]);
