@@ -13,6 +13,7 @@ Today DocSearch is effectively tied to the production index. This causes two iss
 - Make index selection deterministic for:
   - Vercel deployments (main/dev)
   - local builds
+- Ensure crawlers use the correct sitemap per environment (main vs dev).
 - Disable Algolia search on **historical** releases served from GitHub Pages.
 - Keep `main` and `dev` history linear (no CI commits to `main` for releases).
 
@@ -37,22 +38,17 @@ This mapping is project-based (both are “Production” in Vercel terms).
 
 ### 1. Build-time search config
 
-Generate a small static config artifact into the build output, e.g. `js/search-config.json`:
+Current behavior:
 
-- Reads from env vars:
-  - `ALGOLIA_APP_ID`
-  - `ALGOLIA_SEARCH_API_KEY` (search-only)
-  - `ALGOLIA_INDEX_NAME`
-- Writes a config file consumed by the frontend.
-- Fails the build if required vars are missing (to avoid silently using the wrong index).
-
-Frontend (`js/algo.js`) loads that config and initializes DocSearch from it.
+- Index selection is automatic:
+  - `lex-0.org` → `lex0-crawler`
+  - `dev.lex-0.org` or local (`file://`, `localhost`) → `lex0-dev-crawler`
 
 ### 2. Disable search on historical releases
 
-During release publishing, CI already knows whether a tag is the latest (`release-status=current|historical`).
+Already implemented in `scripts/postprocess-html.mjs`. During release publishing, CI already knows whether a tag is the latest (`release-status=current|historical`).
 
-For `mode=release` + `release-status=historical`, the release post-processing step should remove/disable DocSearch by editing the generated HTML:
+For `mode=release` + `release-status=historical`, the post-processing step removes/disables DocSearch by editing the generated HTML:
 
 - Remove the DocSearch CDN script tag.
 - Remove the `js/algo.js` script tag.
@@ -60,24 +56,65 @@ For `mode=release` + `release-status=historical`, the release post-processing st
 
 This ensures historical releases never make Algolia requests and don’t show a search UI.
 
-### 3. Vercel per-project env
+### 3. Sitemap strategy (main vs dev)
 
-Set per project:
+Algolia Crawler must point to different sitemaps per environment. Update post-processing to optionally emit a sitemap for `dev` with a `dev.lex-0.org` base.
 
-- `lex-0.org`:
-  - `ALGOLIA_INDEX_NAME=lex0-crawler`
-- `dev.lex-0.org`:
-  - `ALGOLIA_INDEX_NAME=lex0-dev-crawler`
+Proposed behavior:
 
-Shared values (same on both projects):
+- `main`:
+  - Keep current behavior: generate `sitemap.xml` from `build/html` with base `https://lex-0.org`.
+  - `robots.txt` includes `Sitemap: https://lex-0.org/sitemap.xml`.
+- `dev`:
+  - Generate `sitemap.xml` from `build/html` with base `https://dev.lex-0.org`.
+  - `robots.txt` remains `Disallow: /` (noindex), but Algolia can still crawl via explicit sitemap URL.
+- `release`:
+  - No sitemap.
 
-- `ALGOLIA_APP_ID`
-- `ALGOLIA_SEARCH_API_KEY`
+Implementation detail:
 
-### 4. Guardrails
+- `scripts/postprocess-html.mjs` accepts `--sitemap=main|dev|none`.
+- `--mode=main` defaults to `--sitemap=main`; `--mode=dev` defaults to `--sitemap=dev`; `--mode=release` defaults to `--sitemap=none`.
+- If `--sitemap=dev`, use `https://dev.lex-0.org` as the sitemap base (canonical URLs still point to `https://lex-0.org/...`).
 
-- Restrict the search API key to the expected indices.
-- Optionally restrict by allowed domains/referrers for `lex-0.org` and `dev.lex-0.org`.
+### 4. Transition option (until `lex-0.org` sitemap is fixed)
+
+Right now `lex-0.org` mirrors `lex0.org`, but the production sitemap still lists `lex0.org` URLs. Until that is fixed, keep the **production crawler** fully on `lex0.org` to avoid the "0 records" safe‑reindexing failure.
+
+Temporary production crawler config (stay on old domain):
+
+- `startUrls`: `https://lex0.org`
+- `sitemaps`: `https://lex0.org/sitemap.xml`
+- `discoveryPatterns`: `https://lex0.org/**`
+- `pathsToMatch`: `https://lex0.org/...`
+
+After the main sitemap is corrected, flip **all** of the above fields to `lex-0.org` in one pass:
+
+- `startUrls`: `https://lex-0.org`
+- `sitemaps`: `https://lex-0.org/sitemap.xml`
+- `discoveryPatterns`: `https://lex-0.org/**`
+- `pathsToMatch`: `https://lex-0.org/...`
+
+### 5. CI wiring
+
+Update workflows so each deployment produces its own sitemap:
+
+- `push_main`:
+  - `node scripts/postprocess-html.mjs --mode=main --sitemap=main`
+- `push_dev`:
+  - ensure post-processing runs in dev flow
+  - `node scripts/postprocess-html.mjs --mode=dev --sitemap=dev`
+
+### 6. Crawler configuration
+
+Dev crawler:
+
+- `lex0-dev-crawler`:
+  - `https://dev.lex-0.org/sitemap.xml`
+
+Production crawler is covered by the transition section above (stay on `lex0.org` until the sitemap flips).
+
+Ensure both crawlers allow the correct domains and do not follow cross-domain links.
 
 ## Verification checklist
 
@@ -85,3 +122,5 @@ Shared values (same on both projects):
 - `dev.lex-0.org`: queries `lex0-dev-crawler`
 - Current release (if enabled): queries `lex0-crawler`
 - Historical releases: no DocSearch UI and no Algolia requests
+- `lex-0.org/sitemap.xml` only contains `https://lex-0.org/...` (after flip)
+- `dev.lex-0.org/sitemap.xml` only contains `https://dev.lex-0.org/...`

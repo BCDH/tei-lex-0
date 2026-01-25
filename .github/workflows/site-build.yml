@@ -192,7 +192,7 @@ jobs:
       - name: Link hygiene
         run: node scripts/check-internal-links.mjs
       - name: Post-process HTML
-        run: node scripts/postprocess-html.mjs --mode=main
+        run: node scripts/postprocess-html.mjs --mode=main --sitemap=main
       - name: Publish to vercel-main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -318,7 +318,7 @@ jobs:
       - name: Link hygiene
         run: node scripts/check-internal-links.mjs
       - name: Post-process HTML
-        run: node scripts/postprocess-html.mjs --mode=dev
+        run: node scripts/postprocess-html.mjs --mode=dev --sitemap=dev
       - name: Publish to vercel-dev
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

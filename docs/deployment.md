@@ -81,6 +81,15 @@ Modes:
 - `dev`: noindex; `robots.txt` disallows all; no sitemap.
 - `release`: noindex; `robots.txt` disallows all; no sitemap.
 
+Sitemap flag:
+
+- `--sitemap=main|dev|none` overrides the sitemap output for a given mode.
+- `--mode=main` defaults to `--sitemap=main`; `--mode=dev` defaults to `--sitemap=dev`; `--mode=release` defaults to `--sitemap=none`.
+
+Algolia config:
+
+- Index selection is based on hostname (prod vs dev vs local).
+
 ### Publishing targets
 
 - `main` build -> `vercel-main` (repo root).
