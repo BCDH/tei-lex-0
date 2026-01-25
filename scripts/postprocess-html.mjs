@@ -4,6 +4,7 @@ import path from "node:path";
 const ROOT_DIR = path.resolve("build", "html");
 const BASE_URL = "https://lex-0.org";
 const VALID_MODES = new Set(["main", "dev", "release"]);
+const VALID_SITEMAPS = new Set(["main", "dev", "none"]);
 
 const args = process.argv.slice(2);
 const opts = {};
@@ -16,11 +17,18 @@ for (const arg of args) {
 const mode = opts.mode || "main";
 const tag = opts.tag || opts.version || "";
 const releaseStatus = opts["release-status"] || "historical";
+const sitemapMode =
+  opts.sitemap || (mode === "main" ? "main" : mode === "dev" ? "dev" : "none");
 
 if (!VALID_MODES.has(mode)) {
   console.error(`Unknown --mode "${mode}". Use main|dev|release.`);
   process.exit(1);
 }
+if (!VALID_SITEMAPS.has(sitemapMode)) {
+  console.error(`Unknown --sitemap "${sitemapMode}". Use main|dev|none.`);
+  process.exit(1);
+}
+
 
 const fileExists = async (p) => {
   try {
@@ -218,6 +226,10 @@ const main = async () => {
     process.exit(1);
   }
 
+  let sitemapBase = "";
+  if (sitemapMode === "main") sitemapBase = "https://lex-0.org";
+  if (sitemapMode === "dev") sitemapBase = "https://dev.lex-0.org";
+
   const files = await walkHtml(ROOT_DIR);
   const urls = [];
 
@@ -243,14 +255,14 @@ const main = async () => {
     html = minifyHtml(html);
 
     await fs.writeFile(file, html, "utf-8");
-    if (mode === "main") {
-      urls.push(canonicalUrl);
+    if (sitemapBase) {
+      urls.push(`${sitemapBase}${urlPath}`);
     }
   }
 
   await ensureRobots();
 
-  if (mode === "main") {
+  if (sitemapBase) {
     const unique = Array.from(new Set(urls)).sort();
     await writeSitemap(unique);
   }

@@ -1,9 +1,30 @@
+const DOCSEARCH_CONFIG = {
+  appId: "7KP0FJOR6F",
+  apiKey: "c30c21b1f89a0e2d5b44df1be7401072",
+  indexProd: "lex0-crawler",
+  indexDev: "lex0-dev-crawler",
+};
+
+const selectIndexName = () => {
+  if (window.location.protocol === "file:") return DOCSEARCH_CONFIG.indexDev;
+  const host = window.location.hostname || "";
+  if (host === "dev.lex-0.org" || host.startsWith("dev.")) {
+    return DOCSEARCH_CONFIG.indexDev;
+  }
+  if (host === "localhost" || host === "127.0.0.1") {
+    return DOCSEARCH_CONFIG.indexDev;
+  }
+  return DOCSEARCH_CONFIG.indexProd;
+};
+
 (() => {
   const docsearchFn = window.docsearch;
   if (typeof docsearchFn !== "function") {
     // DocSearch UMD script not loaded.
     return;
   }
+
+  const indexName = selectIndexName();
 
   // DocSearch can sometimes leave the "kbd pressed" visual state stuck
   // (e.g. ⌘ / Ctrl keycap shows as pressed) if the corresponding keyup event
@@ -43,7 +64,10 @@
     if (typeof itemUrl !== "string") return itemUrl;
 
     const isLex0Host = (hostname) =>
-      hostname === "lex-0.org" || hostname.endsWith(".lex-0.org");
+      hostname === "lex-0.org" ||
+      hostname.endsWith(".lex-0.org") ||
+      hostname === "lex0.org" ||
+      hostname.endsWith(".lex0.org");
 
     let parsed;
     try {
@@ -75,9 +99,9 @@
   };
 
   docsearchFn({
-    appId: "7KP0FJOR6F",
-    apiKey: "c30c21b1f89a0e2d5b44df1be7401072",
-    indexName: "lex0-crawler",
+    appId: DOCSEARCH_CONFIG.appId,
+    apiKey: DOCSEARCH_CONFIG.apiKey,
+    indexName,
     container: "#docsearch",
     transformItems(items) {
       return (items || []).map((item) => {
