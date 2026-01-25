@@ -245,9 +245,12 @@ const main = async () => {
 
     if (mode === "dev" || mode === "release") {
       html = addMetaRobots(html, "noindex,nofollow");
-      html = addCanonicalLink(html, canonicalUrl);
       html = injectBannerStyle(html);
       html = insertBanner(html, bannerMarkup());
+    }
+
+    if (mode === "release") {
+      html = addCanonicalLink(html, canonicalUrl);
     }
 
     if (mode === "release" && releaseStatus === "historical") {

@@ -73,7 +73,7 @@ Post-processing is CI-only and operates on `build/html` via `scripts/postprocess
 - Generate `robots.txt` (mode-dependent).
 - Generate `sitemap.xml` for main only from `build/html` file list with `https://lex-0.org/` as the base.
 - Reference the sitemap in main `robots.txt`.
-- Add canonical URLs for dev/release builds if missing; keep the page path and point to `https://lex-0.org/...`.
+- Add canonical URLs for release builds if missing; keep the page path and point to `https://lex-0.org/...`. Dev builds omit canonicals to avoid crawler mismatch.
 
 Modes:
 
