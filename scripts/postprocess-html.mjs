@@ -203,6 +203,9 @@ const ensureRobots = async () => {
   let content = "";
   if (mode === "main") {
     content = `User-agent: *\nAllow: /\nSitemap: ${BASE_URL}/sitemap.xml\n`;
+  } else if (mode === "dev") {
+    content =
+      "User-agent: Algolia Crawler\nAllow: /\n\nUser-agent: *\nDisallow: /\n";
   } else {
     content = "User-agent: *\nDisallow: /\n";
   }
