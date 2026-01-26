@@ -194,6 +194,7 @@ jobs:
       - name: Post-process HTML
         run: node scripts/postprocess-html.mjs --mode=main --sitemap=main
       - name: Publish to vercel-main
+        id: publish_vercel_main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           TARGET_BRANCH: vercel-main
@@ -217,10 +218,66 @@ jobs:
           git add .
           if git diff --cached --quiet; then
             echo "No changes to publish."
+            echo "deployed=false" >> "$GITHUB_OUTPUT"
             exit 0
           fi
           git commit -m "Deploy ${GITHUB_SHA}"
           git push origin "$TARGET_BRANCH"
+          echo "deployed=true" >> "$GITHUB_OUTPUT"
+
+      - name: Wait for lex-0.org to serve this build
+        if: ${{ steps.publish_vercel_main.outputs.deployed == 'true' }}
+        run: |
+          set -euo pipefail
+          EXPECTED_SHA="${GITHUB_SHA}"
+          URL="https://lex-0.org/?__sha=${EXPECTED_SHA}"
+          for i in $(seq 1 40); do
+            if curl -fsSL -H 'Cache-Control: no-cache' -H 'Pragma: no-cache' "$URL" \
+              | grep -F "sha=${EXPECTED_SHA}" >/dev/null; then
+              echo "lex-0.org updated (sha=${EXPECTED_SHA})."
+              exit 0
+            fi
+            echo "Waiting for lex-0.org to update... (${i}/40)"
+            sleep 15
+          done
+          echo "Timed out waiting for lex-0.org to serve sha=${EXPECTED_SHA}."
+          exit 1
+
+      - name: Trigger Algolia crawler reindex (main)
+        if: ${{ steps.publish_vercel_main.outputs.deployed == 'true' }}
+        env:
+          ALGOLIA_CRAWLER_ID: ${{ secrets.ALGOLIA_CRAWLER_ID_MAIN }}
+          ALGOLIA_CRAWLER_USER_ID: ${{ secrets.ALGOLIA_CRAWLER_USER_ID }}
+          ALGOLIA_CRAWLER_API_KEY: ${{ secrets.ALGOLIA_CRAWLER_API_KEY }}
+        run: |
+          set -euo pipefail
+          if [ -z "${ALGOLIA_CRAWLER_ID}" ]; then
+            echo "Missing secret: ALGOLIA_CRAWLER_ID_MAIN"
+            exit 1
+          fi
+          if [ -z "${ALGOLIA_CRAWLER_USER_ID}" ] || [ -z "${ALGOLIA_CRAWLER_API_KEY}" ]; then
+            echo "Missing secrets: ALGOLIA_CRAWLER_USER_ID / ALGOLIA_CRAWLER_API_KEY"
+            exit 1
+          fi
+          endpoint="https://crawler.algolia.com/api/1/crawlers/${ALGOLIA_CRAWLER_ID}/reindex"
+          tmp="$(mktemp)"
+          code="$(curl -sS -o "$tmp" -w "%{http_code}" \
+            -u "${ALGOLIA_CRAWLER_USER_ID}:${ALGOLIA_CRAWLER_API_KEY}" \
+            -X POST \
+            -H "Content-Type: application/json" \
+            "$endpoint" || true)"
+          echo "Algolia response (HTTP ${code}):"
+          cat "$tmp" || true
+          rm -f "$tmp"
+          if echo "$code" | grep -Eq '^2'; then
+            exit 0
+          fi
+          if [ "$code" = "409" ]; then
+            echo "Crawler already running; treating as success."
+            exit 0
+          fi
+          echo "Failed to trigger reindex (HTTP ${code})."
+          exit 1
 
   push_dev:
     if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/dev' }}
@@ -320,6 +377,7 @@ jobs:
       - name: Post-process HTML
         run: node scripts/postprocess-html.mjs --mode=dev --sitemap=dev
       - name: Publish to vercel-dev
+        id: publish_vercel_dev
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           TARGET_BRANCH: vercel-dev
@@ -343,10 +401,66 @@ jobs:
           git add .
           if git diff --cached --quiet; then
             echo "No changes to publish."
+            echo "deployed=false" >> "$GITHUB_OUTPUT"
             exit 0
           fi
           git commit -m "Deploy ${GITHUB_SHA}"
           git push origin "$TARGET_BRANCH"
+          echo "deployed=true" >> "$GITHUB_OUTPUT"
+
+      - name: Wait for dev.lex-0.org to serve this build
+        if: ${{ steps.publish_vercel_dev.outputs.deployed == 'true' }}
+        run: |
+          set -euo pipefail
+          EXPECTED_SHA="${GITHUB_SHA}"
+          URL="https://dev.lex-0.org/?__sha=${EXPECTED_SHA}"
+          for i in $(seq 1 40); do
+            if curl -fsSL -H 'Cache-Control: no-cache' -H 'Pragma: no-cache' "$URL" \
+              | grep -F "sha=${EXPECTED_SHA}" >/dev/null; then
+              echo "dev.lex-0.org updated (sha=${EXPECTED_SHA})."
+              exit 0
+            fi
+            echo "Waiting for dev.lex-0.org to update... (${i}/40)"
+            sleep 15
+          done
+          echo "Timed out waiting for dev.lex-0.org to serve sha=${EXPECTED_SHA}."
+          exit 1
+
+      - name: Trigger Algolia crawler reindex (dev)
+        if: ${{ steps.publish_vercel_dev.outputs.deployed == 'true' }}
+        env:
+          ALGOLIA_CRAWLER_ID: ${{ secrets.ALGOLIA_CRAWLER_ID_DEV }}
+          ALGOLIA_CRAWLER_USER_ID: ${{ secrets.ALGOLIA_CRAWLER_USER_ID }}
+          ALGOLIA_CRAWLER_API_KEY: ${{ secrets.ALGOLIA_CRAWLER_API_KEY }}
+        run: |
+          set -euo pipefail
+          if [ -z "${ALGOLIA_CRAWLER_ID}" ]; then
+            echo "Missing secret: ALGOLIA_CRAWLER_ID_DEV"
+            exit 1
+          fi
+          if [ -z "${ALGOLIA_CRAWLER_USER_ID}" ] || [ -z "${ALGOLIA_CRAWLER_API_KEY}" ]; then
+            echo "Missing secrets: ALGOLIA_CRAWLER_USER_ID / ALGOLIA_CRAWLER_API_KEY"
+            exit 1
+          fi
+          endpoint="https://crawler.algolia.com/api/1/crawlers/${ALGOLIA_CRAWLER_ID}/reindex"
+          tmp="$(mktemp)"
+          code="$(curl -sS -o "$tmp" -w "%{http_code}" \
+            -u "${ALGOLIA_CRAWLER_USER_ID}:${ALGOLIA_CRAWLER_API_KEY}" \
+            -X POST \
+            -H "Content-Type: application/json" \
+            "$endpoint" || true)"
+          echo "Algolia response (HTTP ${code}):"
+          cat "$tmp" || true
+          rm -f "$tmp"
+          if echo "$code" | grep -Eq '^2'; then
+            exit 0
+          fi
+          if [ "$code" = "409" ]; then
+            echo "Crawler already running; treating as success."
+            exit 0
+          fi
+          echo "Failed to trigger reindex (HTTP ${code})."
+          exit 1
 
   tag_release:
     if: ${{ github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v') }}
