@@ -255,6 +255,11 @@ jobs:
             echo "Missing secret: ALGOLIA_CRAWLER_ID_MAIN"
             exit 1
           fi
+          if [ "${ALGOLIA_CRAWLER_ID}" = "lex0-crawler" ] || [ "${ALGOLIA_CRAWLER_ID}" = "lex0-dev-crawler" ]; then
+            echo "ALGOLIA_CRAWLER_ID_MAIN looks like an Algolia *index name*, not a Crawler ID."
+            echo "Set ALGOLIA_CRAWLER_ID_MAIN to the crawler ID from the Algolia Crawler dashboard URL (the segment after /crawlers/)."
+            exit 1
+          fi
           if [ -z "${ALGOLIA_CRAWLER_USER_ID}" ] || [ -z "${ALGOLIA_CRAWLER_API_KEY}" ]; then
             echo "Missing secrets: ALGOLIA_CRAWLER_USER_ID / ALGOLIA_CRAWLER_API_KEY"
             exit 1
@@ -268,6 +273,10 @@ jobs:
             "$endpoint" || true)"
           echo "Algolia response (HTTP ${code}):"
           cat "$tmp" || true
+          if grep -q '"code":"malformed_id"' "$tmp" 2>/dev/null; then
+            echo "Crawler API rejected ALGOLIA_CRAWLER_ID_MAIN as malformed."
+            echo "This usually means the secret value is wrong (often an index name like lex0-crawler instead of a crawler ID)."
+          fi
           rm -f "$tmp"
           if echo "$code" | grep -Eq '^2'; then
             exit 0
@@ -438,6 +447,11 @@ jobs:
             echo "Missing secret: ALGOLIA_CRAWLER_ID_DEV"
             exit 1
           fi
+          if [ "${ALGOLIA_CRAWLER_ID}" = "lex0-crawler" ] || [ "${ALGOLIA_CRAWLER_ID}" = "lex0-dev-crawler" ]; then
+            echo "ALGOLIA_CRAWLER_ID_DEV looks like an Algolia *index name*, not a Crawler ID."
+            echo "Set ALGOLIA_CRAWLER_ID_DEV to the crawler ID from the Algolia Crawler dashboard URL (the segment after /crawlers/)."
+            exit 1
+          fi
           if [ -z "${ALGOLIA_CRAWLER_USER_ID}" ] || [ -z "${ALGOLIA_CRAWLER_API_KEY}" ]; then
             echo "Missing secrets: ALGOLIA_CRAWLER_USER_ID / ALGOLIA_CRAWLER_API_KEY"
             exit 1
@@ -451,6 +465,10 @@ jobs:
             "$endpoint" || true)"
           echo "Algolia response (HTTP ${code}):"
           cat "$tmp" || true
+          if grep -q '"code":"malformed_id"' "$tmp" 2>/dev/null; then
+            echo "Crawler API rejected ALGOLIA_CRAWLER_ID_DEV as malformed."
+            echo "This usually means the secret value is wrong (often an index name like lex0-dev-crawler instead of a crawler ID)."
+          fi
           rm -f "$tmp"
           if echo "$code" | grep -Eq '^2'; then
             exit 0
