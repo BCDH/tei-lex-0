@@ -85,4 +85,24 @@
         </xsl:element>
     </xsl:template>
 
+    <!--
+      Woven ODD "Used by" / "Members" lists often emit adjacent <ref> nodes with no
+      separating whitespace, which becomes squished links in HTML (e.g. ...</a><a...).
+      Add a literal space between consecutive link_odd_* refs, and after bracketed
+      member groups (showmembers2/3) when followed by another link.
+    -->
+    <xsl:template match="tei:ref[starts-with(normalize-space(@rend), 'link_odd_')]">
+        <xsl:next-match/>
+        <xsl:if test="following-sibling::*[1][self::tei:ref[starts-with(normalize-space(@rend), 'link_odd_')]]">
+            <xsl:text> </xsl:text>
+        </xsl:if>
+    </xsl:template>
+
+    <xsl:template match="tei:*[normalize-space(@rend) = ('showmembers2', 'showmembers3')]">
+        <xsl:next-match/>
+        <xsl:if test="following-sibling::*[1][self::tei:ref[starts-with(normalize-space(@rend), 'link_odd_')]]">
+            <xsl:text> </xsl:text>
+        </xsl:if>
+    </xsl:template>
+
 </xsl:stylesheet>
