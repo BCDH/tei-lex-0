@@ -772,13 +772,13 @@ blockquote.quote {
 }
 
 /* in data types */
-div.parent a.link_odd_dataSpec {
+/* div.parent a.link_odd_dataSpec {
   display: block;
 }
 
 a.link_odd_elementSpec + a.link_odd_elementSpec {
   margin-left: 0.1em;
-}
+} */
 
 div.parent ul {
   margin-block-start: 0em;
