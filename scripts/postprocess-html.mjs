@@ -112,11 +112,68 @@ const bannerMarkup = () => {
 };
 
 const minifyHtml = (html) => {
-  // Conservative minification: skip if pre/code blocks are present.
-  if (/<pre\b|<code\b/i.test(html)) {
-    return html;
+  // Conservative minification:
+  // - skip entirely if pre/code blocks are present (whitespace is meaningful)
+  // - do NOT remove inter-tag whitespace globally (that breaks inline layout, e.g. </a> <a>)
+  // - trim leading/trailing whitespace for the whole document
+  // - collapse whitespace runs only inside text nodes, leaving tag markup untouched
+  if (/<pre\b|<code\b/i.test(html)) return html;
+
+  const input = html.trim();
+  let out = "";
+  let i = 0;
+
+  const indexOfInsensitive = (haystack, needle, fromIndex) =>
+    haystack.toLowerCase().indexOf(needle.toLowerCase(), fromIndex);
+
+  while (i < input.length) {
+    const lt = input.indexOf("<", i);
+    if (lt === -1) {
+      out += input.slice(i).replace(/\s+/g, " ");
+      break;
+    }
+
+    // Text segment.
+    if (lt > i) {
+      out += input.slice(i, lt).replace(/\s+/g, " ");
+      i = lt;
+    }
+
+    // Tag or comment/doctype segment.
+    const gt = input.indexOf(">", i);
+    if (gt === -1) {
+      out += input.slice(i);
+      break;
+    }
+
+    const tag = input.slice(i, gt + 1);
+    out += tag;
+    i = gt + 1;
+
+    // Leave script/style bodies untouched (they are text nodes, but whitespace can matter).
+    if (/^<script\b/i.test(tag)) {
+      const closeIdx = indexOfInsensitive(input, "</script", i);
+      if (closeIdx === -1) break;
+      out += input.slice(i, closeIdx);
+      const closeGt = input.indexOf(">", closeIdx);
+      if (closeGt === -1) break;
+      out += input.slice(closeIdx, closeGt + 1);
+      i = closeGt + 1;
+      continue;
+    }
+    if (/^<style\b/i.test(tag)) {
+      const closeIdx = indexOfInsensitive(input, "</style", i);
+      if (closeIdx === -1) break;
+      out += input.slice(i, closeIdx);
+      const closeGt = input.indexOf(">", closeIdx);
+      if (closeGt === -1) break;
+      out += input.slice(closeIdx, closeGt + 1);
+      i = closeGt + 1;
+      continue;
+    }
   }
-  return html.replace(/>\s+</g, "><").trim();
+
+  return out.trim();
 };
 
 const addCanonicalLink = (html, canonicalUrl) => {
