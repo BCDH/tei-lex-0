@@ -29,7 +29,7 @@
         
     
             <figure>
-                <graphic url="../../assets/images/imgur/IVutWGQ.png"/>
+                <graphic width="100%" url="../../assets/images/imgur/IVutWGQ.png"/>
             </figure>
             <egXML xmlns="http://www.tei-c.org/ns/Examples">
             <xi:include href="../examples/examples.stripped.xml"
