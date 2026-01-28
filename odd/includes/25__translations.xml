@@ -31,7 +31,7 @@
         
     
             <figure>
-                <graphic url="images/imgur/IVutWGQ.png"/>
+                <graphic url="../../assets/images/imgur/IVutWGQ.png"/>
             </figure>
             <egXML xmlns="http://www.tei-c.org/ns/Examples">
             <xi:include href="../examples/examples.stripped.xml"

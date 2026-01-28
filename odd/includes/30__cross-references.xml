@@ -125,7 +125,7 @@
             <p>In TEI Lex-0, synonyms are encoded inside <code>&lt;xr
                     type=&quot;synonymy&quot;&gt;&lt;/xr&gt;</code></p>
             <figure>
-                <graphic url="images/imgur/yXte5h1.png"/>
+                <graphic url="../../assets/images/imgur/yXte5h1.png"/>
             </figure>
             <egXML xmlns="http://www.tei-c.org/ns/Examples" source="#Duden2007">
                             <xi:include href="../examples/examples.stripped.xml" corresp="../examples/examples.xml" xpointer="arbeitsunfähig"/>
@@ -234,7 +234,7 @@
             dictionaries do use this mechanism. In TEI Lex-0, <gi>xr</gi> is allowed within
                 <gi>def</gi>:</p>
         <figure>
-            <graphic url="images/imgur/1aM02qR.jpg"></graphic>
+            <graphic url="../../assets/images/imgur/1aM02qR.jpg"></graphic>
         </figure>
         <egXML xmlns="http://www.tei-c.org/ns/Examples">
             <xi:include href="../examples/examples.stripped.xml" corresp="../examples/examples.xml" xpointer="VSK.SR.грдомајчић"/>
@@ -253,7 +253,7 @@
             <head>Antepassado</head>
 
             <figure>
-                <graphic url="images/imgur/Mg7arob.png"/>
+                <graphic url="../../assets/images/imgur/Mg7arob.png"/>
             </figure>
             <egXML xmlns="http://www.tei-c.org/ns/Examples">
             <xi:include href="../examples/examples.stripped.xml" corresp="../examples/examples.xml" xpointer="DLPC.antepassado_a"/>

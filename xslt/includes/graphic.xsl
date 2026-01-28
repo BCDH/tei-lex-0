@@ -2,8 +2,23 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:teix="http://www.tei-c.org/ns/Examples"
+    xmlns:lex0="urn:tei-lex0"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xpath-default-namespace="http://www.tei-c.org/ns/1.0" version="2.0"
-    exclude-result-prefixes="tei teix">
+    exclude-result-prefixes="tei teix lex0 xs">
+    
+    <xsl:function name="lex0:html-image-url" as="xs:string">
+        <xsl:param name="url" as="xs:string?"/>
+        <xsl:variable name="u" select="string($url)"/>
+        <xsl:sequence
+            select="
+                if (starts-with($u, 'http://') or starts-with($u, 'https://') or starts-with($u, 'data:'))
+                then $u
+                else if (contains($u, 'assets/images/'))
+                then concat('images/', substring-after($u, 'assets/images/'))
+                else $u
+            "/>
+    </xsl:function>
     
    <xsl:template match="tei:head[parent::tei:figure]">
        <xsl:element name="div" namespace="http://www.w3.org/1999/xhtml">
@@ -67,7 +82,7 @@
             </xsl:attribute>
             <img class="pure-img-responsive lazyload">
                 <xsl:attribute name="data-src">
-                    <xsl:value-of select="@url"/>
+                    <xsl:value-of select="lex0:html-image-url(@url)"/>
                 </xsl:attribute>
                 <xsl:if test="@height">
                     <xsl:attribute name="style">
@@ -84,7 +99,7 @@
                     <xsl:value-of select="concat(@rend, ' pure-img-responsive lazyload')"/>
                 </xsl:attribute>
                 <xsl:attribute name="data-src">
-                    <xsl:value-of select="@url"/>
+                    <xsl:value-of select="lex0:html-image-url(@url)"/>
                 </xsl:attribute>
                 <xsl:if test="@height">
                     <xsl:attribute name="style">

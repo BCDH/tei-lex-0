@@ -129,7 +129,7 @@
             cases, <gi>gramGrp</gi> will be naturally placed inside the given <gi>sense</gi>: </p>
         <p>Consider, for instance, the second sense of this entry:</p>
         <figure>
-            <graphic url="images/imgur/2UJC9Ae.jpg" rend="padded"/>
+            <graphic url="../../assets/images/imgur/2UJC9Ae.jpg" rend="padded"/>
         </figure>
         <egXML xmlns="http://www.tei-c.org/ns/Examples" source="#DLPC2014" xml:id="antepassado-gramGrp-in-sense">
             <xi:include href="../examples/examples.stripped.xml" corresp="../examples/examples.xml" xpointer="DLPC.antepassado_b_2"/>
@@ -174,7 +174,7 @@
                 various lexicographic components, certain levels of ambiguity remain, often due to
                 the highly condensed nature of dictionary content.</p>
             <p>Consider, for instance, this entry: <figure>
-                    <graphic url="images/imgur/LlL0H4l.jpg"/>
+                    <graphic url="../../assets/images/imgur/LlL0H4l.jpg"/>
                 </figure>
             </p>
             <p>Is this an entry with two senses? Or are these two entries that were on the account
@@ -235,7 +235,7 @@
             <p>For an example in which grammatical homonyms have themselves multiple senses, one of
                 which is grammatically constrained, see, for instance: </p>
             <figure>
-                <graphic url="images/imgur/b9dNR9m.png"/>
+                <graphic url="../../assets/images/imgur/b9dNR9m.png"/>
             </figure>
             <egXML xmlns="http://www.tei-c.org/ns/Examples">
                     <xi:include href="../examples/examples.stripped.xml" corresp="../examples/examples.xml" xpointer="ED.aid"/>
