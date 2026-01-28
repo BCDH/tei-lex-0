@@ -15,7 +15,7 @@
                 Schema Association dialog (Document &gt; Schema &gt; Associate Schema, or the
                 red-pin icon). <figure xml:id="oxy-assoc-schema">
                     <head>Associating schema in oXygen XML Editor</head>
-                    <graphic url="../../assets/images/associate-schema.png"/>
+                    <graphic width="100%" url="../../assets/images/associate-schema.png"/>
                 </figure>
             </item>
             <item>

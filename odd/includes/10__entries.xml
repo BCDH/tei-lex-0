@@ -347,7 +347,7 @@
          <list type="examples">
             <item>
                <figure>
-                  <graphic url="https://user-images.githubusercontent.com/45368069/196040540-8e0253c2-a4cc-4a55-8ad0-0dc461945978.png"/>
+                  <graphic width="100%" url="https://user-images.githubusercontent.com/45368069/196040540-8e0253c2-a4cc-4a55-8ad0-0dc461945978.png"/>
                </figure>
                <egXML xmlns="http://www.tei-c.org/ns/Examples" source="#Morais1789"> 
                   <xi:include href="../examples/examples.stripped.xml" corresp="../examples/examples.xml" xpointer="MORAIS.1.DLP.JANTAR"/>
@@ -366,7 +366,7 @@
          <list type="examples">
             <item>
                <figure>
-                  <graphic url="../../assets/images/imgur/d4QTXla.png"/>
+                  <graphic width="100%" url="../../assets/images/imgur/d4QTXla.png"/>
                </figure>
                <egXML xmlns="http://www.tei-c.org/ns/Examples" source="#Almonjid2014">
                   <xi:include href="../examples/examples.stripped.xml" corresp="../examples/examples.xml" xpointer="syj"/>
@@ -374,7 +374,7 @@
             </item>
             <item>
                <figure>
-                  <graphic url="../../assets/images/imgur/Lb2sxyo.png"/>
+                  <graphic width="100%" url="../../assets/images/imgur/Lb2sxyo.png"/>
                </figure>
                <egXML xmlns="http://www.tei-c.org/ns/Examples" source="#Almonjid2014">
                   <xi:include href="../examples/examples.stripped.xml" corresp="../examples/examples.xml" xpointer="shahama"/>
