@@ -368,7 +368,7 @@
          <list type="examples">
             <item>
                <figure>
-                  <graphic url="images/imgur/d4QTXla.png"/>
+                  <graphic url="../../assets/images/imgur/d4QTXla.png"/>
                </figure>
                <egXML xmlns="http://www.tei-c.org/ns/Examples" source="#Almonjid2014">
                   <xi:include href="../examples/examples.stripped.xml" corresp="../examples/examples.xml" xpointer="syj"/>
@@ -376,7 +376,7 @@
             </item>
             <item>
                <figure>
-                  <graphic url="images/imgur/Lb2sxyo.png"/>
+                  <graphic url="../../assets/images/imgur/Lb2sxyo.png"/>
                </figure>
                <egXML xmlns="http://www.tei-c.org/ns/Examples" source="#Almonjid2014">
                   <xi:include href="../examples/examples.stripped.xml" corresp="../examples/examples.xml" xpointer="shahama"/>

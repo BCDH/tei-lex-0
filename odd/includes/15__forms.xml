@@ -40,7 +40,7 @@
         <p>Such inflected forms should be encoded in <code rend="language-xpath"
                 >entry/form[@type="inflected"]</code>, e.g.:</p>
         <figure>
-            <graphic url="images/imgur/JxXgsjl.jpg"/>
+            <graphic url="../../assets/images/imgur/JxXgsjl.jpg"/>
         </figure>
         <egXML xmlns="http://www.tei-c.org/ns/Examples" source="#Chambers2014">
             <xi:include href="../examples/examples.stripped.xml"
@@ -146,7 +146,7 @@
             reflexive counterpart <code>leleti sě</code>. These can be presented in a print
             dictionary in a condensed, shorthand form such as <code>leleti (sě)</code>.</p>
         <figure>
-            <graphic url="images/imgur/Dm57uLO.png" rend="padded"/>
+            <graphic url="../../assets/images/imgur/Dm57uLO.png" rend="padded"/>
         </figure>
         <p>In English, this would be comparable to a hypothetical lemma <code>ask (oneself)</code>
             combining <code>ask</code> (“to pose a question”) and <code>ask oneself</code> (“to
@@ -219,7 +219,7 @@
             <head>Collocations</head>
             <p>TODO: explain "lexicographically transparent"</p>
             <figure>
-                <graphic url="images/imgur/gcsqdhb.jpg" rend="padded"/>
+                <graphic url="../../assets/images/imgur/gcsqdhb.jpg" rend="padded"/>
             </figure>
             <egXML xmlns="http://www.tei-c.org/ns/Examples" source="#DLPC2014">
                 <xi:include href="../examples/examples.stripped.xml"
@@ -230,7 +230,7 @@
             <head>Idiomatic expressions</head>
             <p>TODO text ("lexicographically non-transparent")</p>
             <figure>
-                <graphic url="images/imgur/VXwxggA.jpg" rend="padded"/>
+                <graphic url="../../assets/images/imgur/VXwxggA.jpg" rend="padded"/>
             </figure>
             <egXML xmlns="http://www.tei-c.org/ns/Examples" source="#DLPC2014">
                 <xi:include href="../examples/examples.stripped.xml"

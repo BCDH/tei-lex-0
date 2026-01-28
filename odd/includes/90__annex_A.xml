@@ -15,7 +15,7 @@
             <cell>
                 <figure>
                     <graphic n="10012" width="7cm"
-                        url="images/imgur/d4QTXla.png" rend="inline"/>
+                        url="../../assets/images/imgur/d4QTXla.png" rend="inline"/>
                     <note place="comment" resp="Mohamed_Khemakhem"><hi>In this example,
                         the root entry contains entries which don't have necessarily
                         related meanings</hi></note>
@@ -34,7 +34,7 @@
                     content of the root entry is organised by sense where each sense is
                     composed of different entries listed by POS.</note>
                 <figure>
-                    <graphic n="10013" width="7cm" url="images/imgur/Lb2sxyo.png"
+                    <graphic n="10013" width="7cm" url="../../assets/images/imgur/Lb2sxyo.png"
                         rend="block"/>
                 </figure></cell>
             <cell>
@@ -46,7 +46,7 @@
         <row>
             <cell><figure>
                 <graphic n="10014" width="7cm"
-                    url="images/imgur/Bl4zhav.png"
+                    url="../../assets/images/imgur/Bl4zhav.png"
                     rend="block"> </graphic>
             </figure></cell>
             <cell>
