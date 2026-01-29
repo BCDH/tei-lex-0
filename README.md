@@ -66,12 +66,39 @@ XMLCALABASH_JAR=/path/to/xmlcalabash-app-3.0.35.jar npm run assets:odd
 
 - Install dependencies: `npm ci` (or `npm install`)
 - Generate guidelines + schema (ODD → HTML + RNG): `npm run assets:odd`
+- Download/cached TEI upstream stylesheets locally (for catalog-based resolution in oXygen/offline): `npm run tei:resources`
 - Full local build (recommended): `npm run build`
   - Runs `assets:odd`
   - Minifies CSS/JS into `build/html/css/` and `build/html/js/`
   - Copies images into `build/html/images/` (referenced in the ODD and examples as `images/...`)
 - Link hygiene for `build/html`: `npm run links:check`
 - Post-process HTML (banners/robots/minify): `npm run postprocess:html -- --mode=dev` (or `--mode=main`)
+
+### Post-processing (HTML)
+
+The post-processor rewrites the already-generated static HTML under `build/html/` (it does **not** regenerate HTML from the ODD).
+
+It is implemented in `scripts/postprocess-html.mjs` and invoked via:
+
+- `npm run postprocess:html -- --mode=<main|dev|release> [--sitemap=<main|dev|none>]`
+- `npm run postprocess:html:dev` (shorthand for `--mode=dev --sitemap=dev`)
+
+What it does:
+
+- Adds `robots.txt` (mode-dependent).
+- Optionally generates `sitemap.xml` by walking `build/html/**/*.html`:
+  - `--mode=main` defaults to `--sitemap=main` (URLs under `https://lex-0.org/...`).
+  - `--mode=dev` defaults to `--sitemap=dev` (URLs under `https://dev.lex-0.org/...`).
+  - `--mode=release` defaults to `--sitemap=none`.
+- For `dev` and `release`:
+  - Adds `<meta name="robots" content="noindex,nofollow">` (if missing).
+  - Injects a fixed environment banner and a small CSS patch to keep the sticky sidebar/menu aligned.
+- For `release`:
+  - Adds `<link rel="canonical" href="https://lex-0.org/...">` (if missing).
+  - If `--release-status=historical` (default), disables DocSearch (removes the loader/boot script and replaces the mount node with a static note).
+- Adds a build-info HTML comment (commit/tag/time) for debugging.
+- Runs a conservative HTML minifier (skips pages containing `<pre>`/`<code>` to avoid breaking code examples).
+- Strips previously injected environment artifacts so repeated runs don’t duplicate banners/comments.
 
 #### Watch mode
 
@@ -103,8 +130,8 @@ You can run these transformations regardless of your currently open file. If you
 
 ## Operations
 
-- Releases and day-to-day branch workflow: [`docs/git-workflow.md`](docs/git-workflow.md)
-- Deployment architecture (Vercel + GitHub Pages release archive): [`docs/deployment.md`](docs/deployment.md)
+- Releases and day-to-day branch workflow: [docs/git-workflow.md](docs/git-workflow.md)
+- Deployment architecture (Vercel + GitHub Pages release archive): [docs/deployment.md](docs/deployment.md)
 
 ## Maintainers
 
