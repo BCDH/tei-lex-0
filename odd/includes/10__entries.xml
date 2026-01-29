@@ -29,7 +29,7 @@
          have the <att>xml:lang</att> attribute. </p>
       <p>TEI Lex-0 recommends that <att>xml:lang</att> be attached to so-called container elements
          (such as <gi>entry</gi> and <gi>cit</gi>) rather than individual <gi>form</gi> elements. </p>
-      <p>In addition, TEI Lex-0 privileges <code>&lt;entry></code> as the dictionary’s central
+      <p>In addition, TEI Lex-0 privileges <gi>entry</gi> as the dictionary’s central
          textual component by requiring both a unique identifier (<att>xml:id</att>) as well as
             <att>xml:lang</att>. </p>
       <floatingText type="inFocusPanel" xml:id="naming-your-languages">

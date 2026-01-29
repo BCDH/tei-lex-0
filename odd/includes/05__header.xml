@@ -3,8 +3,8 @@
    <head>Header</head>
       <p>A lexical resource encoded in TEI Lex-0 must, like any TEI file, start with the root
             <gi>TEI</gi> element, which, in turn, must contain a <gi>teiHeader</gi> element.</p>
-      <p>TEI Lex-0, unlike TEI P5, however, requires the <code>@type</code> attribute on the root
-            <code>TEI</code> with the value "lex-0". </p>
+   <p>TEI Lex-0, unlike TEI P5, however, requires the <code rend="language-xpath">@type</code> attribute on the root
+      <code rend="language-xpath">/TEI</code> with the value "lex-0". </p>
       <p>A TEI header contains information about the lexical resource itself, its source(s), its
          encoding, and its revisions. Proper, structured metadata of this kind is equally important
          for scholars using the resource, for software processing them, and for cataloguers in
