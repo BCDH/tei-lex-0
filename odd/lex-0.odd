@@ -137,7 +137,7 @@
                     <change type="spec">Added <gi>ruby</gi> annotation support as per <ref target="https://github.com/DARIAH-ERIC/lexicalresources/issues/225">#225</ref></change>
                     <change type="spec">Added <gi>measure</gi> (to be used, for instance, within <gi>extent</gi> in <gi>fileDesc</gi> as per <ref target="https://github.com/DARIAH-ERIC/lexicalresources/issues/257">#257</ref>.</change>
                     <change type="xproc">Added a temporary step to fix <att>xml:base</att> and <att>xml:lang</att> issues in xincluded examples as per <ref target="https://github.com/DARIAH-ERIC/lexicalresources/issues/256">#256</ref></change>
-                    <change type="spec">Deprecated <code>gram[@type="government"]</code> in favor of <code>gram[@type="government"]</code> as per <ref target="https://github.com/DARIAH-ERIC/lexicalresources/issues/254">#254</ref></change>
+                    <change type="spec">Deprecated <code rend="language-xpath">gram[@type="government"]</code> in favor of <code rend="language-xpath">gram[@type="construction"]</code> as per <ref target="https://github.com/DARIAH-ERIC/lexicalresources/issues/254">#254</ref></change>
                     <change type="spec">Refactored model classes to fix XSD UPA violations as per <ref target="https://github.com/DARIAH-ERIC/lexicalresources/issues/223">#223</ref>.</change>
                     <change type="docs">Minor corrections in the documentation</change>
                     <change type="docs">Introduced the tagging of P5 and Lex-0 examples in the specification to avoid confusion</change>
@@ -161,9 +161,9 @@
                     <change type="spec">remove <ref target="#TEI.model.listLike">model.listLike</ref> from <ref target="#TEI.model.lexicalInter">model.lexicalInter</ref></change>
                     <change type="html">link version number in the menu to revision history</change>
                     <change type="spec">allow <gi>abbr</gi> and <gi>expan</gi> so that they can be used in lists of abbreviations in dictionary front matter</change>
-                    <change type="spec">introduced <code>valency</code> as a suggested value in <code>gram[@type="valency"]</code></change>
-                    <change type="spec">introduced <code>gram[@type="government"]</code> and clarified the difference from <code>gram[@type="colloc"]</code>. See sections on <ref target="#typology-of-gram">Typology of <code>gram</code></ref> and <ref target="#collocates">Collocates</ref></change>
-                    <change type="spec">made <code>@type</code> mandatory on <gi>TEI</gi></change>
+                    <change type="spec">introduced <code>valency</code> as a suggested value in <code rend="language-xpath">gram[@type="valency"]</code></change>
+                    <change type="spec">introduced <code rend="language-xpath">gram[@type="government"]</code> and clarified the difference from <code rend="language-xpath">gram[@type="colloc"]</code>. See sections on <ref target="#typology-of-gram">Typology of <code>gram</code></ref> and <ref target="#collocates">Collocates</ref></change>
+                    <change type="spec">made <code rend="language-xpath">@type</code> mandatory on <gi>TEI</gi></change>
                     <change type="spec">add <gi>principal</gi> and <gi>affiliation</gi> for more robust metadata in the <gi>teiHeader</gi></change>
                 </listChange>
                 <listChange n="0.9.1">

@@ -11,7 +11,7 @@
         <list>
             <item>
                 <hi rend="italic">In oXygen XML Editor</hi>: associate your TEI document with the
-                current Relax NG schema <code>https://lex-0.org/schema/lex-0.rng</code> using the
+                current Relax NG schema <code rend="language-xpath">https://lex-0.org/schema/lex-0.rng</code> using the
                 Schema Association dialog (Document &gt; Schema &gt; Associate Schema, or the
                 red-pin icon). <figure xml:id="oxy-assoc-schema">
                     <head>Associating schema in oXygen XML Editor</head>
@@ -105,27 +105,27 @@
         <div xml:id="faq.contribute.nitty-gritty">
             <head>The internal nitty-gritty</head>
             <list>
-                <item><code>lex-0.odd</code> is the master ODD file. It uses
+                <item><code rend="language-xpath">lex-0.odd</code> is the master ODD file. It uses
                         <code>&lt;xi:include&gt;</code> to pull chapter fragments from
-                        <code>odd/includes/</code>.</item>
-                <item>Examples of TEI Lex-0 live in <code>odd/examples/examples.xml</code>; the
-                    stripped counterpart is <code>odd/examples/examples.stripped.xml</code>.</item>
+                    <code rend="language-xpath">odd/includes/</code>.</item>
+                <item>Examples of TEI Lex-0 live in <code rend="language-xpath">odd/examples/examples.xml</code>; the
+                    stripped counterpart is <code rend="language-xpath">odd/examples/examples.stripped.xml</code>.</item>
                 <item>The Relax NG schema generated from the ODD is written to
-                        <code>build/html/schema/lex-0.rng</code>.</item>
-                <item><code>xslt/tei-stripper.xsl</code> strips TEI examples into the
-                        <code>http://www.tei-c.org/ns/Examples</code> namespace so they can be
+                    <code rend="language-xpath">build/html/schema/lex-0.rng</code>.</item>
+                <item><code rend="language-xpath">xslt/tei-stripper.xsl</code> strips TEI examples into the
+                    <code rend="language-xpath">http://www.tei-c.org/ns/Examples</code> namespace so they can be
                     included inside <gi>egXML</gi>. The stripping is run by the XProc pipeline in
-                        <code>xproc/lex-0.xpl</code> (invoked by <code>npm run assets:odd</code>
+                    <code rend="language-xpath">xproc/lex-0.xpl</code> (invoked by <code>npm run assets:odd</code>
                     from the repository root).</item>
                 <item>To include validated examples, reference ids from the stripped file, for
                     example: <xi:include parse="xml" href="fragments/referencing-stripped-ids.xml"/>
-                    You can also include segments using the <code>element()</code> scheme, e.g.
+                    You can also include segments using the <code rend="language-xpath">element()</code> scheme, e.g.
                         <xi:include parse="xml" href="fragments/xinclude-element-scheme.xml"/>
                 </item>
                 <item>If you are using oXygen XML, clicking on the link in Author Mode will take you
-                    directly to the element or fragment in <code>odd/examples/examples.xml</code>
+                    directly to the element or fragment in <code rend="language-xpath">odd/examples/examples.xml</code>
                     for editing.</item>
-                <item>After changing <code>odd/examples/examples.xml</code>, run <code>npm run
+                <item>After changing <code rend="language-xpath">odd/examples/examples.xml</code>, run <code>npm run
                         assets:odd</code> to regenerate the stripped examples and the HTML
                     output.</item>
             </list>

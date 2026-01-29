@@ -27,8 +27,8 @@
                         rend="language-xpath">'en'</code></item>
             </list>
         </p>
-        <p>If your dictionary uses multiple language tags for one language (as in <code>'en'</code>, <code>'en-GB</code>' and
-            <code>'en-US'</code>) and you want to capture all language varieties with one XPath expression, you can use the XPath <code>lang()</code> function as in:
+        <p>If your dictionary uses multiple language tags for one language (as in <code rend="language-xpath">'en'</code>, <code rend="language-xpath">'en-GB</code>' and
+            <code rend="language-xpath">'en-US'</code>) and you want to capture all language varieties with one XPath expression, you can use the XPath <code rend="language-xpath">lang()</code> function as in:
                 <code rend="language-xpath"
                 >//orth[ancestor-or-self::*[@xml:lang][1][lang('en')]]</code>. </p>
         <p>While the predicate <code rend="language-xpath">[@xml:lang='en']</code> will match only

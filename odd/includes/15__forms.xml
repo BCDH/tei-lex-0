@@ -151,7 +151,7 @@
             wonder, to reflect”) in a single entry as one condensed lemma.</p>
         <p>Because bracketed constructions such as <code>leleti (sě)</code> do not represent
             naturally occurring word forms, we recommend treating these condensed forms as labels (<gi>lbl</gi>)
-            rather than lemmas. From an encoding perspective, this means using <code>lbl[@type="condensedLemma"]</code> to
+            rather than lemmas. From an encoding perspective, this means using <code rend="language-xpath">lbl[@type="condensedLemma"]</code> to
             represent the compacted headword for display or identification purposes, while defining
             each of the component lemmas separately using individual <gi>form</gi> elements:</p>
         <egXML xmlns="http://www.tei-c.org/ns/Examples" source="#MSS">
@@ -169,9 +169,9 @@
             <body>
                 <head>indexing condensed lemmas</head>
                 <p>If we encode regular lemmas (those present in the source) as
-                        <code>//form[@type='lemma']/orth</code> and reconstructed lemmas (those
+                    <code rend="language-xpath">//form[@type='lemma']/orth</code> and reconstructed lemmas (those
                     inferred or editorially supplied) as
-                        <code>//form[@type='lemma']/orth/@value</code>, we will no longer have a
+                    <code rend="language-xpath">//form[@type='lemma']/orth/@value</code>, we will no longer have a
                     uniform path for indexing the dictionary. This is because two kinds of lemmas
                     will reside on different XPaths. This, however, is a necessary and principled
                     compromise.</p>
@@ -183,7 +183,7 @@
                     searchability, machine processing, and downstream applications.</p>
                 <p>To support robust querying, it is, therefore, recommended that documentation or downstream
                     systems account for this distinction, for instance by using the combined XPath
-                    expression such as <code>//form[@type='lemma']/orth/text() |
+                    expression such as <code rend="language-xpath">//form[@type='lemma']/orth/text() |
                         //form[@type='lemma']/orth/@value</code> to get to the consolidated list of
                     both explicit and implicit lemmas.</p>
             </body>
