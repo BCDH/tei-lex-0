@@ -1,5 +1,5 @@
 import { spawn } from "node:child_process";
-import { join, basename } from "node:path";
+import { join, basename, extname } from "node:path";
 import chokidar from "chokidar";
 
 const debug =
@@ -25,21 +25,21 @@ const playNotificationSound = () => {
 const cwd = process.cwd();
 const assetsDir = join(cwd, "assets");
 const watchTargets = [
-  { dir: join(assetsDir, "css"), task: "assets:minify" },
-  { dir: join(assetsDir, "js"), task: "assets:minify" },
+  { dir: join(assetsDir, "css"), task: "assets:minify", exts: new Set([".css"]) },
+  { dir: join(assetsDir, "js"), task: "assets:minify", exts: new Set([".js"]) },
   { dir: join(assetsDir, "images"), task: "assets:images" },
-  { dir: join(cwd, "odd"), task: "assets:odd" },
-  { dir: join(cwd, "xslt"), task: "assets:odd" },
-  // { dir: join(cwd, "xproc"), task: "assets:odd" },
+  // Only watch ODD/XSLT inputs (avoid noise from odd/*.md, etc.).
+  { dir: join(cwd, "odd"), task: "assets:odd", exts: new Set([".odd", ".xml"]) },
+  { dir: join(cwd, "xslt"), task: "assets:odd", exts: new Set([".xsl", ".xslt"]) },
+  // { dir: join(cwd, "xproc"), task: "assets:odd", exts: new Set([".xpl"]) },
 ];
 
 // Ignore generated artifacts and temp files that may retrigger assets:odd
 const shouldIgnore = (fullPath = "") => {
   const base = basename(fullPath);
+  // Ignore hidden files/dirs (IDE metadata, OS dotfiles, etc.)
+  if (base.startsWith(".")) return true;
   return (
-    base === ".DS_Store" ||
-    base.startsWith("._") ||
-    base.startsWith(".#") ||
     base.endsWith(".stripped.xml") ||
     base.endsWith("~") ||
     base.endsWith(".swp") ||
@@ -98,7 +98,7 @@ const scheduleTask = (task) => {
 // on macOS for directory trees (missed events under `odd/includes/`).
 // `chokidar` uses the best available backend per platform (incl. fsevents on
 // macOS) and handles atomic/safe-write editor patterns reliably.
-const watchers = watchTargets.map(({ dir, task }) =>
+const watchers = watchTargets.map(({ dir, task, exts }) =>
   chokidar
     .watch(dir, {
       ignoreInitial: true,
@@ -106,6 +106,10 @@ const watchers = watchTargets.map(({ dir, task }) =>
       ignored: (path) => shouldIgnore(path),
     })
     .on("all", (eventType, path) => {
+      // Directory events tend to be noisy on macOS (and are not actionable for rebuilds).
+      if (eventType === "addDir" || eventType === "unlinkDir") return;
+      if (shouldIgnore(path)) return;
+      if (exts && !exts.has(extname(path))) return;
       logDebug(`[watch] ${task}: ${eventType} ${path}`);
       scheduleTask(task);
     }),
