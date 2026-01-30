@@ -1,6 +1,12 @@
 import { spawn } from "node:child_process";
-import { watch } from "node:fs";
 import { join, basename } from "node:path";
+import chokidar from "chokidar";
+
+const debug =
+  process.env.WATCH_DEBUG === "1" || process.env.WATCH_DEBUG === "true";
+const logDebug = (...args) => {
+  if (debug) console.log(...args);
+};
 
 const playNotificationSound = () => {
   if (process.platform === "darwin") {
@@ -31,10 +37,21 @@ const watchTargets = [
 const shouldIgnore = (fullPath = "") => {
   const base = basename(fullPath);
   return (
-    base.startsWith(".") ||
+    base === ".DS_Store" ||
+    base.startsWith("._") ||
+    base.startsWith(".#") ||
     base.endsWith(".stripped.xml") ||
     base.endsWith("~") ||
-    base.endsWith(".swp")
+    base.endsWith(".swp") ||
+    base.endsWith(".swo") ||
+    base.endsWith(".swn") ||
+    base.endsWith(".swx") ||
+    base.endsWith(".tmp") ||
+    base.endsWith(".temp") ||
+    base.endsWith(".bak") ||
+    base.endsWith(".orig") ||
+    base.startsWith("#") ||
+    base.endsWith("#")
   );
 };
 
@@ -77,14 +94,26 @@ const scheduleTask = (task) => {
   state.debounce = setTimeout(() => runTask(task), 200);
 };
 
-watchTargets.forEach(({ dir, task }) => {
-  watch(dir, { recursive: true }, (eventType, filename) => {
-    const fullPath = filename ? join(dir, filename) : "";
-    if (!filename || shouldIgnore(fullPath)) return;
-    if (eventType === "rename" || eventType === "change") {
+// NOTE: Node's built-in `fs.watch({ recursive: true })` has proven unreliable
+// on macOS for directory trees (missed events under `odd/includes/`).
+// `chokidar` uses the best available backend per platform (incl. fsevents on
+// macOS) and handles atomic/safe-write editor patterns reliably.
+const watchers = watchTargets.map(({ dir, task }) =>
+  chokidar
+    .watch(dir, {
+      ignoreInitial: true,
+      awaitWriteFinish: { stabilityThreshold: 150, pollInterval: 50 },
+      ignored: (path) => shouldIgnore(path),
+    })
+    .on("all", (eventType, path) => {
+      logDebug(`[watch] ${task}: ${eventType} ${path}`);
       scheduleTask(task);
-    }
-  });
+    }),
+);
+
+process.on("SIGINT", () => {
+  for (const w of watchers) w.close();
+  process.exit(0);
 });
 
 console.log("Watching assets for changes:");
