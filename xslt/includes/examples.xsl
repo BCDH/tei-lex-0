@@ -107,10 +107,25 @@
             [not(contains(@rend,'unwrapped'))]">
         <xsl:param name="simple">false</xsl:param>
         <xsl:param name="highlight"/>
-      <!--  <xsl:variable name="pos-in-list" select="count(../preceding-sibling::tei:item) + 1"/>-->
+        <!--
+            When examples are wrapped via tei:list[@type='examples'], the tei:item template above
+            suppresses all item content except teix:egXML. To allow authors to provide an explicit
+            label for the tab UI, we mine it from the nearest preceding sibling within the same
+            tei:item.
+
+            Recommended authoring pattern:
+              <item>
+                <desc>Short label shown in the tab header</desc>
+                <egXML>…</egXML>
+              </item>
+        -->
+        <xsl:variable name="eg" select="." as="element(teix:egXML)"/>
+        <xsl:variable name="label"
+            select="parent::tei:item/tei:desc" as="node()*"/>   
         <xsl:variable name="egImg" select="parent::tei:item/tei:figure"/>
         <xsl:call-template name="wrapExample">
             <xsl:with-param name="egImg" select="$egImg"/>
+            <xsl:with-param name="label" select="$label"/>
         </xsl:call-template>
     </xsl:template>
     
@@ -214,11 +229,18 @@
     </xsl:template>
 
     <xsl:template name="wrapExample">
+       
         <xsl:param name="egImg"/>
+        <xsl:param name="label" as="node()*" select="()"/>
+        <xsl:variable name="labelText" select="normalize-space(string-join($label//text(), ' '))"/>
         <xsl:call-template name="wrapTab">
             <xsl:with-param name="iconSrc" select="'images/code.png'"/>
             <xsl:with-param name="labelContent">
-                <span style="display:inline-block"></span>
+                <xsl:if test="$labelText != ''">
+                    <span style="display:inline-block">
+                        <xsl:value-of select="$labelText"/>
+                    </span>
+                </xsl:if>
             </xsl:with-param>
             <xsl:with-param name="bodyContent">
                 <xsl:apply-templates select="$egImg"/>
