@@ -11,118 +11,155 @@
                 <title>TEI Lex-0</title>
                 <title type="subordinate">A baseline encoding for lexicographic data</title>
                 <title type="tagline">Clarity for lexicographers. Stability for data. Compatibility for the future.</title>
-                <editor>
+                <editor corresp="#pre-v0.9.5 #v0.9.5">
                     <persName>
                         <forename>Toma</forename>
                         <surname>Tasovac</surname>
                     </persName>
                 </editor>
-                <editor>
+                <editor corresp="#pre-v0.9.5 #v0.9.5">
                     <persName>
                         <forename>Laurent</forename>
                         <surname>Romary</surname>
                     </persName>
                 </editor>
-                <author xml:id="TT" role="main">
+                <author xml:id="TT" role="main" corresp="#pre-v0.9.5 #v0.9.5">
                     <persName>
                         <forename>Toma</forename>
                         <surname>Tasovac</surname>
                     </persName>
                 </author>
-                <author xml:id="LR" role="main">
+                <author xml:id="LR" role="main" corresp="#pre-v0.9.5 #v0.9.5">
                     <persName>
                         <forename>Laurent</forename>
                         <surname>Romary</surname>
                     </persName>
                 </author>
-                <author xml:id="AS" role="contributing">
+                <author xml:id="AS" role="contributing" corresp="#pre-v0.9.5 #v0.9.5">
                     <persName>
                         <forename>Ana</forename>
                         <surname>Salgado</surname>
                     </persName>
                 </author>
-                <author xml:id="AH" role="contributing">
-                    <persName>
-                        <forename>Axel</forename>
-                        <surname>Herold</surname>
-                    </persName>
-                </author>
-                <author xml:id="JB" role="contributing">
-                    <persName>
-                        <forename>Jack</forename>
-                        <surname>Bowers</surname>
-                    </persName>
-                </author>
-                <author xml:id="AG" role="contributing">
-                    <persName>
-                        <forename>Alexander</forename>
-                        <surname>Geyken</surname>
-                    </persName>
-                </author>
-                <author xml:id="JD" role="contributing">
-                    <persName>
-                        <forename>Jesse</forename>
-                        <surname>de Does</surname>
-                    </persName>
-                </author>
-                <author xml:id="KD" role="contributing">
-                    <persName>
-                        <forename>Katrien</forename>
-                        <surname>Depuydt</surname>
-                    </persName>
-                </author>
-                <author xml:id="MK" role="contributing">
-                    <persName>
-                        <forename>Mohamed</forename>
-                        <surname>Khemakhem</surname>
-                    </persName>
-                </author>
-                <author xml:id="TE" role="contributing">
-                    <persName>
-                        <forename>Tomaž</forename>
-                        <surname>Erjavec</surname>
-                    </persName>
-                </author>
-                <author xml:id="AW" role="contributing">
-                    <persName>
-                        <forename>Andreas</forename>
-                        <surname>Witt</surname>
-                    </persName>
-                </author>
-                <author xml:id="PB" role="contributing">
-                    <persName>
-                        <forename>Piotr</forename>
-                        <surname>Banski</surname>
-                    </persName>
-                </author>
-                <author xml:id="SP" role="contributing">
-                    <persName>
-                        <forename>Snežana</forename>
-                        <surname>Petrović</surname>
-                    </persName>
-                </author>
-                <author xml:id="VH" role="contributing">
-                    <persName>
-                        <forename>Vera</forename>
-                        <surname>Hildenbrandt</surname>
-                    </persName>
-                </author>
-                <author xml:id="BL" role="contributing">
+                <author xml:id="BL" role="contributing" corresp="#pre-v0.9.5 #v0.9.5">
                     <persName>
                         <forename>Boris</forename>
                         <surname>Lehečka</surname>
                     </persName>
                 </author>
+                <author xml:id="AH" role="contributing" corresp="#pre-v0.9.5 #v0.9.5">
+                    <persName>
+                        <forename>Axel</forename>
+                        <surname>Herold</surname>
+                    </persName>
+                </author>
+                <author xml:id="PB" role="contributing" corresp="#pre-v0.9.5 #v0.9.5">
+                    <persName>
+                        <forename>Piotr</forename>
+                        <surname>Banski</surname>
+                    </persName>
+                </author>
+                <author xml:id="CM" role="contributing" corresp="#pre-v0.9.5 #v0.9.5">
+                    <persName>
+                        <forename>Charly</forename>
+                        <surname>Moerth</surname>
+                    </persName>
+                </author>
+                <author xml:id="FK" role="contributing" corresp="#v0.9.5">
+                    <persName>
+                        <forename>Fahad</forename>
+                        <surname>Kahn</surname>
+                    </persName>
+                </author>
+                <author xml:id="KS" role="contributing" corresp="#v0.9.5">
+                    <persName>
+                        <forename>Kinga</forename>
+                        <surname>Sramó</surname>
+                    </persName>
+                </author>
+                <author xml:id="DS" role="contributing" corresp="#v0.9.5">
+                    <persName>
+                        <forename>Daniel</forename>
+                        <surname>Schopper</surname>
+                    </persName>
+                </author>
+                <author xml:id="VE" role="contributing" corresp="#v0.9.5">
+                    <persName>
+                        <forename>Veronika</forename>
+                        <surname>Engler</surname>
+                    </persName>
+                </author>
+                <author xml:id="JB" role="contributing" corresp="#pre-v0.9.5">
+                    <persName>
+                        <forename>Jack</forename>
+                        <surname>Bowers</surname>
+                    </persName>
+                </author>
+                <author xml:id="AG" role="contributing" corresp="#pre-v0.9.5">
+                    <persName>
+                        <forename>Alexander</forename>
+                        <surname>Geyken</surname>
+                    </persName>
+                </author>
+                <author xml:id="TE" role="contributing" corresp="#pre-v0.9.5">
+                    <persName>
+                        <forename>Tomaž</forename>
+                        <surname>Erjavec</surname>
+                    </persName>
+                </author>
+                <author xml:id="AW" role="contributing" corresp="#pre-v0.9.5">
+                    <persName>
+                        <forename>Andreas</forename>
+                        <surname>Witt</surname>
+                    </persName>
+                </author>
+                <author xml:id="SP" role="contributing" corresp="#pre-v0.9.5">
+                    <persName>
+                        <forename>Snežana</forename>
+                        <surname>Petrović</surname>
+                    </persName>
+                </author>
+                <author xml:id="JD" role="contributing" corresp="#pre-v0.9.5">
+                    <persName>
+                        <forename>Jesse</forename>
+                        <surname>de Does</surname>
+                    </persName>
+                </author>
+                <author xml:id="KD" role="contributing" corresp="#pre-v0.9.5">
+                    <persName>
+                        <forename>Katrien</forename>
+                        <surname>Depuydt</surname>
+                    </persName>
+                </author>
+                <author xml:id="MK" role="contributing" corresp="#pre-v0.9.5">
+                    <persName>
+                        <forename>Mohamed</forename>
+                        <surname>Khemakhem</surname>
+                    </persName>
+                </author> 
+                <author xml:id="VH" role="contributing" corresp="#pre-v0.9.5">
+                    <persName>
+                        <forename>Vera</forename>
+                        <surname>Hildenbrandt</surname>
+                    </persName>
+                </author>
+                <author xml:id="PeBa" role="contributing" corresp="#pre-v0.9.5">
+                    <persName>
+                        <forename>Petra</forename>
+                        <surname>Bago</surname>
+                    </persName>
+                </author> 
             </titleStmt>
             <editionStmt>
                 <!--make sure to remove the dev suffix before publishing a new release-->
-                <edition n="0.9.5-dev"/>
+                <edition n="0.9.5"/>
             </editionStmt>
+           
             <publicationStmt>
                 <authority>DARIAH Working Group on Lexical Resources</authority>
-                <date when="2018"/>
+                <date when="2025"/>
                 <ptr
-                    target="https://dariah-eric.github.io/lexicalresources/pages/TEILex0/TEILex0.html"
+                    target="https://lex-0.org"
                 />
             </publicationStmt>
             <sourceDesc>
@@ -131,7 +168,7 @@
         </fileDesc>
         <revisionDesc>
             <listChange>
-                <listChange n="0.9.5">
+                <listChange n="0.9.5" xml:id="v0.9.5">
                     <change when="2024-11-27" type="docs">Added documentation on encoding condensed forms a là "leleti (sě)".</change>
                     <change type="spec">Added <ref target="#TEI.model.languageProfile">model.languageProfile</ref> to better structure <gi>language</gi> as per <ref target="https://github.com/DARIAH-ERIC/lexicalresources/issues/245">#245</ref>.</change>
                     <change type="spec">Added <gi>ruby</gi> annotation support as per <ref target="https://github.com/DARIAH-ERIC/lexicalresources/issues/225">#225</ref></change>
@@ -140,10 +177,11 @@
                     <change type="spec">Deprecated <code rend="language-xpath">gram[@type="government"]</code> in favor of <code rend="language-xpath">gram[@type="construction"]</code> as per <ref target="https://github.com/DARIAH-ERIC/lexicalresources/issues/254">#254</ref></change>
                     <change type="spec">Refactored model classes to fix XSD UPA violations as per <ref target="https://github.com/DARIAH-ERIC/lexicalresources/issues/223">#223</ref>.</change>
                     <change type="docs">Minor corrections in the documentation</change>
-                    <change type="docs">Introduced the tagging of P5 and Lex-0 examples in the specification to avoid confusion</change>
-                    <change type="spec">Include <gi>listPlace</gi> to be used in <gi>settingDesc</gi> as part of <ref target="#TEI.model.languageProfile">model.languageProfile</ref></change>
+                    <change type="docs">Introduced the labeling of P5 and Lex-0 examples in the specification to avoid confusion</change>
+                    <change type="docs">Added a secion on documenting <ref target="#language-profile">language profiles</ref> to the <hi rend="italic">Guidelines</hi></change>
+                    <change type="spec">Included <gi>listPlace</gi> to be used in <gi>settingDesc</gi> as part of <ref target="#TEI.model.languageProfile">model.languageProfile</ref></change>
                 </listChange>
-                <listChange n="0.9.4">
+                <listChange n="0.9.4" corresp="https://lex-0.org/releases/v0.9.4/">
                     <change when="2024-05-12" type="xproc">fix documentation build on macOS and Windows in oXygen XML Editor</change>
                     <change type="spec">added <code>degree</code> as <gi>gram</gi> <att>type</att> value</change>
                     <change type="docs">fixed some typographical errors in the documentation</change>

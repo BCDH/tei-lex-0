@@ -17,7 +17,8 @@
     </xsl:variable>
     <xsl:variable name="mainAuthors">
         <!--used in short citation-->
-        <xsl:for-each select="//tei:fileDesc/tei:titleStmt/tei:author[@role = 'main']">
+        <xsl:for-each
+            select="//tei:fileDesc/tei:titleStmt/tei:author[@role = 'main' and tokenize(@corresp, '\s+') = $currentVersionToken]">
             <xsl:value-of select="tei:persName/tei:forename"/>
             <xsl:text> </xsl:text>
             <xsl:value-of select="tei:persName/tei:surname"/>
@@ -28,13 +29,15 @@
     </xsl:variable>
     <xsl:variable name="formattedAuthors">
         <!--used in long citation-->
-        <xsl:for-each select="//tei:fileDesc/tei:titleStmt/tei:author[@role = 'main']">
+        <xsl:for-each
+            select="//tei:fileDesc/tei:titleStmt/tei:author[@role = 'main' and tokenize(@corresp, '\s+') = $currentVersionToken]">
             <xsl:value-of select="tei:persName/tei:forename"/>
             <xsl:text> </xsl:text>
             <xsl:value-of select="tei:persName/tei:surname"/>
             <xsl:text>, </xsl:text>
         </xsl:for-each>
-        <xsl:for-each select="//tei:fileDesc/tei:titleStmt/tei:author[@role = 'contributing']">
+        <xsl:for-each
+            select="//tei:fileDesc/tei:titleStmt/tei:author[@role = 'contributing' and tokenize(@corresp, '\s+') = $currentVersionToken]">
             <xsl:sort select="upper-case(tei:persName/tei:surname)"/>
             <xsl:if test="position() eq last()">
                 <xsl:text> and </xsl:text>
@@ -51,6 +54,7 @@
         </xsl:for-each>
     </xsl:variable>
     <xsl:variable name="version" select="//tei:fileDesc/tei:editionStmt/tei:edition/@n"/>
+    <xsl:variable name="currentVersionToken" select="concat('#v', $version)"/>
     <xsl:variable name="url" select="//tei:fileDesc/tei:publicationStmt/tei:ptr/@target"/>
     <xsl:variable name="date" select="//tei:fileDesc/tei:publicationStmt/tei:date/@when"/>
     <xsl:variable name="title">
@@ -121,7 +125,7 @@
             <xsl:element name="p" namespace="http://www.tei-c.org/ns/1.0"> Changes to the TEI Lex-0
                 specification up to version 0.8.6 were included in comments inside the ODD file
                 itself. Starting with version 0.9.0, we're listing a summary of the changes in this
-                list for easier reference. </xsl:element>
+                list for easier reference. And starting with v.0.9.4, we're archiving historical releases. </xsl:element>
             <xsl:for-each select="/tei:TEI/tei:teiHeader/tei:revisionDesc/tei:listChange">
                 <xsl:for-each select="./tei:listChange">
                     <xsl:element name="list" namespace="http://www.tei-c.org/ns/1.0">
@@ -134,7 +138,18 @@
                             <xsl:text> (</xsl:text>
                             <xsl:value-of select="change[1]/@when"/>
                             <xsl:text>)</xsl:text>
+                            <xsl:if test="@corresp">
+                                <xsl:text> → </xsl:text>
+                                <xsl:element name="ref" namespace="http://www.tei-c.org/ns/1.0">
+                                    <xsl:attribute name="target">
+                                        <xsl:value-of select="@corresp"/>
+                                    </xsl:attribute>
+                                    <xsl:value-of select="@corresp"/>
+                                </xsl:element>
+                            </xsl:if>
                         </xsl:element>
+                        
+                            
                         <xsl:for-each select="tei:change">
                             <xsl:element name="item" namespace="http://www.tei-c.org/ns/1.0">
                                 <xsl:element name="label" namespace="http://www.tei-c.org/ns/1.0">
