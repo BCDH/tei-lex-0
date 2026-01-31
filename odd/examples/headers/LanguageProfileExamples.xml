@@ -32,16 +32,16 @@
                 <language ident="ru-x-lit19c" role="objectLanguage">
                     <name xml:lang="ru">Русский литературный язык XIX века</name>
                     <name xml:lang="en">19th-century literary Russian</name>
+                    <date notBefore="1800" notAfter="1899"></date>
                 </language>
                 <language ident="ru" role="workingLanguage">
                     <name xml:lang="ru">Современный русский язык</name>
-                    <name xml:lang="en">Modern Russian</name>
+                    <name xml:lang="en">Contemporary Russian</name>
                 </language>
             </langUsage>
             <!-- xpointer="element(/1/1/2/2)-->
             <langUsage>
-                <language status="active" role="sourceLanguage" ident="fr" type="individual"
-                    subtype="living">
+                <language status="active" role="objectLanguage" ident="fr">
                     <ident type="languageIdentifier" subtype="ISO639-3B">fre</ident>
                     <ident type="languageIdentifier" subtype="ISO639-3T">fra</ident>
                     <ident type="languageIdentifier" subtype="ISO639-2">fr</ident>
@@ -54,7 +54,7 @@
             <langUsage>
                 <language status="retired" ident="auv" role="sourceLanguage">
                     <name type="languageName" role="languageReferenceName" xml:lang="en"
-                        >Auvergnat</name> 
+                        >Auvergnat</name>
                 </language>
             </langUsage>
             <!-- xpointer="element(/1/1/2/4)-->
@@ -62,16 +62,16 @@
                 <language ident="ar-x-syrkha" role="objectLanguage">
                     <name type="languageVariety">the Arabic of the Khawetna (E Syria)</name>
                     <settingDesc>
-                        <place sameAs="geo:khawetna" />
+                        <place sameAs="geo:khawetna"/>
                     </settingDesc>
                     <date type="languagePeriod">Contemporary</date>
-                    <personGrp role="tribe" corresp="pgr:khawetna_tribe" />
+                    <personGrp role="tribe" corresp="pgr:khawetna_tribe"/>
                     <channel mode="s">spoken</channel>
                 </language>
             </langUsage>
             <!-- xpointer="element(/1/1/2/5)-->
             <langUsage>
-                <language ident="fr-FR" role="sourceLanguage">
+                <language ident="fr-FR" role="objectLanguage">
                     <name type="languageVariety">French as used in France in the early 20th
                         century</name>
                     <settingDesc>
@@ -80,31 +80,44 @@
                             <idno type="UN-M49">250</idno>
                             <idno type="ISO-alpha3">FRA</idno>
                         </place>
-                    </settingDesc>   
+                    </settingDesc>
                     <date notBefore="1900" notAfter="1940"/>
                 </language>
             </langUsage>
             <!-- xpointer="element(/1/1/2/6)-->
             <langUsage>
-                <language role="sourceLanguage" ident="ar-x-shawi">
+                <language role="objectLanguage" ident="ar-x-shawi">
+                    <name type="languageVariety">Shawi Arabic </name>
                     <personGrp>
                         <age>Different ages</age>
-                        <gender>Male and female</gender>
+                        <gender>All genders</gender>
                         <faith>Muslim (Sunni)</faith>
                         <education>No specific level of education. Any formal education received in
                             Turkish, no formal education in Arabic</education>
                         <nationality type="citizenship">Turkish</nationality>
                         <nationality type="ethnicity">Arab</nationality>
-                        <residence>No specific residence</residence>
-                        <occupation>No specific occupation</occupation>
+                        <residence/>
+                        <occupation/>
                         <socecStatus>The speakers of this variety were formerly sheep and goat
                             rearing nomads.</socecStatus>
-                        <note/>
                         <langKnowledge>
                             <langKnown tag="ar-x-shaw"/>
                             <langKnown tag="tr"/>
                         </langKnowledge>
+                        <note/>
                     </personGrp>
+                    <channel mode="s">spoken</channel>
+                </language>
+            </langUsage>
+            <!-- xpointer="element(/1/1/2/7)-->
+            <langUsage>
+                <language role="sourceLanguage" ident="yi">
+                    <name xml:lang="en">Yiddish</name>
+                    <name xml:lang="yi">ייִדיש</name>
+                </language>
+                <language role="targetLanguage" ident="en">
+                    <name xml:lang="en">English</name>
+                    <name xml:lang="yi">ענגליש</name>
                 </language>
             </langUsage>
         </profileDesc>

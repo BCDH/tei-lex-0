@@ -57,8 +57,12 @@
             <egXML xmlns="http://www.tei-c.org/ns/Examples">
                <profileDesc>
                   <langUsage>
-                     <language ident="mix" role="objectLanguage">Mixtepec Mixtec</language>
-                     <language ident="mix-x-YCNY" role="objectLanguage">Yucanany Mixtec</language>
+                     <language ident="mix" role="objectLanguage">
+                        <name xml:lang="en">Mixtepec Mixtec</name>
+                     </language>
+                     <language ident="mix-x-YCNY" role="objectLanguage">
+                        <name xml:lang="en">Yucanany Mixtec</name>
+                     </language>
                   </langUsage>
                </profileDesc>
             </egXML>
