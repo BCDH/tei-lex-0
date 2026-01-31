@@ -1,38 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <div xmlns="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:id="header">
    <head>Header</head>
-      <p>A lexical resource encoded in TEI Lex-0 must, like any TEI file, start with the root
-            <gi>TEI</gi> element, which, in turn, must contain a <gi>teiHeader</gi> element.</p>
-   <p>TEI Lex-0, unlike TEI P5, however, requires the <code rend="language-xpath">@type</code> attribute on the root
-      <code rend="language-xpath">/TEI</code> with the value "lex-0". </p>
-      <p>A TEI header contains information about the lexical resource itself, its source(s), its
-         encoding, and its revisions. Proper, structured metadata of this kind is equally important
-         for scholars using the resource, for software processing them, and for cataloguers in
-         libraries and archives.</p>
-      <p>The TEI header of a lexical resource has five major parts:<list>
-            <item>a <hi rend="italic">file description</hi>, tagged <gi>fileDesc</gi>, provides a
-               full bibliographic description of the electronic lexical resource itself as well as
-               the source(s), analogue or digital, from which it may have been derived. For details,
-               see section <ref target="#file-description">File Description</ref> below. </item>
-            <item>an <hi rend="italic">encoding description</hi>, tagged <gi>encodingDesc</gi>,
-               describes the relationship between the electronic resource and its source(s). It
-               allows for detailed description of whether (or how) the electronic resource was
-               produced, transcribed or normalized, how the encoder resolved ambiguities in the
-               source, what levels of encoding or analysis were applied etc.</item>
-            <item>a <hi rend="italic">profile description</hi>, tagged <gi>profileDesc</gi>,
-               contains classificatory and contextual information about the lexical resource
-               including its object and working languages.</item>
-            <item>a <hi rend="italic">container for external metadata</hi>, tagged
-               <gi>xenoData</gi>, contains metadata from non-TEI schemas, for instance Dublin Core,
-               MARCXML or MODS, if available.</item>
-            <item>a <hi rend="italic">revision history</hi>, tagged <gi>revisionDesc</gi>, contains
-               a list of changes made during the development of the lexical resource, both before
-               and after its official release. </item>
-         </list></p>
-      <p>Of these, two elements are required in TEI Lex-0: <gi>fileDesc</gi> and
-            <gi>profileDesc</gi>. It is highly recommended to include additional information in
-            <gi>encodingDesc</gi>. It is also an example of good practice to record changes in
-            <gi>revisionDesc</gi>. </p>
+   <p>A lexical resource encoded in TEI Lex-0 must, like any TEI file, start with the root
+         <gi>TEI</gi> element, which, in turn, must contain a <gi>teiHeader</gi> element.</p>
+   <p>TEI Lex-0, unlike TEI P5, however, requires the <code rend="language-xpath">@type</code>
+      attribute on the root <code rend="language-xpath">/TEI</code> with the value "lex-0". </p>
+   <p>A TEI header contains information about the lexical resource itself, its source(s), its
+      encoding, and its revisions. Proper, structured metadata of this kind is equally important for
+      scholars using the resource, for software processing them, and for cataloguers in libraries
+      and archives.</p>
+   <p>The TEI header of a lexical resource has five major parts:<list>
+         <item>a <hi rend="italic">file description</hi>, tagged <gi>fileDesc</gi>, provides a full
+            bibliographic description of the electronic lexical resource itself as well as the
+            source(s), analogue or digital, from which it may have been derived. For details, see
+            section <ref target="#file-description">File Description</ref> below. </item>
+         <item>an <hi rend="italic">encoding description</hi>, tagged <gi>encodingDesc</gi>,
+            describes the relationship between the electronic resource and its source(s). It allows
+            for detailed description of whether (or how) the electronic resource was produced,
+            transcribed or normalized, how the encoder resolved ambiguities in the source, what
+            levels of encoding or analysis were applied etc.</item>
+         <item>a <hi rend="italic">profile description</hi>, tagged <gi>profileDesc</gi>, contains
+            classificatory and contextual information about the lexical resource including its
+            object and working languages.</item>
+         <item>a <hi rend="italic">container for external metadata</hi>, tagged <gi>xenoData</gi>,
+            contains metadata from non-TEI schemas, for instance Dublin Core, MARCXML or MODS, if
+            available.</item>
+         <item>a <hi rend="italic">revision history</hi>, tagged <gi>revisionDesc</gi>, contains a
+            list of changes made during the development of the lexical resource, both before and
+            after its official release. </item>
+      </list></p>
+   <p>Of these, two elements are required in TEI Lex-0: <gi>fileDesc</gi> and <gi>profileDesc</gi>.
+      It is highly recommended to include additional information in <gi>encodingDesc</gi>. It is
+      also an example of good practice to record changes in <gi>revisionDesc</gi>. </p>
    <div xml:id="file-description">
       <head>File description</head>
       <p>The bibliographic description of the given machine-readable lexical resource is absolutely
@@ -106,14 +105,13 @@
                   lexicographic resource.</item>
             </list>
          </p>
-         <p>TEI Lex-0 requires the use of <gi>biblStruct</gi> for structuring
-            bibliographic information about each individual source. This, too, is a departure from
-            vanilla TEI which is more permissive in this respect. <list type="examples">
+         <p>TEI Lex-0 requires the use of <gi>biblStruct</gi> for structuring bibliographic
+            information about each individual source. This, too, is a departure from vanilla TEI
+            which is more permissive in this respect. <list type="examples">
                <item>
                   <egXML xmlns="http://www.tei-c.org/ns/Examples" source="#VOLP">
                      <xi:include href="../examples/headers/VOLP.stripped.xml"
-                        corresp="../examples/headers/VOLP.xml" xpointer="element(/1/1/1/3)"
-                     />
+                        corresp="../examples/headers/VOLP.xml" xpointer="element(/1/1/1/3)"/>
                   </egXML>
                </item>
                <item>
@@ -126,15 +124,13 @@
                <item>
                   <egXML xmlns="http://www.tei-c.org/ns/Examples" source="#StčS">
                      <xi:include href="../examples/headers/StčS.stripped.xml"
-                        corresp="../examples/headers/StčS.xml" xpointer="element(/1/1/1/3)"
-                     />
+                        corresp="../examples/headers/StčS.xml" xpointer="element(/1/1/1/3)"/>
                   </egXML>
                </item>
                <item>
                   <egXML xmlns="http://www.tei-c.org/ns/Examples" source="#Morais1789">
                      <xi:include href="../examples/headers/Morais.stripped.xml"
-                        corresp="../examples/headers/Morais.xml"
-                        xpointer="element(/1/1/1/4)"/>
+                        corresp="../examples/headers/Morais.xml" xpointer="element(/1/1/1/4)"/>
                   </egXML>
                </item>
             </list>
@@ -145,22 +141,103 @@
       <head>Encoding description</head>
       <p><gi>encodingDesc</gi> is an optional element, which can be used to document the methods and
          editorial principles which governed the transcription or encoding of the lexicographic
-         resource in hand and may also include sets of coded definitions used elsewhere in the
-         text.</p>
+         resource in hand and may also include sets of coded definitions used elsewhere in the text. </p>
       <p>For an explanation of how to encode a taxonomy of domain labels to be used for encoding
          usage labels, see section on <ref target="#HierarchicalUsageLabels">hierarchical usage
             labels</ref>. </p>
    </div>
    <div xml:id="profile-description">
       <head>Profile description</head>
-      <p>In plain TEI, <gi>profileDesc</gi> is an optional element, whereas in TEI Lex-0, it is
-         required. This is because the nature lexicographic resources is such that it is essential
-         to identify and record the language(s) used as part of the resource metadata. </p>
-      <p>That's why <gi>profileDesc</gi> requires <gi>langUsage</gi> and <gi>langUsage</gi> requires
-         at least one <gi>language</gi> element.</p>
+      <p>In TEI P5, <gi>profileDesc</gi> is an optional element, whereas in TEI Lex-0, it is
+         required: <gi>profileDesc</gi> itself requires <gi>langUsage</gi> and <gi>langUsage</gi>
+         requires at least one <gi>language</gi> element. This is because for any lexical or
+         lexicographic resource, it is essential to identify and record the language(s) used as part
+         of the resource metadata. </p>
       <p>Regarding the use of the required attribute <att>role</att> and its possible values
             (<val>objectLanguage</val>, <val>workingLanguage</val>, <val>sourceLanguage</val> or
             <val>targetLanguage</val>), see the specification details for <gi>language</gi>. </p>
+      <div xml:id="language-profile">
+         <head>Language profiles</head>
+         <p>Lexicographic resources often deal not only with well-established languages, but also
+            with language varieties: historical stages, regional dialects, sociolects, writing
+            conventions, or project-specific subsets of a language. TEI Lex-0 requires that each
+            language (or variety) used in the resource be identified with a standard language tag,
+            and described in a structured way in the TEI header.</p>
+         <p>At the level of identification, TEI Lex-0 follows established practice: use <ref
+               target="http://www.rfc-editor.org/rfc/bcp/bcp47.txt">IETF BCP 47</ref> language tags
+            (usually grounded in ISO 639) wherever possible. Because language varieties are not
+            exhaustively standardized, projects may need to create <ref
+               target="entries.html#naming-your-languages">private-use tags</ref>. If you do so,
+            make sure to document them explicitly in the header so that the meaning of each tag is
+            clear to both humans and software.</p>
+         <p>In TEI Lex-0, language profiles are recorded in <code rend="language-xpath"
+               >profileDesc/langUsage</code>. Each <gi>language</gi> element provides:</p>
+         <list>
+            <item>a required identifier (<att>ident</att>) and a required functional role
+                  (<att>role</att>) such as <val>objectLanguage</val> or
+               <val>workingLanguage</val>;</item>
+            <item>one or more human-readable names (<gi>name</gi>), optionally multilingual using
+                  <att>xml:lang</att>;</item>
+            <item>optional additional identifiers (<gi>ident</gi>) and descriptive metadata that
+               characterize a language variety.</item>
+         </list>
+         <p>Prior to v0.9.5, which introduced a richer data model for describing languages, TEI
+            Lex-0 recommended entering the human-readable name of a language directly as a text node
+            of <gi>language</gi>, for instance: <xi:include href="fragments/language-name-old.xml"
+            /> This remains technically valid for backwards compatibility. Moving forward, however,
+            users are strongly encouraged to follow this pattern: <xi:include href="fragments/language-name-new.xml"
+            /> so
+            that the language name can be processed consistently alongside other descriptive
+            dimensions in a way that is compatible with ISO 21636. The most common of these dimensions are:</p>
+         <list>
+            <item><hi rend="italic">space</hi> (where the variety is used), using
+                  <gi>settingDesc</gi> with <gi>place</gi> or <gi>listPlace</gi>;</item>
+            <item><hi rend="italic">time</hi> (when the variety is used), using <gi>date</gi> and
+               its dating attributes;</item>
+            <item><hi rend="italic">social group</hi> (who uses the variety), using
+                  <gi>personGrp</gi> (and, when needed, <gi>langKnowledge</gi>);</item>
+            <item><hi rend="italic">medium</hi> (how it is communicated), using <gi>channel</gi>
+               (e.g. spoken vs. written).</item>
+         </list>
+         <p><gi>language</gi> is a very flexible element in Lex-0. It allows you to record language
+            profiles that range from basic identification of dictionary's object and working
+            languages to full-blown profiles describing a language variety or its speakers.</p>
+         <list type="examples">
+            <item>
+               <desc>Basic language identification (monolingual) </desc>
+               <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                  <xi:include href="../examples/headers/LanguageProfileExamples.stripped.xml"
+                     corresp="../examples/headers/LanguageProfileExamples.xml"
+                     xpointer="element(/1/1/2/1)"/>
+               </egXML>
+            </item>
+            <item>
+               <desc>Basic language identification (bilingual)</desc>
+               <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                  <xi:include href="../examples/headers/LanguageProfileExamples.stripped.xml"
+                     corresp="../examples/headers/LanguageProfileExamples.xml"
+                     xpointer="element(/1/1/2/7)"/>
+               </egXML>
+            </item>
+            <item>
+               <desc>Providing multiple standard identifiers (e.g. ISO 639 variants)</desc>
+               <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                  <xi:include href="../examples/headers/LanguageProfileExamples.stripped.xml"
+                     corresp="../examples/headers/LanguageProfileExamples.xml"
+                     xpointer="element(/1/1/2/2)"/>
+               </egXML>
+            </item>
+            <item>
+               <desc>Characterizing a variety through the profile of its speaker community</desc>
+               <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                  <xi:include href="../examples/headers/LanguageProfileExamples.stripped.xml"
+                     corresp="../examples/headers/LanguageProfileExamples.xml"
+                     xpointer="element(/1/1/2/6)"/>
+               </egXML>
+            </item>
+         </list>
+
+      </div>
    </div>
    <div xml:id="header.revision-description">
       <head>Revision description</head>
