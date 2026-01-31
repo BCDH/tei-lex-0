@@ -181,7 +181,7 @@
                     <change type="docs">Added a secion on documenting <ref target="#language-profile">language profiles</ref> to the <hi rend="italic">Guidelines</hi></change>
                     <change type="spec">Included <gi>listPlace</gi> to be used in <gi>settingDesc</gi> as part of <ref target="#TEI.model.languageProfile">model.languageProfile</ref></change>
                 </listChange>
-                <listChange n="0.9.4" corresp="https://lex-0.org/releases/v0.9.4/">
+                <listChange n="0.9.4" corresp="releases/v0.9.4/">
                     <change when="2024-05-12" type="xproc">fix documentation build on macOS and Windows in oXygen XML Editor</change>
                     <change type="spec">added <code>degree</code> as <gi>gram</gi> <att>type</att> value</change>
                     <change type="docs">fixed some typographical errors in the documentation</change>
