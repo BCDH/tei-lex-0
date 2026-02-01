@@ -36,12 +36,26 @@ The injector updates or inserts the fields without altering other content. This
 keeps local builds deterministic while ensuring published branches carry the
 exact provenance metadata.
 
+### Secrets and permissions
+
+The `citation-metadata` workflow must create a PR that triggers PR checks. To
+avoid the GitHub Actions token suppression on `pull_request` workflows, it uses
+a fine-grained PAT stored as a repo secret:
+
+- **Secret name:** `CITATION_BOT_TOKEN`
+- **Resource owner:** `BCDH`
+- **Repository access:** only `BCDH/tei-lex-0`
+- **Permissions:** Contents (read/write), Pull requests (read/write), Actions (read/write)
+
+If the secret is missing, the workflow fails fast with a clear error.
+
 ## CI Workflows
 
 - `citation-metadata` (push to `dev`/`main`)
   - Runs the citation-only pipeline (`xproc/citation-cff.xpl`)
   - Injects metadata
   - Opens/updates a PR and enables auto-merge (no direct pushes)
+  - Uses branch `ci/citation-metadata/<base>` and label `automation`
 - `site-build` (push to `dev`/`main` and tags)
   - Skips deploy on metadata-only bot commits
 - `release-helper` (manual, owner-only)
