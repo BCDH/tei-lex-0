@@ -92,11 +92,17 @@ Note: GitHub Desktop is fine for day-to-day work, but the release tag must be an
 
 These settings enforce a rebase-only workflow on `dev`, while still allowing admin to fast-forward `main` to `dev` from the CLI.
 
+**Repo settings → Secrets and variables → Actions**
+
+- `CITATION_BOT_TOKEN` (fine-grained PAT) is required for the `citation-metadata`
+  workflow to open PRs that trigger PR checks.
+
 **Repo settings → Pull Requests**
 
 - Enable: “Allow rebase merging”
 - Disable: “Allow merge commits”
 - Disable: “Allow squash merging” (rebase-only)
+- Enable: “Allow auto-merge” (required for `citation-metadata` PRs)
 - Do _not_ set “Always suggest updating pull request branches” (the “Update branch” flow is not compatible with rebase-only workflows)
 
 **Repo settings → Rules → Rulesets**
@@ -108,11 +114,13 @@ Use two rulesets, because `dev` and `main` have different constraints.
   - Enable: “Require a pull request before merging”
   - Enable: “Require linear history”
   - Enable: “Block force pushes” and “Block deletions”
+  - Required status checks: `check_citation` and `pr` (build-site)
 - **Ruleset for `main` (FF-only by admin):**
   - Target branches (fnmatch pattern): `main`
   - Enable: “Require a pull request before merging” (it blocks the `git merge --ff-only origin/dev && git push origin main` release step)
   - Enable: “Require linear history”
   - Enable: “Block force pushes” and “Block deletions”
+  - Required status checks: `check_citation` and `pr` (build-site)
 
 **Bypass list**
 
