@@ -110,10 +110,13 @@ jobs:
           git commit -m "chore: update citation metadata"
           git push -u origin "$BRANCH"
           PR_NUMBER="$(gh pr list --head "$BRANCH" --base "$BASE" --json number --jq '.[0].number')"
+          # Ensure label exists (best-effort; do not fail if we can't create it).
+          gh label create "automation" --color "0E8A16" --description "Automated changes" --force >/dev/null 2>&1 || true
           if [ -z "$PR_NUMBER" ]; then
-            PR_URL="$(gh pr create --base "$BASE" --head "$BRANCH" --title "chore: update citation metadata" --body "Automated metadata update for CITATION.cff." --label "automation")"
+            PR_URL="$(gh pr create --base "$BASE" --head "$BRANCH" --title "chore: update citation metadata" --body "Automated metadata update for CITATION.cff." --label "automation" || gh pr create --base "$BASE" --head "$BRANCH" --title "chore: update citation metadata" --body "Automated metadata update for CITATION.cff.")"
             PR_NUMBER="$(echo "$PR_URL" | sed -E 's#.*/pull/([0-9]+).*#\\1#')"
           else
-            gh pr edit "$PR_NUMBER" --title "chore: update citation metadata" --body "Automated metadata update for CITATION.cff." --add-label "automation"
+            gh pr edit "$PR_NUMBER" --title "chore: update citation metadata" --body "Automated metadata update for CITATION.cff." --add-label "automation" || \
+              gh pr edit "$PR_NUMBER" --title "chore: update citation metadata" --body "Automated metadata update for CITATION.cff."
           fi
           gh pr merge "$PR_NUMBER" --rebase --auto
