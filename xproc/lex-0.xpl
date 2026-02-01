@@ -104,6 +104,22 @@
                     port="result" />
         </p:with-input>
     </lex0:debug-store>
+    <p:xslt name="teiheader-to-cff">
+        <p:with-input port="source">
+            <p:pipe step="debug-xmlbasefix"
+                    port="result" />
+        </p:with-input>
+        <p:with-input port="stylesheet">
+            <p:document href="../xslt/teiheader-to-cff.xsl" />
+        </p:with-input>
+    </p:xslt>
+    <p:store href="{resolve-uri('../CITATION.cff', static-base-uri())}"
+             serialization="map{'method':'text','encoding':'UTF-8'}">
+        <p:with-input>
+            <p:pipe step="teiheader-to-cff"
+                    port="result" />
+        </p:with-input>
+    </p:store>
     <p:xslt name="odd2relax">
         <p:with-input port="source">
             <p:pipe step="debug-xmlbasefix"

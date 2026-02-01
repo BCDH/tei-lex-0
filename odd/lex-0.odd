@@ -28,36 +28,42 @@
                         <forename>Toma</forename>
                         <surname>Tasovac</surname>
                     </persName>
+                    <ident type="orcid">https://orcid.org/0000-0002-3919-993X</ident>
                 </author>
                 <author xml:id="LR" role="main" corresp="#pre-v0.9.5 #v0.9.5">
                     <persName>
                         <forename>Laurent</forename>
                         <surname>Romary</surname>
                     </persName>
+                    <ident type="orcid">https://orcid.org/0000-0002-0756-0508</ident>
                 </author>
                 <author xml:id="AS" role="contributing" corresp="#pre-v0.9.5 #v0.9.5">
                     <persName>
                         <forename>Ana</forename>
                         <surname>Salgado</surname>
                     </persName>
+                    <ident type="orcid">https://orcid.org/0000-0002-6670-3564</ident>
                 </author>
                 <author xml:id="BL" role="contributing" corresp="#pre-v0.9.5 #v0.9.5">
                     <persName>
                         <forename>Boris</forename>
                         <surname>Lehečka</surname>
                     </persName>
+                    <ident type="orcid">https://orcid.org/0000-0003-4893-5537</ident>
                 </author>
                 <author xml:id="AH" role="contributing" corresp="#pre-v0.9.5 #v0.9.5">
                     <persName>
                         <forename>Axel</forename>
                         <surname>Herold</surname>
                     </persName>
+                    <ident type="orcid">https://orcid.org/0009-0003-8938-4994</ident>
                 </author>
                 <author xml:id="PB" role="contributing" corresp="#pre-v0.9.5 #v0.9.5">
                     <persName>
                         <forename>Piotr</forename>
-                        <surname>Banski</surname>
+                        <surname>Bański</surname>
                     </persName>
+                    <ident type="orcid">https://orcid.org/0000-0002-9217-9209</ident>
                 </author>
                 <author xml:id="CM" role="contributing" corresp="#pre-v0.9.5 #v0.9.5">
                     <persName>
@@ -70,73 +76,85 @@
                         <forename>Fahad</forename>
                         <surname>Kahn</surname>
                     </persName>
+                    <ident type="orcid">https://orcid.org/0000-0002-1551-7438</ident>
                 </author>
                 <author xml:id="KS" role="contributing" corresp="#v0.9.5">
                     <persName>
                         <forename>Kinga</forename>
                         <surname>Sramó</surname>
                     </persName>
+                    <ident type="orcid">https://orcid.org/0009-0009-4161-9532</ident>
                 </author>
                 <author xml:id="DS" role="contributing" corresp="#v0.9.5">
                     <persName>
                         <forename>Daniel</forename>
                         <surname>Schopper</surname>
                     </persName>
+                    <ident type="orcid">https://orcid.org/0000-0003-2436-0361</ident>
                 </author>
                 <author xml:id="VE" role="contributing" corresp="#v0.9.5">
                     <persName>
                         <forename>Veronika</forename>
                         <surname>Engler</surname>
                     </persName>
+                    <ident type="orcid">https://orcid.org/0000-0001-9860-7668</ident>
                 </author>
                 <author xml:id="JB" role="contributing" corresp="#pre-v0.9.5">
                     <persName>
                         <forename>Jack</forename>
                         <surname>Bowers</surname>
                     </persName>
+                    <ident type="orcid">https://orcid.org/0000-0002-7724-3508</ident>
                 </author>
                 <author xml:id="AG" role="contributing" corresp="#pre-v0.9.5">
                     <persName>
                         <forename>Alexander</forename>
                         <surname>Geyken</surname>
                     </persName>
+                    <ident type="orcid">https://orcid.org/0009-0007-0790-8192</ident>
                 </author>
                 <author xml:id="TE" role="contributing" corresp="#pre-v0.9.5">
                     <persName>
                         <forename>Tomaž</forename>
                         <surname>Erjavec</surname>
                     </persName>
+                    <ident type="orcid">https://orcid.org/0000-0002-1560-4099</ident>
                 </author>
                 <author xml:id="AW" role="contributing" corresp="#pre-v0.9.5">
                     <persName>
                         <forename>Andreas</forename>
                         <surname>Witt</surname>
                     </persName>
+                    <ident type="orcid">https://orcid.org/0000-0002-0299-5713</ident>
                 </author>
                 <author xml:id="SP" role="contributing" corresp="#pre-v0.9.5">
                     <persName>
                         <forename>Snežana</forename>
                         <surname>Petrović</surname>
                     </persName>
+                    <ident type="orcid">https://orcid.org/0000-0003-1549-7294</ident>
                 </author>
                 <author xml:id="JD" role="contributing" corresp="#pre-v0.9.5">
                     <persName>
                         <forename>Jesse</forename>
                         <surname>de Does</surname>
                     </persName>
+                    <ident type="orcid">https://orcid.org/0000-0003-0170-8943</ident>
                 </author>
                 <author xml:id="KD" role="contributing" corresp="#pre-v0.9.5">
                     <persName>
                         <forename>Katrien</forename>
                         <surname>Depuydt</surname>
                     </persName>
+                    <ident type="orcid">https://orcid.org/0000-0003-4579-5305</ident>
                 </author>
                 <author xml:id="MK" role="contributing" corresp="#pre-v0.9.5">
                     <persName>
                         <forename>Mohamed</forename>
                         <surname>Khemakhem</surname>
                     </persName>
-                </author> 
+                    <ident type="orcid">https://orcid.org/0000-0003-3529-2990</ident>
+                </author>
                 <author xml:id="VH" role="contributing" corresp="#pre-v0.9.5">
                     <persName>
                         <forename>Vera</forename>
@@ -148,10 +166,12 @@
                         <forename>Petra</forename>
                         <surname>Bago</surname>
                     </persName>
+                    <ident type="orcid">https://orcid.org/0000-0002-4994-6417</ident>
                 </author> 
             </titleStmt>
             <editionStmt>
-                <!--make sure to remove the dev suffix before publishing a new release-->
+                <!--in the dev branch, make sure to add the "-dev" suffix to the @n-->
+                <!--make sure to remove the dev suffix when publishing a new release-->
                 <edition n="0.9.5"/>
             </editionStmt>
            
@@ -166,6 +186,27 @@
                 <p>Born digital</p>
             </sourceDesc>
         </fileDesc>
+        <profileDesc>
+            <textClass>
+                <keywords>
+                    <list>
+                        <item>TEI</item>
+                        <item>XML</item>
+                        <item>encoding</item>
+                        <item>lexicography</item>
+                        <item>dictionaries</item>
+                        <item>Digital Humanities</item>
+                    </list>
+                </keywords>
+            </textClass>
+            <abstract>
+                <p>TEI Lex-0 is a community-driven subset of the Text Encoding Initiative (TEI)
+                    Guidelines that defines a constrained, interoperable model for encoding
+                    dictionaries and lexical resources. It combines human-readable guidelines
+                    with machine-actionable RELAX NG schemas to support consistent data creation,
+                    validation, and reuse in electronic lexicography and the digital humanities.</p>
+            </abstract>
+        </profileDesc>
         <revisionDesc>
             <listChange>
                 <listChange n="0.9.5" xml:id="v0.9.5">
