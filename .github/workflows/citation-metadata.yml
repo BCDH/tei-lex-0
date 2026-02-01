@@ -115,6 +115,10 @@ jobs:
           fi
           mv "$TMP_CFF" CITATION.cff
           git add CITATION.cff
+          if git diff --cached --quiet; then
+            echo "No citation metadata changes after checkout."
+            exit 0
+          fi
           git commit -m "chore: update citation metadata"
           git push --force-with-lease -u origin "$BRANCH"
           PR_NUMBER="$(gh pr list --head "$BRANCH" --base "$BASE" --json number --jq '.[0].number')"
