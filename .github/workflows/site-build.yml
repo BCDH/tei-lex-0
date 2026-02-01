@@ -97,7 +97,7 @@ jobs:
         run: node scripts/check-internal-links.mjs
 
   push_main:
-    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' && !(github.actor == 'github-actions[bot]' && contains(github.event.head_commit.message, 'chore: update citation metadata')) }}
+    if: "${{ github.event_name == 'push' && github.ref == 'refs/heads/main' && !(github.actor == 'github-actions[bot]' && contains(github.event.head_commit.message, 'chore: update citation metadata')) }}"
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -289,7 +289,7 @@ jobs:
           exit 1
 
   push_dev:
-    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/dev' && !(github.actor == 'github-actions[bot]' && contains(github.event.head_commit.message, 'chore: update citation metadata')) }}
+    if: "${{ github.event_name == 'push' && github.ref == 'refs/heads/dev' && !(github.actor == 'github-actions[bot]' && contains(github.event.head_commit.message, 'chore: update citation metadata')) }}"
     runs-on: ubuntu-latest
     permissions:
       contents: write
