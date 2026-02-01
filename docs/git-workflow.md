@@ -48,18 +48,30 @@ Releases are immutable snapshots published under `lex-0.org/releases/vX.Y.Z/` (G
 - The `build-site` workflow exists (`.github/workflows/site-build.yml`) and is green on pushes.
 - Vercel projects are configured to deploy `vercel-main` and `vercel-dev` branches.
 
-### Release process
+### Release process (owner-only automation)
+
+Use the GitHub Actions **release-helper** workflow (`.github/workflows/release-helper.yml`, manual trigger). It is gated to `ttasovac` and:
+
+- fast-forwards `main` to `dev` (ff-only)
+- regenerates `CITATION.cff`
+- injects metadata (`commit`, `date-generated`) and commits it to `main`
+- creates an annotated tag `vX.Y.Z`
+
+Then the normal tag build publishes to `gh-pages/releases/vX.Y.Z/`.
+
+### Release process (manual alternative)
 
 1. Fast-forward `main` to `dev` (see [above](#release-dev-to-main-ff-only).)
-2. Wait for GitHub Actions → `build-site` on `main` to finish successfully (this deploys `lex-0.org`).
-3. Create an **annotated** tag on `main` and push it:
+2. Wait for GitHub Actions → `citation-metadata` (`.github/workflows/citation-metadata.yml`) on `main` to commit `CITATION.cff` metadata.
+3. Wait for GitHub Actions → `build-site` on `main` to finish successfully (this deploys `lex-0.org`).
+4. Create an **annotated** tag on `main` and push it:
 
    - `git checkout main`
    - `git pull --ff-only origin main`
    - `git tag -a vX.Y.Z -m "Release vX.Y.Z"`
    - `git push origin vX.Y.Z`
 
-4. Monitor GitHub Actions → `build-site` → `tag_release` job:
+5. Monitor GitHub Actions → `build-site` → `tag_release` job:
 
    - Publishes `build/html` to `gh-pages/releases/vX.Y.Z/`
    - Regenerates `gh-pages/releases/index.html`

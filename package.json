@@ -10,6 +10,7 @@
     "assets:images": "node scripts/copy-images.mjs",
     "assets:minify": "node scripts/minify-assets.mjs",
     "assets:odd": "node scripts/run-xproc.mjs",
+    "citation:cff": "node scripts/run-citation-cff.mjs",
     "tei:resources": "node scripts/run-xproc-resources.mjs",
     "assets:trang": "node scripts/run-trang.mjs",
     "assets:unused": "node scripts/find-unused-media.mjs",
