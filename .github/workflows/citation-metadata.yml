@@ -105,11 +105,19 @@ jobs:
           BASE="${GITHUB_REF_NAME}"
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          STASHED=0
+          if [ -n "$(git status --porcelain CITATION.cff)" ]; then
+            git stash push -u -m "citation-metadata" -- CITATION.cff
+            STASHED=1
+          fi
           git fetch origin "$BRANCH" || true
           if git show-ref --verify --quiet "refs/remotes/origin/$BRANCH"; then
             git checkout -B "$BRANCH" "origin/$BRANCH"
           else
             git checkout -B "$BRANCH"
+          fi
+          if [ "$STASHED" = "1" ]; then
+            git stash pop
           fi
           git add CITATION.cff
           git commit -m "chore: update citation metadata"
