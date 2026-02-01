@@ -14,6 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+      pull-requests: write
     steps:
       - uses: actions/checkout@v4
         with:
@@ -91,15 +92,28 @@ jobs:
           node scripts/update-citation-metadata.mjs \
             --commit "${GITHUB_SHA}" \
             --date "$(date -u +%F)"
-      - name: Commit citation metadata
+      - name: Create or update metadata PR
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           set -euo pipefail
           if git diff --quiet -- CITATION.cff; then
             echo "No citation metadata changes."
             exit 0
           fi
+          BRANCH="ci/citation-metadata/${GITHUB_REF_NAME}"
+          BASE="${GITHUB_REF_NAME}"
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -B "$BRANCH"
           git add CITATION.cff
           git commit -m "chore: update citation metadata"
-          git push origin "HEAD:${GITHUB_REF_NAME}"
+          git push -u origin "$BRANCH"
+          PR_NUMBER="$(gh pr list --head "$BRANCH" --base "$BASE" --json number --jq '.[0].number')"
+          if [ -z "$PR_NUMBER" ]; then
+            PR_URL="$(gh pr create --base "$BASE" --head "$BRANCH" --title "chore: update citation metadata" --body "Automated metadata update for CITATION.cff." --label "automation")"
+            PR_NUMBER="$(echo "$PR_URL" | sed -E 's#.*/pull/([0-9]+).*#\\1#')"
+          else
+            gh pr edit "$PR_NUMBER" --title "chore: update citation metadata" --body "Automated metadata update for CITATION.cff." --add-label "automation"
+          fi
+          gh pr merge "$PR_NUMBER" --rebase --auto
