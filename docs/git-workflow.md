@@ -62,7 +62,7 @@ Then the normal tag build publishes to `gh-pages/releases/vX.Y.Z/`.
 ### Release process (manual alternative)
 
 1. Fast-forward `main` to `dev` (see [above](#release-dev-to-main-ff-only).)
-2. Wait for GitHub Actions → `citation-metadata` (`.github/workflows/citation-metadata.yml`) on `main` to commit `CITATION.cff` metadata.
+2. Wait for GitHub Actions → `citation-metadata` (`.github/workflows/citation-metadata.yml`) on `main` to open and auto-merge the metadata PR.
 3. Wait for GitHub Actions → `build-site` on `main` to finish successfully (this deploys `lex-0.org`).
 4. Create an **annotated** tag on `main` and push it:
 

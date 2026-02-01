@@ -41,7 +41,7 @@ exact provenance metadata.
 - `citation-metadata` (push to `dev`/`main`)
   - Runs the citation-only pipeline (`xproc/citation-cff.xpl`)
   - Injects metadata
-  - Commits back to the branch
+  - Opens/updates a PR and enables auto-merge (no direct pushes)
 - `site-build` (push to `dev`/`main` and tags)
   - Skips deploy on metadata-only bot commits
 - `release-helper` (manual, owner-only)
