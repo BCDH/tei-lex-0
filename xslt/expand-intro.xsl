@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:teix="http://www.tei-c.org/ns/Examples"
-    xpath-default-namespace="http://www.tei-c.org/ns/1.0"
-    version="2.0" exclude-result-prefixes="tei teix">
+    xpath-default-namespace="http://www.tei-c.org/ns/1.0" version="2.0"
+    exclude-result-prefixes="tei teix">
     <xsl:variable name="contributorsList">
         <!--sorted alphabetically-->
         <xsl:for-each select="//tei:fileDesc/tei:titleStmt/tei:author">
@@ -69,12 +69,15 @@
         <xsl:element name="div" namespace="http://www.tei-c.org/ns/1.0">
             <xsl:attribute name="xml:id">introduction.community.contributors</xsl:attribute>
             <head xmlns="http://www.tei-c.org/ns/1.0">Contributors</head>
+            <xsl:element name="p" namespace="http://www.tei-c.org/ns/1.0"> Over the years, various
+                scholars have contributed to the activities of the Working Group and the development
+                of Lex-0. This list includes both current and past members. </xsl:element>
             <xsl:element name="list" namespace="http://www.tei-c.org/ns/1.0">
                 <xsl:attribute name="rend">contributors</xsl:attribute>
                 <xsl:copy-of select="$contributorsList"/>
             </xsl:element>
         </xsl:element>
-        
+
     </xsl:template>
     <!--generate how to cite guidelines -->
     <xsl:template match="tei:divGen[@type = 'how-to-cite']">
@@ -125,7 +128,8 @@
             <xsl:element name="p" namespace="http://www.tei-c.org/ns/1.0"> Changes to the TEI Lex-0
                 specification up to version 0.8.6 were included in comments inside the ODD file
                 itself. Starting with version 0.9.0, we're listing a summary of the changes in this
-                list for easier reference. And starting with v.0.9.4, we're archiving historical releases. </xsl:element>
+                list for easier reference. And starting with v.0.9.4, we're archiving historical
+                releases. </xsl:element>
             <xsl:for-each select="/tei:TEI/tei:teiHeader/tei:revisionDesc/tei:listChange">
                 <xsl:for-each select="./tei:listChange">
                     <xsl:element name="list" namespace="http://www.tei-c.org/ns/1.0">
@@ -148,8 +152,8 @@
                                 </xsl:element>
                             </xsl:if>
                         </xsl:element>
-                        
-                            
+
+
                         <xsl:for-each select="tei:change">
                             <xsl:element name="item" namespace="http://www.tei-c.org/ns/1.0">
                                 <xsl:element name="label" namespace="http://www.tei-c.org/ns/1.0">
