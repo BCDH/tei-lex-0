@@ -94,9 +94,13 @@ jobs:
             --date "$(date -u +%F)"
       - name: Create or update metadata PR
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.CITATION_BOT_TOKEN }}
         run: |
           set -euo pipefail
+          if [ -z "${GH_TOKEN:-}" ]; then
+            echo "Missing CITATION_BOT_TOKEN secret; cannot create PRs that trigger checks."
+            exit 1
+          fi
           if git diff --quiet -- CITATION.cff; then
             echo "No citation metadata changes."
             exit 0
