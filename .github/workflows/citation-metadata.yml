@@ -105,10 +105,15 @@ jobs:
           BASE="${GITHUB_REF_NAME}"
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git checkout -B "$BRANCH"
+          git fetch origin "$BRANCH" || true
+          if git show-ref --verify --quiet "refs/remotes/origin/$BRANCH"; then
+            git checkout -B "$BRANCH" "origin/$BRANCH"
+          else
+            git checkout -B "$BRANCH"
+          fi
           git add CITATION.cff
           git commit -m "chore: update citation metadata"
-          git push -u origin "$BRANCH"
+          git push --force-with-lease -u origin "$BRANCH"
           PR_NUMBER="$(gh pr list --head "$BRANCH" --base "$BASE" --json number --jq '.[0].number')"
           # Ensure label exists (best-effort; do not fail if we can't create it).
           gh label create "automation" --color "0E8A16" --description "Automated changes" --force >/dev/null 2>&1 || true
