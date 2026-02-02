@@ -144,7 +144,13 @@ jobs:
               exit 1
             fi
           else
-            gh pr edit "$PR_NUMBER" --title "chore: update citation metadata" --body "Automated metadata update for CITATION.cff." --add-label "automation" || \
-              gh pr edit "$PR_NUMBER" --title "chore: update citation metadata" --body "Automated metadata update for CITATION.cff."
+            PR_URL=""
           fi
-          gh pr merge "$PR_NUMBER" --rebase --auto
+
+          PR_REF="$PR_NUMBER"
+          if [ -z "$PR_REF" ]; then
+            PR_REF="$PR_URL"
+          fi
+          gh pr edit "$PR_REF" --title "chore: update citation metadata" --body "Automated metadata update for CITATION.cff." --add-label "automation" || \
+            gh pr edit "$PR_REF" --title "chore: update citation metadata" --body "Automated metadata update for CITATION.cff."
+          gh pr merge "$PR_REF" --rebase --auto
