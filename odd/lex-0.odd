@@ -10,7 +10,8 @@
             <titleStmt>
                 <title>TEI Lex-0</title>
                 <title type="subordinate">A baseline encoding for lexicographic data</title>
-                <title type="tagline">Clarity for lexicographers. Stability for data. Compatibility for the future.</title>
+                <title type="tagline">Clarity for lexicographers. Stability for data. Compatibility
+                    for the future.</title>
                 <editor corresp="#pre-v0.9.5 #v0.9.5">
                     <persName>
                         <forename>Toma</forename>
@@ -167,20 +168,18 @@
                         <surname>Bago</surname>
                     </persName>
                     <ident type="orcid">https://orcid.org/0000-0002-4994-6417</ident>
-                </author> 
+                </author>
             </titleStmt>
             <editionStmt>
                 <!--in the dev branch, make sure to add the "-dev" suffix to the @n-->
                 <!--make sure to remove the dev suffix when publishing a new release-->
                 <edition n="0.9.5"/>
             </editionStmt>
-           
+
             <publicationStmt>
                 <authority>DARIAH Working Group on Lexical Resources</authority>
                 <date when="2025"/>
-                <ptr
-                    target="https://lex-0.org"
-                />
+                <ptr target="https://lex-0.org"/>
             </publicationStmt>
             <sourceDesc>
                 <p>Born digital</p>
@@ -202,62 +201,120 @@
             <abstract>
                 <p>TEI Lex-0 is a community-driven subset of the Text Encoding Initiative (TEI)
                     Guidelines that defines a constrained, interoperable model for encoding
-                    dictionaries and lexical resources. It combines human-readable guidelines
-                    with machine-actionable RELAX NG schemas to support consistent data creation,
+                    dictionaries and lexical resources. It combines human-readable guidelines with
+                    machine-actionable RELAX NG schemas to support consistent data creation,
                     validation, and reuse in electronic lexicography and the digital humanities.</p>
             </abstract>
         </profileDesc>
         <revisionDesc>
             <listChange>
                 <listChange n="0.9.5" xml:id="v0.9.5">
-                    <change when="2024-11-27" type="docs">Added documentation on encoding condensed forms a là "leleti (sě)".</change>
-                    <change type="spec">Added <ref target="#TEI.model.languageProfile">model.languageProfile</ref> to better structure <gi>language</gi> as per <ref target="https://github.com/DARIAH-ERIC/lexicalresources/issues/245">#245</ref>.</change>
-                    <change type="spec">Added <gi>ruby</gi> annotation support as per <ref target="https://github.com/DARIAH-ERIC/lexicalresources/issues/225">#225</ref></change>
-                    <change type="spec">Added <gi>measure</gi> (to be used, for instance, within <gi>extent</gi> in <gi>fileDesc</gi> as per <ref target="https://github.com/DARIAH-ERIC/lexicalresources/issues/257">#257</ref>.</change>
-                    <change type="xproc">Added a temporary step to fix <att>xml:base</att> and <att>xml:lang</att> issues in xincluded examples as per <ref target="https://github.com/DARIAH-ERIC/lexicalresources/issues/256">#256</ref></change>
-                    <change type="spec">Deprecated <code rend="language-xpath">gram[@type="government"]</code> in favor of <code rend="language-xpath">gram[@type="construction"]</code> as per <ref target="https://github.com/DARIAH-ERIC/lexicalresources/issues/254">#254</ref></change>
-                    <change type="spec">Refactored model classes to fix XSD UPA violations as per <ref target="https://github.com/DARIAH-ERIC/lexicalresources/issues/223">#223</ref>.</change>
+                    <change when="2026-02-02" type="docs">Added documentation on encoding condensed
+                        forms a là "leleti (sě)".</change>
+                    <change type="spec">Added <ref target="#TEI.model.languageProfile"
+                            >model.languageProfile</ref> to better structure <gi>language</gi> as
+                        per <ref target="https://github.com/DARIAH-ERIC/lexicalresources/issues/245"
+                            >#245</ref>.</change>
+                    <change type="spec">Added <gi>ruby</gi> annotation support as per <ref
+                            target="https://github.com/DARIAH-ERIC/lexicalresources/issues/225"
+                            >#225</ref></change>
+                    <change type="spec">Added <gi>measure</gi> (to be used, for instance, within
+                            <gi>extent</gi> in <gi>fileDesc</gi> as per <ref
+                            target="https://github.com/DARIAH-ERIC/lexicalresources/issues/257"
+                            >#257</ref>.</change>
+                    <change type="xproc">Added a temporary step to fix <att>xml:base</att> and
+                            <att>xml:lang</att> issues in xincluded examples as per <ref
+                            target="https://github.com/DARIAH-ERIC/lexicalresources/issues/256"
+                            >#256</ref></change>
+                    <change type="spec">Deprecated <code rend="language-xpath"
+                            >gram[@type="government"]</code> in favor of <code rend="language-xpath"
+                            >gram[@type="construction"]</code> as per <ref
+                            target="https://github.com/DARIAH-ERIC/lexicalresources/issues/254"
+                            >#254</ref></change>
+                    <change type="spec">Refactored model classes to fix XSD UPA violations as per
+                            <ref target="https://github.com/DARIAH-ERIC/lexicalresources/issues/223"
+                            >#223</ref>.</change>
                     <change type="docs">Minor corrections in the documentation</change>
-                    <change type="docs">Introduced the labeling of P5 and Lex-0 examples in the specification to avoid confusion</change>
-                    <change type="docs">Added a secion on documenting <ref target="#language-profile">language profiles</ref> to the <hi rend="italic">Guidelines</hi></change>
-                    <change type="spec">Included <gi>listPlace</gi> to be used in <gi>settingDesc</gi> as part of <ref target="#TEI.model.languageProfile">model.languageProfile</ref></change>
+                    <change type="docs">Introduced the labeling of P5 and Lex-0 examples in the
+                        specification to avoid confusion</change>
+                    <change type="docs">Added a secion on documenting <ref
+                            target="#language-profile">language profiles</ref> to the <hi
+                            rend="italic">Guidelines</hi></change>
+                    <change type="spec">Included <gi>listPlace</gi> to be used in
+                            <gi>settingDesc</gi> as part of <ref target="#TEI.model.languageProfile"
+                            >model.languageProfile</ref></change>
                 </listChange>
                 <listChange n="0.9.4" corresp="releases/v0.9.4/">
-                    <change when="2024-05-12" type="xproc">fix documentation build on macOS and Windows in oXygen XML Editor</change>
-                    <change type="spec">added <code>degree</code> as <gi>gram</gi> <att>type</att> value</change>
-                    <change type="docs">fixed some typographical errors in the documentation</change>
+                    <change when="2024-05-12" type="xproc">fix documentation build on macOS and
+                        Windows in oXygen XML Editor</change>
+                    <change type="spec">added <code>degree</code> as <gi>gram</gi>
+                        <att>type</att> value</change>
+                    <change type="docs">fixed some typographical errors in the
+                        documentation</change>
                 </listChange>
                 <listChange n="0.9.3">
-                    <change when="2024-02-12" type="spec"><gi>catDesc</gi> <hi rend="italic">must</hi> contain a <gi>term</gi></change>
-                    <change type="spec">switch to using the external TEI add-on in oXygen when generating schema and documentation</change>
-                    <change type="spec">fix the mismatch in <gi>usg</gi> types between the specification and documentation (use <code>temporal</code> instead of <code>time</code> </change>
-                    <change type="spec">require <gi>listBibl</gi> in <gi>sourceDesc</gi> with three suggested type values: <code>dictionaries</code>, <code>corpora</code> and <code>literature</code></change>
+                    <change when="2024-02-12" type="spec"><gi>catDesc</gi>
+                        <hi rend="italic">must</hi> contain a <gi>term</gi></change>
+                    <change type="spec">switch to using the external TEI add-on in oXygen when
+                        generating schema and documentation</change>
+                    <change type="spec">fix the mismatch in <gi>usg</gi> types between the
+                        specification and documentation (use <code>temporal</code> instead of
+                            <code>time</code>
+                    </change>
+                    <change type="spec">require <gi>listBibl</gi> in <gi>sourceDesc</gi> with three
+                        suggested type values: <code>dictionaries</code>, <code>corpora</code> and
+                            <code>literature</code></change>
                 </listChange>
                 <listChange n="0.9.2">
-                    <change when="2023-04-22" type="xproc">switch to using oXygen's TEI framework when generating schema and documentation</change>
-                    <change type="spec">allow <gi>list</gi> and <gi>item</gi> because lists feature prominently in dictionary front matter</change>
-                    <change type="spec">introduce <ref target="#TEI.model.lexicalInter">model.lexicalInter</ref> (based on <ref target="#TEI.model.inter">model.inter</ref>), <ref target="#TEI.model.lexicalPhrase">model.lexicalPhrase</ref> (based on <ref target="#TEI.model.phrase">model.phrase</ref>) and <ref target="#TEI.macro.lexicalParaContent">macro.lexicalParaContent</ref> (based on <ref target="#TEI.macro.paraContent">macro.paraContent</ref>) to make it easier to simplify the content model of various dictionary elements</change>
-                    <change type="spec">remove <ref target="#TEI.model.listLike">model.listLike</ref> from <ref target="#TEI.model.lexicalInter">model.lexicalInter</ref></change>
+                    <change when="2023-04-22" type="xproc">switch to using oXygen's TEI framework
+                        when generating schema and documentation</change>
+                    <change type="spec">allow <gi>list</gi> and <gi>item</gi> because lists feature
+                        prominently in dictionary front matter</change>
+                    <change type="spec">introduce <ref target="#TEI.model.lexicalInter"
+                            >model.lexicalInter</ref> (based on <ref target="#TEI.model.inter"
+                            >model.inter</ref>), <ref target="#TEI.model.lexicalPhrase"
+                            >model.lexicalPhrase</ref> (based on <ref target="#TEI.model.phrase"
+                            >model.phrase</ref>) and <ref target="#TEI.macro.lexicalParaContent"
+                            >macro.lexicalParaContent</ref> (based on <ref
+                            target="#TEI.macro.paraContent">macro.paraContent</ref>) to make it
+                        easier to simplify the content model of various dictionary elements</change>
+                    <change type="spec">remove <ref target="#TEI.model.listLike"
+                            >model.listLike</ref> from <ref target="#TEI.model.lexicalInter"
+                            >model.lexicalInter</ref></change>
                     <change type="html">link version number in the menu to revision history</change>
-                    <change type="spec">allow <gi>abbr</gi> and <gi>expan</gi> so that they can be used in lists of abbreviations in dictionary front matter</change>
-                    <change type="spec">introduced <code>valency</code> as a suggested value in <code rend="language-xpath">gram[@type="valency"]</code></change>
-                    <change type="spec">introduced <code rend="language-xpath">gram[@type="government"]</code> and clarified the difference from <code rend="language-xpath">gram[@type="colloc"]</code>. See sections on <ref target="#typology-of-gram">Typology of <code>gram</code></ref> and <ref target="#collocates">Collocates</ref></change>
-                    <change type="spec">made <code rend="language-xpath">@type</code> mandatory on <gi>TEI</gi></change>
-                    <change type="spec">add <gi>principal</gi> and <gi>affiliation</gi> for more robust metadata in the <gi>teiHeader</gi></change>
+                    <change type="spec">allow <gi>abbr</gi> and <gi>expan</gi> so that they can be
+                        used in lists of abbreviations in dictionary front matter</change>
+                    <change type="spec">introduced <code>valency</code> as a suggested value in
+                            <code rend="language-xpath">gram[@type="valency"]</code></change>
+                    <change type="spec">introduced <code rend="language-xpath"
+                            >gram[@type="government"]</code> and clarified the difference from <code
+                            rend="language-xpath">gram[@type="colloc"]</code>. See sections on <ref
+                            target="#typology-of-gram">Typology of <code>gram</code></ref> and <ref
+                            target="#collocates">Collocates</ref></change>
+                    <change type="spec">made <code rend="language-xpath">@type</code> mandatory on
+                            <gi>TEI</gi></change>
+                    <change type="spec">add <gi>principal</gi> and <gi>affiliation</gi> for more
+                        robust metadata in the <gi>teiHeader</gi></change>
                 </listChange>
                 <listChange n="0.9.1">
-                    <change when="2021-03-24" type="html">fix namespace issues in html output</change>
-                    <change type="docs">add new examples to the <ref target="#header">Header</ref> section</change>
-                    <change type="docs">add section on <ref target="#HierarchicalUsageLabels">hierarchichal usage labels</ref></change>
-                    <change type="spec">allow <gi>taxonomy</gi>, <gi>category</gi> and <gi>catDesc</gi> in <gi>classDecl</gi> </change>
-                    <change type="docs">move the <ref target="#specification">specification</ref> to a different webpage for quicker loading</change>
+                    <change when="2021-03-24" type="html">fix namespace issues in html
+                        output</change>
+                    <change type="docs">add new examples to the <ref target="#header">Header</ref>
+                        section</change>
+                    <change type="docs">add section on <ref target="#HierarchicalUsageLabels"
+                            >hierarchichal usage labels</ref></change>
+                    <change type="spec">allow <gi>taxonomy</gi>, <gi>category</gi> and
+                            <gi>catDesc</gi> in <gi>classDecl</gi>
+                    </change>
+                    <change type="docs">move the <ref target="#specification">specification</ref> to
+                        a different webpage for quicker loading</change>
                 </listChange>
                 <listChange n="0.9.0">
                     <change when="2021-09-26" type="docs">add section on <ref target="#header">TEI
-                        Header</ref></change>
+                            Header</ref></change>
                     <change type="docs">correction of various misspellings</change>
                     <change type="spec">add <gi>monogr</gi> (needed for
-                            <gi>biblStruct</gi>)</change>
+                        <gi>biblStruct</gi>)</change>
                     <change type="spec">add <gi>forename</gi> and <gi>surname</gi> for more
                         fine-grained bibliographic information</change>
                     <change type="spec">add <gi>editorialDecl</gi></change>
@@ -280,34 +337,29 @@
                     <change type="spec">add <att>role</att> to <gi>language</gi> with a closed list
                         of values: <val>objectLanguage</val>, <val>workingLanguage</val>,
                             <val>sourceLanguage</val>, <val>targetLanguage</val></change>
-                    
+
                 </listChange>
             </listChange>
         </revisionDesc>
     </teiHeader>
     <text>
         <front>
-            <xi:include href="includes/00__index.xml" parse="xml"
-                xpointer="home"/>
+            <xi:include href="includes/00__index.xml" parse="xml" xpointer="home"/>
         </front>
         <body>
             <xi:include href="includes/05__header.xml" parse="xml" xpointer="header"/>
             <xi:include href="includes/10__entries.xml" parse="xml" xpointer="entries"/>
             <xi:include href="includes/15__forms.xml" parse="xml" xpointer="forms"/>
             <xi:include href="includes/20__senses.xml" parse="xml" xpointer="senses"/>
-            <xi:include href="includes/25__translations.xml" parse="xml"
-                xpointer="translations"/>
+            <xi:include href="includes/25__translations.xml" parse="xml" xpointer="translations"/>
             <xi:include href="includes/30__cross-references.xml" parse="xml"
                 xpointer="cross-references"/>
             <xi:include href="includes/35__usage.xml" parse="xml" xpointer="usage"/>
             <xi:include href="includes/40__etymology.xml" parse="xml" xpointer="etymology"/>
             <xi:include href="includes/45__patterns.xml" parse="xml" xpointer="patterns"/>
-            <xi:include href="includes/60__specification.xml" parse="xml"
-                xpointer="specification"/>
-            <xi:include href="includes/70__community.xml" parse="xml"
-                xpointer="community"/>
-            <xi:include href="includes/85__bibliography.xml" parse="xml"
-                xpointer="bibliography"/>
+            <xi:include href="includes/60__specification.xml" parse="xml" xpointer="specification"/>
+            <xi:include href="includes/70__community.xml" parse="xml" xpointer="community"/>
+            <xi:include href="includes/85__bibliography.xml" parse="xml" xpointer="bibliography"/>
             <xi:include href="includes/80__faq.xml" parse="xml" xpointer="faq"/>
             <!--   <xi:include href="parts/90__annex_A.xml" parse="xml" xpointer="annex_A"/>
             <xi:include href="parts/90__annex_B.xml" parse="xml" xpointer="annex_B"/>-->

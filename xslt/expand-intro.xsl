@@ -125,11 +125,11 @@
         <xsl:element name="div" namespace="http://www.tei-c.org/ns/1.0">
             <xsl:attribute name="xml:id">home.revision-history</xsl:attribute>
             <head xmlns="http://www.tei-c.org/ns/1.0">Revision history</head>
-            <xsl:element name="p" namespace="http://www.tei-c.org/ns/1.0"> Changes to the TEI Lex-0
+            <p xmlns="http://www.tei-c.org/ns/1.0">Changes to the TEI Lex-0
                 specification up to version 0.8.6 were included in comments inside the ODD file
                 itself. Starting with version 0.9.0, we're listing a summary of the changes in this
-                list for easier reference. And starting with v.0.9.4, we're archiving historical
-                releases. </xsl:element>
+                list for easier reference. And starting with v.0.9.4, we're also archiving historical
+                <ref xmlns="http://www.tei-c.org/ns/1.0" target="releases">releases</ref>.</p>
             <xsl:for-each select="/tei:TEI/tei:teiHeader/tei:revisionDesc/tei:listChange">
                 <xsl:for-each select="./tei:listChange">
                     <xsl:element name="list" namespace="http://www.tei-c.org/ns/1.0">
@@ -142,6 +142,7 @@
                             <xsl:text> (</xsl:text>
                             <xsl:value-of select="change[1]/@when"/>
                             <xsl:text>)</xsl:text>
+                            
                             <xsl:if test="@corresp">
                                 <xsl:text> → </xsl:text>
                                 <xsl:element name="ref" namespace="http://www.tei-c.org/ns/1.0">

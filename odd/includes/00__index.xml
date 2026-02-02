@@ -10,6 +10,8 @@
     </egXML>
     <div xml:id="home.quickstart">
         <head>Quickstart</head>
+
+
         <p>To start using Lex-0 in your projects, you'll need a schema-aware XML editor and one of
             our schemas: <list>
                 <item>
@@ -22,29 +24,36 @@
                     <ref target="schema/lex-0.xsd">XML Schema (XSD)</ref>
                 </item>
             </list></p>
+        <p>Lex-0 is versioned, so users can choose between the stable, citable release and the
+            latest in‑progress updates:<list>
+                <item><ref target="https://lex-0.org" rend="allow-absolute" type="external-site"
+                        >lex-0.org</ref> (official release) and</item>
+                <item><ref target="https://dev.lex-0.org" rend="allow-absolute" type="external-site"
+                        >dev.lex-0.org</ref> (ongoing development).</item>
+            </list>Starting with v0.9.4, users can also
+            easily consult previous, archived <ref target="releases">releases</ref>. </p>
         <p>If you are new to the world of TEI and XML, in general, or need a refresher on how to
             validate TEI files, see <ref target="#faq.get-started">FAQ → Getting Started</ref></p>
     </div>
     <div xml:id="home.howTo">
         <head>How to use the <hi rend="italic">Guidelines</hi></head>
-        <p>The <hi rend="bold">narrative</hi> chapters of these <hi rend="italic">Guidelines</hi>
-            explain <hi rend="italic">why</hi> TEI Lex-0 recommends certain practices, <hi
-                rend="italic">what</hi> those practices mean for lexicographic work, and <hi
-                rend="italic">how</hi> to apply them in real encoding situations. Each chapter
-            focuses on a specific type of lexicographic content, covering rationale, examples and
-            guidance for the consistent encoding of <ref target="#entries">entries</ref>, <ref
-                target="#forms">forms</ref>, <ref target="#senses">senses</ref>, <ref
-                target="#translations">translations</ref>, <ref target="#cross-references"
-                >cross-references</ref> and <ref target="#usage">usage labels</ref>.</p>
-        <p>The <hi rend="bold">technical</hi>
-            <ref target="#specification">Specification</ref> is the <hi rend="italic">reference
-                manual</hi> (and, effectively, the “grammar”) of Lex-0. When you need to answer
-            concrete questions like “What elements are allowed within <gi>sense</gi>?”, “Which
-            attributes are permitted on <gi>form</gi>?”, or “What types of values are valid in
-                <att>target</att>?”, the <hi rend="italic">Specification</hi> is the first place to
+        <p>The narrative chapters of these <hi rend="italic">Guidelines</hi> explain <hi
+                rend="italic">why</hi> TEI Lex-0 recommends certain practices, <hi rend="italic"
+                >what</hi> those practices mean for lexicographic work, and <hi rend="italic"
+                >how</hi> to apply them in real encoding situations. Each chapter focuses on a
+            specific type of lexicographic content, covering rationale, examples and guidance for
+            the consistent encoding of <ref target="#entries">entries</ref>, <ref target="#forms"
+                >forms</ref>, <ref target="#senses">senses</ref>, <ref target="#translations"
+                >translations</ref>, <ref target="#cross-references">cross-references</ref> and <ref
+                target="#usage">usage labels</ref>.</p>
+        <p>The technical <ref target="#specification">Specification</ref> is the <hi rend="italic"
+                >reference manual</hi> (and, effectively, the “grammar”) of Lex-0. When you need to
+            answer concrete questions like “What elements are allowed within <gi>sense</gi>?”,
+            “Which attributes are permitted on <gi>form</gi>?”, or “What types of values are valid
+            in <att>target</att>?”, the <hi rend="italic">Specification</hi> is the first place to
             look. </p>
         <p>The chapter on the <ref target="#community">Community</ref> explains how TEI Lex-0
-            evolved and the people behind it, while <ref target="#faq">FAQs</ref> provide quick
+            evolved and the people behind it, while the <ref target="#faq">FAQs</ref> provide quick
             answers on <ref target="#faq.whyLex-0">why</ref> Lex-0 exists, <ref
                 target="#faq.lex-0-vs-TEI">how</ref> it relates to TEI P5, and how to <ref
                 target="#faq.get-started">get started</ref> with validation and tooling. They also
