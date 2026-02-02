@@ -140,8 +140,12 @@ jobs:
               PR_NUMBER="$(gh pr view --head "$BRANCH" --base "$BASE" --json number --jq '.number' 2>/dev/null || true)"
             fi
             if [ -z "$PR_NUMBER" ]; then
-              echo "Unable to determine PR number after create. PR_URL='$PR_URL'"
-              exit 1
+              if [ -n "$PR_URL" ]; then
+                echo "Warning: unable to determine PR number; will use PR URL."
+              else
+                echo "Unable to determine PR number after create. PR_URL='$PR_URL'"
+                exit 1
+              fi
             fi
           else
             PR_URL=""
