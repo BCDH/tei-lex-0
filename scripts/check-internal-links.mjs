@@ -30,14 +30,32 @@ const stripCodeBlocks = (html) => {
   return html.replace(/<pre\b[^>]*>[\s\S]*?<\/pre>/gi, "");
 };
 
+const hasAllowedAbsoluteClass = (tag) =>
+  /\bclass=["'][^"']*\ballow-absolute\b[^"']*["']/i.test(tag);
+
 const findViolations = (html) => {
   const matches = [];
-  const regex =
-    /(href|src)=["'](https?:\/\/lex-0\.org\/[^"']*|\/[^"']*)["']/gi;
-  let match;
-  while ((match = regex.exec(html)) !== null) {
-    matches.push(match[0]);
+
+  // Check href on anchors, but allow explicit opt-out via class.
+  const anchorRegex = /<a\b[^>]*\bhref=["']([^"']+)["'][^>]*>/gi;
+  let anchorMatch;
+  while ((anchorMatch = anchorRegex.exec(html)) !== null) {
+    const tag = anchorMatch[0];
+    const href = anchorMatch[1];
+    const isAbsoluteInternal =
+      href.startsWith("https://lex-0.org/") || href.startsWith("/");
+    if (isAbsoluteInternal && !hasAllowedAbsoluteClass(tag)) {
+      matches.push(`href="${href}"`);
+    }
   }
+
+  // Check src attributes (no class-based exceptions).
+  const srcRegex = /\bsrc=["'](https?:\/\/lex-0\.org\/[^"']*|\/[^"']*)["']/gi;
+  let srcMatch;
+  while ((srcMatch = srcRegex.exec(html)) !== null) {
+    matches.push(`src="${srcMatch[1]}"`);
+  }
+
   return matches;
 };
 
