@@ -131,7 +131,11 @@ jobs:
           gh label create "automation" --color "0E8A16" --description "Automated changes" --force >/dev/null 2>&1 || true
           if [ -z "$PR_NUMBER" ]; then
             PR_URL="$(gh pr create --base "$BASE" --head "$BRANCH" --title "chore: update citation metadata" --body "Automated metadata update for CITATION.cff." --label "automation" || gh pr create --base "$BASE" --head "$BRANCH" --title "chore: update citation metadata" --body "Automated metadata update for CITATION.cff.")"
+            PR_URL="$(printf '%s' "$PR_URL" | tr -d '\r\n')"
             PR_NUMBER="$(echo "$PR_URL" | sed -E 's#.*/pull/([0-9]+).*#\\1#')"
+            if ! echo "$PR_NUMBER" | grep -Eq '^[0-9]+$'; then
+              PR_NUMBER="$(gh pr view --url "$PR_URL" --json number --jq '.number' 2>/dev/null || true)"
+            fi
             if ! echo "$PR_NUMBER" | grep -Eq '^[0-9]+$'; then
               PR_NUMBER="$(gh pr view --head "$BRANCH" --base "$BASE" --json number --jq '.number' 2>/dev/null || true)"
             fi
