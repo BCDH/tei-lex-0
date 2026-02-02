@@ -65,7 +65,7 @@ XMLCALABASH_JAR=/path/to/xmlcalabash-app-3.0.35.jar npm run assets:odd
 #### Common commands
 
 - Install dependencies: `npm ci` (or `npm install`)
-- Generate guidelines + schema (ODD → HTML + RNG, also regenerates `CITATION.cff`): `npm run assets:odd`
+- Generate guidelines + schema (ODD → HTML + RNG): `npm run assets:odd`
 - Generate only `CITATION.cff` from the TEI header (fast, no full build): `npm run citation:cff`
 - Download/cached TEI upstream stylesheets locally (for catalog-based resolution in oXygen/offline): `npm run tei:resources`
 - Full local build (recommended): `npm run build`

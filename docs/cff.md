@@ -11,12 +11,12 @@ This document explains how `CITATION.cff` is generated from the TEI header in
 - Local command: `npm run citation:cff`
 - CI metadata injection: `scripts/update-citation-metadata.mjs`
 
-The build pipeline generates a clean `CITATION.cff` (no CI-only fields). CI then
-adds `commit` and `date-generated` on `dev`/`main` pushes.
+CI generates a clean `CITATION.cff` (without `commit` and `date-generated`)
+and then adds those two fields on `dev`/`main` pushes.
 
 ## Local Usage
 
-Generate (or refresh) `CITATION.cff` locally:
+Generate (or refresh) `CITATION.cff` locally (this is separate from `npm run build`):
 
 ```
 npm run citation:cff
