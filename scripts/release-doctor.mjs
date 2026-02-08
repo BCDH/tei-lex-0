@@ -233,7 +233,7 @@ try {
     const hasCiteMeta = /\bcitation-metadata\b/.test(list);
     const hasReleaseHelper = /\brelease-helper\b/.test(list);
     add('workflows.build_site', hasBuild ? 'pass' : 'fail', hasBuild ? 'Workflow build-site exists.' : 'Workflow build-site is missing.');
-    add('workflows.citation_metadata', hasCiteMeta ? 'pass' : 'fail', hasCiteMeta ? 'Workflow citation-metadata exists.' : 'Workflow citation-metadata is missing.');
+    add('workflows.citation_metadata', hasCiteMeta ? 'pass' : 'warn', hasCiteMeta ? 'Workflow citation-metadata exists.' : 'Workflow citation-metadata is missing (manual fallback unavailable).');
     add('workflows.release_helper', hasReleaseHelper ? 'pass' : 'warn', hasReleaseHelper ? 'Workflow release-helper is visible to GitHub.' : 'Workflow release-helper not visible (may be absent on default branch).');
   }
 
@@ -242,8 +242,10 @@ try {
     add('wf.citation_metadata.file', 'fail', 'Cannot read citation-metadata workflow from origin/dev.');
   } else {
     const text = citeMetaFile.stdout;
-    const devOnly = /branches:\s*\[\s*dev\s*\]/m.test(text);
-    add('wf.citation_metadata.dev_only', devOnly ? 'pass' : 'fail', devOnly ? 'citation-metadata runs on dev only.' : 'citation-metadata is not configured as dev-only.');
+    const hasPushTrigger = /(^|\n)\s*push:\s*/m.test(text);
+    const hasWorkflowDispatch = /(^|\n)\s*workflow_dispatch:\s*/m.test(text);
+    add('wf.citation_metadata.manual_only', !hasPushTrigger ? 'pass' : 'warn', !hasPushTrigger ? 'citation-metadata is not triggered on every dev push (manual/explicit use only).' : 'citation-metadata still has push trigger enabled.');
+    add('wf.citation_metadata.dispatch', hasWorkflowDispatch ? 'pass' : 'warn', hasWorkflowDispatch ? 'citation-metadata supports manual dispatch.' : 'citation-metadata has no workflow_dispatch trigger.');
   }
 
   const releaseHelperFile = run('git', ['show', `${devRef}:.github/workflows/release-helper.yml`], { allowFail: true, trim: false });
@@ -269,7 +271,7 @@ try {
     add('secrets.list', 'warn', 'Unable to list repository secrets.');
   } else {
     const hasCiteToken = /^CITATION_BOT_TOKEN\b/m.test(secrets.stdout);
-    add('secrets.citation_bot_token', hasCiteToken ? 'pass' : 'fail', hasCiteToken ? 'CITATION_BOT_TOKEN exists.' : 'CITATION_BOT_TOKEN is missing.');
+    add('secrets.citation_bot_token', hasCiteToken ? 'pass' : 'warn', hasCiteToken ? 'CITATION_BOT_TOKEN exists (manual citation workflow available).' : 'CITATION_BOT_TOKEN missing (manual citation workflow cannot push PRs).');
   }
 
   const devCitation = run('git', ['show', `${devRef}:CITATION.cff`], { allowFail: true, trim: false });

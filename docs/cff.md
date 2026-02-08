@@ -41,20 +41,15 @@ provenance metadata.
 
 ### Secrets and permissions
 
-The `citation-metadata` workflow must create a PR that triggers PR checks. To
-avoid the GitHub Actions token suppression on `pull_request` workflows, it uses
-a fine-grained PAT stored as a repo secret:
+Primary release prep is done via `npm run release:prepare` using the maintainer
+identity (no bot PAT required).
 
-- **Secret name:** `CITATION_BOT_TOKEN`
-- **Resource owner:** `BCDH`
-- **Repository access:** only `BCDH/tei-lex-0`
-- **Permissions:** Contents (read/write), Pull requests (read/write), Actions (read/write)
-
-If the secret is missing, the workflow fails fast with a clear error.
+`CITATION_BOT_TOKEN` is only needed if you explicitly run the legacy/manual
+`citation-metadata` workflow.
 
 ## CI Workflows
 
-- `citation-metadata` (push to `dev`)
+- `citation-metadata` (manual fallback via `workflow_dispatch`)
   - Runs the citation-only pipeline (`xproc/citation-cff.xpl`)
   - Injects `commit` + `date-generated`
   - Opens/updates a PR and enables auto-merge (no direct pushes)

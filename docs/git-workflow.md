@@ -92,7 +92,7 @@ Then the normal tag build publishes to `gh-pages/releases/vX.Y.Z/`.
    - `git push -u origin chore/release-prep-vX.Y.Z`
    - `gh pr create --base dev --head chore/release-prep-vX.Y.Z --title "chore: prepare citation metadata for vX.Y.Z" --body ""`
    - `gh pr merge --rebase --auto`
-2. Wait for GitHub Actions → `citation-metadata` and `build-site` on `dev` to finish successfully.
+2. Wait for GitHub Actions → `build-site` on `dev` to finish successfully.
 3. Fast-forward `main` to `dev` (see [above](#release-dev-to-main-ff-only).)
 4. Wait for GitHub Actions → `build-site` on `main` to finish successfully (this deploys `lex-0.org`).
 5. Create an **annotated** tag on `main` and push it:
@@ -125,15 +125,15 @@ These settings enforce a rebase-only workflow on `dev`, while still allowing adm
 
 **Repo settings → Secrets and variables → Actions**
 
-- `CITATION_BOT_TOKEN` (fine-grained PAT) is required for the `citation-metadata`
-  workflow to open PRs that trigger PR checks.
+- `CITATION_BOT_TOKEN` is optional now (used only if you run the legacy/manual
+  `citation-metadata` workflow directly).
 
 **Repo settings → Pull Requests**
 
 - Enable: “Allow rebase merging”
 - Disable: “Allow merge commits”
 - Disable: “Allow squash merging” (rebase-only)
-- Enable: “Allow auto-merge” (required for `citation-metadata` PRs)
+- Enable: “Allow auto-merge” (required for automated release-prep PR merges)
 - Do _not_ set “Always suggest updating pull request branches” (the “Update branch” flow is not compatible with rebase-only workflows)
 
 **Repo settings → Rules → Rulesets**
