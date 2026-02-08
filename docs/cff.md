@@ -12,7 +12,8 @@ This document explains how `CITATION.cff` is generated from the TEI header in
 - CI metadata injection: `scripts/update-citation-metadata.mjs`
 
 CI generates a clean `CITATION.cff` (without `commit`, `date-generated`, and
-`date-released`) and then injects metadata in CI.
+`date-released`). CI then injects `commit` and `date-generated`, while release
+prep sets `date-released` on `dev`.
 
 ## Local Usage
 
@@ -31,11 +32,12 @@ CI injects the following fields after the file is generated:
 
 - `commit`: full SHA (`git rev-parse HEAD`)
 - `date-generated`: UTC date (`date -u +%F`)
-- `date-released`: UTC date (`date -u +%F`) for release commits only
 
-The injector updates or inserts the fields without altering other content. This
-keeps local builds deterministic while ensuring published branches carry the
-exact provenance metadata.
+Release prep sets `date-released` on `dev` before the FF promotion to `main`.
+
+The injector updates or inserts fields without altering other content. This
+keeps local builds deterministic while ensuring published branches carry exact
+provenance metadata.
 
 ### Secrets and permissions
 

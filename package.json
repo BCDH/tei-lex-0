@@ -19,6 +19,7 @@
     "postprocess:html": "node scripts/postprocess-html.mjs",
     "postprocess:html:dev": "node scripts/postprocess-html.mjs --mode=dev --sitemap=dev",
     "links:check": "node scripts/check-internal-links.mjs",
+    "release:doctor": "node scripts/release-doctor.mjs",
     "postprocess:watch": "node scripts/watch-postprocess-script.mjs",
     "releases:index": "node scripts/generate-release-index.cjs"
   },

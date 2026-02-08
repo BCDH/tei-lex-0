@@ -48,6 +48,15 @@ Releases are immutable snapshots published under `lex-0.org/releases/vX.Y.Z/` (G
 - The `build-site` workflow exists (`.github/workflows/site-build.yml`) and is green on pushes.
 - Vercel projects are configured to deploy `vercel-main` and `vercel-dev` branches.
 
+### Release preflight (recommended)
+
+Run release doctor before cutting a release:
+
+- `npm run release:doctor -- --tag vX.Y.Z`
+
+It checks branch topology, rulesets, workflow wiring, required secrets, tag
+collisions, and release metadata readiness (`date-released` on `origin/dev`).
+
 ### Release process (owner-only automation)
 
 Use the GitHub Actions **release-helper** workflow (`.github/workflows/release-helper.yml`, manual trigger). It is gated to `ttasovac` and:
@@ -60,10 +69,15 @@ Then the normal tag build publishes to `gh-pages/releases/vX.Y.Z/`.
 
 ### Release process (manual alternative)
 
-1. Ensure release citation metadata is prepared on `dev` (including `date-released` in `CITATION.cff`), then commit it on `dev`:
+1. Prepare release citation metadata via a PR to `dev` (because `dev` is PR-only):
 
-   - `node scripts/update-citation-metadata.mjs --commit "$(git rev-parse HEAD)" --date "$(date -u +%F)" --date-released "$(date -u +%F)"`
-   - `git add CITATION.cff && git commit -m "chore: prepare citation metadata for vX.Y.Z" && git push origin dev`
+   - `git checkout dev && git pull --ff-only origin dev`
+   - `git checkout -b chore/release-prep-vX.Y.Z`
+   - `node scripts/update-citation-metadata.mjs --commit "$(git rev-parse origin/dev)" --date "$(date -u +%F)" --date-released "$(date -u +%F)"`
+   - `git add CITATION.cff && git commit -m "chore: prepare citation metadata for vX.Y.Z"`
+   - `git push -u origin chore/release-prep-vX.Y.Z`
+   - `gh pr create --base dev --head chore/release-prep-vX.Y.Z --title "chore: prepare citation metadata for vX.Y.Z" --body ""`
+   - `gh pr merge --rebase --auto`
 2. Wait for GitHub Actions → `citation-metadata` and `build-site` on `dev` to finish successfully.
 3. Fast-forward `main` to `dev` (see [above](#release-dev-to-main-ff-only).)
 4. Wait for GitHub Actions → `build-site` on `main` to finish successfully (this deploys `lex-0.org`).
@@ -117,13 +131,13 @@ Use two rulesets, because `dev` and `main` have different constraints.
   - Enable: “Require a pull request before merging”
   - Enable: “Require linear history”
   - Enable: “Block force pushes” and “Block deletions”
-  - Required status checks: `check_citation` and `pr` (build-site)
+  - Required status checks: `check_citation`
 - **Ruleset for `main` (FF-only by admin):**
   - Target branches (fnmatch pattern): `main`
-  - Enable: “Require a pull request before merging” (it blocks the `git merge --ff-only origin/dev && git push origin main` release step)
   - Enable: “Require linear history”
   - Enable: “Block force pushes” and “Block deletions”
-  - Required status checks: `check_citation` and `pr` (build-site)
+  - Do **not** require pull requests (FF promotion is a direct push)
+  - Do **not** require status checks (checks run on `dev` before FF promotion)
 
 **Bypass list**
 
