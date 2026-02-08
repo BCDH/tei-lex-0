@@ -89,9 +89,16 @@ jobs:
             exit 1
           fi
       - name: Create annotated tag
+        env:
+          TAG_PUSH_TOKEN: ${{ secrets.CITATION_BOT_TOKEN }}
         run: |
           set -euo pipefail
+          if [ -z "${TAG_PUSH_TOKEN:-}" ]; then
+            echo "Missing secret: CITATION_BOT_TOKEN"
+            exit 1
+          fi
           TAG="${{ inputs.tag }}"
+          git remote set-url origin "https://x-access-token:${TAG_PUSH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
           git fetch origin main --tags
           git checkout -B main origin/main
           git config user.name "github-actions[bot]"
