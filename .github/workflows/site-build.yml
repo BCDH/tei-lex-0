@@ -631,10 +631,11 @@ jobs:
           fi
           mkdir -p releases
           if [ -d "releases/${RELEASE_TAG}" ]; then
-            echo "Release folder already exists: releases/${RELEASE_TAG}"
-            exit 1
+            echo "Release folder already exists: releases/${RELEASE_TAG} (keeping existing content)"
+          else
+            cp -R ../build/html "releases/${RELEASE_TAG}"
           fi
-          cp -R ../build/html "releases/${RELEASE_TAG}"
+          node ../scripts/rewrite-release-banners.mjs --dir=releases --current="${RELEASE_TAG}"
           node ../scripts/generate-release-index.cjs
           git add releases
           if git diff --cached --quiet; then
