@@ -210,6 +210,9 @@
             <listChange>
                 <listChange n="0.9.6-dev" xml:id="v.0.9.6-dev">
                     <change when="2026-02-08" type="docs">Set up v.0.9.6-dev.</change>
+                    <change type="spec">Reintroduced <gi>ruby</gi> annotation support as per <ref
+                            target="https://github.com/BCDH/tei-lex-0/issues/120"
+                            >#120</ref></change>
                 </listChange>
                 <listChange n="0.9.5" xml:id="v0.9.5" corresp="releases/v0.9.5">
                     <change when="2026-02-08" type="docs">Added documentation on encoding condensed
@@ -218,9 +221,6 @@
                             >model.languageProfile</ref> to better structure <gi>language</gi> as
                         per <ref target="https://github.com/DARIAH-ERIC/lexicalresources/issues/245"
                             >#245</ref>.</change>
-                    <!--<change type="spec">Added <gi>ruby</gi> annotation support as per <ref
-                            target="https://github.com/DARIAH-ERIC/lexicalresources/issues/225"
-                            >#225</ref></change>-->
                     <change type="spec">Added <gi>measure</gi> (to be used, for instance, within
                             <gi>extent</gi> in <gi>fileDesc</gi> as per <ref
                             target="https://github.com/DARIAH-ERIC/lexicalresources/issues/257"
