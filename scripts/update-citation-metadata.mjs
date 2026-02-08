@@ -21,9 +21,10 @@ for (let i = 0; i < args.length; i++) {
 const file = opts.get('file') || 'CITATION.cff';
 const commit = opts.get('commit');
 const dateGenerated = opts.get('date');
+const dateReleased = opts.get('date-released');
 
 if (!commit || !dateGenerated) {
-  console.error('Usage: update-citation-metadata.mjs --commit <sha> --date <YYYY-MM-DD> [--file <path>]');
+  console.error('Usage: update-citation-metadata.mjs --commit <sha> --date <YYYY-MM-DD> [--date-released <YYYY-MM-DD>] [--file <path>]');
   process.exit(1);
 }
 
@@ -55,6 +56,9 @@ const upsert = (key, value) => {
 
 upsert('commit', commit);
 upsert('date-generated', dateGenerated);
+if (typeof dateReleased === 'string' && dateReleased.length > 0) {
+  upsert('date-released', dateReleased);
+}
 
 const updated = lines.join('\n').replace(/\n*$/, '\n');
 if (updated !== original) {

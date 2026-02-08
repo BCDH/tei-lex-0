@@ -11,8 +11,8 @@ This document explains how `CITATION.cff` is generated from the TEI header in
 - Local command: `npm run citation:cff`
 - CI metadata injection: `scripts/update-citation-metadata.mjs`
 
-CI generates a clean `CITATION.cff` (without `commit` and `date-generated`)
-and then adds those two fields on `dev`/`main` pushes.
+CI generates a clean `CITATION.cff` (without `commit`, `date-generated`, and
+`date-released`) and then injects metadata in CI.
 
 ## Local Usage
 
@@ -27,10 +27,11 @@ This runs the citation-only XProc pipeline and overwrites the repository root
 
 ## CI Metadata Injection
 
-CI injects two fields after the file is generated:
+CI injects the following fields after the file is generated:
 
 - `commit`: full SHA (`git rev-parse HEAD`)
 - `date-generated`: UTC date (`date -u +%F`)
+- `date-released`: UTC date (`date -u +%F`) for release commits only
 
 The injector updates or inserts the fields without altering other content. This
 keeps local builds deterministic while ensuring published branches carry the
@@ -53,7 +54,7 @@ If the secret is missing, the workflow fails fast with a clear error.
 
 - `citation-metadata` (push to `dev`/`main`)
   - Runs the citation-only pipeline (`xproc/citation-cff.xpl`)
-  - Injects metadata
+  - Injects `commit` + `date-generated`
   - Opens/updates a PR and enables auto-merge (no direct pushes)
   - Uses branch `ci/citation-metadata/<base>` and label `automation`
 - `site-build` (push to `dev`/`main` and tags)
@@ -61,7 +62,7 @@ If the secret is missing, the workflow fails fast with a clear error.
 - `release-helper` (manual, owner-only)
   - Fast-forwards `main` to `dev`
   - Regenerates `CITATION.cff`
-  - Injects metadata and commits
+  - Injects `commit` + `date-generated` + `date-released` and commits
   - Creates the annotated tag
 
 ## Release Notes
