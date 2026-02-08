@@ -2,8 +2,6 @@ cff-version: 1.2.0
 message: "If you use TEI Lex-0 in your research, software, or data production, please cite it using the information below."
 title: "TEI Lex-0"
 type: software
-date-released: 2026-02-08
-commit: d3c3e95e306585cf0dc292dc5cb06881959f8eae
 date-generated: 2026-02-08
 authors:
   - family-names: "Tasovac"
@@ -38,7 +36,7 @@ authors:
   - family-names: "Sramó"
     given-names: "Kinga"
     orcid: "https://orcid.org/0009-0009-4161-9532"
-version: 0.9.5
+version: 0.9.6-dev
 repository-code: "https://github.com/BCDH/tei-lex-0"
 url: "https://lex-0.org"
 license: "BSD-3-Clause"
