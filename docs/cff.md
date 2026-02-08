@@ -52,7 +52,7 @@ If the secret is missing, the workflow fails fast with a clear error.
 
 ## CI Workflows
 
-- `citation-metadata` (push to `dev`/`main`)
+- `citation-metadata` (push to `dev`)
   - Runs the citation-only pipeline (`xproc/citation-cff.xpl`)
   - Injects `commit` + `date-generated`
   - Opens/updates a PR and enables auto-merge (no direct pushes)
@@ -60,14 +60,17 @@ If the secret is missing, the workflow fails fast with a clear error.
 - `site-build` (push to `dev`/`main` and tags)
   - Skips deploy on metadata-only bot commits
 - `release-helper` (manual, owner-only)
-  - Fast-forwards `main` to `dev`
-  - Regenerates `CITATION.cff`
-  - Injects `commit` + `date-generated` + `date-released` and commits
+  - Validates that `main` already contains `dev`
+  - Validates `date-released` exists in `CITATION.cff` on `main`
   - Creates the annotated tag
+
+In the FF-only release model, `date-released` must be prepared on `dev` before
+promoting `dev` to `main`.
 
 ## Release Notes
 
 - Tag builds are immutable. The tag must point to a commit that already
-  contains the injected metadata.
+  contains release metadata (including `date-released`) prepared on `dev`
+  before the FF promotion to `main`.
 - The release helper workflow enforces this order and creates the annotated
-  tag only after metadata is committed.
+  tag only after metadata presence is validated on `main`.
