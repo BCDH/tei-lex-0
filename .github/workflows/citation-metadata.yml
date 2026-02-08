@@ -1,8 +1,7 @@
 name: citation-metadata
 
 on:
-  push:
-    branches: [dev]
+  workflow_dispatch:
 
 concurrency:
   group: citation-metadata-${{ github.ref }}

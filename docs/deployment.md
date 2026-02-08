@@ -52,7 +52,7 @@ All deployments are handled in GitHub Actions. High-level triggers:
 - Pull requests targeting `dev`: build only; no post-processing; no publish.
 - Pushes to `main` and `dev`: build + post-process, then publish to Vercel artifact branches.
 - **Annotated tags** on `main` (e.g., `vX.Y.Z`): build + post-process, then publish to GitHub Pages.
-- Metadata generation for `CITATION.cff` happens in a separate workflow on pushes to `dev` (`.github/workflows/citation-metadata.yml`).
+- Release metadata for `CITATION.cff` is prepared explicitly during release prep (`npm run release:prepare`), not on every `dev` push.
 - `citation-check` runs on PRs to `dev`/`main`; in branch protection, `dev` currently requires `check_citation` and `pr`.
 
 Common job steps:
