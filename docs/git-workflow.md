@@ -52,14 +52,21 @@ Releases are immutable snapshots published under `lex-0.org/releases/vX.Y.Z/` (G
 
 Use the GitHub Actions **release-helper** workflow (`.github/workflows/release-helper.yml`, manual trigger). It is gated to `ttasovac` and:
 
-- fast-forwards `main` to `dev` (ff-only)
+- opens a PR to promote `dev` to `main` and waits for merge
 - regenerates `CITATION.cff`
-- injects metadata (`commit`, `date-generated`, `date-released`) and commits it to `main`
+- opens a PR with citation metadata (`commit`, `date-generated`, `date-released`) and waits for merge
 - creates an annotated tag `vX.Y.Z`
 
 Then the normal tag build publishes to `gh-pages/releases/vX.Y.Z/`.
 
+Reruns: `release-helper` is rerun-safe. If `main` already contains `dev`, it
+skips the promotion PR. For release-helper-created branches, it reuses the
+existing PR when possible instead of failing on duplicate PR creation.
+
 ### Release process (manual alternative)
+
+This path assumes your `main` rules allow the required direct push operation. If
+`main` is PR-only, use `release-helper`.
 
 1. Fast-forward `main` to `dev` (see [above](#release-dev-to-main-ff-only).)
 2. Wait for GitHub Actions → `citation-metadata` (`.github/workflows/citation-metadata.yml`) on `main` to open and auto-merge the metadata PR.
@@ -115,9 +122,9 @@ Use two rulesets, because `dev` and `main` have different constraints.
   - Enable: “Require linear history”
   - Enable: “Block force pushes” and “Block deletions”
   - Required status checks: `check_citation` and `pr` (build-site)
-- **Ruleset for `main` (FF-only by admin):**
+- **Ruleset for `main` (release-helper PR-based):**
   - Target branches (fnmatch pattern): `main`
-  - Enable: “Require a pull request before merging” (it blocks the `git merge --ff-only origin/dev && git push origin main` release step)
+  - Enable: “Require a pull request before merging” (release-helper now opens PRs instead of pushing directly)
   - Enable: “Require linear history”
   - Enable: “Block force pushes” and “Block deletions”
   - Required status checks: `check_citation` and `pr` (build-site)
