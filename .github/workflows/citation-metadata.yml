@@ -112,12 +112,10 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           TMP_CFF="$(mktemp)"
           cp CITATION.cff "$TMP_CFF"
-          git fetch origin "$BRANCH" || true
-          if git show-ref --verify --quiet "refs/remotes/origin/$BRANCH"; then
-            git checkout -f -B "$BRANCH" "origin/$BRANCH"
-          else
-            git checkout -f -B "$BRANCH"
-          fi
+          # Always recreate the automation branch from the current base branch.
+          # This prevents stale ci/citation-metadata/* history from causing PR conflicts.
+          git fetch origin "$BASE" "$BRANCH" || git fetch origin "$BASE"
+          git checkout -f -B "$BRANCH" "origin/$BASE"
           mv "$TMP_CFF" CITATION.cff
           git add CITATION.cff
           if git diff --cached --quiet; then
