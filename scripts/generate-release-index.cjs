@@ -29,7 +29,9 @@ function getReleaseTags() {
 const releasesDir = path.join(process.cwd(), "releases");
 const tags = getReleaseTags();
 const entries =
-  tags ??
+  tags && tags.length > 0
+    ? tags
+    :
   fs
     .readdirSync(releasesDir, { withFileTypes: true })
     .filter((d) => d.isDirectory())
