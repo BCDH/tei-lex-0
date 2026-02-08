@@ -73,6 +73,9 @@ XMLCALABASH_JAR=/path/to/xmlcalabash-app-3.0.35.jar npm run assets:odd
   - Minifies CSS/JS into `build/html/css/` and `build/html/js/`
   - Copies images into `build/html/images/` (referenced in the ODD and examples as `images/...`)
 - Link hygiene for `build/html`: `npm run links:check`
+- Release policy preflight (includes tag vs `odd/lex-0.odd` edition check): `npm run release:doctor -- --tag vX.Y.Z`
+- Release metadata prep PR (to `dev`): `npm run release:prepare -- --tag vX.Y.Z`
+- End-to-end release orchestration: `npm run release:cut -- --tag vX.Y.Z`
 - Post-process HTML (banners/robots/minify): `npm run postprocess:html -- --mode=dev` (or `--mode=main`)
 
 ### Post-processing (HTML)
@@ -134,6 +137,9 @@ You can run these transformations regardless of your currently open file. If you
 - Releases and day-to-day branch workflow: [docs/git-workflow.md](docs/git-workflow.md)
 - Deployment architecture (Vercel + GitHub Pages release archive): [docs/deployment.md](docs/deployment.md)
 - CITATION.cff generation and CI metadata injection: [docs/cff.md](docs/cff.md)
+
+Release automation note: prefer the repo-local npm commands above (`release:doctor`,
+`release:prepare`, `release:cut`) over machine-specific shell helpers.
 
 ## Maintainers
 
