@@ -55,12 +55,12 @@ jobs:
           DEV_SHA="$(git rev-parse origin/dev)"
           RUNS_URL="https://api.github.com/repos/${REPO}/actions/workflows/site-build.yml/runs?branch=dev&event=push&per_page=5"
           json="$(curl -fsSL -H "Authorization: Bearer ${GITHUB_TOKEN}" -H "Accept: application/vnd.github+json" "$RUNS_URL")"
-          busy="$(printf '%s' "$json" | python3 - <<'PY'\nimport json,sys\nj=json.load(sys.stdin)\nfor r in j.get('workflow_runs',[]):\n    if r.get('status') in ('queued','in_progress'):\n        print(r.get('html_url',''))\n        break\nPY\n)"
+          busy="$(printf '%s' "$json" | jq -r '.workflow_runs[]? | select(.status == "queued" or .status == "in_progress") | .html_url' | head -n1)"
           if [ -n "$busy" ]; then
             echo "dev CI is still running: $busy"
             exit 1
           fi
-          match="$(printf '%s' "$json" | python3 - <<'PY'\nimport json,sys\nj=json.load(sys.stdin)\nsha=sys.argv[1]\nfor r in j.get('workflow_runs',[]):\n    if r.get('head_sha') == sha:\n        print(f\"{r.get('status','')}|{r.get('conclusion','')}|{r.get('html_url','')}\")\n        break\nPY\n\"$DEV_SHA\")"
+          match="$(printf '%s' "$json" | jq -r --arg sha "$DEV_SHA" '.workflow_runs[]? | select(.head_sha == $sha) | "\(.status)|\(.conclusion)|\(.html_url)"' | head -n1)"
           if [ -z "$match" ]; then
             echo "No site-build run found for dev SHA $DEV_SHA."
             exit 1
