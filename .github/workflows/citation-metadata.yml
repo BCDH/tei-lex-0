@@ -10,7 +10,7 @@ concurrency:
 
 jobs:
   update_citation:
-    if: ${{ github.actor != 'github-actions[bot]' }}
+    if: "${{ github.actor != 'github-actions[bot]' && !contains(github.event.head_commit.message, 'chore: update citation metadata') }}"
     runs-on: ubuntu-latest
     permissions:
       contents: write
