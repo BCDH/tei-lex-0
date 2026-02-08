@@ -57,6 +57,12 @@ const ensureDevBuildGreen = async ({ branch, commit, timeoutSeconds }) => {
   });
 };
 
+const hasDevReleaseDate = ({ remote, devBranch }) => {
+  const out = run('git', ['show', `${remote}/${devBranch}:CITATION.cff`], { allowFail: true, trim: false });
+  if (!out.ok) return false;
+  return /^date-released:\s*\d{4}-\d{2}-\d{2}\s*$/m.test(out.stdout);
+};
+
 const main = async () => {
   const { opts } = parseArgs(process.argv.slice(2));
 
@@ -107,29 +113,38 @@ const main = async () => {
     }
   }
 
+  const releaseDateReadyOnDev = hasDevReleaseDate({ remote, devBranch });
+
   console.log(`Release tag: ${tag}`);
   console.log(`Remote: ${remote}`);
   console.log(`Promotion: ${devBranch} -> ${mainBranch}`);
 
-  if (!noDoctor) {
-    if (dryRun) {
-      console.log(`DRY-RUN: would run release-doctor for ${tag} after release prep`);
-    }
+  if (!noDoctor && dryRun) {
+    const doctorContext = releaseDateReadyOnDev ? 'after prep-skip' : 'after release prep';
+    console.log(`DRY-RUN: would run release-doctor for ${tag} ${doctorContext}`);
   }
 
   console.log('Step 1/3: release preparation on dev');
-  const prepArgs = ['scripts/release-prepare.mjs', '--tag', tag, '--remote', remote, '--dev', devBranch, '--watch-timeout', String(timeoutSeconds)];
-  if (typeof opts.get('date') === 'string') prepArgs.push('--date', opts.get('date'));
-  if (yes) prepArgs.push('--yes');
-  if (dryRun) prepArgs.push('--dry-run');
-  if (nonInteractive) prepArgs.push('--non-interactive');
-  if (!watchPrepare) prepArgs.push('--no-watch-pr');
+  if (releaseDateReadyOnDev) {
+    console.log(`Skipping release-prepare: origin/${devBranch} already has date-released in CITATION.cff.`);
+    if (!noDoctor) {
+      console.log('Step 1.5/3: release doctor re-check');
+      run('node', ['scripts/release-doctor.mjs', '--tag', tag], { stdio: 'inherit' });
+    }
+  } else {
+    const prepArgs = ['scripts/release-prepare.mjs', '--tag', tag, '--remote', remote, '--dev', devBranch, '--watch-timeout', String(timeoutSeconds)];
+    if (typeof opts.get('date') === 'string') prepArgs.push('--date', opts.get('date'));
+    if (yes) prepArgs.push('--yes');
+    if (dryRun) prepArgs.push('--dry-run');
+    if (nonInteractive) prepArgs.push('--non-interactive');
+    if (!watchPrepare) prepArgs.push('--no-watch-pr');
 
-  run('node', prepArgs, { stdio: 'inherit' });
+    run('node', prepArgs, { stdio: 'inherit' });
 
-  if (!noDoctor) {
-    console.log('Step 1.5/3: release doctor re-check');
-    run('node', ['scripts/release-doctor.mjs', '--tag', tag], { stdio: 'inherit' });
+    if (!noDoctor) {
+      console.log('Step 1.5/3: release doctor re-check');
+      run('node', ['scripts/release-doctor.mjs', '--tag', tag], { stdio: 'inherit' });
+    }
   }
 
   console.log('Step 2/3: fast-forward promote dev -> main');
