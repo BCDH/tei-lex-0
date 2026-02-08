@@ -76,6 +76,7 @@ XMLCALABASH_JAR=/path/to/xmlcalabash-app-3.0.35.jar npm run assets:odd
 - Release policy preflight (includes tag vs `odd/lex-0.odd` edition check): `npm run release:doctor -- --tag vX.Y.Z`
 - Release metadata prep PR (to `dev`): `npm run release:prepare -- --tag vX.Y.Z`
 - End-to-end release orchestration: `npm run release:cut -- --tag vX.Y.Z`
+- `release:prepare` and `release:cut` default to auto-confirm + non-interactive; use `--interactive` if you want prompts.
 - Post-process HTML (banners/robots/minify): `npm run postprocess:html -- --mode=dev` (or `--mode=main`)
 
 ### Post-processing (HTML)
