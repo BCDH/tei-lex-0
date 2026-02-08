@@ -2,7 +2,7 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://www.tei-c.org/ns/1.0" xmlns:tei="http://www.tei-c.org/ns/1.0">
   <xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="xml.xsd"/>
   <!--
-    Schema generated from ODD source 2026-02-08T16:46:14Z. . 
+    Schema generated from ODD source 2026-02-08T17:12:11Z. . 
     TEI Edition: P5 Version 4.10.2. Last updated on 4th September 2025, revision bcfa98f42 
     TEI Edition Location: https://www.tei-c.org/Vault/P5/4.10.2/ 
     
@@ -59,6 +59,7 @@
       <xs:group ref="tei:model.ptrLike"/>
       <xs:group ref="tei:model.segLike"/>
       <xs:element ref="tei:gloss"/>
+      <xs:element ref="tei:ruby"/>
       <xs:element ref="tei:xr"/>
     </xs:choice>
   </xs:complexType>
@@ -1755,6 +1756,46 @@ Sample values include: 1] all; 2] most; 3] range</xs:documentation>
       </xs:simpleType>
     </xs:attribute>
   </xs:attributeGroup>
+  <xs:attributeGroup name="att.transcriptional.attributes">
+    <xs:attributeGroup ref="tei:att.editLike.attributes"/>
+    <xs:attributeGroup ref="tei:att.placement.attributes"/>
+    <xs:attributeGroup ref="tei:att.written.attributes"/>
+    <xs:attributeGroup ref="tei:att.transcriptional.attribute.status"/>
+    <xs:attributeGroup ref="tei:att.transcriptional.attribute.cause"/>
+    <xs:attributeGroup ref="tei:att.transcriptional.attribute.seq"/>
+  </xs:attributeGroup>
+  <xs:attributeGroup name="att.transcriptional.attribute.status">
+    <xs:attribute name="status" default="unremarkable">
+      <xs:annotation>
+        <xs:documentation>indicates the effect of the intervention, for example in the case of a deletion, strikeouts which include too much or too little text, or in the case of an addition, an insertion which duplicates some of the text already present.
+Sample values include: 1] duplicate; 2] duplicate-partial; 3] excessStart; 4] excessEnd; 5] shortStart; 6] shortEnd; 7] partial; 8] unremarkable</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:pattern value="[^\p{C}\p{Z}]+"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <xs:attributeGroup name="att.transcriptional.attribute.cause">
+    <xs:attribute name="cause">
+      <xs:annotation>
+        <xs:documentation>documents the presumed cause for the intervention.</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:pattern value="[^\p{C}\p{Z}]+"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <xs:attributeGroup name="att.transcriptional.attribute.seq">
+    <xs:attribute name="seq" type="xs:nonNegativeInteger">
+      <xs:annotation>
+        <xs:documentation>(sequence) assigns a sequence number related to the order in which the encoded features carrying this attribute are believed to have occurred.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
   <xs:group name="model.nameLike.agent">
     <xs:choice>
       <xs:element ref="tei:name"/>
@@ -2713,6 +2754,7 @@ Sample values include: 1] all; 2] most; 3] range</xs:documentation>
       <xs:group ref="tei:model.pPart.edit"/>
       <xs:group ref="tei:model.ptrLike"/>
       <xs:group ref="tei:model.pPart.data"/>
+      <xs:element ref="tei:ruby"/>
     </xs:choice>
   </xs:group>
   <xs:group name="model.paraPart">
@@ -3099,6 +3141,77 @@ Suggested values include: 1] deprecationInfo (deprecation information)</xs:docum
           <xs:attributeGroup ref="tei:att.pointing.attributes"/>
           <xs:attributeGroup ref="tei:att.sortable.attributes"/>
           <xs:attributeGroup ref="tei:att.typed.attributes"/>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ruby">
+    <xs:annotation>
+      <xs:documentation>(ruby container) contains a passage of base text along with its associated ruby gloss(es). [3.4.2. Ruby Annotations]</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="tei:rb"/>
+        <xs:element maxOccurs="unbounded" ref="tei:rt"/>
+      </xs:sequence>
+      <xs:attributeGroup ref="tei:att.global.attributes"/>
+      <xs:attributeGroup ref="tei:att.cmc.attributes"/>
+      <xs:attributeGroup ref="tei:att.typed.attributes"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="rb">
+    <xs:annotation>
+      <xs:documentation>(ruby base) contains the base text annotated by a ruby gloss. [3.4.2. Ruby Annotations]</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="tei:macro.phraseSeq">
+          <xs:attributeGroup ref="tei:att.global.attributes"/>
+          <xs:attributeGroup ref="tei:att.typed.attributes"/>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="rt">
+    <xs:annotation>
+      <xs:documentation>(ruby text) contains a ruby text, an annotation closely associated with a passage of the main text. [3.4.2. Ruby Annotations]</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="tei:macro.phraseSeq">
+          <xs:attributeGroup ref="tei:att.global.attributes"/>
+          <xs:attributeGroup ref="tei:att.transcriptional.attributes"/>
+          <xs:attributeGroup ref="tei:att.typed.attributes"/>
+          <xs:attribute name="target">
+            <xs:annotation>
+              <xs:documentation>supplies a pointer to the base being glossed by this ruby text.</xs:documentation>
+            </xs:annotation>
+            <xs:simpleType>
+              <xs:restriction base="xs:anyURI">
+                <xs:pattern value="\S+"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:attribute>
+          <xs:attribute name="from">
+            <xs:annotation>
+              <xs:documentation>points to the starting point of the span of text being glossed by this ruby text.</xs:documentation>
+            </xs:annotation>
+            <xs:simpleType>
+              <xs:restriction base="xs:anyURI">
+                <xs:pattern value="\S+"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:attribute>
+          <xs:attribute name="to">
+            <xs:annotation>
+              <xs:documentation>points to the ending point of the span of text being glossed.</xs:documentation>
+            </xs:annotation>
+            <xs:simpleType>
+              <xs:restriction base="xs:anyURI">
+                <xs:pattern value="\S+"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:attribute>
         </xs:extension>
       </xs:complexContent>
     </xs:complexType>
@@ -9502,6 +9615,7 @@ Sample values include: 1] atBirth; 2] atDeath; 3] dependent; 4] inherited; 5] in
       <xs:group ref="tei:model.segLike"/>
       <xs:group ref="tei:model.hiLike"/>
       <xs:group ref="tei:model.ptrLike"/>
+      <xs:element ref="tei:ruby"/>
       <xs:element ref="tei:lang"/>
       <xs:group ref="tei:model.lexEmphLike"/>
     </xs:choice>

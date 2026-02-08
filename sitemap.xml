@@ -51,6 +51,7 @@
   <url><loc>https://dev.lex-0.org/TEI.att.sortable.html</loc></url>
   <url><loc>https://dev.lex-0.org/TEI.att.spanning.html</loc></url>
   <url><loc>https://dev.lex-0.org/TEI.att.styleDef.html</loc></url>
+  <url><loc>https://dev.lex-0.org/TEI.att.transcriptional.html</loc></url>
   <url><loc>https://dev.lex-0.org/TEI.att.translatable.html</loc></url>
   <url><loc>https://dev.lex-0.org/TEI.att.typed.html</loc></url>
   <url><loc>https://dev.lex-0.org/TEI.att.written.html</loc></url>
@@ -228,12 +229,15 @@
   <url><loc>https://dev.lex-0.org/TEI.publisher.html</loc></url>
   <url><loc>https://dev.lex-0.org/TEI.purpose.html</loc></url>
   <url><loc>https://dev.lex-0.org/TEI.quote.html</loc></url>
+  <url><loc>https://dev.lex-0.org/TEI.rb.html</loc></url>
   <url><loc>https://dev.lex-0.org/TEI.ref.html</loc></url>
   <url><loc>https://dev.lex-0.org/TEI.rendition.html</loc></url>
   <url><loc>https://dev.lex-0.org/TEI.residence.html</loc></url>
   <url><loc>https://dev.lex-0.org/TEI.resp.html</loc></url>
   <url><loc>https://dev.lex-0.org/TEI.respStmt.html</loc></url>
   <url><loc>https://dev.lex-0.org/TEI.revisionDesc.html</loc></url>
+  <url><loc>https://dev.lex-0.org/TEI.rt.html</loc></url>
+  <url><loc>https://dev.lex-0.org/TEI.ruby.html</loc></url>
   <url><loc>https://dev.lex-0.org/TEI.seg.html</loc></url>
   <url><loc>https://dev.lex-0.org/TEI.sense.html</loc></url>
   <url><loc>https://dev.lex-0.org/TEI.seriesStmt.html</loc></url>
