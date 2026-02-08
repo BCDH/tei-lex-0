@@ -54,7 +54,7 @@ Use the GitHub Actions **release-helper** workflow (`.github/workflows/release-h
 
 - fast-forwards `main` to `dev` (ff-only)
 - regenerates `CITATION.cff`
-- injects metadata (`commit`, `date-generated`) and commits it to `main`
+- injects metadata (`commit`, `date-generated`, `date-released`) and commits it to `main`
 - creates an annotated tag `vX.Y.Z`
 
 Then the normal tag build publishes to `gh-pages/releases/vX.Y.Z/`.

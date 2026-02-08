@@ -151,7 +151,8 @@ jobs:
           set -euo pipefail
           node scripts/update-citation-metadata.mjs \
             --commit "$(git rev-parse HEAD)" \
-            --date "$(date -u +%F)"
+            --date "$(date -u +%F)" \
+            --date-released "$(date -u +%F)"
       - name: Commit citation metadata
         run: |
           set -euo pipefail
