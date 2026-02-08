@@ -60,9 +60,9 @@ If the secret is missing, the workflow fails fast with a clear error.
 - `site-build` (push to `dev`/`main` and tags)
   - Skips deploy on metadata-only bot commits
 - `release-helper` (manual, owner-only)
-  - Opens a PR to promote `dev` to `main` (no direct push)
+  - Fast-forwards `main` to `dev`
   - Regenerates `CITATION.cff`
-  - Opens a PR that injects `commit` + `date-generated` + `date-released`
+  - Injects `commit` + `date-generated` + `date-released` and commits
   - Creates the annotated tag
 
 ## Release Notes
