@@ -94,6 +94,8 @@ jobs:
           TAG="${{ inputs.tag }}"
           git fetch origin main --tags
           git checkout -B main origin/main
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           if git rev-parse -q --verify "refs/tags/$TAG" >/dev/null; then
             echo "Tag already exists after validation stage: $TAG"
             exit 1
