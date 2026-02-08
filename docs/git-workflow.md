@@ -55,7 +55,20 @@ Run release doctor before cutting a release:
 - `npm run release:doctor -- --tag vX.Y.Z`
 
 It checks branch topology, rulesets, workflow wiring, required secrets, tag
-collisions, and release metadata readiness (`date-released` on `origin/dev`).
+collisions, tag vs `odd/lex-0.odd` edition alignment, and release metadata
+readiness (`date-released` on `origin/dev`).
+
+### Release automation (preferred)
+
+Use repo-local Node scripts:
+
+- Prepare release metadata PR on `dev`:
+  - `npm run release:prepare -- --tag vX.Y.Z`
+- End-to-end release (prepare -> FF `dev` to `main` -> trigger `release-helper`):
+  - `npm run release:cut -- --tag vX.Y.Z`
+
+Both support `--dry-run`; pass `--yes --non-interactive` for unattended runs.
+Legacy fish helpers can still be used, but the npm scripts are the canonical path.
 
 ### Release process (owner-only automation)
 
@@ -131,7 +144,7 @@ Use two rulesets, because `dev` and `main` have different constraints.
   - Enable: “Require a pull request before merging”
   - Enable: “Require linear history”
   - Enable: “Block force pushes” and “Block deletions”
-  - Required status checks: `check_citation`
+  - Required status checks: `check_citation` and `pr` (build-site PR job)
 - **Ruleset for `main` (FF-only by admin):**
   - Target branches (fnmatch pattern): `main`
   - Enable: “Require linear history”

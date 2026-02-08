@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 import { spawnSync } from 'node:child_process';
+import { readOddEditionNumber, tagVersion } from './lib/release-common.mjs';
 
 const args = process.argv.slice(2);
 const opts = new Map();
@@ -168,6 +169,17 @@ try {
       add('tag.remote', 'fail', `Tag already exists on ${remote}: ${tag}.`);
     } else {
       add('tag.remote', 'pass', `Tag not present on ${remote}: ${tag}.`);
+    }
+
+    try {
+      const oddEdition = readOddEditionNumber();
+      if (tagVersion(tag) === oddEdition) {
+        add('tag.odd_edition_match', 'pass', `Tag version matches odd/lex-0.odd edition n='${oddEdition}'.`);
+      } else {
+        add('tag.odd_edition_match', 'fail', `Tag version '${tagVersion(tag)}' does not match odd/lex-0.odd edition n='${oddEdition}'.`);
+      }
+    } catch (err) {
+      add('tag.odd_edition_match', 'fail', 'Unable to validate tag against odd/lex-0.odd edition.', String(err?.message || err));
     }
   } else {
     add('tag.input', 'warn', 'No --tag provided; skipping tag collision checks.');
