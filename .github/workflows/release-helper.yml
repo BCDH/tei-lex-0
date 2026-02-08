@@ -18,8 +18,6 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
-      pull-requests: write
-      actions: read
     steps:
       - uses: actions/checkout@v4
         with:
@@ -71,76 +69,16 @@ jobs:
             fi
             exit 1
           fi
-      - name: Open promotion PR (dev -> main)
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Fast-forward main to dev
         run: |
           set -euo pipefail
-          if git merge-base --is-ancestor origin/main origin/dev; then
-            NEED_PROMOTION=1
-          elif git merge-base --is-ancestor origin/dev origin/main; then
-            NEED_PROMOTION=0
-            echo "origin/main already contains origin/dev; skipping promotion PR."
-          else
-            echo "origin/main and origin/dev have diverged (not rebase-promotable)."
+          if ! git merge-base --is-ancestor origin/main origin/dev; then
+            echo "origin/main and origin/dev have diverged (not fast-forwardable)."
             exit 1
           fi
-
-          if [ "$NEED_PROMOTION" -eq 0 ]; then
-            echo "PROMOTION_PR_URL=" >> "$GITHUB_ENV"
-            exit 0
-          fi
-
-          TAG="${{ inputs.tag }}"
-          RELEASE_BRANCH="ci/release-helper/${TAG}-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
-          git checkout -B "$RELEASE_BRANCH" origin/dev
-          git push origin "$RELEASE_BRANCH"
-          PR_TITLE="chore(release): promote dev to main for ${TAG}"
-          PR_BODY="Automated release-helper PR to promote dev to main before tagging ${TAG}."
-          PR_URL="$(gh pr create --base main --head "$RELEASE_BRANCH" --title "$PR_TITLE" --body "$PR_BODY" 2>/dev/null || true)"
-          if [ -z "$PR_URL" ]; then
-            PR_URL="$(gh pr view --head "$RELEASE_BRANCH" --base main --json url --jq '.url' 2>/dev/null || true)"
-          fi
-          if [ -z "$PR_URL" ]; then
-            echo "Unable to create or resolve promotion PR for head '$RELEASE_BRANCH'."
-            exit 1
-          fi
-          gh pr merge "$PR_URL" --auto --rebase
-          echo "PROMOTION_PR_URL=$PR_URL" >> "$GITHUB_ENV"
-      - name: Wait for promotion PR merge
-        if: ${{ env.PROMOTION_PR_URL != '' }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          set -euo pipefail
-          PR_URL="${PROMOTION_PR_URL}"
-          if [ -z "$PR_URL" ]; then
-            echo "Promotion PR URL missing."
-            exit 1
-          fi
-          echo "Waiting for PR to merge: $PR_URL"
-          for i in $(seq 1 180); do
-            merged_at="$(gh pr view "$PR_URL" --json mergedAt --jq '.mergedAt')"
-            state="$(gh pr view "$PR_URL" --json state --jq '.state')"
-            if [ "$merged_at" != "null" ] && [ -n "$merged_at" ]; then
-              break
-            fi
-            if [ "$state" = "CLOSED" ]; then
-              echo "Promotion PR closed without merge: $PR_URL"
-              exit 1
-            fi
-            sleep 10
-          done
-          merged_at="$(gh pr view "$PR_URL" --json mergedAt --jq '.mergedAt')"
-          if [ "$merged_at" = "null" ] || [ -z "$merged_at" ]; then
-            echo "Timed out waiting for promotion PR merge: $PR_URL"
-            exit 1
-          fi
-          git fetch origin main dev --tags
-          if ! git merge-base --is-ancestor origin/dev origin/main; then
-            echo "After PR merge, origin/main does not contain origin/dev."
-            exit 1
-          fi
+          git checkout main
+          git merge --ff-only origin/dev
+          git push origin main
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
@@ -207,14 +145,6 @@ jobs:
           CALABASH_CP="$(cat "$OUTPUT_FILE")"
           echo "XMLCALABASH_CMD=java -cp \"$CALABASH_CP\" com.xmlcalabash.app.Main {PIPELINE}" >> "$GITHUB_ENV"
           echo "SAXON_JAR=$SAXON_JAR" >> "$GITHUB_ENV"
-      - name: Checkout citation branch from main
-        run: |
-          set -euo pipefail
-          TAG="${{ inputs.tag }}"
-          CITATION_BRANCH="ci/release-citation/${TAG}-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
-          git fetch origin main --tags
-          git checkout -B "$CITATION_BRANCH" origin/main
-          echo "CITATION_BRANCH=$CITATION_BRANCH" >> "$GITHUB_ENV"
       - run: node scripts/run-citation-cff.mjs
       - name: Inject citation metadata
         run: |
@@ -224,67 +154,22 @@ jobs:
             --date "$(date -u +%F)" \
             --date-released "$(date -u +%F)"
       - name: Commit citation metadata
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           set -euo pipefail
-          TAG="${{ inputs.tag }}"
           if git diff --quiet -- CITATION.cff; then
             echo "No citation metadata changes."
-            echo "CITATION_PR_URL=" >> "$GITHUB_ENV"
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add CITATION.cff
           git commit -m "chore: update citation metadata"
-          git push origin "$CITATION_BRANCH"
-          PR_TITLE="chore(release): citation metadata for ${TAG}"
-          PR_BODY="Automated release-helper PR to add release citation metadata before tagging ${TAG}."
-          PR_URL="$(gh pr create --base main --head "$CITATION_BRANCH" --title "$PR_TITLE" --body "$PR_BODY" 2>/dev/null || true)"
-          if [ -z "$PR_URL" ]; then
-            PR_URL="$(gh pr view --head "$CITATION_BRANCH" --base main --json url --jq '.url' 2>/dev/null || true)"
-          fi
-          if [ -z "$PR_URL" ]; then
-            echo "Unable to create or resolve citation metadata PR for head '$CITATION_BRANCH'."
-            exit 1
-          fi
-          gh pr merge "$PR_URL" --auto --rebase
-          echo "CITATION_PR_URL=$PR_URL" >> "$GITHUB_ENV"
-      - name: Wait for citation metadata PR merge
-        if: ${{ env.CITATION_PR_URL != '' }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          set -euo pipefail
-          PR_URL="${CITATION_PR_URL}"
-          echo "Waiting for PR to merge: $PR_URL"
-          for i in $(seq 1 180); do
-            merged_at="$(gh pr view "$PR_URL" --json mergedAt --jq '.mergedAt')"
-            state="$(gh pr view "$PR_URL" --json state --jq '.state')"
-            if [ "$merged_at" != "null" ] && [ -n "$merged_at" ]; then
-              break
-            fi
-            if [ "$state" = "CLOSED" ]; then
-              echo "Citation metadata PR closed without merge: $PR_URL"
-              exit 1
-            fi
-            sleep 10
-          done
-          merged_at="$(gh pr view "$PR_URL" --json mergedAt --jq '.mergedAt')"
-          if [ "$merged_at" = "null" ] || [ -z "$merged_at" ]; then
-            echo "Timed out waiting for citation metadata PR merge: $PR_URL"
-            exit 1
-          fi
+          git push origin main
       - name: Create annotated tag
         run: |
           set -euo pipefail
           TAG="${{ inputs.tag }}"
           git fetch origin main --tags
-          git checkout -B main origin/main
-          if git rev-parse -q --verify "refs/tags/$TAG" >/dev/null; then
-            echo "Tag already exists after PR merge stage: $TAG"
-            exit 1
-          fi
+          git checkout main
           git tag -a "$TAG" -m "Release $TAG"
           git push origin "$TAG"
