@@ -2,7 +2,7 @@ cff-version: 1.2.0
 message: "If you use TEI Lex-0 in your research, software, or data production, please cite it using the information below."
 title: "TEI Lex-0"
 type: software
-commit: b351288cc00777b5ac8dfb22fe85d45246cc6759
+commit: f6cea222f009b6b78719186296d82cc5e9dd69aa
 date-generated: 2026-02-08
 authors:
   - family-names: "Tasovac"
