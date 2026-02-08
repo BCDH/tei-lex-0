@@ -19,7 +19,8 @@ import {
 } from './lib/release-common.mjs';
 
 const usage = () => {
-  console.log('Usage: npm run release:prepare -- --tag vX.Y.Z [--date YYYY-MM-DD] [--remote origin] [--dev dev] [--yes] [--non-interactive] [--dry-run] [--no-watch-pr] [--watch-timeout 3600] [--json]');
+  console.log('Usage: npm run release:prepare -- --tag vX.Y.Z [--date YYYY-MM-DD] [--remote origin] [--dev dev] [--dry-run] [--no-watch-pr] [--watch-timeout 3600] [--json] [--interactive]');
+  console.log('Defaults: --yes and --non-interactive are enabled by default. Use --interactive to prompt.');
 };
 
 const main = async () => {
@@ -48,16 +49,13 @@ const main = async () => {
 
   const remote = typeof opts.get('remote') === 'string' ? opts.get('remote') : 'origin';
   const devBranch = typeof opts.get('dev') === 'string' ? opts.get('dev') : 'dev';
-  const yes = Boolean(opts.get('yes'));
+  const interactive = Boolean(opts.get('interactive'));
+  const yes = !interactive;
   const dryRun = Boolean(opts.get('dry-run'));
-  const nonInteractive = Boolean(opts.get('non-interactive'));
+  const nonInteractive = !interactive;
   const watchPr = !Boolean(opts.get('no-watch-pr'));
   const timeoutSeconds = Number(opts.get('watch-timeout') || 3600);
   const json = Boolean(opts.get('json'));
-
-  if (nonInteractive && !yes && !dryRun) {
-    throw new Error('--non-interactive requires --yes (except with --dry-run).');
-  }
 
   ensureCommands(['git', 'gh', 'node']);
   ensureGitRepo();

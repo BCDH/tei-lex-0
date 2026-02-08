@@ -67,7 +67,8 @@ Use repo-local Node scripts:
 - End-to-end release (prepare -> FF `dev` to `main` -> trigger `release-helper`):
   - `npm run release:cut -- --tag vX.Y.Z`
 
-Both support `--dry-run`; pass `--yes --non-interactive` for unattended runs.
+Both support `--dry-run`. By default they run in non-interactive auto-confirm mode;
+use `--interactive` to require prompts.
 Legacy fish helpers can still be used, but the npm scripts are the canonical path.
 
 ### Release process (owner-only automation)

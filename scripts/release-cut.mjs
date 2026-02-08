@@ -17,7 +17,8 @@ import {
 } from './lib/release-common.mjs';
 
 const usage = () => {
-  console.log('Usage: npm run release:cut -- --tag vX.Y.Z [--remote origin] [--dev dev] [--main main] [--date YYYY-MM-DD] [--yes] [--non-interactive] [--dry-run] [--no-watch-prepare] [--no-watch-main] [--no-watch-release] [--watch-timeout 3600] [--no-doctor]');
+  console.log('Usage: npm run release:cut -- --tag vX.Y.Z [--remote origin] [--dev dev] [--main main] [--date YYYY-MM-DD] [--dry-run] [--no-watch-prepare] [--no-watch-main] [--no-watch-release] [--watch-timeout 3600] [--no-doctor] [--interactive]');
+  console.log('Defaults: --yes and --non-interactive are enabled by default. Use --interactive to prompt.');
 };
 
 const ensureMainRulesCompatible = (repoSlug) => {
@@ -74,18 +75,15 @@ const main = async () => {
   const remote = typeof opts.get('remote') === 'string' ? opts.get('remote') : 'origin';
   const devBranch = typeof opts.get('dev') === 'string' ? opts.get('dev') : 'dev';
   const mainBranch = typeof opts.get('main') === 'string' ? opts.get('main') : 'main';
-  const yes = Boolean(opts.get('yes'));
+  const interactive = Boolean(opts.get('interactive'));
+  const yes = !interactive;
   const dryRun = Boolean(opts.get('dry-run'));
-  const nonInteractive = Boolean(opts.get('non-interactive'));
+  const nonInteractive = !interactive;
   const watchPrepare = !Boolean(opts.get('no-watch-prepare'));
   const watchMain = !Boolean(opts.get('no-watch-main'));
   const watchRelease = !Boolean(opts.get('no-watch-release'));
   const timeoutSeconds = Number(opts.get('watch-timeout') || 3600);
   const noDoctor = Boolean(opts.get('no-doctor'));
-
-  if (nonInteractive && !yes && !dryRun) {
-    throw new Error('--non-interactive requires --yes (except with --dry-run).');
-  }
 
   ensureCommands(['git', 'gh', 'node']);
   ensureGitRepo();
@@ -101,6 +99,13 @@ const main = async () => {
   if (!dryRun) fetchRemote(remote);
 
   const repoSlug = repoSlugFromRemote(remote);
+  if (!dryRun) {
+    ensureMainRulesCompatible(repoSlug);
+    const diverge = branchDivergence(`${remote}/${mainBranch}`, `${remote}/${devBranch}`);
+    if (diverge.leftOnly > 0 && diverge.rightOnly > 0) {
+      throw new Error(`Cannot fast-forward: ${remote}/${mainBranch} and ${remote}/${devBranch} diverged (main-only=${diverge.leftOnly}, dev-only=${diverge.rightOnly}).`);
+    }
+  }
 
   console.log(`Release tag: ${tag}`);
   console.log(`Remote: ${remote}`);
@@ -132,13 +137,6 @@ const main = async () => {
   if (dryRun) {
     console.log(`DRY-RUN: would verify main ruleset compatibility and run FF merge/push ${remote}/${devBranch} -> ${mainBranch}`);
   } else {
-    ensureMainRulesCompatible(repoSlug);
-
-    const diverge = branchDivergence(`${remote}/${mainBranch}`, `${remote}/${devBranch}`);
-    if (diverge.leftOnly > 0 && diverge.rightOnly > 0) {
-      throw new Error(`Cannot fast-forward: ${remote}/${mainBranch} and ${remote}/${devBranch} diverged (main-only=${diverge.leftOnly}, dev-only=${diverge.rightOnly}).`);
-    }
-
     const devSha = remoteSha(remote, devBranch);
     await ensureDevBuildGreen({ branch: devBranch, commit: devSha, timeoutSeconds });
 
