@@ -2,7 +2,7 @@ name: citation-metadata
 
 on:
   push:
-    branches: [main, dev]
+    branches: [dev]
 
 concurrency:
   group: citation-metadata-${{ github.ref }}

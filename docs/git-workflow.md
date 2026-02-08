@@ -52,31 +52,34 @@ Releases are immutable snapshots published under `lex-0.org/releases/vX.Y.Z/` (G
 
 Use the GitHub Actions **release-helper** workflow (`.github/workflows/release-helper.yml`, manual trigger). It is gated to `ttasovac` and:
 
-- fast-forwards `main` to `dev` (ff-only)
-- regenerates `CITATION.cff`
-- injects metadata (`commit`, `date-generated`, `date-released`) and commits it to `main`
+- validates that `main` already contains `dev` (FF promotion must already be done)
+- validates that `CITATION.cff` on `main` already includes `date-released`
 - creates an annotated tag `vX.Y.Z`
 
 Then the normal tag build publishes to `gh-pages/releases/vX.Y.Z/`.
 
 ### Release process (manual alternative)
 
-1. Fast-forward `main` to `dev` (see [above](#release-dev-to-main-ff-only).)
-2. Wait for GitHub Actions → `citation-metadata` (`.github/workflows/citation-metadata.yml`) on `main` to open and auto-merge the metadata PR.
-3. Wait for GitHub Actions → `build-site` on `main` to finish successfully (this deploys `lex-0.org`).
-4. Create an **annotated** tag on `main` and push it:
+1. Ensure release citation metadata is prepared on `dev` (including `date-released` in `CITATION.cff`), then commit it on `dev`:
+
+   - `node scripts/update-citation-metadata.mjs --commit "$(git rev-parse HEAD)" --date "$(date -u +%F)" --date-released "$(date -u +%F)"`
+   - `git add CITATION.cff && git commit -m "chore: prepare citation metadata for vX.Y.Z" && git push origin dev`
+2. Wait for GitHub Actions → `citation-metadata` and `build-site` on `dev` to finish successfully.
+3. Fast-forward `main` to `dev` (see [above](#release-dev-to-main-ff-only).)
+4. Wait for GitHub Actions → `build-site` on `main` to finish successfully (this deploys `lex-0.org`).
+5. Create an **annotated** tag on `main` and push it:
 
    - `git checkout main`
    - `git pull --ff-only origin main`
    - `git tag -a vX.Y.Z -m "Release vX.Y.Z"`
    - `git push origin vX.Y.Z`
 
-5. Monitor GitHub Actions → `build-site` → `tag_release` job:
+6. Monitor GitHub Actions → `build-site` → `tag_release` job:
 
    - Publishes `build/html` to `gh-pages/releases/vX.Y.Z/`
    - Regenerates `gh-pages/releases/index.html`
 
-5. Verify:
+7. Verify:
 
    - `https://lex-0.org/releases/vX.Y.Z/` loads
    - Assets resolve (no `github.io` URLs)

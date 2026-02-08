@@ -38,6 +38,14 @@ jobs:
         run: |
           set -euo pipefail
           git fetch origin main dev --tags
+      - name: Ensure main already contains dev
+        run: |
+          set -euo pipefail
+          if ! git merge-base --is-ancestor origin/dev origin/main; then
+            echo "origin/main does not contain origin/dev."
+            echo "Run the FF-only dev->main promotion first, then rerun release-helper."
+            exit 1
+          fi
       - name: Ensure dev CI is clean
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -47,13 +55,11 @@ jobs:
           DEV_SHA="$(git rev-parse origin/dev)"
           RUNS_URL="https://api.github.com/repos/${REPO}/actions/workflows/site-build.yml/runs?branch=dev&event=push&per_page=5"
           json="$(curl -fsSL -H "Authorization: Bearer ${GITHUB_TOKEN}" -H "Accept: application/vnd.github+json" "$RUNS_URL")"
-          # Ensure no in-progress/queued run exists for dev
           busy="$(printf '%s' "$json" | python3 - <<'PY'\nimport json,sys\nj=json.load(sys.stdin)\nfor r in j.get('workflow_runs',[]):\n    if r.get('status') in ('queued','in_progress'):\n        print(r.get('html_url',''))\n        break\nPY\n)"
           if [ -n "$busy" ]; then
             echo "dev CI is still running: $busy"
             exit 1
           fi
-          # Ensure latest run for the current dev SHA succeeded
           match="$(printf '%s' "$json" | python3 - <<'PY'\nimport json,sys\nj=json.load(sys.stdin)\nsha=sys.argv[1]\nfor r in j.get('workflow_runs',[]):\n    if r.get('head_sha') == sha:\n        print(f\"{r.get('status','')}|{r.get('conclusion','')}|{r.get('html_url','')}\")\n        break\nPY\n\"$DEV_SHA\")"
           if [ -z "$match" ]; then
             echo "No site-build run found for dev SHA $DEV_SHA."
@@ -69,107 +75,28 @@ jobs:
             fi
             exit 1
           fi
-      - name: Fast-forward main to dev
+      - name: Ensure release metadata already exists on main
         run: |
           set -euo pipefail
-          if ! git merge-base --is-ancestor origin/main origin/dev; then
-            echo "origin/main and origin/dev have diverged (not fast-forwardable)."
+          git checkout -B main origin/main
+          if [ ! -f CITATION.cff ]; then
+            echo "CITATION.cff missing on origin/main."
             exit 1
           fi
-          git checkout main
-          git merge --ff-only origin/dev
-          git push origin main
-      - uses: actions/setup-java@v4
-        with:
-          distribution: temurin
-          java-version: "17"
-      - uses: actions/setup-node@v4
-        with:
-          node-version: "22"
-          cache: npm
-      - name: Cache Calabash, Saxon, and Maven
-        uses: actions/cache@v4
-        with:
-          path: |
-            .cache/tools
-            ~/.m2/repository
-          key: calabash-3.0.35-saxon-12.4-maven
-      - name: Prepare Calabash and Saxon
-        run: |
-          set -euo pipefail
-          mkdir -p .cache/tools
-          CALABASH_VERSION=3.0.35
-          SAXON_VERSION=12.4
-          SAXON_JAR=".cache/tools/saxon-he-${SAXON_VERSION}.jar"
-          cat > .cache/tools/pom.xml <<'EOF_POM'
-          <project xmlns="http://maven.apache.org/POM/4.0.0"
-                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-            <modelVersion>4.0.0</modelVersion>
-            <groupId>local</groupId>
-            <artifactId>calabash-runner</artifactId>
-            <version>1.0.0</version>
-            <dependencies>
-              <dependency>
-                <groupId>com.xmlcalabash</groupId>
-                <artifactId>app</artifactId>
-                <version>3.0.35</version>
-              </dependency>
-            </dependencies>
-          </project>
-          EOF_POM
-          OUTPUT_FILE="$(pwd)/.cache/tools/classpath.txt"
-          if ! mvn -q -B -f .cache/tools/pom.xml -DincludeScope=runtime -Dmdep.outputFile="$OUTPUT_FILE" \
-            org.apache.maven.plugins:maven-dependency-plugin:3.6.1:build-classpath > .cache/tools/maven.log 2>&1; then
-            echo "Maven failed while building Calabash classpath."
-            tail -n 200 .cache/tools/maven.log || true
+          if ! grep -Eq '^date-released:[[:space:]]*[0-9]{4}-[0-9]{2}-[0-9]{2}$' CITATION.cff; then
+            echo "CITATION.cff on origin/main must include 'date-released: YYYY-MM-DD' before tagging."
+            echo "Prepare citation metadata on dev first, then fast-forward main to dev."
             exit 1
           fi
-          if [ ! -s "$OUTPUT_FILE" ]; then
-            echo "Calabash classpath not generated."
-            tail -n 200 .cache/tools/maven.log || true
-            exit 1
-          fi
-          echo "Calabash classpath ready."
-          if [ ! -f "$SAXON_JAR" ]; then
-            curl -fL -o "$SAXON_JAR" "https://repo.maven.apache.org/maven2/net/sf/saxon/Saxon-HE/${SAXON_VERSION}/Saxon-HE-${SAXON_VERSION}.jar"
-            curl -fL -o "$SAXON_JAR.sha256" "https://repo.maven.apache.org/maven2/net/sf/saxon/Saxon-HE/${SAXON_VERSION}/Saxon-HE-${SAXON_VERSION}.jar.sha256"
-            EXPECTED="$(tr -d ' \n' < "$SAXON_JAR.sha256")"
-            if ! echo "$EXPECTED" | grep -Eq '^[0-9a-fA-F]{64}$'; then
-              echo "Invalid Saxon checksum: $EXPECTED"
-              exit 1
-            fi
-            echo "$EXPECTED  $SAXON_JAR" | sha256sum -c -
-          fi
-          echo "Saxon jar ready."
-          CALABASH_CP="$(cat "$OUTPUT_FILE")"
-          echo "XMLCALABASH_CMD=java -cp \"$CALABASH_CP\" com.xmlcalabash.app.Main {PIPELINE}" >> "$GITHUB_ENV"
-          echo "SAXON_JAR=$SAXON_JAR" >> "$GITHUB_ENV"
-      - run: node scripts/run-citation-cff.mjs
-      - name: Inject citation metadata
-        run: |
-          set -euo pipefail
-          node scripts/update-citation-metadata.mjs \
-            --commit "$(git rev-parse HEAD)" \
-            --date "$(date -u +%F)" \
-            --date-released "$(date -u +%F)"
-      - name: Commit citation metadata
-        run: |
-          set -euo pipefail
-          if git diff --quiet -- CITATION.cff; then
-            echo "No citation metadata changes."
-            exit 0
-          fi
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add CITATION.cff
-          git commit -m "chore: update citation metadata"
-          git push origin main
       - name: Create annotated tag
         run: |
           set -euo pipefail
           TAG="${{ inputs.tag }}"
           git fetch origin main --tags
-          git checkout main
+          git checkout -B main origin/main
+          if git rev-parse -q --verify "refs/tags/$TAG" >/dev/null; then
+            echo "Tag already exists after validation stage: $TAG"
+            exit 1
+          fi
           git tag -a "$TAG" -m "Release $TAG"
           git push origin "$TAG"
