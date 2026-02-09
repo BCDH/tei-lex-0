@@ -832,23 +832,21 @@
             <exemplum type="lex0">
                 <egXML xmlns="http://www.tei-c.org/ns/Examples" xml:id="sw34hfa">
                     <sourceDesc>
-                        <biblStruct>
-                            <listBibl type="dictionaries">
-                                <biblStruct>
-                                    <monogr>
-                                        <author>
-                                            <surname>Miklosich</surname>
-                                            <forename>Franz</forename></author>
-                                        <title>Lexicon Palaeoslovenico-Graeco-Latinum</title>
-                                        <imprint>
-                                            <publisher>Guilelmus Braumueller</publisher>
-                                            <pubPlace>Vindobonae</pubPlace>
-                                            <date>1862</date>
-                                        </imprint>
-                                    </monogr>
-                                </biblStruct>
-                            </listBibl>
-                        </biblStruct>
+                        <listBibl type="dictionaries">
+                            <biblStruct>
+                                <monogr>
+                                    <author>
+                                        <surname>Miklosich</surname>
+                                        <forename>Franz</forename></author>
+                                    <title>Lexicon Palaeoslovenico-Graeco-Latinum</title>
+                                    <imprint>
+                                        <publisher>Guilelmus Braumueller</publisher>
+                                        <pubPlace>Vindobonae</pubPlace>
+                                        <date>1862</date>
+                                    </imprint>
+                                </monogr>
+                            </biblStruct>
+                        </listBibl>
                     </sourceDesc>
                 </egXML>
             </exemplum>
