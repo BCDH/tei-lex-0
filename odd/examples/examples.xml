@@ -93,7 +93,7 @@
                   </gramGrp>
                   <def>help, especially money, food or other gifts given to people living in
                      difficult conditions</def>
-                  <metamark function="exampleMarker">○</metamark>
+                  <metamark function="exampleDelimiter">○</metamark>
                   <cit type="example">
                      <quote>aid to the earth-quake zone</quote>
                   </cit>
@@ -101,18 +101,18 @@
                      <quote>an aid worker</quote>
                   </cit>
                   <note>(NOTE: This meaning of aid has no plural.)</note>
-                  <metamark function="relatedEntryMarker">○</metamark>
+                  <metamark function="relatedEntryDelimiter">○</metamark>
                   <entry type="relatedEntry" xml:id="ED.aid_n.1.in_aid_of" xml:lang="en">
                      <form type="lemma">
                         <orth>in aid of</orth>
                      </form>
                      <sense xml:id="ED.aid_n.1.in_aid_of.1">
                         <def>in order to help</def>
-                        <metamark function="exampleMarker">○</metamark>
+                        <metamark function="exampleDelimiter">○</metamark>
                         <cit type="example">
                            <quote>We give money in aid of the Red Cross.</quote>
                         </cit>
-                        <metamark function="exampleMarker">○</metamark>
+                        <metamark function="exampleDelimiter">○</metamark>
                         <cit type="example">
                            <quote>They are collecting money in aid of refugees.</quote>
                         </cit>
@@ -122,13 +122,13 @@
                <sense xml:id="ED.aid_n.2" n="2">
                   <num>2.</num>
                   <def>thing which helps you to do something</def>
-                  <metamark function="exampleMarker">○</metamark>
+                  <metamark function="exampleDelimiter">○</metamark>
                   <cit type="example">
                      <quote>kitchen aids</quote>
                   </cit>
                </sense>
             </entry>
-            <metamark function="subentryMarker">■</metamark>
+            <metamark function="subentryDelimiter">■</metamark>
             <entry xml:id="ED.aid_v" xml:lang="en" type="homonymicEntry">
                <gramGrp>
                   <gram type="pos">verb</gram>
@@ -828,7 +828,7 @@
                <def>spare, extra</def>
                <pc>.</pc>
             </sense>
-            <metamark function="senseSeparator">◆</metamark>
+            <metamark function="senseDelimiter">◆</metamark>
             <sense xml:id="CDHDOEL.gash2.2">
                <gramGrp>
                   <gram type="pos">n</gram>
@@ -860,7 +860,7 @@
                   <pc>.</pc>
                </sense>
             </entry>
-            <metamark function="entrySeparator">◆</metamark>
+            <metamark function="entryDelimiter">◆</metamark>
             <entry xml:id="CH.gash2.2" xml:lang="en" type="homonymicEntry">
                <gramGrp>
                   <gram type="pos">n</gram>
