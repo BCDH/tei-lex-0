@@ -1,35 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <div xmlns="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:id="senses">
     <head>Senses</head>
-        <p>In the current TEI Dictionary Chapter, the content model of <gi>entry</gi> allows one to
-            have sense-related information directly within <gi>entry</gi>. TEI Lex-0 proscribes a
-            stricter use of these elements so that sense-related information is grouped within the
-                <gi>sense</gi> element, in accordance with the underlying semasiological model
-            implemented in the TEI <hi rend="italic">Guidelines</hi>.</p>
-        <p><gi>sense</gi> should be therefore considered mandatory for any dictionary entry that
-            actually provides sense information for the headword. Further in this document, we
-            consider some additional specific cases e.g. “referencing” entries (entries that simply
-            point to other entries) and inflectional lexica (dictionaries that describe word forms
-            only), where <gi>sense</gi> is not a mandatory child of <gi>entry</gi>.</p>
-        <p>As a consequence of making the use of <gi>sense</gi> more systematic within
-                <gi>entry</gi>, we have seen (see section on <gi>entry</gi>) that some elements are
-            no longer allowed as children of <gi>entry</gi>. We provide here a specific background
-            for each of them:</p>
-        <list type="unordered">
-            <item><gi>def</gi> is clearly intended to provide a prose description of a meaning
-                within a <gi>sense</gi> element and should not appear in any other context;</item>
-            <item>In the same way, it is recommended that <gi>cit</gi> be used exclusively as a
-                child of <gi>sense</gi>, or when necessary within <gi>dictScrap</gi>;</item>
-            <item>The case of <gi>hom</gi> is peculiar since it provides a subordinate organization
-                to an entry which is redundant in relation to what <gi>sense</gi> allows one to
-                represent. <gi>hom</gi> is not allowed in TEI Lex-0.</item>
-        </list>
-        <p>Note: In the case one has to deal with information that does not fit a
-            <gi>sense</gi>-based organization, for instance in the process of retro-digitizing an
-            existing dictionary source, the use of <gi>dictScrap</gi> is recommended. Further step
-            in the encoding of the lexical content may lead to a more precise encoding in a second
-            phase.</p>
-        <p>In TEI Lex-0, <gi>sense</gi> has a mandatory <att>xml:id</att>.</p>
+    <p>In the current TEI Dictionary Chapter, the content model of <gi>entry</gi> allows one to have
+        sense-related information directly within <gi>entry</gi>. TEI Lex-0 proscribes a stricter
+        use of these elements so that sense-related information is grouped within the <gi>sense</gi>
+        element, in accordance with the underlying semasiological model implemented in the TEI <hi
+            rend="italic">Guidelines</hi>.</p>
+    <p><gi>sense</gi> should be therefore considered mandatory for any dictionary entry that
+        actually provides sense information for the headword. Further in this document, we consider
+        some additional specific cases e.g. “referencing” entries (entries that simply point to
+        other entries) and inflectional lexica (dictionaries that describe word forms only), where
+            <gi>sense</gi> is not a mandatory child of <gi>entry</gi>.</p>
+    <p>As a consequence of making the use of <gi>sense</gi> more systematic within <gi>entry</gi>,
+        we have seen (see section on <gi>entry</gi>) that some elements are no longer allowed as
+        children of <gi>entry</gi>. We provide here a specific background for each of them:</p>
+    <list type="unordered">
+        <item><gi>def</gi> is clearly intended to provide a prose description of a meaning within a
+                <gi>sense</gi> element and should not appear in any other context;</item>
+        <item>In the same way, it is recommended that <gi>cit</gi> be used exclusively as a child of
+                <gi>sense</gi>, or when necessary within <gi>dictScrap</gi>;</item>
+        <item>The case of <gi>hom</gi> is peculiar since it provides a subordinate organization to
+            an entry which is redundant in relation to what <gi>sense</gi> allows one to represent.
+                <gi>hom</gi> is not allowed in TEI Lex-0.</item>
+    </list>
+    <p>Note: In the case one has to deal with information that does not fit a <gi>sense</gi>-based
+        organization, for instance in the process of retro-digitizing an existing dictionary source,
+        the use of <gi>dictScrap</gi> is recommended. Further step in the encoding of the lexical
+        content may lead to a more precise encoding in a second phase.</p>
+    <p>In TEI Lex-0, <gi>sense</gi> has a mandatory <att>xml:id</att>.</p>
     <div xml:id="sense.def">
         <head>Limiting contexts for <gi>def</gi></head>
         <p>In the current <hi rend="italic">TEI Guidelines</hi>, <gi>def</gi> is allowed within the
@@ -45,27 +43,26 @@
     </div>
     <div xml:id="senses.glosses">
         <head>Glosses</head>
-            <p>In the lexicographic literature, gloss is a rather amorphous category. Zgusta, in his
-                classic <hi rend="italic">Manual of Lexicography</hi>
-                <ref target="#Zgusta1971">(1971)</ref>, defines it as "any descriptive or
-                explanatory note within the entry" which includes "short comments, explanatory
-                remarks, semantic characteristics or qualifications" (270). Atkins and Rundell <ref
-                    target="#Atkins2008">(2008)</ref> see the gloss as "a more informal explanation
-                of the meaning of a multiword expression or example (or even part of one) in the
-                entry,[...] chiefly used in monolingual dictionaries for learners, to help
-                understanding" (209). While one could argue about the statement that this type of
-                lexicographic construct is used "chiefly... in monolingual dictionaries for
-                learners", it is certainly the case that glosses are expected to help users better
-                understand or more easily locate the particular meaning of a word that they are
-                looking up. </p>
-            <p>In other words, the prototypical gloss contextualizes and clarifies the meaning of
-                the word. Take this example from Zgusta: <list type="ordered">
-                    <item><hi rend="bold">fugitive</hi> (of persons)</item>
-                    <item><hi rend="bold">fugitive</hi> (verses)</item>
-                </list> Here, glosses are used to signal the meaning of <hi rend="bold"
-                    >fugitive</hi>: in the first sense "fugitive" refers to persons, and in the
-                second example, to verses. In TEI Lex-0, this could be represented as:
-                <egXML xmlns="http://www.tei-c.org/ns/Examples">
+        <p>In the lexicographic literature, gloss is a rather amorphous category. Zgusta, in his
+            classic <hi rend="italic">Manual of Lexicography</hi>
+            <ref target="#Zgusta1971">(1971)</ref>, defines it as "any descriptive or explanatory
+            note within the entry" which includes "short comments, explanatory remarks, semantic
+            characteristics or qualifications" (270). Atkins and Rundell <ref target="#Atkins2008"
+                >(2008)</ref> see the gloss as "a more informal explanation of the meaning of a
+            multiword expression or example (or even part of one) in the entry,[...] chiefly used in
+            monolingual dictionaries for learners, to help understanding" (209). While one could
+            argue about the statement that this type of lexicographic construct is used "chiefly...
+            in monolingual dictionaries for learners", it is certainly the case that glosses are
+            expected to help users better understand or more easily locate the particular meaning of
+            a word that they are looking up. </p>
+        <p>In other words, the prototypical gloss contextualizes and clarifies the meaning of the
+            word. Take this example from Zgusta: <list type="ordered">
+                <item><hi rend="bold">fugitive</hi> (of persons)</item>
+                <item><hi rend="bold">fugitive</hi> (verses)</item>
+            </list> Here, glosses are used to signal the meaning of <hi rend="bold">fugitive</hi>:
+            in the first sense "fugitive" refers to persons, and in the second example, to verses.
+            In TEI Lex-0, this could be represented as: <egXML
+                xmlns="http://www.tei-c.org/ns/Examples">
                 <entry xml:id="ED.fugitive" xml:lang="en">
                     <form type="lemma">
                         <orth>fugitive</orth>
@@ -77,31 +74,33 @@
                         <gloss>(verses)</gloss>
                     </sense>
                 </entry>
-            </egXML>
-                Glosses, however, are <hi rend="italic">not</hi> definitions: one can imagine the
-                above two senses to contain proper lexicographic definitions as well:
-                <egXML xmlns="http://www.tei-c.org/ns/Examples">
+            </egXML> Glosses, however, are <hi rend="italic">not</hi> definitions: one can imagine
+            the above two senses to contain proper lexicographic definitions as well: <egXML
+                xmlns="http://www.tei-c.org/ns/Examples">
                 <entry xml:id="ED.fugitive" xml:lang="en">
                     <form type="lemma">
                         <orth>fugitive</orth>
                     </form>
                     <sense n="1">
                         <gloss>(of persons)</gloss>
-                        <def>given to, or in the act of, running away from a place, especially to avoid arrest or persecution.</def>
+                        <def>given to, or in the act of, running away from a place, especially to
+                            avoid arrest or persecution.</def>
                     </sense>
                     <sense n="2">
                         <gloss>(verses)</gloss>
-                        <def>concerned or dealing with subjects of passing interest; ephemeral, occasional.</def>
+                        <def>concerned or dealing with subjects of passing interest; ephemeral,
+                            occasional.</def>
                     </sense>
                 </entry>
-            </egXML>Zgusta
-                notes a certain amount of overlapping between glosses and other categories, "the
-                most important probably being that of the examples" (ibid.) This is especially
-                evident in sense no. 2 above where "fugitive verses" or "~ verses" could have been
-                used as an example. The absence of the lemma or lemma reference in "(verses)" as
-                well as the brackets are a clear indicator that the whole construct is not to be
-                read as an example, but rather as a semantic signpost for the given sense. </p>
-            <p>On sense-distinguishing grammatical properties, see section <ref target="#grammatical-properties-in-senses">Grammatical properties in senses</ref></p>
+            </egXML>Zgusta notes a certain amount of overlapping between glosses and other
+            categories, "the most important probably being that of the examples" (ibid.) This is
+            especially evident in sense no. 2 above where "fugitive verses" or "~ verses" could have
+            been used as an example. The absence of the lemma or lemma reference in "(verses)" as
+            well as the brackets are a clear indicator that the whole construct is not to be read as
+            an example, but rather as a semantic signpost for the given sense. </p>
+        <p>On sense-distinguishing grammatical properties, see section <ref
+                target="#grammatical-properties-in-senses">Grammatical properties in
+            senses</ref></p>
         <div xml:id="senses.glosses.examples">
             <head>Glossing examples</head>
             <p>Semantic glosses can occur at different levels of the entry hierarchy. In the
@@ -115,8 +114,9 @@
                     language </hi> (=one that people still use) [….] </p>
             <p>In TEI Lex-0, this entry would be represented as:</p>
             <egXML xmlns="http://www.tei-c.org/ns/Examples" source="#LDOCE2003">
-               <xi:include href="../examples/examples.stripped.xml" corresp="../examples/examples.xml" xpointer="LDOCE.living"/>
-           </egXML>
+                <xi:include href="../examples/examples.stripped.xml"
+                    corresp="../examples/examples.xml" xpointer="LDOCE.living"/>
+            </egXML>
         </div>
     </div>
     <div xml:id="senses.grammatical-properties">
@@ -129,8 +129,10 @@
         <figure>
             <graphic width="100%" url="../../assets/images/imgur/2UJC9Ae.jpg" rend="padded"/>
         </figure>
-        <egXML xmlns="http://www.tei-c.org/ns/Examples" source="#DLPC2014" xml:id="antepassado-gramGrp-in-sense">
-            <xi:include href="../examples/examples.stripped.xml" corresp="../examples/examples.xml" xpointer="DLPC.antepassado_b_2"/>
+        <egXML xmlns="http://www.tei-c.org/ns/Examples" source="#DLPC2014"
+            xml:id="antepassado-gramGrp-in-sense">
+            <xi:include href="../examples/examples.stripped.xml" corresp="../examples/examples.xml"
+                xpointer="DLPC.antepassado_b_2"/>
         </egXML>
         <div xml:id="senses.grammatical-properties.glosses">
             <head>Grammatical glosses? </head>
@@ -145,18 +147,18 @@
                 </list>
             </p>
             <p>In theory, one could choose to encode such phenomena using <gi>gloss</gi>, but TEI
-                Lex-0 recommends a clear separation of roles: <gi>gloss</gi> should be used for semantic
-                or pragmatic information, whereas grammatical information should be encoded using
-                the familiar <code rend="language-xpath">gramGrp/gram</code> constructs: </p>
+                Lex-0 recommends a clear separation of roles: <gi>gloss</gi> should be used for
+                semantic or pragmatic information, whereas grammatical information should be encoded
+                using the familiar <code rend="language-xpath">gramGrp/gram</code> constructs: </p>
             <egXML xmlns="http://www.tei-c.org/ns/Examples">
                 <sense n="1" xml:id="LD.peto.1">
                     <gramGrp>
-                        <gram type="government">aliquid ab aliquo</gram>
+                        <gram type="construction">aliquid ab aliquo</gram>
                     </gramGrp>
                 </sense>
                 <sense n="1" xml:id="LD.peto.2">
                     <gramGrp>
-                        <gram type="government">Romam</gram>
+                        <gram type="construction">Romam</gram>
                     </gramGrp>
                 </sense>
             </egXML>
@@ -191,8 +193,9 @@
                     >gash</hi> as an entry consisting of senses, each with a different part of
                 speech, like this:</p>
             <egXML xmlns="http://www.tei-c.org/ns/Examples" xml:id="gash-as-grammatical-homonyms">
-                        <xi:include href="../examples/examples.stripped.xml" corresp="../examples/examples.xml" xpointer="CHDOEL.gash2"/>
-                    </egXML>
+                <xi:include href="../examples/examples.stripped.xml"
+                    corresp="../examples/examples.xml" xpointer="CHDOEL.gash2"/>
+            </egXML>
             <p>This is surely valid TEI Lex-0. There is conceptually nothing wrong with this
                 encoding: it adequately represents the structure implied by the source text.</p>
             <p> We should, however, try to look at the issue at hand from a broader, comparative,
@@ -228,16 +231,18 @@
             <p>For that reason, our preferred encoding of <hi rend="bold">gash</hi> as a verb and a
                 noun would be:</p>
             <egXML xmlns="http://www.tei-c.org/ns/Examples">
-                    <xi:include href="../examples/examples.stripped.xml" corresp="../examples/examples.xml" xpointer="CH.gash2"/>
-                </egXML>
+                <xi:include href="../examples/examples.stripped.xml"
+                    corresp="../examples/examples.xml" xpointer="CH.gash2"/>
+            </egXML>
             <p>For an example in which grammatical homonyms have themselves multiple senses, one of
                 which is grammatically constrained, see, for instance: </p>
             <figure>
                 <graphic width="100%" url="../../assets/images/imgur/b9dNR9m.png"/>
             </figure>
             <egXML xmlns="http://www.tei-c.org/ns/Examples">
-                    <xi:include href="../examples/examples.stripped.xml" corresp="../examples/examples.xml" xpointer="ED.aid"/>
-                </egXML>
+                <xi:include href="../examples/examples.stripped.xml"
+                    corresp="../examples/examples.xml" xpointer="ED.aid"/>
+            </egXML>
         </div>
     </div>
 </div>
