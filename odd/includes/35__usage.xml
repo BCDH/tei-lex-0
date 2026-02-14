@@ -246,20 +246,20 @@
         <head>Restricting the scope of <gi>usg</gi>
         </head>
         <list type="ordered">
-            <item><p>Do not use <tag>usg type="lang"</tag> to mark up the name of a language in an
+            <item><p>Do not use <code>&lt;usg type="lang">&lt;/usg></code> to mark up the name of a language in an
                     etymological or other discussion. The recommended way to encode this information
                     is using <gi>lang</gi> element within <gi>etym</gi>.</p>
-                <p>INCORRECT</p>
+                <p>INCORRECT:</p>
                 <egXML xmlns="http://www.tei-c.org/ns/Examples" valid="false">
                     <entryFree xml:id="MZ.RGJS.сајдисльк_1">
                         <form type="lemma"><orth>сајдисль́к</orth></form>
                         <gramGrp><gram type="pos">м</gram></gramGrp>
-                        <usg type="lang">тур.</usg>
+                        <usg type="lang">(тур.)</usg>
                         <sense>
                             <def>уважавање.</def> … </sense>
                     </entryFree>
                 </egXML>
-                <p>CORRECT</p>
+                <p>CORRECT:</p>
                 <egXML xmlns="http://www.tei-c.org/ns/Examples" xml:id="d1e3815">
                     <xi:include href="../examples/examples.stripped.xml"
                         corresp="../examples/examples.xml" xpointer="MZ.RGJS.сајдисльк_2"/>
