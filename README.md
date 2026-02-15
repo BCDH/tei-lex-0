@@ -1,16 +1,18 @@
 # TEI Lex-0
 
-Official repository for [TEI Lex-0](https://lex-0.org). It contains the Lex-0 ODD and build pipeline used to generate the schema and guidelines.
+Official repository for TEI Lex-0. It contains the Lex-0 ODD and build pipeline used to generate the schemas and the guidelines.
 
-## Development
+- Production site: [https://lex-0.org/](https://lex-0.org/)
+- Dev site: [https://dev.lex-0.org/](https://dev.lex-0.org/)
+- Previous releases: [https://lex-0.org/releases/](https://lex-0.org/releases/)
 
-### Quickstart
+## Quickstart
 
 ```sh
 git clone https://github.com/BCDH/tei-lex-0.git
 cd tei-lex-0
 npm ci
-XMLCALABASH_CMD=xmlcalabash npm run build
+npm run build
 ```
 
 Open `build/html/index.html` to view the generated documentation.
@@ -27,23 +29,16 @@ Open `build/html/index.html` to view the generated documentation.
     - `lex-0.rnc`
     - `lex-0.xsd`
 
-### Build
+## Development
 
-#### Requirements
+To build the Lex-0 guidelines and schemas from source, you need to edit ODD files and/or XSL stylesheets, run the local pipeline, inspect the generated HTML and schemas under `build/`, and iterate until the output is stable for `dev` and release deployment.
+
+### Requirements
 
 - Node.js (for asset build scripts).
 - XML Calabash (XProc 3.0) to run `xproc/lex-0.xpl`.
 
-#### Calabash detection order
-
-`npm run assets:odd` runs `scripts/run-xproc.mjs` and looks for Calabash in this order:
-
-1. `XMLCALABASH_CMD` (shell command string).
-2. `xmlcalabash` on `PATH`.
-3. `calabash` on `PATH`.
-4. `XMLCALABASH_JAR` or `CALABASH_JAR` (full path to the Calabash jar).
-
-#### Environment variables
+### Environment variables
 
 Set one of these before running `npm run assets:odd` (or `npm run build`):
 
@@ -62,7 +57,16 @@ or
 XMLCALABASH_JAR=/path/to/xmlcalabash-app-3.0.35.jar npm run assets:odd
 ```
 
-#### Common commands
+#### Calabash detection order
+
+`npm run assets:odd` runs `scripts/run-xproc.mjs` and looks for Calabash in this order:
+
+1. `XMLCALABASH_CMD` (shell command string).
+2. `xmlcalabash` on `PATH`.
+3. `calabash` on `PATH`.
+4. `XMLCALABASH_JAR` or `CALABASH_JAR` (full path to the Calabash jar).
+
+### Common commands
 
 - Install dependencies: `npm ci` (or `npm install`)
 - Generate guidelines + schema (ODD → HTML + RNG): `npm run assets:odd`
@@ -79,7 +83,7 @@ XMLCALABASH_JAR=/path/to/xmlcalabash-app-3.0.35.jar npm run assets:odd
 - `release:prepare` and `release:cut` default to auto-confirm + non-interactive; use `--interactive` if you want prompts.
 - Post-process HTML (banners/robots/minify): `npm run postprocess:html -- --mode=dev` (or `--mode=main`)
 
-### Post-processing (HTML)
+#### Post-processing (HTML)
 
 The post-processor rewrites the already-generated static HTML under `build/html/` (it does **not** regenerate HTML from the ODD).
 
@@ -118,7 +122,7 @@ For iterative work, run the watchers in separate terminals:
 
 Stop either watcher with Ctrl+C.
 
-### Build in oXygen
+## Build with oXygen
 
 Alternatively, you can build from inside oXygen XML Editor.
 
