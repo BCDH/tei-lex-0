@@ -151,6 +151,7 @@ a.toc {
 
 div.tocTree,
 div.toc_body div.toc {
+  --toc-heading-gap: 10px;
   margin-top: 10px;
   display: grid;
   grid-template-columns: var(--toc-number-width, 3em) minmax(0, 1fr) max-content;
@@ -173,34 +174,20 @@ div.toc_body div.toc {
 
 #menu .toc_body > .tocTree,
 #menu .toc_body > .toc {
-  --toc-number-width: 3em;
+  --toc-number-width: 2.7em;
 }
 
 /* Controls for second-level TOC entries */
 
 #menu .toc_body > .tocTree > .continuedtoc > .tocTree,
 #menu .toc_body > .tocTree > .continuedtoc > .toc {
-  --toc-number-width: 5.25em;
+  --toc-number-width: calc(2em + var(--toc-heading-gap));
 }
 
 /* Controls for third-level TOC entries */
 
 #menu .toc_body > .tocTree > .continuedtoc > .tocTree > .continuedtoc > .toc {
-  --toc-number-width: 8.4em;
-}
-
-/* special provisions for TOC entries starting with the 10th  */
-
-/* second level */
-
-#menu .toc_body > div:nth-child(n + 10) > .continuedtoc > .toc,
-#menu .toc_body > div:nth-child(n + 10) > .continuedtoc > .tocTree {
-  --toc-number-width: 5.8em;
-}
-
-/* third level */
-#menu .toc_body > div:nth-child(n + 10) > .continuedtoc > .tocTree > .continuedtoc > .toc {
-  --toc-number-width: 9.4em;
+  --toc-number-width: calc(2em + var(--toc-heading-gap));
 }
 
 .toc-heading-number {
@@ -229,11 +216,22 @@ div.toc_body div.toc {
 .tocTree > .continuedtoc,
 div.toc_body div.toc > .continuedtoc {
   grid-column: 1 / -1;
+  padding-left: var(--toc-number-width, 3em);
+  box-sizing: border-box;
+}
+
+#menu .continuedtoc > .tocTree,
+#menu .continuedtoc > .toc {
+  grid-template-columns: max-content minmax(0, 1fr) max-content;
+}
+
+#menu .continuedtoc .toc-heading-number {
+  text-align: left;
 }
 
 /* keep span spacing between number and heading */
 .toc-heading-number span {
-  padding-right: 10px;
+  padding-right: var(--toc-heading-gap);
 }
 
 /*other stuff*/
