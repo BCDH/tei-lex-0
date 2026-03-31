@@ -2,9 +2,11 @@ import { spawnSync } from "node:child_process";
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { loadLocalEnv } from "./lib/load-local-env.mjs";
 
 const scriptDir = path.dirname(fileURLToPath(import.meta.url));
 const repoRoot = path.resolve(scriptDir, "..");
+loadLocalEnv(repoRoot);
 const pipeline = path.join(repoRoot, "xproc", "resources.xpl");
 const extraArgs = process.argv.slice(2);
 
@@ -78,4 +80,3 @@ console.error(
   'XML Calabash not found. Set XMLCALABASH_CMD (e.g. "xmlcalabash") or XMLCALABASH_JAR.'
 );
 process.exit(1);
-

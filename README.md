@@ -57,6 +57,21 @@ or
 XMLCALABASH_JAR=/path/to/xmlcalabash-app-3.0.35.jar npm run assets:odd
 ```
 
+For repo-local overrides, create `.env.local` in the repo root (see `.env.example`).
+Values from `.env` and `.env.local` override inherited shell variables for the Node build scripts, so this checkout can use a different Calabash install than your global shell config.
+
+Example:
+
+```sh
+cp .env.example .env.local
+```
+
+Then set:
+
+```sh
+XMLCALABASH_JAR=/absolute/path/to/xmlcalabash-app-3.0.42.jar
+```
+
 #### Calabash detection order
 
 `npm run assets:odd` runs `scripts/run-xproc.mjs` and looks for Calabash in this order:
