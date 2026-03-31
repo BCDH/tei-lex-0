@@ -158,7 +158,7 @@
                                 </xsl:otherwise>
                             </xsl:choose>
                             <xsl:if test="$minimal = 'false'">
-                                <xsl:call-template name="headingNumberSuffix"/>
+                                <xsl:value-of select="$numberSpacer"/>
                             </xsl:if>
                         </xsl:when>
                     </xsl:choose>
