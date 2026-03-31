@@ -220,6 +220,18 @@ div.toc_body div.toc > .continuedtoc {
   box-sizing: border-box;
 }
 
+/* For third-level TOC rows, indent by the parent number column only.
+   This keeps the child number aligned with the second-level heading text. */
+#menu .continuedtoc .continuedtoc {
+  padding-left: calc(var(--toc-number-width, 3em) - var(--toc-heading-gap));
+}
+
+/* Top-level chapters 10+ have a wider second-level number column (e.g. 10.2),
+   so third-level rows need a small extra offset to stay aligned. */
+#menu .toc_body > div:nth-child(n + 10) > .continuedtoc > .tocTree > .continuedtoc {
+  padding-left: calc(var(--toc-number-width, 3em) - var(--toc-heading-gap) + 0.5em);
+}
+
 #menu .continuedtoc > .tocTree,
 #menu .continuedtoc > .toc {
   grid-template-columns: max-content minmax(0, 1fr) max-content;
