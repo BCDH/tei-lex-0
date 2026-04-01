@@ -84,7 +84,7 @@ function normalizeArchiveEntries(raw) {
     .map((entry) => entry.trim())
     .filter(Boolean)
     .map((entry) => entry.replace(/^\.\//, ""))
-    .filter((entry) => entry !== "." && entry !== "./" && !entry.endsWith("/"))
+    .filter((entry) => entry !== "" && entry !== "." && entry !== "./" && !entry.endsWith("/"))
     .sort();
 }
 
@@ -146,14 +146,14 @@ function validateArchives() {
     const zipDiff = diffEntries(expectedEntries, zipEntries);
     if (zipDiff.missing.length || zipDiff.extra.length) {
       throw new Error(
-        `${path.basename(archive.zipPath)} contents mismatch. Missing: ${zipDiff.missing.join(", ") || "none"}. Extra: ${zipDiff.extra.join(", ") || "none"}.`,
+        `${path.basename(archive.zipPath)} contents mismatch. Expected ${expectedEntries.length} files, got ${zipEntries.length}. Missing: ${zipDiff.missing.join(", ") || "none"}. Extra: ${zipDiff.extra.join(", ") || "none"}.`,
       );
     }
 
     const tarDiff = diffEntries(expectedEntries, tarEntries);
     if (tarDiff.missing.length || tarDiff.extra.length) {
       throw new Error(
-        `${path.basename(archive.tarPath)} contents mismatch. Missing: ${tarDiff.missing.join(", ") || "none"}. Extra: ${tarDiff.extra.join(", ") || "none"}.`,
+        `${path.basename(archive.tarPath)} contents mismatch. Expected ${expectedEntries.length} files, got ${tarEntries.length}. Missing: ${tarDiff.missing.join(", ") || "none"}. Extra: ${tarDiff.extra.join(", ") || "none"}.`,
       );
     }
 
