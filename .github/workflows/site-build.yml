@@ -609,6 +609,62 @@ jobs:
       - name: Post-process HTML
         run: |
           node scripts/postprocess-html.mjs --mode=release --tag="${GITHUB_REF_NAME}" --release-status="${RELEASE_STATUS}"
+      - name: Create release archives
+        run: |
+          set -euo pipefail
+          rm -f guidelines+schemas.zip guidelines+schemas.tar.gz schemas.zip schemas.tar.gz
+          (
+            cd build/html
+            zip -qr ../../guidelines+schemas.zip .
+            tar -czf ../../guidelines+schemas.tar.gz .
+          )
+          (
+            cd build/html/schema
+            zip -qr ../../../schemas.zip .
+            tar -czf ../../../schemas.tar.gz .
+          )
+      - name: Validate release archives
+        run: |
+          set -euo pipefail
+          test -f guidelines+schemas.zip
+          test -f guidelines+schemas.tar.gz
+          test -f schemas.zip
+          test -f schemas.tar.gz
+
+          unzip -Z1 guidelines+schemas.zip | grep -Fx 'index.html'
+          unzip -Z1 guidelines+schemas.zip | grep -Fx 'schema/lex-0.rng'
+          tar -tzf guidelines+schemas.tar.gz | grep -E '^\.?/index\.html$'
+          tar -tzf guidelines+schemas.tar.gz | grep -E '^\.?/schema/lex-0\.rng$'
+
+          unzip -Z1 schemas.zip | grep -Fx 'lex-0.rng'
+          unzip -Z1 schemas.zip | grep -Fx 'lex-0.rnc'
+          unzip -Z1 schemas.zip | grep -Fx 'lex-0.xsd'
+          tar -tzf schemas.tar.gz | grep -E '^\.?/lex-0\.rng$'
+          tar -tzf schemas.tar.gz | grep -E '^\.?/lex-0\.rnc$'
+          tar -tzf schemas.tar.gz | grep -E '^\.?/lex-0\.xsd$'
+
+          if unzip -Z1 schemas.zip | grep -Eq '/'; then
+            echo "schemas.zip must contain only schema files at the archive root."
+            exit 1
+          fi
+          if tar -tzf schemas.tar.gz | grep -Ev '(^$|^\.$|^\./?$|^\.?/lex-0\.(rng|rnc|xsd)$)'; then
+            echo "schemas.tar.gz contains unexpected entries."
+            exit 1
+          fi
+      - name: Upload release assets
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          if ! gh release view "${GITHUB_REF_NAME}" >/dev/null 2>&1; then
+            gh release create "${GITHUB_REF_NAME}" --verify-tag --title "${GITHUB_REF_NAME}" --generate-notes
+          fi
+          gh release upload "${GITHUB_REF_NAME}" \
+            guidelines+schemas.zip \
+            guidelines+schemas.tar.gz \
+            schemas.zip \
+            schemas.tar.gz \
+            --clobber
       - name: Publish release to gh-pages
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
