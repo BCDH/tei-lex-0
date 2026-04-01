@@ -7,7 +7,7 @@ Goal: keep `dev` and `main` strictly linear with rebase-only PR merges, publish 
 - Set up [required settings](#required-github-settings) on GitHub
 - **Publish to dev site:** merge PRs into `dev` (rebase-only) → pushing to `dev` triggers deployment to `dev.lex-0.org`.
 - **Publish to production site:** fast-forward `main` to `dev` → pushing to `main` triggers deployment to `lex-0.org`.
-- **Publish an immutable release:** create an **annotated** tag `vX.Y.Z` on `main` and push the tag → GitHub Actions publishes to `gh-pages/releases/vX.Y.Z/` and updates the releases index on `gh-pages`.
+- **Publish an immutable release:** create an **annotated** tag `vX.Y.Z` on `main` and push the tag → GitHub Actions publishes to `gh-pages/releases/vX.Y.Z/`, updates the releases index on `gh-pages`, and attaches `guidelines+schemas.{zip,tar.gz}` plus `schemas.{zip,tar.gz}` to the GitHub Release.
 
 ## Feature branch creation
 
@@ -58,6 +58,10 @@ It checks branch topology, rulesets, workflow wiring, required secrets, tag
 collisions, tag vs `odd/lex-0.odd` edition alignment, and release metadata
 readiness (`date-released` on `origin/dev`).
 
+For a local archive smoke test after you have built and post-processed the site:
+
+- `npm run release:archives`
+
 ### Release automation (preferred)
 
 Use repo-local Node scripts:
@@ -79,7 +83,7 @@ Use the GitHub Actions **release-helper** workflow (`.github/workflows/release-h
 - validates that `CITATION.cff` on `main` already includes `date-released`
 - creates an annotated tag `vX.Y.Z`
 
-Then the normal tag build publishes to `gh-pages/releases/vX.Y.Z/`.
+Then the normal tag build publishes to `gh-pages/releases/vX.Y.Z/` and uploads the four custom release archives to the GitHub Release page for that tag.
 
 ### Release process (manual alternative)
 
@@ -106,11 +110,16 @@ Then the normal tag build publishes to `gh-pages/releases/vX.Y.Z/`.
 
    - Publishes `build/html` to `gh-pages/releases/vX.Y.Z/`
    - Regenerates `gh-pages/releases/index.html`
+   - Uploads `guidelines+schemas.zip`
+   - Uploads `guidelines+schemas.tar.gz`
+   - Uploads `schemas.zip`
+   - Uploads `schemas.tar.gz`
 
 7. Verify:
 
    - `https://lex-0.org/releases/vX.Y.Z/` loads
    - Assets resolve (no `github.io` URLs)
+   - The GitHub Release page for `vX.Y.Z` shows the four custom archive assets in addition to GitHub’s automatic source-code archives
 
 Notes:
 

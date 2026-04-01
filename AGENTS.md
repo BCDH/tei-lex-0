@@ -36,6 +36,7 @@ Project: Build Pipeline for TEI Lex-0 Guidelines.
 - `npm run build` full local build (odd + minify + images)
 - `npm run links:check` internal link hygiene for `build/html`
 - `npm run postprocess:html -- --mode=dev` postprocess HTML for dev
+- `npm run release:archives` create + validate `guidelines+schemas.{zip,tar.gz}` and `schemas.{zip,tar.gz}` from current build output
 
 ## Watch mode
 
@@ -54,7 +55,7 @@ Run in separate terminals when iterating:
 
 - Branch from `dev`, always target `dev` in PRs; rebase-only merges to keep `dev` linear.
 - Release to prod by fast-forwarding `main` to `dev` via CLI (`git merge --ff-only origin/dev`).
-- Publish releases from **annotated** tags on `main` (`vX.Y.Z`); tag publish generates `gh-pages/releases/vX.Y.Z/`.
+- Publish releases from **annotated** tags on `main` (`vX.Y.Z`); tag publish generates `gh-pages/releases/vX.Y.Z/` and attaches `guidelines+schemas.{zip,tar.gz}` plus `schemas.{zip,tar.gz}` to the GitHub Release.
 - Never rebase `dev` or `main`; only rebase feature branches and force-push with `--force-with-lease`.
 
 ## Deployment overview
@@ -62,5 +63,6 @@ Run in separate terminals when iterating:
 - `lex-0.org` serves `main` (Vercel project on `vercel-main`).
 - `dev.lex-0.org` serves `dev` (Vercel project on `vercel-dev`).
 - `lex-0.org/releases/vX.Y.Z/` serves GitHub Pages releases via Vercel rewrite.
+- PRs to `dev` also run a non-publishing release-archive smoke test in CI.
 - Release builds are immutable and require annotated tags; if a tag exists, publish fails.
 - HTML output must use relative links (no absolute `/` or `github.io`) or releases will break.
