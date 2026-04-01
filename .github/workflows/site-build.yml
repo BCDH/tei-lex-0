@@ -96,6 +96,105 @@ jobs:
       - name: Link hygiene
         run: node scripts/check-internal-links.mjs
 
+  archive_smoke:
+    if: ${{ github.event_name == 'pull_request' }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - name: Cache Calabash, Saxon, and Maven
+        uses: actions/cache@v4
+        with:
+          path: |
+            .cache/tools
+            ~/.m2/repository
+          key: calabash-3.0.35-saxon-12.4-maven
+      - name: Prepare Calabash and Saxon
+        run: |
+          set -euo pipefail
+          mkdir -p .cache/tools
+          CALABASH_VERSION=3.0.35
+          SAXON_VERSION=12.4
+          SAXON_JAR=".cache/tools/saxon-he-${SAXON_VERSION}.jar"
+          cat > .cache/tools/pom.xml <<'EOF'
+          <project xmlns="http://maven.apache.org/POM/4.0.0"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+            <modelVersion>4.0.0</modelVersion>
+            <groupId>local</groupId>
+            <artifactId>calabash-runner</artifactId>
+            <version>1.0.0</version>
+            <dependencies>
+              <dependency>
+                <groupId>com.xmlcalabash</groupId>
+                <artifactId>app</artifactId>
+                <version>3.0.35</version>
+              </dependency>
+            </dependencies>
+          </project>
+          EOF
+          OUTPUT_FILE="$(pwd)/.cache/tools/classpath.txt"
+          if ! mvn -q -B -f .cache/tools/pom.xml -DincludeScope=runtime -Dmdep.outputFile="$OUTPUT_FILE" \
+            org.apache.maven.plugins:maven-dependency-plugin:3.6.1:build-classpath > .cache/tools/maven.log 2>&1; then
+            echo "Maven failed while building Calabash classpath."
+            tail -n 200 .cache/tools/maven.log || true
+            exit 1
+          fi
+          if [ ! -s "$OUTPUT_FILE" ]; then
+            echo "Calabash classpath not generated."
+            tail -n 200 .cache/tools/maven.log || true
+            exit 1
+          fi
+          echo "Calabash classpath ready."
+          if [ ! -f "$SAXON_JAR" ]; then
+            curl -fL -o "$SAXON_JAR" "https://repo.maven.apache.org/maven2/net/sf/saxon/Saxon-HE/${SAXON_VERSION}/Saxon-HE-${SAXON_VERSION}.jar"
+            curl -fL -o "$SAXON_JAR.sha256" "https://repo.maven.apache.org/maven2/net/sf/saxon/Saxon-HE/${SAXON_VERSION}/Saxon-HE-${SAXON_VERSION}.jar.sha256"
+            EXPECTED="$(tr -d ' \n' < "$SAXON_JAR.sha256")"
+            if ! echo "$EXPECTED" | grep -Eq '^[0-9a-fA-F]{64}$'; then
+              echo "Invalid Saxon checksum: $EXPECTED"
+              exit 1
+            fi
+            echo "$EXPECTED  $SAXON_JAR" | sha256sum -c -
+          fi
+          echo "Saxon jar ready."
+          CALABASH_CP="$(cat "$OUTPUT_FILE")"
+          echo "XMLCALABASH_CMD=java -cp \"$CALABASH_CP\" com.xmlcalabash.app.Main {PIPELINE}" >> "$GITHUB_ENV"
+          echo "SAXON_JAR=$SAXON_JAR" >> "$GITHUB_ENV"
+      - run: npm ci
+      - run: npm run build
+      - name: Install Trang
+        run: |
+          set -euo pipefail
+          sudo apt-get update
+          sudo apt-get install -y trang
+      - name: Convert RNG to RNC/XSD
+        run: npm run assets:trang
+      - name: Verify schema conversions
+        run: |
+          test -d build/html/schema
+          test -f build/html/schema/lex-0.rnc
+          test -f build/html/schema/lex-0.xsd
+      - name: Verify build output
+        run: |
+          test -d build/html
+          test -n "$(ls -A build/html)"
+      - name: Post-process HTML for release archive smoke test
+        run: |
+          node scripts/postprocess-html.mjs --mode=release --tag="preview-${GITHUB_SHA::7}" --release-status=historical
+      - name: Build and validate release archives
+        run: npm run release:archives
+
   push_main:
     if: "${{ github.event_name == 'push' && github.ref == 'refs/heads/main' && !(github.actor == 'github-actions[bot]' && contains(github.event.head_commit.message, 'chore: update citation metadata')) }}"
     runs-on: ubuntu-latest
@@ -611,46 +710,10 @@ jobs:
           node scripts/postprocess-html.mjs --mode=release --tag="${GITHUB_REF_NAME}" --release-status="${RELEASE_STATUS}"
       - name: Create release archives
         run: |
-          set -euo pipefail
-          rm -f guidelines+schemas.zip guidelines+schemas.tar.gz schemas.zip schemas.tar.gz
-          (
-            cd build/html
-            zip -qr ../../guidelines+schemas.zip .
-            tar -czf ../../guidelines+schemas.tar.gz .
-          )
-          (
-            cd build/html/schema
-            zip -qr ../../../schemas.zip .
-            tar -czf ../../../schemas.tar.gz .
-          )
+          node scripts/release-archives.mjs --create
       - name: Validate release archives
         run: |
-          set -euo pipefail
-          test -f guidelines+schemas.zip
-          test -f guidelines+schemas.tar.gz
-          test -f schemas.zip
-          test -f schemas.tar.gz
-
-          unzip -Z1 guidelines+schemas.zip | grep -Fx 'index.html'
-          unzip -Z1 guidelines+schemas.zip | grep -Fx 'schema/lex-0.rng'
-          tar -tzf guidelines+schemas.tar.gz | grep -E '^\.?/index\.html$'
-          tar -tzf guidelines+schemas.tar.gz | grep -E '^\.?/schema/lex-0\.rng$'
-
-          unzip -Z1 schemas.zip | grep -Fx 'lex-0.rng'
-          unzip -Z1 schemas.zip | grep -Fx 'lex-0.rnc'
-          unzip -Z1 schemas.zip | grep -Fx 'lex-0.xsd'
-          tar -tzf schemas.tar.gz | grep -E '^\.?/lex-0\.rng$'
-          tar -tzf schemas.tar.gz | grep -E '^\.?/lex-0\.rnc$'
-          tar -tzf schemas.tar.gz | grep -E '^\.?/lex-0\.xsd$'
-
-          if unzip -Z1 schemas.zip | grep -Eq '/'; then
-            echo "schemas.zip must contain only schema files at the archive root."
-            exit 1
-          fi
-          if tar -tzf schemas.tar.gz | grep -Ev '(^$|^\.$|^\./?$|^\.?/lex-0\.(rng|rnc|xsd)$)'; then
-            echo "schemas.tar.gz contains unexpected entries."
-            exit 1
-          fi
+          node scripts/release-archives.mjs --validate
       - name: Upload release assets
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

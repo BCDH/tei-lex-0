@@ -49,9 +49,9 @@ These branches are artifact-only deployments that contain only the built site.
 
 All deployments are handled in GitHub Actions. High-level triggers:
 
-- Pull requests targeting `dev`: build only; no post-processing; no publish.
+- Pull requests targeting `dev`: build + link hygiene; no deploy. A separate `archive_smoke` job also runs a release-mode archive smoke test without publishing anything.
 - Pushes to `main` and `dev`: build + post-process, then publish to Vercel artifact branches.
-- **Annotated tags** on `main` (e.g., `vX.Y.Z`): build + post-process, then publish to GitHub Pages.
+- **Annotated tags** on `main` (e.g., `vX.Y.Z`): build + post-process, publish to GitHub Pages, and attach custom archives to the GitHub Release.
 - Release metadata for `CITATION.cff` is prepared explicitly during release prep (`npm run release:prepare`), not on every `dev` push.
 - `citation-check` runs on PRs to `dev`/`main`; in branch protection, `dev` currently requires `check_citation` and `pr`.
 
@@ -60,9 +60,10 @@ Common job steps:
 - `npm ci` with caching.
 - Download/cache Calabash + Saxon; set `XMLCALABASH_JAR` and `SAXON_JAR`.
 - Run ODD -> HTML pipeline and asset build.
+- Install Trang and convert generated RNG into RNC and XSD.
 - Fail if `build/html` is missing or empty.
 - Run link hygiene checks on PRs and pushes (skip on tags).
-- TODO: schema generation (RNG + XSD)
+- On the PR-only `archive_smoke` job and on tag releases, post-process in release mode and run `npm run release:archives`.
 
 ### Post-processing
 
@@ -97,6 +98,11 @@ Algolia config:
 - `main` build -> `vercel-main` (repo root).
 - `dev` build -> `vercel-dev` (repo root).
 - Tag build -> `gh-pages/releases/<tag>/`.
+- Tag build -> GitHub Release assets:
+  - `guidelines+schemas.zip`
+  - `guidelines+schemas.tar.gz`
+  - `schemas.zip`
+  - `schemas.tar.gz`
 
 Publishing rules:
 
@@ -104,6 +110,7 @@ Publishing rules:
 - Append commits when publishing to `vercel-main` and `vercel-dev`.
 - For tags, fail if the release folder already exists.
 - `releases/index.html` in `gh-pages` is regenerated on every successful tag publish.
+- Custom release archives are attached to the GitHub Release only; they are not copied into `gh-pages/releases/<tag>/`.
 
 ## Release banner behavior
 
@@ -131,6 +138,7 @@ Use this to validate a deployment:
 - `lex-0.org` serves latest `main` build via Vercel.
 - `dev.lex-0.org` serves latest `dev` build via Vercel.
 - `lex-0.org/releases/vX.Y.Z/` loads via Vercel rewrite with no redirect.
+- The GitHub Release for `vX.Y.Z` includes `guidelines+schemas.{zip,tar.gz}` and `schemas.{zip,tar.gz}`.
 - Assets for releases resolve correctly and stay on `lex-0.org`.
 - Dev and release builds are noindexed.
 
