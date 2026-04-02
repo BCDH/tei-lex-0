@@ -2,7 +2,7 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://www.tei-c.org/ns/1.0" xmlns:tei="http://www.tei-c.org/ns/1.0">
   <xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="xml.xsd"/>
   <!--
-    Schema generated from ODD source 2026-04-01T15:30:55Z. . 
+    Schema generated from ODD source 2026-04-02T11:35:27Z. . 
     TEI Edition: P5 Version 4.11.0. Last updated on 18th February 2026, revision 358d2e48e 
     TEI Edition Location: https://www.tei-c.org/Vault/P5/4.11.0/ 
     
@@ -1912,6 +1912,7 @@ Sample values include: 1] duplicate; 2] duplicate-partial; 3] excessStart; 4] ex
   </xs:group>
   <xs:group name="model.emphLike">
     <xs:choice>
+      <xs:element ref="tei:gloss"/>
       <xs:element ref="tei:term"/>
       <xs:element ref="tei:title"/>
       <xs:element ref="tei:ident"/>
@@ -1919,6 +1920,7 @@ Sample values include: 1] duplicate; 2] duplicate-partial; 3] excessStart; 4] ex
   </xs:group>
   <xs:group name="model.emphLike_alternation">
     <xs:choice>
+      <xs:element ref="tei:gloss"/>
       <xs:element ref="tei:term"/>
       <xs:element ref="tei:title"/>
       <xs:element ref="tei:ident"/>
@@ -1926,6 +1928,7 @@ Sample values include: 1] duplicate; 2] duplicate-partial; 3] excessStart; 4] ex
   </xs:group>
   <xs:group name="model.emphLike_sequence">
     <xs:sequence>
+      <xs:element ref="tei:gloss"/>
       <xs:element ref="tei:term"/>
       <xs:element ref="tei:title"/>
       <xs:element ref="tei:ident"/>
@@ -1933,6 +1936,7 @@ Sample values include: 1] duplicate; 2] duplicate-partial; 3] excessStart; 4] ex
   </xs:group>
   <xs:group name="model.emphLike_sequenceOptional">
     <xs:sequence>
+      <xs:element minOccurs="0" ref="tei:gloss"/>
       <xs:element minOccurs="0" ref="tei:term"/>
       <xs:element minOccurs="0" ref="tei:title"/>
       <xs:element minOccurs="0" ref="tei:ident"/>
@@ -1940,6 +1944,7 @@ Sample values include: 1] duplicate; 2] duplicate-partial; 3] excessStart; 4] ex
   </xs:group>
   <xs:group name="model.emphLike_sequenceOptionalRepeatable">
     <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" ref="tei:gloss"/>
       <xs:element minOccurs="0" maxOccurs="unbounded" ref="tei:term"/>
       <xs:element minOccurs="0" maxOccurs="unbounded" ref="tei:title"/>
       <xs:element minOccurs="0" maxOccurs="unbounded" ref="tei:ident"/>
@@ -1947,6 +1952,7 @@ Sample values include: 1] duplicate; 2] duplicate-partial; 3] excessStart; 4] ex
   </xs:group>
   <xs:group name="model.emphLike_sequenceRepeatable">
     <xs:sequence>
+      <xs:element maxOccurs="unbounded" ref="tei:gloss"/>
       <xs:element maxOccurs="unbounded" ref="tei:term"/>
       <xs:element maxOccurs="unbounded" ref="tei:title"/>
       <xs:element maxOccurs="unbounded" ref="tei:ident"/>
@@ -3122,10 +3128,22 @@ Suggested values include: 1] deprecationInfo (deprecation information)</xs:docum
       </xs:complexContent>
     </xs:complexType>
   </xs:element>
-  <xs:element name="gloss" type="tei:macro.phraseSeq">
+  <xs:element name="gloss">
     <xs:annotation>
       <xs:documentation>(gloss) identifies a phrase or word used to provide a gloss or definition for some other word or phrase. [3.4.1. Terms and Glosses 23.4.1. Description of Components]</xs:documentation>
     </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="tei:macro.phraseSeq">
+          <xs:attributeGroup ref="tei:att.global.attributes"/>
+          <xs:attributeGroup ref="tei:att.cReferencing.attributes"/>
+          <xs:attributeGroup ref="tei:att.cmc.attributes"/>
+          <xs:attributeGroup ref="tei:att.pointing.attributes"/>
+          <xs:attributeGroup ref="tei:att.translatable.attributes"/>
+          <xs:attributeGroup ref="tei:att.typed.attributes"/>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
   </xs:element>
   <xs:element name="term">
     <xs:annotation>
