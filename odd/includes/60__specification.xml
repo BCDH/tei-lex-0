@@ -320,7 +320,7 @@
             </content>
         </elementSpec>
         <elementSpec ident="gloss" mode="change">
-            <classes>
+            <classes mode="change">
                 <memberOf key="model.lexEmphLike" mode="add"/>
             </classes>
         </elementSpec>
