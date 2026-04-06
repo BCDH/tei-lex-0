@@ -51,7 +51,7 @@ All deployments are handled in GitHub Actions. High-level triggers:
 
 - Pull requests targeting `dev`: build + link hygiene; no deploy. A separate `archive_smoke` job also runs a release-mode archive smoke test without publishing anything.
 - Pushes to `main` and `dev`: build + post-process, then publish to Vercel artifact branches.
-- **Annotated tags** on `main` (e.g., `vX.Y.Z`): build + post-process, publish to GitHub Pages, and attach custom archives to the GitHub Release.
+- **Annotated tags** on `main` (e.g., `vX.Y.Z`): build + post-process, publish to GitHub Pages, attach custom archives to the GitHub Release, and notify `BCDH/oxygen-tei-lex-0` to prepare a downstream integration PR.
 - Release metadata for `CITATION.cff` is prepared explicitly during release prep (`npm run release:prepare`), not on every `dev` push.
 - `citation-check` runs on PRs to `dev`/`main`; in branch protection, `dev` currently requires `check_citation` and `pr`.
 
@@ -103,6 +103,7 @@ Algolia config:
   - `guidelines+schemas.tar.gz`
   - `schemas.zip`
   - `schemas.tar.gz`
+- Tag build -> downstream dispatch to `BCDH/oxygen-tei-lex-0` with archive URLs for `schemas.zip` and `schemas.tar.gz`
 
 Publishing rules:
 
@@ -111,6 +112,7 @@ Publishing rules:
 - For tags, fail if the release folder already exists.
 - `releases/index.html` in `gh-pages` is regenerated on every successful tag publish.
 - Custom release archives are attached to the GitHub Release only; they are not copied into `gh-pages/releases/<tag>/`.
+- Downstream notification requires repository secret `OXYGEN_TEI_LEX0_DISPATCH_TOKEN`.
 
 ## Release banner behavior
 
@@ -139,6 +141,8 @@ Use this to validate a deployment:
 - `dev.lex-0.org` serves latest `dev` build via Vercel.
 - `lex-0.org/releases/vX.Y.Z/` loads via Vercel rewrite with no redirect.
 - The GitHub Release for `vX.Y.Z` includes `guidelines+schemas.{zip,tar.gz}` and `schemas.{zip,tar.gz}`.
+- The tag release triggers `tei_lex_0_released` dispatch to `BCDH/oxygen-tei-lex-0`.
+- `BCDH/oxygen-tei-lex-0` opens an automation PR from `automation/lex0-vX.Y.Z` to `dev`.
 - Assets for releases resolve correctly and stay on `lex-0.org`.
 - Dev and release builds are noindexed.
 

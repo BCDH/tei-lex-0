@@ -7,7 +7,7 @@ Goal: keep `dev` and `main` strictly linear with rebase-only PR merges, publish 
 - Set up [required settings](#required-github-settings) on GitHub
 - **Publish to dev site:** merge PRs into `dev` (rebase-only) → pushing to `dev` triggers deployment to `dev.lex-0.org`.
 - **Publish to production site:** fast-forward `main` to `dev` → pushing to `main` triggers deployment to `lex-0.org`.
-- **Publish an immutable release:** create an **annotated** tag `vX.Y.Z` on `main` and push the tag → GitHub Actions publishes to `gh-pages/releases/vX.Y.Z/`, updates the releases index on `gh-pages`, and attaches `guidelines+schemas.{zip,tar.gz}` plus `schemas.{zip,tar.gz}` to the GitHub Release.
+- **Publish an immutable release:** create an **annotated** tag `vX.Y.Z` on `main` and push the tag → GitHub Actions publishes to `gh-pages/releases/vX.Y.Z/`, updates the releases index on `gh-pages`, attaches `guidelines+schemas.{zip,tar.gz}` plus `schemas.{zip,tar.gz}` to the GitHub Release, and dispatches the release to `BCDH/oxygen-tei-lex-0` for downstream framework intake.
 
 ## Feature branch creation
 
@@ -84,6 +84,7 @@ Use the GitHub Actions **release-helper** workflow (`.github/workflows/release-h
 - creates an annotated tag `vX.Y.Z`
 
 Then the normal tag build publishes to `gh-pages/releases/vX.Y.Z/` and uploads the four custom release archives to the GitHub Release page for that tag.
+It also dispatches `tei_lex_0_released` to `BCDH/oxygen-tei-lex-0`, which should create an automation PR to `dev` there.
 
 ### Release process (manual alternative)
 
@@ -114,12 +115,14 @@ Then the normal tag build publishes to `gh-pages/releases/vX.Y.Z/` and uploads t
    - Uploads `guidelines+schemas.tar.gz`
    - Uploads `schemas.zip`
    - Uploads `schemas.tar.gz`
+   - Dispatches the release to `BCDH/oxygen-tei-lex-0`
 
 7. Verify:
 
    - `https://lex-0.org/releases/vX.Y.Z/` loads
    - Assets resolve (no `github.io` URLs)
    - The GitHub Release page for `vX.Y.Z` shows the four custom archive assets in addition to GitHub’s automatic source-code archives
+   - `BCDH/oxygen-tei-lex-0` receives the dispatch and opens `automation/lex0-vX.Y.Z` PR to `dev`
 
 Notes:
 
@@ -136,6 +139,7 @@ These settings enforce a rebase-only workflow on `dev`, while still allowing adm
 
 - `CITATION_BOT_TOKEN` is optional now (used only if you run the legacy/manual
   `citation-metadata` workflow directly).
+- `OXYGEN_TEI_LEX0_DISPATCH_TOKEN` is required for tag releases to notify `BCDH/oxygen-tei-lex-0`.
 
 **Repo settings → Pull Requests**
 
