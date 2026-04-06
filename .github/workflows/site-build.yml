@@ -723,11 +723,64 @@ jobs:
             gh release create "${GITHUB_REF_NAME}" --verify-tag --title "${GITHUB_REF_NAME}" --generate-notes
           fi
           gh release upload "${GITHUB_REF_NAME}" \
+            build/html/schema/lex-0.rng \
+            build/html/schema/lex-0.rnc \
+            build/html/schema/lex-0.xsd \
             guidelines+schemas.zip \
             guidelines+schemas.tar.gz \
             schemas.zip \
             schemas.tar.gz \
             --clobber
+      - name: Notify oxygen-tei-lex-0 downstream
+        env:
+          DOWNSTREAM_DISPATCH_TOKEN: ${{ secrets.OXYGEN_TEI_LEX0_DISPATCH_TOKEN }}
+        run: |
+          set -euo pipefail
+
+          if [ -z "${DOWNSTREAM_DISPATCH_TOKEN:-}" ]; then
+            echo "Missing secret: OXYGEN_TEI_LEX0_DISPATCH_TOKEN"
+            exit 1
+          fi
+
+          tag="${GITHUB_REF_NAME}"
+          schema_version="${tag#v}"
+          release_url="${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/releases/tag/${tag}"
+          published_at="$(date -u +%FT%TZ)"
+
+          payload="$(jq -n \
+            --arg source_repo "${GITHUB_REPOSITORY}" \
+            --arg tag "${tag}" \
+            --arg schema_version "${schema_version}" \
+            --arg release_url "${release_url}" \
+            --arg commit_sha "${GITHUB_SHA}" \
+            --arg published_at "${published_at}" \
+            --arg rng_url "${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/releases/download/${tag}/lex-0.rng" \
+            --arg rnc_url "${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/releases/download/${tag}/lex-0.rnc" \
+            --arg xsd_url "${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/releases/download/${tag}/lex-0.xsd" \
+            '{
+              event_type: "tei_lex_0_released",
+              client_payload: {
+                source_repo: $source_repo,
+                tag: $tag,
+                schema_version: $schema_version,
+                release_url: $release_url,
+                commit_sha: $commit_sha,
+                published_at: $published_at,
+                assets: {
+                  rng_url: $rng_url,
+                  rnc_url: $rnc_url,
+                  xsd_url: $xsd_url
+                }
+              }
+            }')"
+
+          curl -fsSL \
+            -X POST \
+            -H "Accept: application/vnd.github+json" \
+            -H "Authorization: Bearer ${DOWNSTREAM_DISPATCH_TOKEN}" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            https://api.github.com/repos/BCDH/oxygen-tei-lex-0/dispatches \
+            -d "${payload}"
       - name: Publish release to gh-pages
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
