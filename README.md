@@ -158,6 +158,8 @@ You can run these transformations regardless of your currently open file. If you
 - Deployment architecture (Vercel + GitHub Pages release archive): [docs/deployment.md](docs/deployment.md)
 - CITATION.cff generation and CI metadata injection: [docs/cff.md](docs/cff.md)
 
+Annotated tag releases also notify the downstream `BCDH/oxygen-tei-lex-0` repository after the GitHub Release is published. This requires the repository secret `OXYGEN_TEI_LEX0_DISPATCH_TOKEN`. A successful release is expected to publish the four archive assets here and open an automation PR to `dev` in the downstream framework repository.
+
 Release automation note: prefer the repo-local npm commands above (`release:doctor`,
 `release:prepare`, `release:cut`) over machine-specific shell helpers.
 
