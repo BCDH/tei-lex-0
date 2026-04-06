@@ -723,9 +723,6 @@ jobs:
             gh release create "${GITHUB_REF_NAME}" --verify-tag --title "${GITHUB_REF_NAME}" --generate-notes
           fi
           gh release upload "${GITHUB_REF_NAME}" \
-            build/html/schema/lex-0.rng \
-            build/html/schema/lex-0.rnc \
-            build/html/schema/lex-0.xsd \
             guidelines+schemas.zip \
             guidelines+schemas.tar.gz \
             schemas.zip \
@@ -754,9 +751,8 @@ jobs:
             --arg release_url "${release_url}" \
             --arg commit_sha "${GITHUB_SHA}" \
             --arg published_at "${published_at}" \
-            --arg rng_url "${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/releases/download/${tag}/lex-0.rng" \
-            --arg rnc_url "${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/releases/download/${tag}/lex-0.rnc" \
-            --arg xsd_url "${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/releases/download/${tag}/lex-0.xsd" \
+            --arg schemas_zip_url "${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/releases/download/${tag}/schemas.zip" \
+            --arg schemas_tar_gz_url "${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/releases/download/${tag}/schemas.tar.gz" \
             '{
               event_type: "tei_lex_0_released",
               client_payload: {
@@ -767,9 +763,8 @@ jobs:
                 commit_sha: $commit_sha,
                 published_at: $published_at,
                 assets: {
-                  rng_url: $rng_url,
-                  rnc_url: $rnc_url,
-                  xsd_url: $xsd_url
+                  schemas_zip_url: $schemas_zip_url,
+                  schemas_tar_gz_url: $schemas_tar_gz_url
                 }
               }
             }')"
