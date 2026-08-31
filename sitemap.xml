@@ -103,6 +103,7 @@
   <url><loc>https://dev.lex-0.org/TEI.front.html</loc></url>
   <url><loc>https://dev.lex-0.org/TEI.g.html</loc></url>
   <url><loc>https://dev.lex-0.org/TEI.gender.html</loc></url>
+  <url><loc>https://dev.lex-0.org/TEI.geo.html</loc></url>
   <url><loc>https://dev.lex-0.org/TEI.gloss.html</loc></url>
   <url><loc>https://dev.lex-0.org/TEI.glyph.html</loc></url>
   <url><loc>https://dev.lex-0.org/TEI.gram.html</loc></url>
@@ -128,6 +129,7 @@
   <url><loc>https://dev.lex-0.org/TEI.listBibl.html</loc></url>
   <url><loc>https://dev.lex-0.org/TEI.listPlace.html</loc></url>
   <url><loc>https://dev.lex-0.org/TEI.localProp.html</loc></url>
+  <url><loc>https://dev.lex-0.org/TEI.location.html</loc></url>
   <url><loc>https://dev.lex-0.org/TEI.macro.lexParaContent.html</loc></url>
   <url><loc>https://dev.lex-0.org/TEI.macro.lexSpecialPara.html</loc></url>
   <url><loc>https://dev.lex-0.org/TEI.macro.limitedContent.html</loc></url>
@@ -177,6 +179,7 @@
   <url><loc>https://dev.lex-0.org/TEI.model.lexicalRefinement.html</loc></url>
   <url><loc>https://dev.lex-0.org/TEI.model.limitedPhrase.html</loc></url>
   <url><loc>https://dev.lex-0.org/TEI.model.listLike.html</loc></url>
+  <url><loc>https://dev.lex-0.org/TEI.model.measureLike.html</loc></url>
   <url><loc>https://dev.lex-0.org/TEI.model.morphLike.html</loc></url>
   <url><loc>https://dev.lex-0.org/TEI.model.nameLike.agent.html</loc></url>
   <url><loc>https://dev.lex-0.org/TEI.model.nameLike.html</loc></url>

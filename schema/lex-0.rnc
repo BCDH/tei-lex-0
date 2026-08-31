@@ -8,7 +8,7 @@ namespace teix = "http://www.tei-c.org/ns/Examples"
 namespace xi = "http://www.w3.org/2001/XInclude"
 namespace xlink = "http://www.w3.org/1999/xlink"
 
-# Schema generated from ODD source 2026-08-31T04:24:25Z. . 
+# Schema generated from ODD source 2026-08-31T05:01:20Z. . 
 # TEI Edition: P5 Version 4.12.0. Last updated on 28th July 2026, revision 113e933e2 
 # TEI Edition Location: https://www.tei-c.org/Vault/P5/4.12.0/ 
 #
@@ -1216,12 +1216,12 @@ model.dateLike_sequence = date
 model.dateLike_sequenceOptional = date?
 model.dateLike_sequenceOptionalRepeatable = date*
 model.dateLike_sequenceRepeatable = date+
-model.measureLike = notAllowed
-model.measureLike_alternation = notAllowed
-model.measureLike_sequence = empty
-model.measureLike_sequenceOptional = empty
-model.measureLike_sequenceOptionalRepeatable = empty
-model.measureLike_sequenceRepeatable = notAllowed
+model.measureLike = geo
+model.measureLike_alternation = geo
+model.measureLike_sequence = geo
+model.measureLike_sequenceOptional = geo?
+model.measureLike_sequenceOptionalRepeatable = geo*
+model.measureLike_sequenceRepeatable = geo+
 model.egLike = notAllowed
 model.egLike_alternation = notAllowed
 model.egLike_sequence = empty
@@ -1412,17 +1412,20 @@ model.placeNamePart_sequence = placeName
 model.placeNamePart_sequenceOptional = placeName?
 model.placeNamePart_sequenceOptionalRepeatable = placeName*
 model.placeNamePart_sequenceRepeatable = placeName+
-model.placeStateLike = model.placeNamePart | state | trait
+model.placeStateLike = model.placeNamePart | location | state | trait
 model.placeStateLike_alternation =
-  model.placeNamePart_alternation | state | trait
+  model.placeNamePart_alternation | location | state | trait
 model.placeStateLike_sequence =
-  model.placeNamePart_sequence, state, trait
+  model.placeNamePart_sequence, location, state, trait
 model.placeStateLike_sequenceOptional =
-  model.placeNamePart_sequenceOptional?, state?, trait?
+  model.placeNamePart_sequenceOptional?, location?, state?, trait?
 model.placeStateLike_sequenceOptionalRepeatable =
-  model.placeNamePart_sequenceOptionalRepeatable*, state*, trait*
+  model.placeNamePart_sequenceOptionalRepeatable*,
+  location*,
+  state*,
+  trait*
 model.placeStateLike_sequenceRepeatable =
-  model.placeNamePart_sequenceRepeatable+, state+, trait+
+  model.placeNamePart_sequenceRepeatable+, location+, state+, trait+
 model.publicationStmtPart.agency = publisher | authority
 model.availabilityPart = licence
 model.descLike = desc
@@ -5259,6 +5262,10 @@ gender =
     }?,
     empty
   }
+geo =
+  
+  ## (geographical coordinates) contains any expression of a set of geographic coordinates, representing a point, line, or area on the surface of the earth in some notation. [14.3.4.1. Varieties of Location]
+  element geo { text, att.global.attributes, att.cmc.attributes, empty }
 langKnowledge =
   [
     a:documentation [
@@ -5326,6 +5333,24 @@ listPlace =
     att.cmc.attributes,
     att.declarable.attributes,
     att.sortable.attributes,
+    att.typed.attributes,
+    empty
+  }
+location =
+  
+  ## (location) defines the location of a place as a set of geographical coordinates, in terms of other named geo-political entities, or as an address. [14.3.4. Places]
+  element location {
+    (model.labelLike
+     | model.placeNamePart
+     | model.offsetLike
+     | model.measureLike
+     | model.addressLike
+     | model.noteLike
+     | model.biblLike)*,
+    att.global.attributes,
+    att.cmc.attributes,
+    att.datable.attributes,
+    att.editLike.attributes,
     att.typed.attributes,
     empty
   }

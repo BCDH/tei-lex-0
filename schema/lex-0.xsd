@@ -2,7 +2,7 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://www.tei-c.org/ns/1.0" xmlns:tei="http://www.tei-c.org/ns/1.0">
   <xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="xml.xsd"/>
   <!--
-    Schema generated from ODD source 2026-08-31T04:24:25Z. . 
+    Schema generated from ODD source 2026-08-31T05:01:20Z. . 
     TEI Edition: P5 Version 4.12.0. Last updated on 28th July 2026, revision 113e933e2 
     TEI Edition Location: https://www.tei-c.org/Vault/P5/4.12.0/ 
     
@@ -2018,6 +2018,36 @@ Sample values include: 1] duplicate; 2] duplicate-partial; 3] excessStart; 4] ex
       <xs:element maxOccurs="unbounded" ref="tei:date"/>
     </xs:sequence>
   </xs:group>
+  <xs:group name="model.measureLike">
+    <xs:sequence>
+      <xs:element ref="tei:geo"/>
+    </xs:sequence>
+  </xs:group>
+  <xs:group name="model.measureLike_alternation">
+    <xs:sequence>
+      <xs:element ref="tei:geo"/>
+    </xs:sequence>
+  </xs:group>
+  <xs:group name="model.measureLike_sequence">
+    <xs:sequence>
+      <xs:element ref="tei:geo"/>
+    </xs:sequence>
+  </xs:group>
+  <xs:group name="model.measureLike_sequenceOptional">
+    <xs:sequence>
+      <xs:element minOccurs="0" ref="tei:geo"/>
+    </xs:sequence>
+  </xs:group>
+  <xs:group name="model.measureLike_sequenceOptionalRepeatable">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" ref="tei:geo"/>
+    </xs:sequence>
+  </xs:group>
+  <xs:group name="model.measureLike_sequenceRepeatable">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" ref="tei:geo"/>
+    </xs:sequence>
+  </xs:group>
   <xs:group name="model.graphicLike">
     <xs:sequence>
       <xs:element ref="tei:graphic"/>
@@ -2447,6 +2477,7 @@ Sample values include: 1] duplicate; 2] duplicate-partial; 3] excessStart; 4] ex
   <xs:group name="model.placeStateLike">
     <xs:choice>
       <xs:group ref="tei:model.placeNamePart"/>
+      <xs:element ref="tei:location"/>
       <xs:element ref="tei:state"/>
       <xs:element ref="tei:trait"/>
     </xs:choice>
@@ -2454,6 +2485,7 @@ Sample values include: 1] duplicate; 2] duplicate-partial; 3] excessStart; 4] ex
   <xs:group name="model.placeStateLike_alternation">
     <xs:choice>
       <xs:group ref="tei:model.placeNamePart_alternation"/>
+      <xs:element ref="tei:location"/>
       <xs:element ref="tei:state"/>
       <xs:element ref="tei:trait"/>
     </xs:choice>
@@ -2461,6 +2493,7 @@ Sample values include: 1] duplicate; 2] duplicate-partial; 3] excessStart; 4] ex
   <xs:group name="model.placeStateLike_sequence">
     <xs:sequence>
       <xs:group ref="tei:model.placeNamePart_sequence"/>
+      <xs:element ref="tei:location"/>
       <xs:element ref="tei:state"/>
       <xs:element ref="tei:trait"/>
     </xs:sequence>
@@ -2468,6 +2501,7 @@ Sample values include: 1] duplicate; 2] duplicate-partial; 3] excessStart; 4] ex
   <xs:group name="model.placeStateLike_sequenceOptional">
     <xs:sequence>
       <xs:group minOccurs="0" ref="tei:model.placeNamePart_sequenceOptional"/>
+      <xs:element minOccurs="0" ref="tei:location"/>
       <xs:element minOccurs="0" ref="tei:state"/>
       <xs:element minOccurs="0" ref="tei:trait"/>
     </xs:sequence>
@@ -2475,6 +2509,7 @@ Sample values include: 1] duplicate; 2] duplicate-partial; 3] excessStart; 4] ex
   <xs:group name="model.placeStateLike_sequenceOptionalRepeatable">
     <xs:sequence>
       <xs:group minOccurs="0" maxOccurs="unbounded" ref="tei:model.placeNamePart_sequenceOptionalRepeatable"/>
+      <xs:element minOccurs="0" maxOccurs="unbounded" ref="tei:location"/>
       <xs:element minOccurs="0" maxOccurs="unbounded" ref="tei:state"/>
       <xs:element minOccurs="0" maxOccurs="unbounded" ref="tei:trait"/>
     </xs:sequence>
@@ -2482,6 +2517,7 @@ Sample values include: 1] duplicate; 2] duplicate-partial; 3] excessStart; 4] ex
   <xs:group name="model.placeStateLike_sequenceRepeatable">
     <xs:sequence>
       <xs:group maxOccurs="unbounded" ref="tei:model.placeNamePart_sequenceRepeatable"/>
+      <xs:element maxOccurs="unbounded" ref="tei:location"/>
       <xs:element maxOccurs="unbounded" ref="tei:state"/>
       <xs:element maxOccurs="unbounded" ref="tei:trait"/>
     </xs:sequence>
@@ -2705,6 +2741,7 @@ Sample values include: 1] duplicate; 2] duplicate-partial; 3] excessStart; 4] ex
   <xs:group name="model.pPart.data">
     <xs:choice>
       <xs:group ref="tei:model.dateLike"/>
+      <xs:group ref="tei:model.measureLike"/>
       <xs:group ref="tei:model.addressLike"/>
       <xs:group ref="tei:model.nameLike"/>
     </xs:choice>
@@ -2712,6 +2749,7 @@ Sample values include: 1] duplicate; 2] duplicate-partial; 3] excessStart; 4] ex
   <xs:group name="model.pPart.data_alternation">
     <xs:choice>
       <xs:group ref="tei:model.dateLike_alternation"/>
+      <xs:group ref="tei:model.measureLike_alternation"/>
       <xs:group ref="tei:model.addressLike_alternation"/>
       <xs:group ref="tei:model.nameLike_alternation"/>
     </xs:choice>
@@ -2719,6 +2757,7 @@ Sample values include: 1] duplicate; 2] duplicate-partial; 3] excessStart; 4] ex
   <xs:group name="model.pPart.data_sequence">
     <xs:sequence>
       <xs:group ref="tei:model.dateLike_sequence"/>
+      <xs:group ref="tei:model.measureLike_sequence"/>
       <xs:group ref="tei:model.addressLike_sequence"/>
       <xs:group ref="tei:model.nameLike_sequence"/>
     </xs:sequence>
@@ -2726,6 +2765,7 @@ Sample values include: 1] duplicate; 2] duplicate-partial; 3] excessStart; 4] ex
   <xs:group name="model.pPart.data_sequenceOptional">
     <xs:sequence>
       <xs:group minOccurs="0" ref="tei:model.dateLike_sequenceOptional"/>
+      <xs:group minOccurs="0" ref="tei:model.measureLike_sequenceOptional"/>
       <xs:group minOccurs="0" ref="tei:model.addressLike_sequenceOptional"/>
       <xs:group minOccurs="0" ref="tei:model.nameLike_sequenceOptional"/>
     </xs:sequence>
@@ -2733,6 +2773,7 @@ Sample values include: 1] duplicate; 2] duplicate-partial; 3] excessStart; 4] ex
   <xs:group name="model.pPart.data_sequenceOptionalRepeatable">
     <xs:sequence>
       <xs:group minOccurs="0" maxOccurs="unbounded" ref="tei:model.dateLike_sequenceOptionalRepeatable"/>
+      <xs:group minOccurs="0" maxOccurs="unbounded" ref="tei:model.measureLike_sequenceOptionalRepeatable"/>
       <xs:group minOccurs="0" maxOccurs="unbounded" ref="tei:model.addressLike_sequenceOptionalRepeatable"/>
       <xs:group minOccurs="0" maxOccurs="unbounded" ref="tei:model.nameLike_sequenceOptionalRepeatable"/>
     </xs:sequence>
@@ -8635,6 +8676,15 @@ Sample values include: 1] practicing; 2] clandestine; 3] patrilineal; 4] matrili
       </xs:complexContent>
     </xs:complexType>
   </xs:element>
+  <xs:element name="geo">
+    <xs:annotation>
+      <xs:documentation>(geographical coordinates) contains any expression of a set of geographic coordinates, representing a point, line, or area on the surface of the earth in some notation. [14.3.4.1. Varieties of Location]</xs:documentation>
+    </xs:annotation>
+    <xs:complexType mixed="true">
+      <xs:attributeGroup ref="tei:att.global.attributes"/>
+      <xs:attributeGroup ref="tei:att.cmc.attributes"/>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="langKnowledge">
     <xs:complexType>
       <xs:choice>
@@ -8744,6 +8794,26 @@ Sample values include: 1] listening; 2] speaking; 3] reading; 4] writing</xs:doc
       <xs:attributeGroup ref="tei:att.cmc.attributes"/>
       <xs:attributeGroup ref="tei:att.declarable.attributes"/>
       <xs:attributeGroup ref="tei:att.sortable.attributes"/>
+      <xs:attributeGroup ref="tei:att.typed.attributes"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="location">
+    <xs:annotation>
+      <xs:documentation>(location) defines the location of a place as a set of geographical coordinates, in terms of other named geo-political entities, or as an address. [14.3.4. Places]</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:group ref="tei:model.labelLike"/>
+        <xs:group ref="tei:model.placeNamePart"/>
+        <xs:group ref="tei:model.measureLike"/>
+        <xs:group ref="tei:model.addressLike"/>
+        <xs:group ref="tei:model.noteLike"/>
+        <xs:group ref="tei:model.biblLike"/>
+      </xs:choice>
+      <xs:attributeGroup ref="tei:att.global.attributes"/>
+      <xs:attributeGroup ref="tei:att.cmc.attributes"/>
+      <xs:attributeGroup ref="tei:att.datable.attributes"/>
+      <xs:attributeGroup ref="tei:att.editLike.attributes"/>
       <xs:attributeGroup ref="tei:att.typed.attributes"/>
     </xs:complexType>
   </xs:element>
