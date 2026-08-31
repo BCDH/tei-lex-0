@@ -8,9 +8,9 @@ namespace teix = "http://www.tei-c.org/ns/Examples"
 namespace xi = "http://www.w3.org/2001/XInclude"
 namespace xlink = "http://www.w3.org/1999/xlink"
 
-# Schema generated from ODD source 2026-04-06T05:38:57Z. . 
-# TEI Edition: P5 Version 4.11.0. Last updated on 18th February 2026, revision 358d2e48e 
-# TEI Edition Location: https://www.tei-c.org/Vault/P5/4.11.0/ 
+# Schema generated from ODD source 2026-08-31T04:24:25Z. . 
+# TEI Edition: P5 Version 4.12.0. Last updated on 28th July 2026, revision 113e933e2 
+# TEI Edition Location: https://www.tei-c.org/Vault/P5/4.12.0/ 
 #
 
 #
@@ -461,7 +461,7 @@ att.global.rendition.attribute.style =
   attribute style { xsd:string }?
 att.global.rendition.attribute.rendition =
   
-  ## points to a description of the rendering or presentation used for this element in the source text.
+  ## (rendition reference) points to a description of the rendering or presentation used for this element in the source text.
   attribute rendition {
     list {
       xsd:anyURI { pattern = "\S+" }+
@@ -525,9 +525,9 @@ s:pattern [
         "(   self::tei:classRef                                 | self::tei:dataRef                                 | self::tei:elementRef                                 | self::tei:macroRef                                 | self::tei:moduleRef                                 | self::tei:schemaSpec )                                   and                                   $srcs[2]"
       "\x{a}" ~
       "              When used on a schema description element (like\x{a}" ~
-      "              "
+      "              <"
       sch:value-of [ select = "name(.)" ]
-      "), the @source attribute\x{a}" ~
+      ">), the @source attribute\x{a}" ~
       "              should have only 1 value. (This one has "
       sch:value-of [ select = "count($srcs)" ]
       ".)\x{a}" ~
@@ -732,9 +732,9 @@ s:pattern [
     "         "
     sch:assert [
       test = "@target"
-      "@targetLang should only be used on "
+      "@targetLang should only be used on <"
       sch:name [ ]
-      " if @target is specified."
+      "> if @target is specified."
     ]
     "\x{a}" ~
     "      "
@@ -848,11 +848,11 @@ s:pattern [
     sch:assert [
       test = "id( substring( @spanTo, 2 ) ) >> ."
       "\x{a}" ~
-      "	      The element indicated by @spanTo ("
+      "              The element indicated by @spanTo ("
       sch:value-of [ select = "@spanTo" ]
-      ") must follow the current "
+      ") must follow the current <"
       sch:name [ ]
-      " element \x{a}" ~
+      "> element.\x{a}" ~
       "            "
     ]
     "\x{a}" ~
@@ -901,7 +901,7 @@ s:pattern [
     "\x{a}" ~
     "         "
     sch:assert [
-      test = "@scheme and not(@scheme = 'free')"
+      test = "@scheme and not(@scheme eq 'free')"
       "\x{a}" ~
       "              @schemeVersion can only be used if @scheme is specified.\x{a}" ~
       "            "
@@ -936,9 +936,11 @@ s:pattern [
     "         "
     sch:assert [
       test = "@type"
-      "The "
+      "\x{a}" ~
+      "          The <"
       sch:name [ ]
-      " element should not be categorized in detail with @subtype unless also categorized in general with @type"
+      "> element should not be categorized in detail with @subtype unless also categorized in general with @type.\x{a}" ~
+      "        "
     ]
     "\x{a}" ~
     "      "
@@ -1656,9 +1658,9 @@ s:pattern [
       test = "string-length( normalize-space(.) ) gt 0"
       " @calendar indicates one or more\x{a}" ~
       "              systems or calendars to which the date represented by the content of this element belongs,\x{a}" ~
-      "              but this "
+      "              but this <"
       sch:name [ ]
-      " element has no textual content."
+      "> element has no textual content."
     ]
     "\x{a}" ~
     "      "
@@ -1684,7 +1686,7 @@ p =
              test =
                "(ancestor::tei:ab or ancestor::tei:p) and                        not( ancestor::tei:floatingText                           | parent::tei:exemplum                           | parent::tei:item                           | parent::tei:note                           | parent::tei:q                           | parent::tei:quote                           | parent::tei:remarks                           | parent::tei:said                           | parent::tei:sp                           | parent::tei:stage                           | parent::tei:cell                           | parent::tei:figure )"
              "\x{a}" ~
-             "          Abstract model violation: Paragraphs may not occur inside other paragraphs or ab elements.\x{a}" ~
+             "          Abstract model violation: Paragraphs may not occur inside other paragraphs or <ab> elements.\x{a}" ~
              "        "
            ]
            "\x{a}" ~
@@ -1706,7 +1708,7 @@ p =
              test =
                "ancestor::tei:floatingText | parent::tei:figure | parent::tei:note"
              "\x{a}" ~
-             "          Abstract model violation: Metrical lines may not contain higher-level structural elements such as div, p, or ab, unless p is a child of figure or note, or is a descendant of floatingText.\x{a}" ~
+             "          Abstract model violation: Metrical lines (<l> elements) may not contain higher-level structural elements such as <div>, <p>, or <ab>, unless <p> is a child of <figure> or <note>, or is a descendant of <floatingText>.\x{a}" ~
              "        "
            ]
            "\x{a}" ~
@@ -1832,6 +1834,7 @@ gloss =
     att.global.attributes,
     att.cReferencing.attributes,
     att.cmc.attributes,
+    att.placement.attributes,
     att.pointing.attributes,
     att.translatable.attributes,
     att.typed.attributes,
@@ -1890,7 +1893,7 @@ rt =
            "               "
            sch:report [
              test = "../@from | ../@to"
-             "When target= is present, neither from= nor to= should be."
+             "When @target is present, neither @from nor @to should be."
            ]
            "\x{a}" ~
            "            "
@@ -1913,9 +1916,9 @@ rt =
            "               "
            sch:assert [
              test = "../@to"
-             "When from= is present, the to= attribute of "
+             "When @from is present, the @to attribute of <"
              sch:name [ ]
-             " is required."
+             "> is required."
            ]
            "\x{a}" ~
            "            "
@@ -1938,9 +1941,9 @@ rt =
            "               "
            sch:assert [
              test = "../@from"
-             "When to= is present, the from= attribute of "
+             "When @to is present, the @from attribute of <"
              sch:name [ ]
-             " is required."
+             "> is required."
            ]
            "\x{a}" ~
            "            "
@@ -2058,9 +2061,9 @@ ref =
            "               "
            sch:report [
              test = "@target and @cRef"
-             "Only one of the attributes @target and @cRef may be supplied on "
+             "Only one of the attributes @target and @cRef may be supplied on <"
              sch:name [ ]
-             "."
+             ">."
            ]
            "\x{a}" ~
            "            "
@@ -2115,7 +2118,11 @@ ref =
            "               "
            sch:assert [
              test = "tei:label"
-             'The content of a "gloss" list should include a sequence of one or more pairs of a label element followed by an item element'
+             "\x{a}" ~
+             '          The content of a "gloss" list should include a sequence of\x{a}' ~
+             "          one or more pairs of a <label> element followed by an\x{a}" ~
+             "          <item> element.\x{a}" ~
+             "        "
            ]
            "\x{a}" ~
            "            "
@@ -4775,7 +4782,7 @@ profileDesc =
 langUsage =
   
   ## (language usage) describes the languages, sublanguages, registers, dialects, etc. represented within a text. [2.4.2. Language Usage 2.4. The Profile Description 16.3.2. Declarable Elements]
-  element langUsage { model.pLike*, language+ }
+  element langUsage { model.pLike*, (language | languageGrp)+ }
 language =
   
   ## (language) characterizes a single language or sublanguage used within a text. [2.4.2. Language Usage]
@@ -5384,6 +5391,7 @@ person =
   element person {
     (model.pLike+ | (model.personPart | model.global | model.ptrLike)*),
     att.global.attributes,
+    att.datable.attributes,
     att.editLike.attributes,
     att.sortable.attributes,
     
@@ -5460,7 +5468,9 @@ personGrp =
     
     ## specifies the role of this group of participants in the interaction.
     attribute role {
-      xsd:token { pattern = "[^\p{C}\p{Z}]+" }
+      list {
+        xsd:token { pattern = "[^\p{C}\p{Z}]+" }+
+      }
     }?,
     
     ## specifies the sex of the participant group.
@@ -5537,6 +5547,7 @@ place =
      (model.noteLike | model.biblLike | model.ptrLike | idno)*,
      (model.placeLike | listPlace)*),
     att.global.attributes,
+    att.datable.attributes,
     att.editLike.attributes,
     att.sortable.attributes,
     att.typed.attributes,
@@ -5753,7 +5764,7 @@ body =
            sch:assert [
              test = "ancestor::tei:floatingText"
              "\x{a}" ~
-             "          Abstract model violation: Metrical lines may not contain higher-level structural elements such as div, unless div is a descendant of floatingText.\x{a}" ~
+             "          Abstract model violation: Metrical lines (<l> elements) may not contain higher-level structural elements such as <div>, unless <div> is a descendant of <floatingText>.\x{a}" ~
              "        "
            ]
            "\x{a}" ~
@@ -5775,7 +5786,7 @@ body =
              test =
                "(ancestor::tei:p or ancestor::tei:ab) and not(ancestor::tei:floatingText)"
              "\x{a}" ~
-             "          Abstract model violation: p and ab may not contain higher-level structural elements such as div, unless div is a descendant of floatingText.\x{a}" ~
+             "          Abstract model violation: <p> and <ab> may not contain higher-level structural elements such as <div>, unless <div> is a descendant of <floatingText>.\x{a}" ~
              "        "
            ]
            "\x{a}" ~
@@ -5866,6 +5877,28 @@ metamark =
         xsd:anyURI { pattern = "\S+" }+
       }
     }?,
+    empty
+  }
+languageGrp =
+  
+  ## (language group) describes a group of languages treated as a single unit for classification purposes.
+  element languageGrp {
+    (text | model.languageProfile | language | languageGrp)*,
+    att.typed.attributes,
+    
+    ##
+    attribute status { text }?,
+    
+    ## Supplies a language code constructed as defined in BCP 47 which identifies the language group documented by this element.
+    attribute ident {
+      xsd:language
+      | (
+         ##
+         "")
+    },
+    
+    ## specifies the approximate percentage of the text which uses this language group.
+    attribute usage { xsd:nonNegativeInteger }?,
     empty
   }
 model.languageProfile =
