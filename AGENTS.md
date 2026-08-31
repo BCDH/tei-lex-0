@@ -5,8 +5,14 @@ Project: Build Pipeline for TEI Lex-0 Guidelines.
 ## Quickstart
 
 - Install deps: `npm ci`
-- Build docs + schema: `XMLCALABASH_CMD=xmlcalabash npm run build`
+- Build docs + schema: `npm run build`
 - Open output: `build/html/index.html`
+
+## Agent build rule
+
+- Always run `npm run build` first.
+- Do not set `XMLCALABASH_CMD` or search for or install another XProc runner unless the npm command explicitly reports `XML Calabash not found`.
+- If the build fails while fetching TEI resources, rerun the same npm command with network access.
 
 ## Required tools
 
@@ -17,6 +23,7 @@ Project: Build Pipeline for TEI Lex-0 Guidelines.
     2. `xmlcalabash` on `PATH`
     3. `calabash` on `PATH`
     4. `XMLCALABASH_JAR` or `CALABASH_JAR` (full path to jar)
+  - `XMLCALABASH_CMD=xmlcalabash npm run build` is an optional override for environments where `xmlcalabash` is known to be on `PATH`; it is not the default build command.
 
 ## Key paths
 

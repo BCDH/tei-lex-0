@@ -208,6 +208,9 @@
         <revisionDesc>
             <listChange>
                 <listChange n="0.9.6-dev" xml:id="v.0.9.6-dev">
+                    <change when="2026-08-31" type="spec">Added <gi>location</gi> and <gi>geo</gi> to support geographic coordinates in language profiles as per <ref
+                            target="https://github.com/BCDH/tei-lex-0/issues/296"
+                        >#296</ref>.</change>
                     <change when="2026-08-31" type="spec">Added <gi>languageGrp</gi> for documenting recursive language classifications in <gi>langUsage</gi> as per <ref
                             target="https://github.com/BCDH/tei-lex-0/issues/127"
                         >#127</ref>.</change>
