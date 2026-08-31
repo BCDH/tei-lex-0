@@ -32,7 +32,7 @@
                 <language ident="ru-x-lit19c" role="objectLanguage">
                     <name xml:lang="ru">Русский литературный язык XIX века</name>
                     <name xml:lang="en">19th-century literary Russian</name>
-                    <date notBefore="1800" notAfter="1899"></date>
+                    <date notBefore="1800" notAfter="1899" />
                 </language>
                 <language ident="ru" role="workingLanguage">
                     <name xml:lang="ru">Современный русский язык</name>
@@ -42,11 +42,12 @@
             <!-- xpointer="element(/1/1/2/2)-->
             <langUsage>
                 <language status="active" role="objectLanguage" ident="fr">
-                    <ident type="languageIdentifier" subtype="ISO639-3B">fre</ident>
-                    <ident type="languageIdentifier" subtype="ISO639-3T">fra</ident>
-                    <ident type="languageIdentifier" subtype="ISO639-2">fr</ident>
+                    <ident type="ISO639-1">fr</ident>
+                    <ident type="ISO639-2B">fre</ident>
+                    <ident type="ISO639-2T">fra</ident>
+                    <ident type="ISO639-3">fra</ident>
                     <name type="languageName" role="languageReferenceName" xml:lang="en"
-                        >French</name>
+                    >French</name>
                     <name type="languageName" xml:lang="fr">Français</name>
                 </language>
             </langUsage>
@@ -54,7 +55,7 @@
             <langUsage>
                 <language status="retired" ident="auv" role="sourceLanguage">
                     <name type="languageName" role="languageReferenceName" xml:lang="en"
-                        >Auvergnat</name>
+                    >Auvergnat</name>
                 </language>
             </langUsage>
             <!-- xpointer="element(/1/1/2/4)-->
@@ -62,10 +63,10 @@
                 <language ident="ar-x-syrkha" role="objectLanguage">
                     <name type="languageVariety">the Arabic of the Khawetna (E Syria)</name>
                     <settingDesc>
-                        <place sameAs="geo:khawetna"/>
+                        <place sameAs="geo:khawetna" />
                     </settingDesc>
                     <date type="languagePeriod">Contemporary</date>
-                    <personGrp role="tribe" corresp="pgr:khawetna_tribe"/>
+                    <personGrp role="tribe" corresp="pgr:khawetna_tribe" />
                     <channel mode="s">spoken</channel>
                 </language>
             </langUsage>
@@ -81,7 +82,7 @@
                             <idno type="ISO-alpha3">FRA</idno>
                         </place>
                     </settingDesc>
-                    <date notBefore="1900" notAfter="1940"/>
+                    <date notBefore="1900" notAfter="1940" />
                 </language>
             </langUsage>
             <!-- xpointer="element(/1/1/2/6)-->
@@ -96,15 +97,15 @@
                             Turkish, no formal education in Arabic</education>
                         <nationality type="citizenship">Turkish</nationality>
                         <nationality type="ethnicity">Arab</nationality>
-                        <residence/>
-                        <occupation/>
+                        <residence />
+                        <occupation />
                         <socecStatus>The speakers of this variety were formerly sheep and goat
                             rearing nomads.</socecStatus>
                         <langKnowledge>
-                            <langKnown tag="ar-x-shaw"/>
-                            <langKnown tag="tr"/>
+                            <langKnown tag="ar-x-shaw" />
+                            <langKnown tag="tr" />
                         </langKnowledge>
-                        <note/>
+                        <note />
                     </personGrp>
                     <channel mode="s">spoken</channel>
                 </language>
@@ -119,6 +120,64 @@
                     <name xml:lang="en">English</name>
                     <name xml:lang="yi">ענגליש</name>
                 </language>
+            </langUsage>
+            <!-- xpointer="element(/1/1/2/8)-->
+            <langUsage>
+                <languageGrp ident="ine">
+                    <ident type="ISO639-2">ine</ident>
+                    <ident type="ISO639-5">ine</ident>
+                    <ident type="Glottolog">indo1319</ident>
+                    <name xml:lang="en">Indo-European languages</name>
+                    <name xml:lang="sr-Cyrl">Индоевропски језици</name>
+                    <languageGrp ident="x-glotto-balt1263">
+                        <ident type="Glottolog">balt1263</ident>
+                        <name xml:lang="en">Balto-Slavic languages</name>
+                        <name xml:lang="sr-Cyrl">Балтословенски језици</name>
+                        <languageGrp ident="sla">
+                            <ident type="ISO639-2">sla</ident>
+                            <ident type="ISO639-5">sla</ident>
+                            <ident type="Glottolog">slav1255</ident>
+                            <name xml:lang="en">Slavic languages</name>
+                            <name xml:lang="sr-Cyrl">Словенски језици</name>
+                            <languageGrp ident="zls">
+                                <ident type="ISO639-5">zls</ident>
+                                <ident type="Glottolog">sout3147</ident>
+                                <name xml:lang="en">South Slavic languages</name>
+                                <name xml:lang="sr-Cyrl">Јужнословенски језици</name>
+                                <languageGrp ident="x-glotto-west2804">
+                                    <ident type="Glottolog">west2804</ident>
+                                    <name xml:lang="en">Western South Slavic languages</name>
+                                    <name xml:lang="sr-Cyrl">Западни јужнословенски језици</name>
+                                    <languageGrp ident="sh">
+                                        <ident type="ISO639-3">hbs</ident>
+                                        <ident type="Glottolog">sout1528</ident>
+                                        <name xml:lang="en">Serbian-Croatian-Bosnian</name>
+                                        <name xml:lang="sr-Cyrl"
+                                        >Српско-хрватско-босански језик</name>
+                                        <languageGrp ident="x-glotto-shto1241">
+                                            <ident type="Glottolog">shto1241</ident>
+                                            <name xml:lang="en">Shtokavian</name>
+                                            <name xml:lang="sr-Cyrl">Штокавски</name>
+                                            <languageGrp ident="x-glotto-news1236">
+                                                <ident type="Glottolog">news1236</ident>
+                                                <name xml:lang="en">New Shtokavian</name>
+                                                <name xml:lang="sr-Cyrl">Новоштокавски</name>
+                                                <language ident="sr" role="objectLanguage">
+                                                    <ident type="ISO639-1">sr</ident>
+                                                    <ident type="ISO639-2">srp</ident>
+                                                    <ident type="ISO639-3">srp</ident>
+                                                    <ident type="Glottolog">serb1264</ident>
+                                                    <name xml:lang="en">Serbian</name>
+                                                    <name xml:lang="sr-Cyrl">Српски језик</name>
+                                                </language>
+                                            </languageGrp>
+                                        </languageGrp>
+                                    </languageGrp>
+                                </languageGrp>
+                            </languageGrp>
+                        </languageGrp>
+                    </languageGrp>
+                </languageGrp>
             </langUsage>
         </profileDesc>
     </teiHeader>

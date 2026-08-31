@@ -150,12 +150,13 @@
       <head>Profile description</head>
       <p>In TEI P5, <gi>profileDesc</gi> is an optional element, whereas in TEI Lex-0, it is
          required: <gi>profileDesc</gi> itself requires <gi>langUsage</gi> and <gi>langUsage</gi>
-         requires at least one <gi>language</gi> element. This is because for any lexical or
-         lexicographic resource, it is essential to identify and record the language(s) used as part
-         of the resource metadata. </p>
+         requires at least one <gi>language</gi> or <gi>languageGrp</gi> element. This is because for
+         any lexical or lexicographic resource, it is essential to identify and record the
+         language(s) used as part of the resource metadata. </p>
       <p>Regarding the use of the required attribute <att>role</att> and its possible values
             (<val>objectLanguage</val>, <val>workingLanguage</val>, <val>sourceLanguage</val> or
-            <val>targetLanguage</val>), see the specification details for <gi>language</gi>. </p>
+            <val>targetLanguage</val>), see the specification details for <gi>language</gi> and
+            <gi>languageGrp</gi>. </p>
       <div xml:id="language-profile">
          <head>Language profiles</head>
          <p>Lexicographic resources often deal not only with well-established languages, but also
@@ -171,7 +172,8 @@
             make sure to document them explicitly in the header so that the meaning of each tag is
             clear to both humans and software.</p>
          <p>In TEI Lex-0, language profiles are recorded in <code rend="language-xpath"
-               >profileDesc/langUsage</code>. Each <gi>language</gi> element provides:</p>
+               >profileDesc/langUsage</code>. Each <gi>language</gi> or <gi>languageGrp</gi> element
+            provides:</p>
          <list>
             <item>a required identifier (<att>ident</att>) and a required functional role
                   (<att>role</att>) such as <val>objectLanguage</val> or
@@ -202,6 +204,13 @@
          <p><gi>language</gi> is a very flexible element in Lex-0. It allows you to record language
             profiles that range from basic identification of dictionary's object and working
             languages to full-blown profiles describing a language variety or its speakers.</p>
+         <p>When a resource needs to document a language classification, <gi>languageGrp</gi> may be
+            used to group individual <gi>language</gi> elements and may itself contain further
+               <gi>languageGrp</gi> elements. It accepts the same attributes and descriptive
+            language-profile elements as <gi>language</gi>. Use ISO 639 language-family or group
+            identifiers where available; additional identifiers such as Glottocodes should be
+            recorded in child <gi>ident</gi> elements. If a classification node has no standard
+            language tag, use and document a BCP 47 private-use tag in <att>ident</att>.</p>
          <list type="examples">
             <item>
                <desc>Basic language identification (monolingual) </desc>
@@ -233,6 +242,15 @@
                   <xi:include href="../examples/headers/LanguageProfileExamples.stripped.xml"
                      corresp="../examples/headers/LanguageProfileExamples.xml"
                      xpointer="element(/1/1/2/6)"/>
+               </egXML>
+            </item>
+            <item>
+               <desc>Representing a recursive language classification from Indo-European to
+                  Serbian, using ISO 639 identifiers and Glottocodes</desc>
+               <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                  <xi:include href="../examples/headers/LanguageProfileExamples.stripped.xml"
+                     corresp="../examples/headers/LanguageProfileExamples.xml"
+                     xpointer="element(/1/1/2/8)"/>
                </egXML>
             </item>
          </list>
