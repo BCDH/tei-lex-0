@@ -528,10 +528,11 @@
                 </egXML>
             </exemplum>
             <exemplum type="lex0">
-                <p>The <att>ident</att> attribute is required and is used to indicate the language
-                    code used for the given lanuguage variety in the rest of the dictionary. If
-                    multiple language identifiers exist for the given language variety, they should
-                    be encoded using the <gi>ident</gi> element.</p>
+                <p>The <att>ident</att> attribute is required and supplies the BCP 47 language code
+                    used for the given language variety elsewhere in the dictionary. When child
+                    <gi>ident</gi> elements are supplied, they should record a complete, typed
+                    inventory of applicable registry-specific identifiers, including the identifier
+                    supplied in <att>ident</att>.</p>
                 <egXML xmlns="http://www.tei-c.org/ns/Examples">
                     <xi:include href="../examples/headers/LanguageProfileExamples.stripped.xml"
                         corresp="../examples/headers/LanguageProfileExamples.xml"
@@ -545,6 +546,56 @@
                     a specific <att>role</att> attribute. A human-readable, informal prose
                     characterization should be supplied in the child <gi>name</gi> element. </p>
             </remarks>
+        </elementSpec>
+        <elementSpec ident="languageGrp" module="header" mode="add">
+            <gloss>language group</gloss>
+            <desc>describes a group of languages treated as a single unit for classification
+                purposes.</desc>
+            <classes>
+                <memberOf key="att.typed"/>
+            </classes>
+            <content>
+                <alternate minOccurs="0" maxOccurs="unbounded">
+                    <textNode/>
+                    <macroRef key="model.languageProfile"/>
+                    <elementRef key="language"/>
+                    <elementRef key="languageGrp"/>
+                </alternate>
+            </content>
+            <attList>
+                <attDef ident="status"/>
+                <attDef ident="ident" usage="req">
+                    <desc>Supplies a language code constructed as defined in BCP 47 which identifies
+                        the language group documented by this element.</desc>
+                    <datatype>
+                        <dataRef key="teidata.language"/>
+                    </datatype>
+                </attDef>
+                <attDef ident="usage">
+                    <desc>specifies the approximate percentage of the text which uses this language
+                        group.</desc>
+                    <datatype>
+                        <dataRef name="nonNegativeInteger"/>
+                    </datatype>
+                </attDef>
+            </attList>
+            <remarks>
+                <p>A <gi>languageGrp</gi> may contain individual <gi>language</gi> elements and
+                    nested <gi>languageGrp</gi> elements, allowing language classifications of
+                    arbitrary depth. It may carry the same language-profile metadata as a
+                    <gi>language</gi>. When child <gi>ident</gi> elements are supplied, they
+                    should record a complete, typed inventory of applicable registry-specific
+                    identifiers, including the identifier supplied in <att>ident</att>.</p>
+            </remarks>
+            <exemplum type="lex0">
+                <p>Language groups may be nested to document a classification hierarchy, with
+                    individual languages encoded as <gi>language</gi> elements.</p>
+                <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                    <xi:include href="../examples/headers/LanguageProfileExamples.stripped.xml"
+                        corresp="../examples/headers/LanguageProfileExamples.xml"
+                        xpointer="element(/1/1/2/8)"/>
+                </egXML>
+            </exemplum>
         </elementSpec>
         <!-- 2020-06-24 (TT): allowing langUsage and language to document language tags-->
         <elementSpec ident="langUsage" mode="change">
@@ -563,7 +614,10 @@
             <content>
                 <sequence>
                     <classRef key="model.pLike" minOccurs="0" maxOccurs="unbounded"/>
-                    <elementRef key="language" minOccurs="1" maxOccurs="unbounded"/>
+                    <alternate minOccurs="1" maxOccurs="unbounded">
+                        <elementRef key="language"/>
+                        <elementRef key="languageGrp"/>
+                    </alternate>
                 </sequence>
             </content>
             <exemplum type="lex0">

@@ -208,6 +208,9 @@
         <revisionDesc>
             <listChange>
                 <listChange n="0.9.6-dev" xml:id="v.0.9.6-dev">
+                    <change when="2026-08-31" type="spec">Added <gi>languageGrp</gi> for documenting recursive language classifications in <gi>langUsage</gi> as per <ref
+                            target="https://github.com/BCDH/tei-lex-0/issues/127"
+                        >#127</ref>.</change>
                     <change when="2026-04-01" type="spec">Fixed missing attributes on <gi>gloss</gi> as per <ref
                             target="https://github.com/BCDH/tei-lex-0/issues/289"
                         >#289</ref></change>
